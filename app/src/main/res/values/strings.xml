@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">CodeLink</string>
+    <string name="network_error">No Internet connection</string>
+    <string name="un_authorized">UnAuthorized</string>
+    <string name="unkown_error">Something went wrong. Please try again</string>
+    <string name="can_t_use_camera_without_permission">Can\'t use camera without permission</string>
+    <string name="choose_image">Choose Image</string>
 </resources>
