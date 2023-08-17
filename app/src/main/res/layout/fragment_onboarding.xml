@@ -77,4 +77,19 @@
             />
     </androidx.cardview.widget.CardView>
 
+    <TextView
+        android:id="@+id/tv_skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/skip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="16dp"
+        android:textSize="16sp"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="16dp"
+        android:textColor="@color/color_text"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
