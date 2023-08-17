@@ -14,6 +14,7 @@ import androidx.viewpager.widget.ViewPager
 import com.ieee.codelink.common.event.Event
 import com.ieee.codelink.featureAuth.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.featureAuth.ui.auth.AuthActivity
+import com.ieee.codelink.featureHome.ui.main.MainActivity
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -109,9 +110,8 @@ abstract class BaseFragment
 
     fun navigateToHome(token: String) {
         saveToken(token)
-        // TODO should save user's data before starting MainActivity
-//        startActivity(Intent(requireContext(), MainActivity::class.java))
-//        requireActivity().finish()
+        startActivity(Intent(requireContext(), MainActivity::class.java))
+        requireActivity().finish()
     }
 
 

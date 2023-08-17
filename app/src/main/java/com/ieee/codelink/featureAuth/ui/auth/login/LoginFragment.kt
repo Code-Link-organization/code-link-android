@@ -16,8 +16,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         preferenceManger.openedTheAppBefore = true
-        // Handles the back press so it will close the activity instead of
-        // going back to onBoarding Fragment
         onBackPress { requireActivity().finish() }
 
         binding.apply {
