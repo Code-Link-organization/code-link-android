@@ -62,11 +62,6 @@ object NetworkModule {
     fun provideApiService(retrofit: Retrofit): ApiAuthService =
         retrofit.create(ApiAuthService::class.java)
 
-//    @Provides
-//    @Singleton
-//    fun provideApiMainService(retrofit: Retrofit): ApiMainService =
-//        retrofit.create(ApiMainService::class.java)
-
     @ApplicationScope
     @Provides
     @Singleton

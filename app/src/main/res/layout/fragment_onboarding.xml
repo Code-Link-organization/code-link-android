@@ -1,35 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_200"
-    tools:context=".featureAuth.ui.auth.onboarding.OnBoardingFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+      />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/ic_logo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint = "@color/color_text"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"
+        />
+
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Onboarding Fragment.\nReplace with your design"
-        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@id/logo"
+        app:layout_constraintTop_toTopOf="@id/logo"
+        app:layout_constraintBottom_toBottomOf="@id/logo"
+        android:textSize="@dimen/big_txt"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/color_text"
+        android:text="@string/app_name"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        />
 
-    <Button
-        android:id="@+id/btn_skip"
-        android:layout_width="match_parent"
+    <com.github.fajaragungpramana.dotsindicator.DotsIndicator
+        android:id="@+id/dots_indicator"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_12sdp"
-        android:text="Skip"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_centerInParent="true"
+        app:dotColor="@color/color_primary"
+        app:dotCount="3"
+        app:dotSelectedColor="@color/color_text"
+        app:dotSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="@dimen/_20sdp"
+        app:dotSpacing="12dp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_next"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="80dp"
+        app:cardCornerRadius="35dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/next_button_ripple"
+            android:padding="8dp"
+            android:textColor="@color/color_text"
+            android:textSize="@dimen/big_txt"
+            android:text="@string/next"
+            />
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
