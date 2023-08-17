@@ -3,6 +3,7 @@ package com.ieee.codelink.featureAuth.ui.auth.login
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.ieee.codelink.common.extension.onBackPress
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.databinding.FragmentLoginBinding
@@ -16,17 +17,22 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         preferenceManger.openedTheAppBefore = true
+        setOnClicks()
+    }
+
+    private fun setOnClicks() {
         onBackPress { requireActivity().finish() }
 
         binding.apply {
-
-            // TODO just a test code. You can remove it
-            root.setOnClickListener {
-                navigateToHome("")
+            tvSignup.setOnClickListener{
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
             }
 
-        }
+//            root.setOnClickListener {
+//                navigateToHome("")
+//            }
 
+        }
     }
 
 }

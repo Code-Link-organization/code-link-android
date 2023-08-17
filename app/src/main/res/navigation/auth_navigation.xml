@@ -19,5 +19,17 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.ieee.codelink.featureAuth.ui.auth.login.LoginFragment"
-        android:label="LoginFragment" />
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.ieee.codelink.featureAuth.ui.auth.signup.SignUpFragment"
+        android:label="SignUpFragment" />
 </navigation>

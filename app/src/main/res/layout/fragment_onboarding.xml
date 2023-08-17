@@ -55,8 +55,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_next"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
         app:cardCornerRadius="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -65,12 +65,14 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_next"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
             android:background="@drawable/app_button_ripple"
-            android:padding="8dp"
+            android:paddingHorizontal="45dp"
+            android:paddingVertical="8dp"
             android:textColor="@color/color_text"
             android:textSize="@dimen/big_txt"
+            android:textAllCaps="false"
             android:text="@string/next"
             />
     </androidx.cardview.widget.CardView>
