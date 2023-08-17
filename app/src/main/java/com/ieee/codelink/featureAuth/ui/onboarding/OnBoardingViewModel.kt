@@ -14,19 +14,22 @@ import javax.inject.Inject
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(val sharedPreference: SharedPreferenceManger) : BaseViewModel() {
 
-
      val onBoardings : ArrayList<OnBoarding> = ArrayList()
 
     init {
-        onBoardings.add(OnBoarding(R.drawable.ic_launcher_background, "Connect with your fellow graduates and build a strong team" ))
-        onBoardings.add(OnBoarding(R.drawable.ic_launcher_foreground, "Create or join teams for group projects for graduation project" ))
-        onBoardings.add(OnBoarding(R.drawable.ic_launcher_background, "Chat with your team members to discuss ideas"))
+        initOnBoardings()
+    }
+
+    private fun initOnBoardings() {
+        onBoardings.add(OnBoarding(R.drawable.ic_onboarding_1, "Our platform helps those interested in the field of Software to find what matches their interests.." ))
+        onBoardings.add(OnBoarding(R.drawable.ic_onboarding_2, "You can also create or join teams for group projects.." ))
+        onBoardings.add(OnBoarding(R.drawable.ic_onboarding_3, "Make the learning process more easier and enjoyable.."))
     }
 
     fun setIsOnBoardingFinished(isOnBoardingFinished: Boolean) = CoroutineScope(Dispatchers.IO).launch{
         sharedPreference.setValue(IS_ONBOARDING_FINISHED, isOnBoardingFinished)
     }
     fun isFirstPage(currentPage: Int): Boolean = currentPage == 0
-    fun isLastPage(currentPage: Int): Boolean = currentPage == 2
+    fun isLastPage(currentPage: Int): Boolean = currentPage == onBoardings.size - 1
 
 }

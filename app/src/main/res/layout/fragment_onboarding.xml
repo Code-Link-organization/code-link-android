@@ -12,6 +12,32 @@
         android:layout_height="match_parent"
       />
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/ic_logo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint = "@color/color_text"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"
+        />
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/logo"
+        app:layout_constraintTop_toTopOf="@id/logo"
+        app:layout_constraintBottom_toBottomOf="@id/logo"
+        android:textSize="@dimen/big_txt"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/color_text"
+        android:text="@string/app_name"
+        android:textStyle="bold"
+        />
+
     <com.github.fajaragungpramana.dotsindicator.DotsIndicator
         android:id="@+id/dots_indicator"
         android:layout_width="wrap_content"
@@ -19,33 +45,17 @@
         android:layout_centerInParent="true"
         app:dotColor="@color/color_primary"
         app:dotCount="3"
-        app:dotSelectedColor="@color/color_ripple"
-        app:dotSize="16dp"
+        app:dotSelectedColor="@color/color_text"
+        app:dotSize="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="@dimen/_20sdp"
-        app:dotSpacing="8dp" />
-
-<!--    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator-->
-<!--        android:id="@+id/dots_indicator"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:dotsColor="@color/color_primary"-->
-<!--        app:dotsCornerRadius="6dp"-->
-<!--        app:dotsSize="12dp"-->
-<!--        app:dotsSpacing="6dp"-->
-<!--        app:dotsWidthFactor="3.3"-->
-<!--        app:selectedDotColor="@color/color_ripple"-->
-<!--        app:progressMode="false"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:layout_marginBottom="25dp" />-->
+        app:dotSpacing="12dp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_next"
-        android:layout_width="140dp"
+        android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_marginBottom="80dp"
         app:cardCornerRadius="35dp"
@@ -64,18 +74,5 @@
             android:text="@string/next"
             />
     </androidx.cardview.widget.CardView>
-
-<!--    <TextView-->
-<!--        android:id="@+id/tv_skip"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="45dp"-->
-<!--        android:layout_marginBottom="20dp"-->
-<!--        android:paddingHorizontal="20dp"-->
-<!--        android:gravity="center"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textSize="24sp"-->
-<!--        android:text="@string/skip"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,17 +20,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>(FragmentOnboardingBinding::inflate) {
 
     override val viewModel: OnBoardingViewModel by viewModels()
-    private lateinit var binding2 : FragmentOnboardingBinding
     private lateinit var viewPager: ViewPager
     private lateinit var myAdapter: OnBoardingAdapter
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding2 = FragmentOnboardingBinding.inflate(layoutInflater)
-        return binding2.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,7 +30,7 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>(FragmentOnboa
     }
 
     private fun setOnClicks() {
-        binding2.apply {
+        binding.apply {
             btnNext.setOnClickListener {
                 btnNextClicked()
             }
@@ -58,7 +49,7 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>(FragmentOnboa
     }
 
     private fun setButtonNextText(currentItem: Int) {
-        binding2.btnNext.text =
+        binding.btnNext.text =
         if (viewModel.isLastPage(currentItem)){
             getString(R.string.LetsStart)
         }else{
@@ -67,17 +58,16 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>(FragmentOnboa
     }
 
     private fun setOnBoardingAdapter() {
-        viewPager = binding2.viewPager
+        viewPager = binding.viewPager
         myAdapter = OnBoardingAdapter(viewModel.onBoardings)
         viewPager.adapter = myAdapter
-        binding2.dotsIndicator.viewPager = viewPager
+        binding.dotsIndicator.viewPager = viewPager
         setViewPagerScrollListener(viewPager)
     }
 
     private fun setViewPagerScrollListener(viewPager: ViewPager) {
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-            }
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
             override fun onPageScrollStateChanged(state: Int) {}
             override fun onPageSelected(position: Int) {
               setButtonNextText(position)
@@ -87,7 +77,7 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>(FragmentOnboa
 
     private fun navigateToAuth() {
         viewModel.setIsOnBoardingFinished(true)
-       // findNavController().navigate(OnBoardingFragmentDirections.actionOnBoardingFragmentToLoginFragment())
+        findNavController().navigate(OnBoardingFragmentDirections.actionOnBoardingFragmentToLoginFragment())
     }
 
     private fun setViewPagerPosition(nextItem: Int) {
