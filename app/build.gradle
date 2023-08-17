@@ -144,6 +144,10 @@ dependencies {
     // Loading button
     implementation 'br.com.simplepass:loading-button-android:2.2.0'
 
+    //onBoarding indicators
+    //implementation("com.tbuonomo:dotsindicator:5.0")
+    implementation 'com.github.fajaragungpramana:dots-indicator:0.0.5'
+
 //    // Datastore
 //    implementation "androidx.datastore:datastore-preferences:1.0.0"
 //

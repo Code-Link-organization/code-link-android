@@ -5,4 +5,7 @@
     <string name="unkown_error">Something went wrong. Please try again</string>
     <string name="can_t_use_camera_without_permission">Can\'t use camera without permission</string>
     <string name="choose_image">Choose Image</string>
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
+    <string name="LetsStart">Let’s Start</string>
 </resources>

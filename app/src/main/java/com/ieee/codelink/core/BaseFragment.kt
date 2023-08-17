@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
+import androidx.viewpager.widget.ViewPager
 import com.ieee.codelink.common.event.Event
 import com.ieee.codelink.featureAuth.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.featureAuth.ui.auth.AuthActivity
@@ -112,5 +113,6 @@ abstract class BaseFragment
 //        startActivity(Intent(requireContext(), MainActivity::class.java))
 //        requireActivity().finish()
     }
+
 
 }
