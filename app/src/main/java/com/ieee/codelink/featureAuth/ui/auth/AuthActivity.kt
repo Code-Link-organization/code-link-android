@@ -19,6 +19,7 @@ class AuthActivity : BaseActivity() {
     private lateinit var binding: ActivityAuthBinding
     private lateinit var graph: NavGraph
 
+
     @Inject
     lateinit var sharedPreferences: SharedPreferenceManger
 
@@ -28,23 +29,24 @@ class AuthActivity : BaseActivity() {
         setContentView(binding.root)
 
         //todo: setNavigation logic
-//        val navHostFragment =
-//            supportFragmentManager.findFragmentById(R.id.auth_nav_host_fragment) as NavHostFragment
-//
-//        val inflater = navHostFragment.navController.navInflater
-//        graph = inflater.inflate(R.navigation.auth_nav_graph)
-//
-//        when {
-//            sharedPreferences.openedTheAppBefore -> {
-//                graph.setStartDestination(R.id.loginFragment)
-//            }
-//            else -> {
-//                graph.setStartDestination(R.id.onBoardingFragment)
-//            }
-//        }
-//
-//        navController = navHostFragment.findNavController()
-//        navHostFragment.navController.graph = graph
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+
+        val inflater = navHostFragment.navController.navInflater
+        graph = inflater.inflate(R.navigation.auth_navigation)
+
+        when {
+            sharedPreferences.openedTheAppBefore -> {
+                //todo : navigate to login from inBoarding
+          //      graph.setStartDestination(R.id.loginFragment)
+            }
+            else -> {
+                graph.setStartDestination(R.id.onBoardingFragment)
+            }
+        }
+
+        navController = navHostFragment.findNavController()
+        navHostFragment.navController.graph = graph
 
     }
 }

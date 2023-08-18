@@ -73,8 +73,8 @@ class SharedPreferenceManger @Inject constructor(
         return sharedPreferences.getFloat(key, 0F)
     }
 
-    fun getBooleanValue(key: String): Boolean {
-        return sharedPreferences.getBoolean(key, false)
+    fun getBooleanValue(key: String , defaultValue: Boolean = false): Boolean {
+        return sharedPreferences.getBoolean(key, defaultValue)
     }
 
     companion object {
@@ -86,5 +86,7 @@ class SharedPreferenceManger @Inject constructor(
         private const val LNG = "LNG"
         const val LANGUAGE = "LANGUAGE"
         const val INITIAL_LANG = "en"
+        const val IS_ONBOARDING_FINISHED = "onBoarding"
+
     }
 }
