@@ -28,7 +28,6 @@ class AuthActivity : BaseActivity() {
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //todo: setNavigation logic
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 
@@ -36,9 +35,9 @@ class AuthActivity : BaseActivity() {
         graph = inflater.inflate(R.navigation.auth_navigation)
 
         when {
-            sharedPreferences.openedTheAppBefore -> {
+            sharedPreferences.isOnboardingFinished -> {
                 //todo : navigate to login from inBoarding
-          //      graph.setStartDestination(R.id.loginFragment)
+                graph.setStartDestination(R.id.loginFragment)
             }
             else -> {
                 graph.setStartDestination(R.id.onBoardingFragment)

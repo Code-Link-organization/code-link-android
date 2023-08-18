@@ -20,9 +20,9 @@ class SharedPreferenceManger @Inject constructor(
     val hasLoggedIn: Boolean
         get() = getStringValue(TOKEN).isNotEmpty()
 
-    var openedTheAppBefore: Boolean
-        get() = getBooleanValue(OPENED_THE_APP_BEFORE)
-        set(value) = setValue(OPENED_THE_APP_BEFORE, value)
+    var isOnboardingFinished: Boolean
+        get() = getBooleanValue(IS_ONBOARDING_FINISHED)
+        set(value) = setValue(IS_ONBOARDING_FINISHED, value)
 
     var bearerToken: String
         set(value) = setValue(TOKEN, value)
