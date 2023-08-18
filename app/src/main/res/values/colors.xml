@@ -12,5 +12,6 @@
     <color name="color_ripple">#80745D</color>
     <color name="color_text">#000000</color>
     <color name="color_background">#FFFFFFFF</color>
+    <color name="color_hint">#B8B8B8</color>
 
 </resources>

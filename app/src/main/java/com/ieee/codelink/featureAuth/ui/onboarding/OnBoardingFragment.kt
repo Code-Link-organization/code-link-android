@@ -34,6 +34,10 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>(FragmentOnboa
             btnNext.setOnClickListener {
                 btnNextClicked()
             }
+
+            tvSkip.setOnClickListener {
+                navigateToAuth()
+            }
         }
     }
 
