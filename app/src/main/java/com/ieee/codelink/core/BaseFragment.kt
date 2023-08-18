@@ -79,7 +79,7 @@ abstract class BaseFragment
     }
 
     fun clearHasOpenedTheAppBefore() {
-        preferenceManger.openedTheAppBefore = false
+        preferenceManger.isOnboardingFinished = false
     }
 
     fun showToastIfNotNull(

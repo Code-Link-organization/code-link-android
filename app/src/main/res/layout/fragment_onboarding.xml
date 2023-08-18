@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-      />
+        android:layout_height="match_parent" />
 
     <ImageView
         android:id="@+id/logo"
@@ -47,35 +44,28 @@
         app:dotCount="3"
         app:dotSelectedColor="@color/color_text"
         app:dotSize="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_next"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="@dimen/_20sdp"
+        android:layout_marginBottom="20dp"
         app:dotSpacing="12dp" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
-        app:cardCornerRadius="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_next"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:background="@drawable/app_button_ripple"
-            android:paddingHorizontal="45dp"
-            android:paddingVertical="8dp"
-            android:textColor="@color/color_text"
-            android:textSize="@dimen/big_txt"
-            android:textAllCaps="false"
-            android:text="@string/next"
-            />
-    </androidx.cardview.widget.CardView>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_next"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/app_button_ripple"
+        android:paddingHorizontal="45dp"
+        android:paddingVertical="8dp"
+        android:text="@string/next"
+        android:textAllCaps="false"
+        android:textColor="@color/color_text"
+        android:textSize="@dimen/big_txt"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/tv_skip"

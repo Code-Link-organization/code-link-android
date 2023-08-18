@@ -16,7 +16,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        preferenceManger.openedTheAppBefore = true
+        preferenceManger.isOnboardingFinished = true
         setOnClicks()
     }
 
