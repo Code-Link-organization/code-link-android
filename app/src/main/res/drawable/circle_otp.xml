@@ -1,0 +1,23 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Shadow Layer -->
+    <item>
+        <shape>
+            <corners android:radius="45dp" />
+            <gradient
+                android:endColor="#80DECEB1"
+                android:centerColor="#7ADECEB1"
+            android:startColor="#40DECEB1"
+            android:centerY="0.5"
+            android:gradientRadius="50dp"
+            android:type="linear"
+            />
+        </shape>
+    </item>
+
+    <item android:top="1.5dp" android:left="1.5dp" android:right="1.5dp" android:bottom="1dp">
+        <shape>
+            <corners android:radius="50dp" />
+            <solid android:color="@color/color_background" /> <!-- Shape background color -->
+        </shape>
+    </item>
+</layer-list>

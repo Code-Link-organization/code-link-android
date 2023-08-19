@@ -28,6 +28,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
             }
 
+            btnLogin.setOnClickListener{
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToVerificationFragment())
+            }
+
 //            root.setOnClickListener {
 //                navigateToHome("")
 //            }

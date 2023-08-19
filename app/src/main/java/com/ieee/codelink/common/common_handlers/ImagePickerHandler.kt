@@ -33,7 +33,7 @@ class ImagePickerHandler(
             .backButton(gun0912.tedimagepicker.R.drawable.ic_arrow_back_black_24dp)
             .showCameraTile(true)
             .buttonBackground(gun0912.tedimagepicker.R.drawable.btn_done_button)
-            .buttonTextColor(R.color.white)
+            .buttonTextColor(R.color.color_background)
             .buttonText(context.getString(R.string.choose_image))
             .errorListener { }
             .start { uri ->

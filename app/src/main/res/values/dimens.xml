@@ -4,5 +4,6 @@
     <dimen name="horizontal_padding">16dp</dimen>
     <dimen name="margin_20">20dp</dimen>
     <dimen name="button_padding_horizontal">45dp</dimen>
-    <dimen name="button_padding_vertical">8dp</dimen>
+    <dimen name="button_padding_vertical">16dp</dimen>
+    <dimen name="keyboard_line_hieght">55dp</dimen>
 </resources>
