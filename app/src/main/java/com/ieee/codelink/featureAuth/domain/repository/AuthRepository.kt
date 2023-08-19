@@ -6,4 +6,6 @@ import javax.inject.Singleton
 
 @Singleton
 class AuthRepository @Inject constructor(private val api: ApiAuthService) {
+   // suspend fun loginUser(email: String, password: String)
+
 }

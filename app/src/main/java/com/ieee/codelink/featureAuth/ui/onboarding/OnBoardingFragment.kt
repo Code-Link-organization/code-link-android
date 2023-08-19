@@ -1,19 +1,16 @@
 package com.ieee.codelink.featureAuth.ui.onboarding
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.ieee.codelink.R
-import com.ieee.codelink.common.extension.navigateToAction
 import com.ieee.codelink.core.BaseFragment
-import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.databinding.FragmentOnboardingBinding
 import com.ieee.codelink.featureAuth.ui.adapters.OnBoardingAdapter
-import com.ieee.codelink.featureAuth.ui.auth.login.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,10 +26,94 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>(FragmentOnboa
         setOnClicks()
     }
 
+    private fun setOnBoardingAdapter() {
+        setupAdapter()
+        setupViewPager()
+        setViewPagerScrollListener()
+    }
+
+    private fun setupAdapter() {
+        myAdapter = OnBoardingAdapter(viewModel.onBoardings)
+    }
+
+    private fun setupViewPager() {
+        viewPager = binding.viewPager
+        viewPager.adapter = myAdapter
+        binding.dotsIndicator.viewPager = viewPager
+    }
+
+    private fun setViewPagerScrollListener() {
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {}
+            override fun onPageSelected(position: Int) {
+                setActionButtonText(position)
+                setActionButtonSize(position)
+                setSkipButtonVisibility(position)
+                setIndicatorVisibility(position)
+            }
+        })
+    }
+
+    private fun setActionButtonText(currentPage: Int) {
+        binding.btnAction.text =
+            if (viewModel.isLastPage(currentPage)){
+                getString(R.string.LetsStart)
+            }else{
+                getString(R.string.next)
+            }
+    }
+
+    private fun setActionButtonSize(currentPage: Int) {
+        var layoutParams = binding.btnAction.layoutParams as ConstraintLayout.LayoutParams
+
+        layoutParams = setActionButtomMargins(layoutParams)
+        setActionButtomPadding()
+        layoutParams = setActionButtonWidth(layoutParams , currentPage)
+
+        binding.btnAction.layoutParams = layoutParams
+    }
+    private fun setActionButtomMargins(layoutParams: ConstraintLayout.LayoutParams): ConstraintLayout.LayoutParams {
+        layoutParams.marginStart = resources.getDimensionPixelSize(R.dimen.horizontal_padding)
+        layoutParams.marginEnd = resources.getDimensionPixelSize(R.dimen.horizontal_padding)
+        layoutParams.bottomMargin = resources.getDimensionPixelSize(R.dimen.margin_20)
+        return layoutParams
+    }
+    private fun setActionButtomPadding() {
+        binding.btnAction.setPadding(
+            resources.getDimensionPixelSize(R.dimen.button_padding_horizontal),
+            resources.getDimensionPixelSize(R.dimen.button_padding_vertical),
+            resources.getDimensionPixelSize(R.dimen.button_padding_horizontal),
+            resources.getDimensionPixelSize(R.dimen.button_padding_vertical)
+        )
+    }
+    private fun setActionButtonWidth(layoutParams: ConstraintLayout.LayoutParams, currentPage: Int): ConstraintLayout.LayoutParams {
+        if (viewModel.isLastPage(currentPage)) {
+            layoutParams.width = ConstraintLayout.LayoutParams.MATCH_PARENT
+        } else {
+            layoutParams.width = ConstraintLayout.LayoutParams.WRAP_CONTENT
+        }
+        return layoutParams
+    }
+
+    private fun setSkipButtonVisibility(currentPage: Int) {
+        binding.tvSkip.isVisible = viewModel.isLastPage(currentPage).not()
+    }
+
+    private fun setIndicatorVisibility(currentPage: Int){
+        binding.dotsIndicator.isVisible = viewModel.isLastPage(currentPage).not()
+    }
+
     private fun setOnClicks() {
         binding.apply {
-            btnNext.setOnClickListener {
-                btnNextClicked()
+            btnAction.setOnClickListener {
+                btnActionClicked()
             }
 
             tvSkip.setOnClickListener {
@@ -41,51 +122,24 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>(FragmentOnboa
         }
     }
 
-    private fun btnNextClicked() {
+    private fun btnActionClicked() {
         val currentItem = viewPager.currentItem
         val nextItem = currentItem + 1
+        val numberOfPages = myAdapter.count
 
-        if (nextItem < myAdapter.count) {
+        if (nextItem < numberOfPages ) {
             setViewPagerPosition(nextItem)
         } else {
             navigateToAuth()
         }
     }
 
-    private fun setButtonNextText(currentItem: Int) {
-        binding.btnNext.text =
-        if (viewModel.isLastPage(currentItem)){
-            getString(R.string.LetsStart)
-        }else{
-            getString(R.string.next)
-        }
+    private fun setViewPagerPosition(nextItem: Int) {
+        viewPager.currentItem = nextItem
     }
-
-    private fun setOnBoardingAdapter() {
-        viewPager = binding.viewPager
-        myAdapter = OnBoardingAdapter(viewModel.onBoardings)
-        viewPager.adapter = myAdapter
-        binding.dotsIndicator.viewPager = viewPager
-        setViewPagerScrollListener(viewPager)
-    }
-
-    private fun setViewPagerScrollListener(viewPager: ViewPager) {
-        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
-            override fun onPageScrollStateChanged(state: Int) {}
-            override fun onPageSelected(position: Int) {
-              setButtonNextText(position)
-            }
-        })
-    }
-
     private fun navigateToAuth() {
         viewModel.setIsOnBoardingFinished(true)
         findNavController().navigate(OnBoardingFragmentDirections.actionOnBoardingFragmentToLoginFragment())
-    }
-
-    private fun setViewPagerPosition(nextItem: Int) {
-        viewPager.currentItem = nextItem
     }
 
 }

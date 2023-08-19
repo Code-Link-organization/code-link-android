@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class OnBoardingViewModel @Inject constructor(val sharedPreference: SharedPreferenceManger) : BaseViewModel() {
+class OnBoardingViewModel @Inject constructor(private val sharedPreference: SharedPreferenceManger) : BaseViewModel() {
 
      val onBoardings : ArrayList<OnBoarding> = ArrayList()
 
