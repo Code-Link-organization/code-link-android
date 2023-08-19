@@ -12,8 +12,6 @@ interface ApiAuthService {
         @Query("email")
         email: String? = null,
         @Query("password")
-        password: String? = null,
-        @Query("device_name")
-        deviceName: String? = null
+        password: String? = null
     ): Response<AuthResponse>
 }

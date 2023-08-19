@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.ieee.codelink.featureAuth.ui.auth.login.LoginFragment"
+        android:name="com.ieee.codelink.featureAuth.ui.login.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
@@ -30,6 +30,6 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.ieee.codelink.featureAuth.ui.auth.signup.SignUpFragment"
+        android:name="com.ieee.codelink.featureAuth.ui.signup.SignUpFragment"
         android:label="SignUpFragment" />
 </navigation>

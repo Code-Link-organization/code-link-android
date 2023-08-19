@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.ieee.codelink.core.BaseActivity
 import com.ieee.codelink.featureAuth.data.local.preference.SharedPreferenceManger
-import com.ieee.codelink.featureAuth.ui.auth.AuthActivity
+import com.ieee.codelink.featureAuth.ui.AuthActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

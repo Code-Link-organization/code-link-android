@@ -20,6 +20,7 @@ import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import org.json.JSONObject
 import java.io.File
 
 fun getColorFromHex(colorString: String?): Int {
@@ -194,5 +195,15 @@ fun checkPermissionList(
             return@registerForActivityResult
         }
         whenSuccess?.invoke()
+    }
+}
+
+fun parseErrorMessage(responseBody: String?): String {
+    return try {
+        val json = JSONObject(responseBody)
+        val message = json.getString("message")
+        message
+    } catch (e: Exception) {
+        "General Error" // Return a default message if parsing fails
     }
 }

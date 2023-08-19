@@ -1,4 +1,4 @@
-package com.ieee.codelink.featureAuth.ui.auth.signup
+package com.ieee.codelink.featureAuth.ui.signup
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import com.ieee.codelink.R
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.databinding.FragmentSignUpBinding
-import com.ieee.codelink.featureAuth.ui.auth.login.LoginViewModel
+import com.ieee.codelink.featureAuth.ui.login.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

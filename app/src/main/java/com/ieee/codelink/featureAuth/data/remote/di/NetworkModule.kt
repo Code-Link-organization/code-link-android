@@ -2,6 +2,7 @@ package com.ieee.codelink.data.remote.di
 
 import com.ieee.codelink.featureAuth.data.remote.ApiAuthService
 import com.ieee.codelink.featureAuth.data.remote.AuthInterceptor
+import com.ieee.codelink.featureAuth.data.remote.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,11 +22,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
     private const val timeOut = 20L
-
-    // TODO replace with your own base url
-    // This Url should be hidden. To know how read this
-    // https://www.geeksforgeeks.org/how-to-hide-api-and-secret-keys-in-android-studio/
-    private const val BASE_URL = ""
 
     @Provides
     @Singleton
