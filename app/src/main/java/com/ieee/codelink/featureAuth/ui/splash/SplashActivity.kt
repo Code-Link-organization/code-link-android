@@ -22,9 +22,13 @@ class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (sharedPreferenceManger.hasLoggedIn)
+        if (sharedPreferenceManger.hasLoggedIn){
             startActivity(Intent(this, MainActivity::class.java))
-        else
+            this.finish()
+        }
+        else{
             startActivity(Intent(this, AuthActivity::class.java))
+            this.finish()
+        }
     }
 }
