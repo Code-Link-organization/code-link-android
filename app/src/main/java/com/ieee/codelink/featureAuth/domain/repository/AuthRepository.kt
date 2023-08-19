@@ -3,9 +3,8 @@ package com.ieee.codelink.featureAuth.domain.repository
 import com.ieee.codelink.featureAuth.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.featureAuth.data.remote.ApiAuthService
 import com.ieee.codelink.featureAuth.domain.models.AuthResponse
+import com.ieee.codelink.featureAuth.domain.models.User
 import retrofit2.Response
-import javax.inject.Inject
-import javax.inject.Singleton
 
 class AuthRepository (private val api: ApiAuthService , private val sharedPreferenceManger: SharedPreferenceManger) {
     suspend fun loginUser(email: String, password: String): Response<AuthResponse>? {
@@ -15,5 +14,10 @@ class AuthRepository (private val api: ApiAuthService , private val sharedPrefer
             null
         }
     }
+
+    suspend fun cacheUser(user: User) {
+        sharedPreferenceManger.cacheUser(user)
+    }
+
 
 }

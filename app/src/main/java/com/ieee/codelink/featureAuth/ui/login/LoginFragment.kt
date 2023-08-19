@@ -66,19 +66,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                  is ResponseState.Empty ,
                  is ResponseState.NetworkError,
                  is ResponseState.NotAuthorized ,
-                 is ResponseState.UnKnownError
-                 -> {
-                 }
+                 is ResponseState.UnKnownError -> {}
                  is ResponseState.Error -> {
                       com.ieee.codelink.common.showToast(state.message.toString(), requireContext())
                  }
                  is ResponseState.Loading -> {}
                  is ResponseState.Success -> {
-                     var name = ""
                      state.data?.let{response->
-                         name = response.data.user.name
+                         lifecycleScope.launch {
+                             viewModel.cacheUser(response.data.user)
+                             navigateToHome(response.data.user.token)
+                         }
                      }
-                    com.ieee.codelink.common.showToast(name,requireContext())
                  }
              }
     }

@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.ieee.codelink.core.BaseActivity
 import com.ieee.codelink.featureAuth.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.featureAuth.ui.AuthActivity
+import com.ieee.codelink.featureHome.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -22,8 +23,7 @@ class SplashActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         if (sharedPreferenceManger.hasLoggedIn)
-            //todo: go to mainScreen
-          //  startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
         else
             startActivity(Intent(this, AuthActivity::class.java))
     }

@@ -2,8 +2,15 @@ package com.ieee.codelink.featureAuth.data.local.preference
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Base64
 import com.google.gson.Gson
+import com.ieee.codelink.featureAuth.domain.models.User
 import dagger.hilt.android.qualifiers.ApplicationContext
+import java.io.ByteArrayOutputStream
+import java.io.IOException
+import java.io.ObjectInputStream
+import java.io.ObjectOutputStream
+import java.io.Serializable
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -77,6 +84,31 @@ class SharedPreferenceManger @Inject constructor(
         return sharedPreferences.getBoolean(key, defaultValue)
     }
 
+    fun cacheUser(user:User){
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        val objectOutputStream = ObjectOutputStream(byteArrayOutputStream)
+        objectOutputStream.writeObject(user)
+        val base64String = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT)
+        editor.putString(CACHED_USER, base64String)
+        editor.apply()
+    }
+
+    fun getCachedUser(): User?{
+        val base64String = sharedPreferences.getString(CACHED_USER, null)
+        if (base64String != null) {
+            val data = Base64.decode(base64String, Base64.DEFAULT)
+            try {
+                val objectInputStream = ObjectInputStream(data.inputStream())
+                return objectInputStream.readObject() as User
+            } catch (e: IOException) {
+                e.printStackTrace()
+            } catch (e: ClassNotFoundException) {
+                e.printStackTrace()
+            }
+        }
+        return null
+    }
+
     companion object {
         // TODO replace this with your pref name for the app
         private const val SHARED_PREFERENCES_NAME = "alexon_android_base_app"
@@ -87,6 +119,7 @@ class SharedPreferenceManger @Inject constructor(
         const val LANGUAGE = "LANGUAGE"
         const val INITIAL_LANG = "en"
         const val IS_ONBOARDING_FINISHED = "onBoarding"
+        const val CACHED_USER = "user"
 
     }
 }

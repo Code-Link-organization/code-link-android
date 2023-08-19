@@ -8,6 +8,7 @@ import com.ieee.codelink.common.showToast
 import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.featureAuth.domain.models.AuthResponse
+import com.ieee.codelink.featureAuth.domain.models.User
 import com.ieee.codelink.featureAuth.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Response
@@ -39,6 +40,10 @@ class LoginViewModel @Inject constructor(
         val errorBody = response.errorBody()?.string()
         val errorMessage = parseErrorMessage(errorBody)
         return ResponseState.Error(errorMessage,null)
+    }
+
+    suspend fun cacheUser(user: User) {
+      authRepository.cacheUser(user)
     }
 
 }

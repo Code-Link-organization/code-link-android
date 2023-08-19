@@ -21,6 +21,9 @@
             android:exported="false" />
         <activity
             android:name=".featureAuth.ui.AuthActivity"
+            android:exported="false" />
+        <activity
+            android:name=".featureAuth.ui.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
