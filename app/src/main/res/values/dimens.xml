@@ -2,4 +2,7 @@
 <resources>
     <dimen name="big_txt">18sp</dimen>
     <dimen name="horizontal_padding">16dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+    <dimen name="button_padding_horizontal">45dp</dimen>
+    <dimen name="button_padding_vertical">8dp</dimen>
 </resources>

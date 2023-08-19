@@ -44,7 +44,7 @@
         app:dotCount="3"
         app:dotSelectedColor="@color/color_text"
         app:dotSize="12dp"
-        app:layout_constraintBottom_toTopOf="@id/btn_next"
+        app:layout_constraintBottom_toTopOf="@id/btn_action"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="20dp"
@@ -52,7 +52,7 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_next"
+        android:id="@+id/btn_action"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_marginBottom="20dp"
