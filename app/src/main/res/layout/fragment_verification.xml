@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_otp_background"
+    android:windowSoftInputMode="stateAlwaysHidden"
+    tools:context=".featureAuth.ui.verification.VerificationFragment">
+
+    <LinearLayout
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/ll_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_logo"
+            app:tint="@color/color_text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:gravity="center_vertical"
+            android:text="@string/app_name"
+            android:textColor="@color/color_text"
+            android:textSize="22sp" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="@string/enter_your_code_here"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/ll_title"/>
+
+    <in.aabhasjindal.otptextview.OtpTextView
+        android:id="@+id/otp_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:elevation="4dp"
+        android:textColor="@color/color_text"
+        app:bar_enabled="false"
+        app:height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:length="4"
+        app:otp_box_background="@drawable/circle_otp"
+        app:otp_text_size="18dp"
+        app:width="50dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/app_button_ripple"
+        android:paddingVertical="@dimen/button_padding_vertical"
+        android:paddingHorizontal="@dimen/button_padding_horizontal"
+        android:textColor="@color/color_text"
+        android:textSize="16sp"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@id/ll_resend"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="20dp"
+        android:text="@string/submit_code"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_resend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
+        android:layout_marginHorizontal="@dimen/horizontal_padding"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/keyboard_frame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:text="@string/if_you_didn_t_receive_any_code_resend"
+            android:textColor="@color/color_text"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tv_resend_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="8dp"
+            android:text=", Resend"
+            android:textColor="@color/color_ripple"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/keyboard_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <include
+            android:id="@+id/keyboard"
+            layout="@layout/keyboard" />
+    </FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
