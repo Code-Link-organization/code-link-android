@@ -1,4 +1,4 @@
-package com.ieee.codelink.featureAuth.domain.repository
+package com.ieee.codelink.featureAuth.data.repository
 
 import com.ieee.codelink.featureAuth.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.featureAuth.data.remote.ApiAuthService

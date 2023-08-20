@@ -9,7 +9,7 @@ import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.featureAuth.domain.models.AuthResponse
 import com.ieee.codelink.featureAuth.domain.models.User
-import com.ieee.codelink.featureAuth.domain.repository.AuthRepository
+import com.ieee.codelink.featureAuth.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Response
 import javax.inject.Inject

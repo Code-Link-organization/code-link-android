@@ -3,7 +3,7 @@ package com.ieee.codelink.data.remote.di
 import com.ieee.codelink.featureAuth.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.featureAuth.data.remote.ApiAuthService
 import com.ieee.codelink.featureAuth.data.remote.AuthInterceptor
-import com.ieee.codelink.featureAuth.domain.repository.AuthRepository
+import com.ieee.codelink.featureAuth.data.repository.AuthRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
