@@ -2,6 +2,7 @@
 <resources>
 <!--    color scheme-->
     <color name="color_primary">#DECEB1</color>
+    <color name="white">#FFFFFF</color>
     <color name="color_ripple">#80745D</color>
     <color name="color_text">#000000</color>
     <color name="color_background">#FFFFFF</color>
