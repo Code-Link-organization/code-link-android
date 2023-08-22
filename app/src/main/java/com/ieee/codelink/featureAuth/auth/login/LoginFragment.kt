@@ -10,7 +10,6 @@ import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentLoginBinding
 import com.ieee.codelink.domain.models.AuthResponse
-import com.ieee.codelink.featureAuth.ui.login.LoginFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -30,11 +29,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         onBackPress { requireActivity().finish() }
 
         binding.apply {
-            tvSignup.setOnClickListener{
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
+            tvSignup.setOnClickListener {
+                findNavController().navigate(
+                    LoginFragmentDirections.actionLoginFragmentToSignUpFragment()
+                )
             }
 
-            btnLogin.setOnClickListener{
+            btnLogin.setOnClickListener {
                 lifecycleScope.launch {
                     login()
                 }
@@ -55,7 +56,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun setObservers() {
-        viewModel.loginRequestState.observe(viewLifecycleOwner){state ->
+        viewModel.loginRequestState.observe(viewLifecycleOwner) { state ->
             state?.let {
                 loginStateObserver(state)
             }
@@ -63,24 +64,27 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun loginStateObserver(state: ResponseState<AuthResponse>) {
-             when (state) {
-                 is ResponseState.Empty ,
-                 is ResponseState.NetworkError,
-                 is ResponseState.NotAuthorized ,
-                 is ResponseState.UnKnownError -> {}
-                 is ResponseState.Error -> {
-                      com.ieee.codelink.common.showToast(state.message.toString(), requireContext())
-                 }
-                 is ResponseState.Loading -> {}
-                 is ResponseState.Success -> {
-                     state.data?.let{response->
-                         lifecycleScope.launch {
-                             viewModel.cacheUser(response.data.user)
-                             navigateToHome(response.data.user.token)
-                         }
-                     }
-                 }
-             }
+        when (state) {
+            is ResponseState.Empty,
+            is ResponseState.NetworkError,
+            is ResponseState.NotAuthorized,
+            is ResponseState.UnKnownError -> {
+            }
+
+            is ResponseState.Error -> {
+                com.ieee.codelink.common.showToast(state.message.toString(), requireContext())
+            }
+
+            is ResponseState.Loading -> {}
+            is ResponseState.Success -> {
+                state.data?.let { response ->
+                    lifecycleScope.launch {
+                        viewModel.cacheUser(response.data.user)
+                        navigateToHome(response.data.user.token)
+                    }
+                }
+            }
+        }
     }
 
 

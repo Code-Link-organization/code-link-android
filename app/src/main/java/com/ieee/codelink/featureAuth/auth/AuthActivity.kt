@@ -36,7 +36,6 @@ class AuthActivity : BaseActivity() {
 
         when {
             sharedPreferences.isOnboardingFinished -> {
-                //todo : navigate to login from inBoarding
                 graph.setStartDestination(R.id.loginFragment)
             }
             else -> {

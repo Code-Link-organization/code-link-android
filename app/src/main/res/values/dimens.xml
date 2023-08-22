@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="big_txt">18sp</dimen>
+    <dimen name="big_txt">16sp</dimen>
     <dimen name="horizontal_padding">16dp</dimen>
     <dimen name="margin_20">20dp</dimen>
     <dimen name="button_padding_horizontal">45dp</dimen>

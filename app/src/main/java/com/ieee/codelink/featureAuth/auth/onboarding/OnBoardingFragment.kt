@@ -11,7 +11,6 @@ import com.ieee.codelink.R
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.databinding.FragmentOnboardingBinding
 import com.ieee.codelink.featureAuth.auth.adapters.OnBoardingAdapter
-import com.ieee.codelink.featureAuth.ui.onboarding.OnBoardingFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
