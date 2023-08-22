@@ -1,4 +1,4 @@
-package com.ieee.codelink.featureAuth.ui.verification
+package com.ieee.codelink.featureAuth.ui.auth.verification
 
 import android.os.Bundle
 import android.view.View

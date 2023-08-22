@@ -1,4 +1,4 @@
-package com.ieee.codelink.featureAuth.ui.login
+package com.ieee.codelink.featureAuth.ui.auth.login
 
 import android.os.Bundle
 import android.view.View
@@ -10,6 +10,7 @@ import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentLoginBinding
 import com.ieee.codelink.featureAuth.domain.models.AuthResponse
+import com.ieee.codelink.featureAuth.ui.login.LoginFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

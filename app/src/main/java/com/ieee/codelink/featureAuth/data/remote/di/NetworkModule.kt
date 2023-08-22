@@ -2,7 +2,6 @@ package com.ieee.codelink.data.remote.di
 
 import com.ieee.codelink.featureAuth.data.remote.ApiAuthService
 import com.ieee.codelink.featureAuth.data.remote.AuthInterceptor
-import com.ieee.codelink.featureAuth.data.remote.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

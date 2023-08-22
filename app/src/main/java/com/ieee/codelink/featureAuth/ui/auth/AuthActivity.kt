@@ -1,4 +1,4 @@
-package com.ieee.codelink.featureAuth.ui
+package com.ieee.codelink.featureAuth.ui.auth
 
 import android.os.Bundle
 import androidx.navigation.NavController

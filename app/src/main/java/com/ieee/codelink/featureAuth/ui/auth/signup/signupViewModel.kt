@@ -1,4 +1,4 @@
-package com.ieee.codelink.featureAuth.ui.signup
+package com.ieee.codelink.featureAuth.ui.auth.signup
 
 import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.featureAuth.data.repository.AuthRepository

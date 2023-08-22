@@ -1,4 +1,4 @@
-package com.ieee.codelink.featureAuth.ui.login
+package com.ieee.codelink.featureAuth.ui.auth.login
 
 import android.app.Application
 import androidx.lifecycle.LiveData

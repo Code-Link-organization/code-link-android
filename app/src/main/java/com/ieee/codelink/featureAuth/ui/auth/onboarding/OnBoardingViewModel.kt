@@ -1,4 +1,4 @@
-package com.ieee.codelink.featureAuth.ui.onboarding
+package com.ieee.codelink.featureAuth.ui.auth.onboarding
 
 import com.ieee.codelink.R
 import com.ieee.codelink.core.BaseViewModel
