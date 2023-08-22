@@ -2,18 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
-    android:background="@color/color_background">
+    android:background="@color/color_background"
+    android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginHorizontal="80dp"
-            android:src="@drawable/ic_login_image" />
-
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="80dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_login_image" />
 
 
     <TextView
@@ -23,8 +22,8 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="30dp"
         android:text="@string/welcome_back"
-        android:textSize="18sp"
         android:textColor="@color/color_text"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title" />
 
@@ -49,12 +48,11 @@
             android:background="@android:color/transparent"
             android:backgroundTint="@color/white"
             android:hint="@string/email"
-            android:maxLines="1"
             android:inputType="text"
+            android:maxLines="1"
             android:textColor="@color/color_text"
             android:textColorHint="#757575"
-            android:textCursorDrawable="@drawable/color_cursor"
-            />
+            android:textCursorDrawable="@drawable/color_cursor" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -65,10 +63,10 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="20dp"
         android:textColorHint="@color/color_hint"
-        app:hintTextColor="@color/color_hint"
-        app:endIconMode="password_toggle"
         app:endIconCheckable="true"
+        app:endIconMode="password_toggle"
         app:endIconTint="@color/color_hint"
+        app:hintTextColor="@color/color_hint"
         app:startIconDrawable="@drawable/ic_lock"
         app:startIconTint="@color/color_hint">
 
@@ -85,27 +83,26 @@
             android:textColorHint="#757575"
             android:textCursorDrawable="@drawable/color_cursor"
 
-          />
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        android:id="@+id/tv_forget_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_forget_password"
-        android:text="@string/forget_password"
         android:layout_gravity="end"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="12dp"
-        android:textSize="14sp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/forget_password"
         android:textColor="@color/color_text"
-        />
+        android:textSize="14sp" />
 
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        />
+        android:layout_weight="1" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_login"
         android:layout_width="180dp"
@@ -113,21 +110,20 @@
         android:layout_gravity="center_horizontal"
         android:background="@drawable/app_button_ripple"
         android:padding="8dp"
-        android:textColor="@color/color_text"
-        android:textSize="@dimen/big_txt"
-        android:textAllCaps="false"
         android:text="@string/login"
-        />
+        android:textAllCaps="false"
+        android:textColor="@color/color_text"
+        android:textSize="@dimen/big_txt" />
 
     <LinearLayout
-        android:layout_gravity="center_horizontal"
         android:id="@+id/ll_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
         android:orientation="horizontal"
         android:paddingVertical="4dp"
-        android:layout_marginBottom="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -136,20 +132,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
-            android:textSize="14sp"
-            android:textColor="@color/color_text"
             android:text="@string/don_t_have_an_account"
-            />
+            android:textColor="@color/color_text"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tv_signup"
-            android:paddingVertical="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:paddingVertical="8dp"
             android:text="@string/signup"
             android:textColor="@color/color_text"
-            android:textSize="16sp"
-            />
+            android:textSize="16sp" />
     </LinearLayout>
 </LinearLayout>

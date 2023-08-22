@@ -147,6 +147,8 @@ dependencies {
     //onBoarding indicators
     //implementation("com.tbuonomo:dotsindicator:5.0")
     implementation 'com.github.fajaragungpramana:dots-indicator:0.0.5'
+    //Loading Button
+    implementation 'com.github.koushikcse:LoadingButton:1.7'
 
 //    // Datastore
 //    implementation "androidx.datastore:datastore-preferences:1.0.0"

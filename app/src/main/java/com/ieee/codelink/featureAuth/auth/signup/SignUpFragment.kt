@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ieee.codelink.R
+import com.ieee.codelink.common.extension.animateLoadingButton
+import com.ieee.codelink.common.extension.clickWithThrottle
+import com.ieee.codelink.common.extension.navigateToAction
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.databinding.FragmentSignUpBinding
@@ -14,21 +17,61 @@ import com.ieee.codelink.featureAuth.auth.login.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding::inflate){
+class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding::inflate) {
 
-    override val viewModel: signupViewModel by viewModels()
+    override val viewModel: SignupViewModel by viewModels()
+    private lateinit var name: String
+    private lateinit var email: String
+    private lateinit var password: String
+    private lateinit var confirmPassword: String
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setOnClicks()
+        observations()
+    }
+
+    private fun observations() {
+        binding.apply {
+            viewModel.signUpState.awareCollectWithReduce(
+                onAny = {
+                    btnSignup.animateLoadingButton(it.isLoading)
+                },
+                onSuccessSingleTime = {
+                    navigateToAction(
+                        action =
+                        SignUpFragmentDirections.actionSignUpFragmentToVerificationFragment()
+                    )
+                }, onHandledOrUnHandledError = { _, _, errors ->
+                    nameField.error = errors?.name
+                    emailField.error = errors?.email
+                    passwordField.error = errors?.password
+                    confirmPasswordField.error = errors?.confirmPassword
+                }
+            )
+        }
     }
 
     private fun setOnClicks() {
-      binding.apply {
-          tvLogin.setOnClickListener {
-              findNavController().navigateUp()
-          }
-      }
+        binding.apply {
+            btnSignup.clickWithThrottle {
+                getUserData()
+                viewModel.signup(name, email, password, confirmPassword)
+            }
+            tvLogin.setOnClickListener {
+                findNavController().navigateUp()
+            }
+        }
     }
+
+    private fun getUserData() {
+        binding.apply {
+            name = nameEt.text.toString()
+            email = emailEt.text.toString()
+            password = passwordEt.text.toString()
+            confirmPassword = confirmPasswordEt.text.toString()
+        }
+    }
+
 
 }

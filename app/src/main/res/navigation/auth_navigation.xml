@@ -28,19 +28,15 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_left"/>
-        <action
-            android:id="@+id/action_loginFragment_to_verificationFragment"
-            app:destination="@id/verificationFragment"
-
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.ieee.codelink.featureAuth.auth.signup.SignUpFragment"
-        android:label="SignUpFragment" />
+        android:label="SignUpFragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_verificationFragment"
+            app:destination="@id/verificationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/verificationFragment"
         android:name="com.ieee.codelink.featureAuth.auth.verification.VerificationFragment"

@@ -10,6 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
+import com.alexon.Akelni_station.common.network.ResultHelper
+import com.alexon.Akelni_station.common.network.globalReduceState
+import com.ieee.codelink.R
 import com.ieee.codelink.common.event.Event
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.featureAuth.auth.AuthActivity
@@ -18,6 +21,7 @@ import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 abstract class BaseFragment
@@ -68,6 +72,57 @@ abstract class BaseFragment
         lifecycleScope.launchWhenStarted {
             this@awareCollect.collectLatest { action(it) }
         }
+    }
+
+
+    fun <T> StateFlow<ResponseState<T>>.awareCollectWithReduce(
+        showNetworkError: Boolean = true,
+        showUnknownError: Boolean = true,
+        showUnAuthorizedError: Boolean = true,
+        showDefaultError: Boolean = true,
+        onAny: ((resultHelper: ResultHelper<T>) -> Unit)? = null,
+        onSuccess: ((data: T?) -> Unit)? = null,
+        onSuccessSingleTime: ((data: T?) -> Unit)? = null,
+        onLoading: (() -> Unit)? = null,
+        onUnHandledError: ((message: String?, errors: SimpleErrors?) -> Unit)? = null,
+        onHandledOrUnHandledError: ((hasBeenHandled: Boolean, message: String?, errors: SimpleErrors?) -> Unit)? = null,
+        onHandledUnCompleteUserData: (() -> Unit)? = null,
+        onEmptyState: (() -> Unit)? = null,
+    ) {
+        lifecycleScope.launchWhenStarted {
+            this@awareCollectWithReduce.collectLatest {
+                globalReduceState(
+                    observedData = it,
+                    onAny = onAny,
+                    onSuccess = onSuccess,
+                    onSuccessSingleTime = onSuccessSingleTime,
+                    onLoading = onLoading,
+                    onUnHandledError = { message, errors ->
+                        showErrorIf(showDefaultError, message)
+                        onUnHandledError?.invoke(message, errors)
+                    },
+                    onHandledOrUnHandledError = onHandledOrUnHandledError,
+                    onUnCompleteUserData = onHandledUnCompleteUserData,
+                    onNetworkError = {
+                        showErrorIf(showNetworkError, getString(R.string.network_error))
+                    },
+                    onUnAuthorizedError = {
+                        showErrorIf(showUnAuthorizedError, getString(R.string.un_authorized))
+                        logout()
+                    },
+                    onEmptyState = onEmptyState,
+                    onUnKnownError = {
+                        showErrorIf(showUnknownError, getString(R.string.unkown_error))
+                    }
+                )
+            }
+        }
+    }
+
+    private fun showErrorIf(condition: Boolean, error: String?) {
+        if (error == null) return
+        if (!condition) return
+        lifecycleScope.launch { viewModel.error.emit(error) }
     }
 
 

@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Errors(
     @SerializedName("confirm_password")
-    val confirmPassword: List<String>?,
+    val password_confirmation: List<String>?,
     val email: List<String>?,
     val name: List<String>?,
     val password: List<String>?,
@@ -30,7 +30,7 @@ fun Errors.toSimpleErrors(): SimpleErrors {
         phone = this.phone?.firstOrNull(),
         name = this.name?.firstOrNull(),
         password = this.password?.firstOrNull(),
-        confirmPassword = this.confirmPassword?.firstOrNull(),
+        confirmPassword = this.password_confirmation?.firstOrNull(),
         otp = this.otp?.firstOrNull(),
         email = this.email?.firstOrNull(),
         changePassword = this.changePassword?.firstOrNull(),
