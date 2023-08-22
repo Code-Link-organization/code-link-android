@@ -11,9 +11,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.ieee.codelink.common.event.Event
-import com.ieee.codelink.featureAuth.data.local.preference.SharedPreferenceManger
-import com.ieee.codelink.featureAuth.ui.auth.AuthActivity
-import com.ieee.codelink.featureAuth.main.ui.main.MainActivity
+import com.ieee.codelink.data.local.preference.SharedPreferenceManger
+import com.ieee.codelink.featureAuth.auth.AuthActivity
+import com.ieee.codelink.featureAuth.main.MainActivity
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
