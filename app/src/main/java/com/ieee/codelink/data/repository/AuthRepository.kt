@@ -7,12 +7,8 @@ import com.ieee.codelink.domain.models.User
 import retrofit2.Response
 
 class AuthRepository (private val api: ApiAuthService, private val sharedPreferenceManger: SharedPreferenceManger) {
-    suspend fun loginUser(email: String, password: String): Response<AuthResponse>? {
-        return try {
-            api.loginUser(email, password)
-        } catch (e: Exception) {
-            null
-        }
+    suspend fun loginUser(email: String, password: String): Response<AuthResponse> {
+        return  api.loginUser(email, password)
     }
 
     suspend fun cacheUser(user: User) {

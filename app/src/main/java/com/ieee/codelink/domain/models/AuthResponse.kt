@@ -1,8 +1,13 @@
 package com.ieee.codelink.domain.models
 
-data class AuthResponse(
+import com.google.gson.annotations.SerializedName
+import com.ieee.codelink.core.BaseResponse
+
+data class AuthResponse (
+    @SerializedName("success")
     var success: Boolean,
-    var message: String,
+   // var message: String,
+    @SerializedName("data")
     var `data`: Data,
-    var errors: Errors
-)
+    //var errors: Errors
+): BaseResponse()

@@ -11,7 +11,7 @@ open class BaseViewModel : ViewModel() {
 
     val error = MutableSharedFlow<String?>()
 
-    protected fun <T : BaseResponse> networkCall(
+    protected fun < T : BaseResponse> networkCall(
         action: suspend () -> Response<T>,
         onReply: ((ResponseState<T>) -> Unit)? = null,
         doAfter: (suspend (isSuccess: Boolean) -> Unit)? = null,

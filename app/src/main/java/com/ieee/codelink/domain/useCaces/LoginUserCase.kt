@@ -7,7 +7,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class LoginUserCase (val repository: AuthRepository){
-    suspend operator fun invoke(email:String , password : String) :Response<AuthResponse>? = withContext(Dispatchers.IO) {
+    suspend operator fun invoke(email:String , password : String) :Response<AuthResponse> = withContext(Dispatchers.IO) {
         repository.loginUser(email, password)
     }
 }

@@ -5,12 +5,10 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.ieee.codelink.common.extension.animateLoadingButton
 import com.ieee.codelink.common.extension.onBackPress
 import com.ieee.codelink.core.BaseFragment
-import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentLoginBinding
-import com.ieee.codelink.domain.models.AuthResponse
-import com.ieee.codelink.featureAuth.ui.login.LoginFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -40,11 +38,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 }
 
             }
-
-//            root.setOnClickListener {
-//                navigateToHome("")
-//            }
-
         }
     }
 
@@ -55,32 +48,28 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun setObservers() {
-        viewModel.loginRequestState.observe(viewLifecycleOwner){state ->
-            state?.let {
-                loginStateObserver(state)
-            }
-        }
+        loginStateObserver()
     }
 
-    private fun loginStateObserver(state: ResponseState<AuthResponse>) {
-             when (state) {
-                 is ResponseState.Empty ,
-                 is ResponseState.NetworkError,
-                 is ResponseState.NotAuthorized ,
-                 is ResponseState.UnKnownError -> {}
-                 is ResponseState.Error -> {
-                      com.ieee.codelink.common.showToast(state.message.toString(), requireContext())
-                 }
-                 is ResponseState.Loading -> {}
-                 is ResponseState.Success -> {
-                     state.data?.let{response->
-                         lifecycleScope.launch {
-                             viewModel.cacheUser(response.data.user)
-                             navigateToHome(response.data.user.token)
-                         }
-                     }
-                 }
-             }
+    private fun loginStateObserver() {
+        viewModel.loginState.awareCollectWithReduce(
+            onAny = {
+                binding.btnLogin.animateLoadingButton(it.isLoading)
+            },
+            onSuccessSingleTime = { state ->
+                if (state?.result == "true") {
+                    state.data.let { userData ->
+                        lifecycleScope.launch {
+                            viewModel.cacheUser(userData.user)
+                            navigateToHome(userData.user.token)
+                        }
+                    }
+                }
+            }, onHandledOrUnHandledError = { _, _, errors ->
+                binding.emailField.error = errors?.email
+                binding.passwordField.error = errors?.password
+            }
+        )
     }
 
 

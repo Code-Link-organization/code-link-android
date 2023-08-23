@@ -1,49 +1,37 @@
 package com.ieee.codelink.featureAuth.auth.login
 
-import android.app.Application
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.ieee.codelink.common.parseErrorMessage
-import com.ieee.codelink.common.showToast
 import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.domain.models.AuthResponse
 import com.ieee.codelink.domain.models.User
-import com.ieee.codelink.data.repository.AuthRepository
+import com.ieee.codelink.featureAuth.di.useCaces.UserCaces
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val authRepository: AuthRepository,
-    private val app : Application
+    private val useCaces: UserCaces
 ) : BaseViewModel() {
 
-    private val _loginRequestState: MutableLiveData<ResponseState<AuthResponse>?> = MutableLiveData(null)
-    val loginRequestState: LiveData<ResponseState<AuthResponse>?> = _loginRequestState
-    suspend fun login(email: String, password : String){
-        _loginRequestState.postValue(ResponseState.Loading())
-        val response = authRepository.loginUser(email, password)
-        _loginRequestState.postValue(handleLoginResponse(response))
-    }
+    val loginState: MutableStateFlow<ResponseState<AuthResponse>> =
+        MutableStateFlow(ResponseState.Empty())
 
-    private fun handleLoginResponse(response: Response<AuthResponse>?): ResponseState<AuthResponse>? {
-        if (response?.isSuccessful == true) {
-            response.body()?.let { result ->
-                return ResponseState.Success(result)
+    suspend fun login(email: String, password: String) {
+        networkCall(
+            {
+                useCaces.login(email, password)
+            },
+            {
+                loginState.value = it
             }
-        }
-        if (response == null) {
-            return ResponseState.Error("Network error",null)
-        }
-        val errorBody = response.errorBody()?.string()
-        val errorMessage = parseErrorMessage(errorBody)
-        return ResponseState.Error(errorMessage,null)
+        )
     }
 
     suspend fun cacheUser(user: User) {
-      authRepository.cacheUser(user)
+        useCaces.cacheUser(user)
     }
 
 }

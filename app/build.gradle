@@ -143,6 +143,7 @@ dependencies {
 
     // Loading button
     implementation 'br.com.simplepass:loading-button-android:2.2.0'
+    implementation 'com.github.koushikcse:LoadingButton:1.7'
 
     //onBoarding indicators
     //implementation("com.tbuonomo:dotsindicator:5.0")

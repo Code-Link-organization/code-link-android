@@ -4,6 +4,9 @@ import com.ieee.codelink.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.data.remote.ApiAuthService
 import com.ieee.codelink.data.remote.AuthInterceptor
 import com.ieee.codelink.data.repository.AuthRepository
+import com.ieee.codelink.featureAuth.di.useCaces.CacheUserUseCace
+import com.ieee.codelink.featureAuth.di.useCaces.LoginUserCase
+import com.ieee.codelink.featureAuth.di.useCaces.UserCaces
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,6 +32,18 @@ object AuthModule {
         api: ApiAuthService,
         sharedPreferenceManger: SharedPreferenceManger
     ): AuthRepository = AuthRepository(api, sharedPreferenceManger )
+
+    @Provides
+    @Singleton
+    fun provideAuthUseCaces(
+        repository: AuthRepository,
+        sharedPreferenceManger: SharedPreferenceManger
+    ): UserCaces = UserCaces(
+        LoginUserCase(repository),
+        CacheUserUseCace(sharedPreferenceManger)
+    )
+
+
 
     @ApplicationScope
     @Provides

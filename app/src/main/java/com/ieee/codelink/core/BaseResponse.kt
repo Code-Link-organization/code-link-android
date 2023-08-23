@@ -6,9 +6,13 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 open class BaseResponse(
+    @SerializedName("errors")
     val errors: Errors? = null,
+    @SerializedName("message")
     var message: String? = "",
+    @SerializedName("status")
     val status: Int? = 200,
+    @SerializedName("result")
     val result: String? = "success",
     @SerializedName("last_step")
     val lastStep: String? = null,
