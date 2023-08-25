@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/color_otp_background"
     android:windowSoftInputMode="stateAlwaysHidden"
-    tools:context=".featureAuth.auth.verification.VerificationFragment">
+    tools:context=".ui.auth.verification.VerificationFragment">
 
     <LinearLayout
         android:layout_gravity="center_horizontal"

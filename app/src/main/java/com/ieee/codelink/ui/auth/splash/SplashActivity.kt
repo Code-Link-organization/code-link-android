@@ -1,12 +1,12 @@
-package com.ieee.codelink.featureAuth.auth.splash
+package com.ieee.codelink.ui.auth.splash
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import com.ieee.codelink.core.BaseActivity
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
-import com.ieee.codelink.featureAuth.auth.AuthActivity
-import com.ieee.codelink.featureAuth.main.MainActivity
+import com.ieee.codelink.ui.auth.AuthActivity
+import com.ieee.codelink.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

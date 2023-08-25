@@ -1,4 +1,4 @@
-package com.alexon.Akelni_station.common.network
+package com.ieee.codelink.common.network
 
 import android.content.Context
 import android.net.ConnectivityManager

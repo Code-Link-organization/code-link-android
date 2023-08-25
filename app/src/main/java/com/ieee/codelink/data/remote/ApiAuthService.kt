@@ -26,5 +26,19 @@ interface ApiAuthService {
         password: String? = null,
         @Query("password_confirmation")
         password_confirmation: String? = null
-    ): Response<BaseResponse>
+    ): Response<AuthResponse>
+
+    @POST(SEND_VERIFICATION_CODE)
+    suspend fun sendOtp(
+        @Query("email")
+        email: String? = null
+    ): Response<AuthResponse>
+
+    @POST(CHECK_VERIFICATION_CODE)
+    suspend fun verifyOtpCode(
+        @Query("email")
+        email: String? = null,
+        @Query("code")
+        code: String? = null
+    ): Response<AuthResponse>
 }

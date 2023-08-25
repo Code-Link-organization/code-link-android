@@ -23,10 +23,32 @@ class AuthRepository(
         email: String,
         password: String,
         confirmPassword: String
-    ) = api.signUpUser(name, email, password, confirmPassword)
+    ) :Response<AuthResponse>?{
+        return try {
+            api.signUpUser(name, email, password, confirmPassword)
+        }catch (e: Exception) {
+            null
+        }
+    }
 
     suspend fun cacheUser(user: User) {
         sharedPreferenceManger.cacheUser(user)
+    }
+
+    suspend fun sendOtpToUserEmail(email: String): Response<AuthResponse>? {
+        return try {
+            api.sendOtp(email)
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    suspend fun verifyCode(code: String, email: String): Response<AuthResponse>? {
+        return try {
+            api.verifyOtpCode(code = code,email = email)
+        } catch (e: Exception) {
+            null
+        }
     }
 
 

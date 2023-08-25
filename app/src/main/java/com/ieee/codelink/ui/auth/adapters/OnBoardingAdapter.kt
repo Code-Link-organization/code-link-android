@@ -1,4 +1,4 @@
-package com.ieee.codelink.featureAuth.auth.adapters
+package com.ieee.codelink.ui.auth.adapters
 
 import android.view.LayoutInflater
 import android.view.View

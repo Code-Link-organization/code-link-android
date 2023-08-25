@@ -1,4 +1,4 @@
-package com.ieee.codelink.featureAuth.main
+package com.ieee.codelink.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

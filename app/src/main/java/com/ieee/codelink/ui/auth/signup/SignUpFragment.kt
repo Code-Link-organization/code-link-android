@@ -1,20 +1,21 @@
-package com.ieee.codelink.featureAuth.auth.signup
+package com.ieee.codelink.ui.auth.signup
 
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.facebook.appevents.AppEventsLogger.Companion.getUserData
 import com.ieee.codelink.R
 import com.ieee.codelink.common.extension.animateLoadingButton
 import com.ieee.codelink.common.extension.clickWithThrottle
 import com.ieee.codelink.common.extension.navigateToAction
 import com.ieee.codelink.core.BaseFragment
-import com.ieee.codelink.core.BaseViewModel
+import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentSignUpBinding
-import com.ieee.codelink.featureAuth.auth.login.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding::inflate) {
@@ -40,7 +41,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
                 onSuccessSingleTime = {
                     navigateToAction(
                         action =
-                        SignUpFragmentDirections.actionSignUpFragmentToVerificationFragment()
+                        SignUpFragmentDirections.actionSignUpFragmentToVerificationFragment(email)
                     )
                 }, onHandledOrUnHandledError = { _, _, errors ->
                     nameField.error = errors?.name
@@ -50,13 +51,16 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
                 }
             )
         }
+
     }
 
     private fun setOnClicks() {
         binding.apply {
             btnSignup.clickWithThrottle {
                 getUserData()
-                viewModel.signup(name, email, password, confirmPassword)
+                lifecycleScope.launch {
+                    viewModel.signup(name, email, password, confirmPassword)
+                }
             }
             tvLogin.setOnClickListener {
                 findNavController().navigateUp()
