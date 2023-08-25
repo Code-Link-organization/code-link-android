@@ -15,8 +15,8 @@ import com.alexon.Akelni_station.common.network.globalReduceState
 import com.ieee.codelink.R
 import com.ieee.codelink.common.event.Event
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
-import com.ieee.codelink.featureAuth.auth.AuthActivity
-import com.ieee.codelink.featureAuth.main.MainActivity
+import com.ieee.codelink.ui.auth.AuthActivity
+import com.ieee.codelink.ui.main.MainActivity
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow

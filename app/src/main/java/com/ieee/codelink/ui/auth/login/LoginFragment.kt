@@ -1,12 +1,14 @@
-package com.ieee.codelink.featureAuth.auth.login
+package com.ieee.codelink.ui.auth.login
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.ieee.codelink.R
 import com.ieee.codelink.common.extension.onBackPress
 import com.ieee.codelink.core.BaseFragment
+import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentLoginBinding
 import com.ieee.codelink.domain.models.AuthResponse
@@ -42,10 +44,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
             }
 
-//            root.setOnClickListener {
-//                navigateToHome("")
-//            }
-
         }
     }
 
@@ -56,19 +54,56 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun setObservers() {
-        viewModel.loginRequestState.observe(viewLifecycleOwner) { state ->
-            state?.let {
-                loginStateObserver(state)
+        viewModel.loginRequestState.awareCollect { state ->
+            loginStateObserver(state)
+        }
+
+        viewModel.sendOtpState.awareCollect { state ->
+            otpRequestObserver(state)
+        }
+    }
+
+    private fun otpRequestObserver(state: ResponseState<AuthResponse>) {
+        when (state) {
+            is ResponseState.Success -> {
+                goToVerificationScreen()
+            }
+            is ResponseState.Empty -> {}
+            is ResponseState.Loading -> {}
+            is ResponseState.Error -> {
+                state.message?.let {
+                    showToast(state.message.toString())
+                }
+            }
+            is ResponseState.NetworkError->{
+                showToast(getString(R.string.network_error))
+            }
+            else -> {
+                com.ieee.codelink.common.showToast(
+                    getString(R.string.something_went_wrong),
+                    requireContext()
+                )
             }
         }
+    }
+
+    private fun goToVerificationScreen() {
+        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToVerificationFragment(binding.emailEt.text.toString()))
     }
 
     private fun loginStateObserver(state: ResponseState<AuthResponse>) {
         when (state) {
             is ResponseState.Empty,
-            is ResponseState.NetworkError,
-            is ResponseState.NotAuthorized,
             is ResponseState.UnKnownError -> {
+            }
+            is ResponseState.NetworkError -> {
+                showToast(getString(R.string.network_error))
+
+            }
+            is ResponseState.NotAuthorized -> {
+                lifecycleScope.launch {
+                    sendOtpToUserEmail(binding.emailEt.text.toString())
+                }
             }
 
             is ResponseState.Error -> {
@@ -79,13 +114,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             is ResponseState.Success -> {
                 state.data?.let { response ->
                     lifecycleScope.launch {
-                        viewModel.cacheUser(response.data.user)
-                        navigateToHome(response.data.user.token)
+                        viewModel.cacheUser(response.data!!.user)
+                        navigateToHome(response.data!!.user.token)
                     }
                 }
             }
+
         }
+
     }
 
+    private suspend fun sendOtpToUserEmail(email: String) {
+        viewModel.sendOtpToUserEmail(email)
+    }
 
 }

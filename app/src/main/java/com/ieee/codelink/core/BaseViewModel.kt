@@ -1,8 +1,10 @@
 package com.ieee.codelink.core
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alexon.Akelni_station.common.network.globalNetworkCall
+import com.ieee.codelink.common.network.globalNetworkCall
+import com.ieee.codelink.common.parseErrorMessage
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
 import retrofit2.Response
@@ -25,4 +27,24 @@ open class BaseViewModel : ViewModel() {
             scope = viewModelScope
         )
     }
+
+    fun <T> handleResponse(response: Response<T>?): ResponseState<T> {
+        if (response?.isSuccessful == true) {
+            response.body()?.let { result ->
+                return ResponseState.Success(result)
+            }
+        }
+        if (response == null) {
+            return ResponseState.NetworkError()
+        }
+
+        if (response.code() == 401) {
+            return ResponseState.NotAuthorized()
+        }
+
+        val errorBody = response.errorBody()?.string()
+        val errorMessage = parseErrorMessage(errorBody)
+        return ResponseState.Error(errorMessage , null)
+    }
+
 }

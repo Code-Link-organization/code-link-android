@@ -25,4 +25,6 @@
     <string name="enter_your_code_here">Enter Your Code Here</string>
     <string name="new_password">New Password</string>
     <string name="send">Send</string>
+    <string name="something_went_wrong">Something Went Wrong</string>
+    <string name="invalid_otp">Invalid Otp</string>
 </resources>
