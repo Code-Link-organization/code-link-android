@@ -64,12 +64,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun otpRequestObserver(state: ResponseState<AuthResponse>) {
+        binding.btnLogin.hideLoading()
         when (state) {
             is ResponseState.Success -> {
                 goToVerificationScreen()
             }
-            is ResponseState.Empty -> {}
-            is ResponseState.Loading -> {}
+            is ResponseState.Empty -> {
+            }
+            is ResponseState.Loading -> {
+                binding.btnLogin.showLoading()
+            }
             is ResponseState.Error -> {
                 state.message?.let {
                     showToast(state.message.toString())
@@ -92,6 +96,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun loginStateObserver(state: ResponseState<AuthResponse>) {
+        binding.btnLogin.hideLoading()
         when (state) {
             is ResponseState.Empty,
             is ResponseState.UnKnownError -> {
@@ -110,12 +115,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 com.ieee.codelink.common.showToast(state.message.toString(), requireContext())
             }
 
-            is ResponseState.Loading -> {}
+            is ResponseState.Loading -> {
+                binding.btnLogin.showLoading()
+            }
             is ResponseState.Success -> {
                 state.data?.let { response ->
                     lifecycleScope.launch {
-                        viewModel.cacheUser(response.data!!.user)
-                        navigateToHome(response.data!!.user.token!!)
+                        viewModel.cacheUser(response.data.user)
+                        navigateToHome(response.data.user.token!!)
                     }
                 }
             }

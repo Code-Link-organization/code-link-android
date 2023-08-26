@@ -1,4 +1,4 @@
-package com.ieee.codelink.ui.auth.splash
+package com.ieee.codelink.ui.splash
 
 import android.annotation.SuppressLint
 import android.content.Intent

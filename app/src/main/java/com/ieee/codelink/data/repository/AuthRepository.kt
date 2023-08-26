@@ -1,11 +1,8 @@
 package com.ieee.codelink.data.repository
 
-import android.util.Log
-import com.google.android.gms.auth.api.Auth
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.data.remote.ApiAuthService
 import com.ieee.codelink.domain.models.AuthResponse
-import com.ieee.codelink.domain.models.TempResponse
 import com.ieee.codelink.domain.models.User
 import retrofit2.Response
 

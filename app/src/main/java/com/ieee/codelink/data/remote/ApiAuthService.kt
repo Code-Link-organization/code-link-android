@@ -1,8 +1,6 @@
 package com.ieee.codelink.data.remote
 
-import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.domain.models.AuthResponse
-import com.ieee.codelink.domain.models.TempResponse
 import retrofit2.Response
 import retrofit2.http.POST
 import retrofit2.http.Query
