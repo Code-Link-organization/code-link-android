@@ -1,6 +1,6 @@
 package com.ieee.codelink.data.remote
 
-const val BASE_URL = "https://8921-197-43-105-167.ngrok-free.app/api/user/"
+const val BASE_URL = "https://ff66-197-43-82-38.ngrok-free.app/api/user/"
 
 const val LOGIN_END_POINT = "login"
 const val LOGOUT_END_POINT = "logout"

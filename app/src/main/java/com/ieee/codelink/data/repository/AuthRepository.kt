@@ -1,8 +1,11 @@
 package com.ieee.codelink.data.repository
 
+import android.util.Log
+import com.google.android.gms.auth.api.Auth
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.data.remote.ApiAuthService
 import com.ieee.codelink.domain.models.AuthResponse
+import com.ieee.codelink.domain.models.TempResponse
 import com.ieee.codelink.domain.models.User
 import retrofit2.Response
 
@@ -23,13 +26,7 @@ class AuthRepository(
         email: String,
         password: String,
         confirmPassword: String
-    ) :Response<AuthResponse>?{
-        return try {
-            api.signUpUser(name, email, password, confirmPassword)
-        }catch (e: Exception) {
-            null
-        }
-    }
+    ) :Response<AuthResponse> = api.signUpUser(name, email, password, confirmPassword)
 
     suspend fun cacheUser(user: User) {
         sharedPreferenceManger.cacheUser(user)
