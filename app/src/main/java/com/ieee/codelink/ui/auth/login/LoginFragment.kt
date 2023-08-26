@@ -115,7 +115,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 state.data?.let { response ->
                     lifecycleScope.launch {
                         viewModel.cacheUser(response.data!!.user)
-                        navigateToHome(response.data!!.user.token)
+                        navigateToHome(response.data!!.user.token!!)
                     }
                 }
             }

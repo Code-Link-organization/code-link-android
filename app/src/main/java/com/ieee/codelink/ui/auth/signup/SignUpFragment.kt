@@ -1,7 +1,6 @@
 package com.ieee.codelink.ui.auth.signup
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -14,6 +13,7 @@ import com.ieee.codelink.common.extension.navigateToAction
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentSignUpBinding
+import com.ieee.codelink.domain.models.AuthResponse
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -33,6 +33,10 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
     }
 
     private fun observations() {
+            signupStateObserver()
+    }
+
+    private fun signupStateObserver() {
         binding.apply {
             viewModel.signUpState.awareCollectWithReduce(
                 onAny = {
@@ -51,7 +55,6 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
                 }
             )
         }
-
     }
 
     private fun setOnClicks() {

@@ -7,6 +7,7 @@ import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.data.repository.AuthRepository
 import com.ieee.codelink.domain.models.AuthResponse
+import com.ieee.codelink.domain.models.TempResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -28,21 +29,15 @@ class SignupViewModel @Inject constructor(
         password: String,
         confirmPassword: String
     ) {
-//        networkCall(
-//            {
-//                authRepository.signup(name, email, password, confirmPassword)
-//            },
-//            {
-//                Log.d("mohamed", "signup: $it")
-//                signUpState.value = it
-//            }
-//        )
-
-       signUpState.value = ResponseState.Loading()
-       val response = authRepository.signup(name, email, password, confirmPassword)
-       signUpState.value = handleResponse(response)
-       Log.d("mohamed", "signup: ${handleResponse(response)}")
-
+        networkCall(
+            {
+                authRepository.signup(name, email, password, confirmPassword)
+            },
+            {
+                Log.d("mohamed", "signup: $it")
+                signUpState.value = it
+            }
+        )
 
     }
 
