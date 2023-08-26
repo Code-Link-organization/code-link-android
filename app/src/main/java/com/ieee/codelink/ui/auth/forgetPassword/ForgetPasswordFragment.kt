@@ -41,14 +41,12 @@ class ForgetPasswordFragment :
         } else {
             showPasswordSection()
             setPasswordSectionOnClicks()
+            setPasswordSectionObservers()
         }
     }
 
     private fun setEmailSectionObservers() {
 
-        onBackPress {
-            navigateToLogin()
-        }
 
         viewModel.sendOtpState.awareCollect { state ->
             otpRequestObserver(state)
@@ -56,7 +54,18 @@ class ForgetPasswordFragment :
     }
 
 
+    private fun setPasswordSectionObservers() {
+        viewModel.resetPasswordState.awareCollect { state ->
+            resetPasswordObserver(state)
+        }
+    }
+
+
     private fun setEmailSectionOnClicks() {
+        onBackPress {
+            navigateToLogin()
+        }
+
         binding.btnSend.setOnClickListener {
             lifecycleScope.launch {
                 viewModel.sendOtpToUserEmail(binding.emailEt.text.toString())
@@ -73,10 +82,10 @@ class ForgetPasswordFragment :
 
         binding.btnSend.setOnClickListener {
             if (isSamePassword()) {
-                showToast("reset password done")
                 lifecycleScope.launch {
                     val newPassword = binding.passwordEt.text.toString()
-                    viewModel.resetPassword(email, newPassword)
+                    val token = args.token
+                    viewModel.resetPassword(token, newPassword)
                 }
             }
         }
@@ -134,6 +143,43 @@ class ForgetPasswordFragment :
         }
     }
 
+    private fun resetPasswordObserver(state: ResponseState<AuthResponse>) {
+        binding.btnSend.hideLoading()
+        when (state) {
+            is ResponseState.Success -> {
+                com.ieee.codelink.common.showToast(
+                    getString(R.string.password_reset_successfully),
+                    requireContext()
+                )
+                navigateToLogin()
+            }
+
+            is ResponseState.Empty -> {
+            }
+
+            is ResponseState.Loading -> {
+                binding.btnSend.showLoading()
+            }
+
+            is ResponseState.Error -> {
+                state.message?.let {
+                    showToast(state.message.toString())
+                }
+            }
+
+            is ResponseState.NetworkError -> {
+                showToast(getString(R.string.network_error))
+            }
+
+            else -> {
+                com.ieee.codelink.common.showToast(
+                    getString(R.string.something_went_wrong),
+                    requireContext()
+                )
+            }
+        }
+    }
+
     private fun goToVerificationScreen() {
         findNavController().navigate(
             ForgetPasswordFragmentDirections.actionForgetPasswordFragmentToVerificationFragment(
@@ -141,7 +187,6 @@ class ForgetPasswordFragment :
             )
         )
     }
-
 
     private fun navigateToLogin() {
         var currentDestinationId = findNavController().currentDestination?.id

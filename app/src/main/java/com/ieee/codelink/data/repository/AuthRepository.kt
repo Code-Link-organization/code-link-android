@@ -45,8 +45,12 @@ class AuthRepository(
         }
     }
 
-    suspend fun resetPassword(email: String, newPassword: String) {
-
+    suspend fun resetPassword(token: String, password: String): Response<AuthResponse>? {
+        return try {
+            api.resetPassword(token, password , password)
+        } catch (e: Exception) {
+            null
+        }
     }
 
 

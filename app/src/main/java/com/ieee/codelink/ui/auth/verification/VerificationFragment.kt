@@ -44,7 +44,10 @@ class VerificationFragment :
             when(state) {
                 is ResponseState.Success -> {
                     if (navArgs.goToForgetPassword) {
-                        gotoForgetPassword(navArgs.email)
+                        state.data.let {response->
+                            gotoForgetPassword(navArgs.email , response!!.data.user.token!!)
+
+                        }
                     } else {
                         login(state)
                     }
@@ -69,11 +72,12 @@ class VerificationFragment :
         }
     }
 
-    private fun gotoForgetPassword(email: String) {
+    private fun gotoForgetPassword(email: String, token: String) {
         findNavController().navigate(
             VerificationFragmentDirections.actionVerificationFragmentToForgetPasswordFragment(
                 false,
-                email
+                email,
+                token
             )
         )
     }
