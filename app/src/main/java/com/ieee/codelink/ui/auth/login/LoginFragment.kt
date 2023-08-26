@@ -51,7 +51,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun gotoForgetPasswordScreen() {
-        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToForgetPasswordFragment(true," "))
+        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToForgetPasswordFragment(true," "," "))
     }
 
     private suspend fun login() {

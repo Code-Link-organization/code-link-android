@@ -50,5 +50,8 @@ fun Fragment.onBackPress(action: () -> Unit) {
             override fun handleOnBackPressed() {
                 action()
             }
-        })
+        }
+    )
+
+
 }

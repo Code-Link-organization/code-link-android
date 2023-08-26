@@ -14,13 +14,21 @@ class ForgetPasswordViewModel @Inject constructor(private val authRepository: Au
 
     val sendOtpState: MutableStateFlow<ResponseState<AuthResponse>> =
         MutableStateFlow(ResponseState.Empty())
+
+    val resetPasswordState: MutableStateFlow<ResponseState<AuthResponse>> =
+        MutableStateFlow(ResponseState.Empty())
+
     suspend fun sendOtpToUserEmail(email: String) {
         sendOtpState.value = ResponseState.Loading()
         val response = authRepository.sendOtpToUserEmail(email)
         sendOtpState.value = handleResponse(response)
     }
 
-    suspend fun resetPassword(email: String, newPassword: String) {
-        authRepository.resetPassword(email, newPassword)
+    suspend fun resetPassword(token: String, newPassword: String) {
+        val fullToken = "Bearer ${token}"
+        resetPasswordState.value = ResponseState.Loading()
+        val response = authRepository.resetPassword(fullToken, newPassword)
+        resetPasswordState.value = handleResponse(response)
+
     }
 }
