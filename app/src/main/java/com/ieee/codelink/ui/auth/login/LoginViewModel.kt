@@ -31,27 +31,9 @@ class LoginViewModel @Inject constructor(
     suspend fun login(email: String, password: String) {
         loginRequestState.value = ResponseState.Loading()
         val response = authRepository.loginUser(email, password)
-        loginRequestState.value = handleAuthResponse(response)
+        loginRequestState.value = handleResponse(response)
     }
 
-    private fun handleAuthResponse(response: Response<AuthResponse>?): ResponseState<AuthResponse> {
-        if (response?.isSuccessful == true) {
-            response.body()?.let { result ->
-                return ResponseState.Success(result)
-            }
-        }
-        if (response == null) {
-            return ResponseState.NetworkError()
-        }
-
-        if (response.code() == 401) {
-            return ResponseState.NotAuthorized()
-        }
-
-        val errorBody = response.errorBody()?.string()
-        val errorMessage = parseErrorMessage(errorBody)
-        return ResponseState.Error(errorMessage, null)
-    }
 
     suspend fun cacheUser(user: User) {
         authRepository.cacheUser(user)
@@ -60,13 +42,13 @@ class LoginViewModel @Inject constructor(
     suspend fun sendOtpToUserEmail(email: String) {
         sendOtpState.value = ResponseState.Loading()
         val response = authRepository.sendOtpToUserEmail(email)
-        sendOtpState.value = handleAuthResponse(response)
+        sendOtpState.value = handleResponse(response)
     }
 
     suspend fun checkOtp(code: String, email: String) {
         checkOtpState.value = ResponseState.Loading()
         val response = authRepository.verifyCode(code,email)
-        checkOtpState.value = handleAuthResponse(response)
+        checkOtpState.value = handleResponse(response)
     }
 
 

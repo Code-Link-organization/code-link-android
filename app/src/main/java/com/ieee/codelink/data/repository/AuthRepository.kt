@@ -45,5 +45,9 @@ class AuthRepository(
         }
     }
 
+    suspend fun resetPassword(email: String, newPassword: String) {
+
+    }
+
 
 }

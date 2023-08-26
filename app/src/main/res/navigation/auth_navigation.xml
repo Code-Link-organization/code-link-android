@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_loginFragment_to_verificationFragment"
             app:destination="@id/verificationFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgetPasswordFragment"
+            app:destination="@id/forgetPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -48,5 +51,25 @@
         <argument
             android:name="email"
             app:argType="string" />
+        <action
+            android:id="@+id/action_verificationFragment_to_forgetPasswordFragment"
+            app:destination="@id/forgetPasswordFragment" />
+        <argument
+            android:name="goToForgetPassword"
+            app:argType="boolean" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgetPasswordFragment"
+        android:name="com.ieee.codelink.ui.auth.forgetPassword.ForgetPasswordFragment"
+        android:label="ForgetPasswordFragment" >
+        <argument
+            android:name="isEmailSection"
+            app:argType="boolean" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_forgetPasswordFragment_to_verificationFragment"
+            app:destination="@id/verificationFragment" />
     </fragment>
 </navigation>
