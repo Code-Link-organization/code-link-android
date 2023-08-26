@@ -1,4 +1,4 @@
-package com.ieee.codelink.ui.auth.onboarding
+package com.ieee.codelink.ui.onboarding
 
 import android.os.Bundle
 import android.view.View
@@ -10,7 +10,7 @@ import androidx.viewpager.widget.ViewPager
 import com.ieee.codelink.R
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.databinding.FragmentOnboardingBinding
-import com.ieee.codelink.ui.auth.adapters.OnBoardingAdapter
+import com.ieee.codelink.ui.adapters.OnBoardingAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

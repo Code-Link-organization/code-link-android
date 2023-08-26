@@ -103,17 +103,20 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.kusu.loadingbutton.LoadingButton
         android:id="@+id/btn_login"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/app_button_ripple"
+        app:lb_cornerRadius="@dimen/app_btn_radius"
         android:padding="8dp"
         android:text="@string/login"
         android:textAllCaps="false"
         android:textColor="@color/color_text"
-        android:textSize="@dimen/big_txt" />
+        android:textSize="@dimen/big_txt"
+        app:lb_buttonColor="@color/color_primary"
+        app:lb_isShadowEnable="false"
+        app:lb_loaderColor="@color/white" />
 
     <LinearLayout
         android:id="@+id/ll_bottom"

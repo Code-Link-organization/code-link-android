@@ -6,4 +6,5 @@
     <dimen name="button_padding_horizontal">45dp</dimen>
     <dimen name="button_padding_vertical">16dp</dimen>
     <dimen name="keyboard_line_hieght">55dp</dimen>
+    <dimen name="app_btn_radius">16dp</dimen>
 </resources>
