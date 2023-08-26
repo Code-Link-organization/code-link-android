@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ieee.codelink.R
 import com.ieee.codelink.common.showSnackbar
@@ -42,7 +43,11 @@ class VerificationFragment :
         viewModel.checkOtpState.awareCollect {state->
             when(state) {
                 is ResponseState.Success -> {
-                    login(state)
+                    if (navArgs.goToForgetPassword) {
+                        gotoForgetPassword(navArgs.email)
+                    } else {
+                        login(state)
+                    }
                 }
                 is ResponseState.Loading -> {
 
@@ -55,23 +60,33 @@ class VerificationFragment :
                         showToast(state.message.toString())
                     }
                 }
-                is ResponseState.Empty->{}
+
+                is ResponseState.Empty -> {}
                 else -> {
-                    showSnackbar(getString(R.string.invalid_otp),requireContext() , binding.root)
+                    showSnackbar(getString(R.string.invalid_otp), requireContext(), binding.root)
                 }
             }
         }
     }
 
+    private fun gotoForgetPassword(email: String) {
+        findNavController().navigate(
+            VerificationFragmentDirections.actionVerificationFragmentToForgetPasswordFragment(
+                false,
+                email
+            )
+        )
+    }
+
     private fun setKeyboardClicks() {
         binding.keyboard.apply {
-            key0.setOnClickListener {addToOtp("0")}
-            key1.setOnClickListener {addToOtp("1")}
-            key2.setOnClickListener {addToOtp("2")}
-            key3.setOnClickListener {addToOtp("3")}
-            key4.setOnClickListener {addToOtp("4")}
-            key5.setOnClickListener {addToOtp("5")}
-            key6.setOnClickListener {addToOtp("6")}
+            key0.setOnClickListener { addToOtp("0") }
+            key1.setOnClickListener { addToOtp("1") }
+            key2.setOnClickListener { addToOtp("2") }
+            key3.setOnClickListener { addToOtp("3") }
+            key4.setOnClickListener { addToOtp("4") }
+            key5.setOnClickListener { addToOtp("5") }
+            key6.setOnClickListener { addToOtp("6") }
             key7.setOnClickListener {addToOtp("7")}
             key8.setOnClickListener {addToOtp("8")}
             key9.setOnClickListener {addToOtp("9")}

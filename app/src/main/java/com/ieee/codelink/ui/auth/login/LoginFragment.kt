@@ -44,7 +44,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
             }
 
+            tvForgetPassword.setOnClickListener {
+                gotoForgetPasswordScreen()
+            }
         }
+    }
+
+    private fun gotoForgetPasswordScreen() {
+        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToForgetPasswordFragment(true," "))
     }
 
     private suspend fun login() {
@@ -92,7 +99,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun goToVerificationScreen() {
-        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToVerificationFragment(binding.emailEt.text.toString()))
+        findNavController().navigate(LoginFragmentDirections.
+        actionLoginFragmentToVerificationFragment(binding.emailEt.text.toString(),false)
+        )
     }
 
     private fun loginStateObserver(state: ResponseState<AuthResponse>) {

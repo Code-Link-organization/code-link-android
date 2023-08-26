@@ -45,7 +45,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
                 onSuccessSingleTime = {
                     navigateToAction(
                         action =
-                        SignUpFragmentDirections.actionSignUpFragmentToVerificationFragment(email)
+                        SignUpFragmentDirections.actionSignUpFragmentToVerificationFragment(email,false)
                     )
                 }, onHandledOrUnHandledError = { _, _, errors ->
                     nameField.error = errors?.name
