@@ -2,6 +2,7 @@ package com.ieee.codelink.ui.auth.verification
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -37,9 +38,45 @@ class VerificationFragment :
                 viewModel.checkOtp(binding.otpView.otp.toString() , navArgs.email)
             }
         }
+
+        binding.tvResendCode.setOnClickListener{
+            lifecycleScope.launch {
+                viewModel.sendOtpToUserEmail(navArgs.email)
+            }
+        }
     }
 
     private fun setObservers() {
+        checkOtpObserver()
+        sendOtpOnserver()
+    }
+
+    private fun sendOtpOnserver() {
+        viewModel.sendOtpState.awareCollect {state->
+            when(state) {
+                is ResponseState.Success -> {
+                    com.ieee.codelink.common.showToast(getString(R.string.resend_code),requireContext())
+                }
+                is ResponseState.Loading -> {
+                }
+                is ResponseState.NetworkError -> {
+                    showToast(getString(R.string.network_error))
+                }
+                is ResponseState.Error -> {
+                    state.message?.let {
+                        showToast(state.message.toString())
+                    }
+                }
+
+                is ResponseState.Empty -> {}
+                else -> {
+
+                }
+            }
+        }
+    }
+
+    private fun checkOtpObserver() {
         viewModel.checkOtpState.awareCollect {state->
             when(state) {
                 is ResponseState.Success -> {

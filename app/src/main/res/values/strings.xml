@@ -30,4 +30,5 @@
     <string name="email_section_text">Please enter your email address to receive a verification code</string>
     <string name="password_section_text">Your new password must be different from previously used password</string>
     <string name="password_reset_successfully">Password Changed</string>
+    <string name="resend_code">Code Was Sent To Your Email</string>
 </resources>
