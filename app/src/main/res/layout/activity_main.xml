@@ -9,6 +9,7 @@
 
 
     <TextView
+        android:id="@+id/tv_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -17,8 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:textColor="@color/color_ripple"
         android:textSize="24sp"
-        android:text="MainActivity Screen"
-
+        android:text="PRESS TO LOG OUT"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

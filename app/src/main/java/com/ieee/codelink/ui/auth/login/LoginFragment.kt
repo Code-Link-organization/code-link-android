@@ -122,6 +122,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
             is ResponseState.Error -> {
                 com.ieee.codelink.common.showToast(state.message.toString(), requireContext())
+                viewModel.loginRequestState.value= ResponseState.Empty()
             }
 
             is ResponseState.Loading -> {

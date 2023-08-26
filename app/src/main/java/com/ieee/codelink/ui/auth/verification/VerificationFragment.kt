@@ -67,7 +67,6 @@ class VerificationFragment :
                         showToast(state.message.toString())
                     }
                 }
-
                 is ResponseState.Empty -> {}
                 else -> {
 

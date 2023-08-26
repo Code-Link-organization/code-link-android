@@ -109,6 +109,10 @@ class SharedPreferenceManger @Inject constructor(
         return null
     }
 
+    fun logout(){
+        setValue( TOKEN, "")
+    }
+
     companion object {
         // TODO replace this with your pref name for the app
         private const val SHARED_PREFERENCES_NAME = "alexon_android_base_app"
