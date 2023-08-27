@@ -85,32 +85,18 @@ class SharedPreferenceManger @Inject constructor(
     }
 
     fun cacheUser(user: User){
-        val byteArrayOutputStream = ByteArrayOutputStream()
-        val objectOutputStream = ObjectOutputStream(byteArrayOutputStream)
-        objectOutputStream.writeObject(user)
-        val base64String = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT)
-        editor.putString(CACHED_USER, base64String)
-        editor.apply()
+        val json = gson.toJson(user)
+        setValue(CACHED_USER, json)
     }
 
     fun getCachedUser(): User?{
-        val base64String = sharedPreferences.getString(CACHED_USER, null)
-        if (base64String != null) {
-            val data = Base64.decode(base64String, Base64.DEFAULT)
-            try {
-                val objectInputStream = ObjectInputStream(data.inputStream())
-                return objectInputStream.readObject() as User
-            } catch (e: IOException) {
-                e.printStackTrace()
-            } catch (e: ClassNotFoundException) {
-                e.printStackTrace()
-            }
-        }
-        return null
+        val value = getStringValue(CACHED_USER)
+        val innerUser = gson.fromJson(value, User::class.java)
+        return innerUser ?: null
     }
 
     fun logout(){
-        setValue( TOKEN, "")
+        setValue(TOKEN, "")
     }
 
     companion object {
