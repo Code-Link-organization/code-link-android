@@ -3,10 +3,11 @@
 <!--    color scheme-->
     <color name="color_primary">#DECEB1</color>
     <color name="white">#FFFFFF</color>
-    <color name="color_ripple">#80745D</color>
+    <color name="accent_color">#80745D</color>
     <color name="color_text">#E6000000</color>
     <color name="color_background">#FFFFFF</color>
     <color name="color_hint">#B8B8B8</color>
     <color name="color_otp_background">#FCFAF8</color>
+    <color name="bottom_nav_icon_color">#393939</color>
 
 </resources>

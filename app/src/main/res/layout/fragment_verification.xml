@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:paddingVertical="8dp"
             android:text=", Resend"
-            android:textColor="@color/color_ripple"
+            android:textColor="@color/accent_color"
             android:textSize="14sp" />
     </LinearLayout>
 

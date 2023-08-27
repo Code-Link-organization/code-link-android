@@ -151,6 +151,9 @@ dependencies {
     //Loading Button
     implementation 'com.github.koushikcse:LoadingButton:1.7'
 
+    //Bottom Navigation
+    implementation 'np.com.susanthapa:curved_bottom_navigation:0.6.5'
+
 //    // Datastore
 //    implementation "androidx.datastore:datastore-preferences:1.0.0"
 //
