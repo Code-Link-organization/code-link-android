@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.ieee.codelink.ui.main.HomeFragment"
+        android:name="com.ieee.codelink.ui.main.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
@@ -20,4 +20,9 @@
         android:name="com.ieee.codelink.ui.main.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/chatsFragment"
+        android:name="com.ieee.codelink.ui.main.ChatsFragment"
+        android:label="fragment_chats"
+        tools:layout="@layout/fragment_chats" />
 </navigation>

@@ -48,19 +48,23 @@ class MainActivity : AppCompatActivity() {
             R.id.searchFragment
         ),
         CbnMenuItem(
+            R.drawable.ic_chat,
+            R.drawable.avd_chat,
+            R.id.chatsFragment
+        ), CbnMenuItem(
             R.drawable.ic_profile,
             R.drawable.avd_profile,
             R.id.profileFragment
-        ),
-
         )
+    )
 
     private fun setUpVisibilityOfBottomBar() {
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             when (destination.id) {
                 R.id.homeFragment,
                 R.id.searchFragment,
-                R.id.profileFragment
+                R.id.profileFragment,
+                R.id.chatsFragment
                 -> bottomBarNavigationVisibility(true)
 
                 else -> bottomBarNavigationVisibility(false)
