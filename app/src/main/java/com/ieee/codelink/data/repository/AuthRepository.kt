@@ -25,7 +25,7 @@ class AuthRepository(
         confirmPassword: String
     ) :Response<AuthResponse> = api.signUpUser(name, email, password, confirmPassword)
 
-    suspend fun cacheUser(user: User) {
+     fun cacheUser(user: User) {
         sharedPreferenceManger.cacheUser(user)
     }
 
