@@ -38,10 +38,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             }
 
             btnLogin.setOnClickListener {
-                lifecycleScope.launch {
-                    login()
-                }
-
+//                lifecycleScope.launch {
+//                    login()
+//                }
+                navigateToHome("fds")
             }
 
             tvForgetPassword.setOnClickListener {
@@ -51,7 +51,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun gotoForgetPasswordScreen() {
-        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToForgetPasswordFragment(true," "," "))
+        findNavController().navigate(
+            LoginFragmentDirections.actionLoginFragmentToForgetPasswordFragment(
+                true,
+                " ",
+                " "
+            )
+        )
     }
 
     private suspend fun login() {
@@ -76,19 +82,24 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             is ResponseState.Success -> {
                 goToVerificationScreen()
             }
+
             is ResponseState.Empty -> {
             }
+
             is ResponseState.Loading -> {
                 binding.btnLogin.showLoading()
             }
+
             is ResponseState.Error -> {
                 state.message?.let {
                     showToast(state.message.toString())
                 }
             }
-            is ResponseState.NetworkError->{
+
+            is ResponseState.NetworkError -> {
                 showToast(getString(R.string.network_error))
             }
+
             else -> {
                 com.ieee.codelink.common.showToast(
                     getString(R.string.something_went_wrong),
@@ -99,8 +110,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun goToVerificationScreen() {
-        findNavController().navigate(LoginFragmentDirections.
-        actionLoginFragmentToVerificationFragment(binding.emailEt.text.toString(),false)
+        findNavController().navigate(
+            LoginFragmentDirections.actionLoginFragmentToVerificationFragment(
+                binding.emailEt.text.toString(),
+                false
+            )
         )
     }
 
@@ -110,10 +124,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             is ResponseState.Empty,
             is ResponseState.UnKnownError -> {
             }
+
             is ResponseState.NetworkError -> {
                 showToast(getString(R.string.network_error))
 
             }
+
             is ResponseState.NotAuthorized -> {
                 lifecycleScope.launch {
                     sendOtpToUserEmail(binding.emailEt.text.toString())
@@ -122,12 +138,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
             is ResponseState.Error -> {
                 com.ieee.codelink.common.showToast(state.message.toString(), requireContext())
-                viewModel.loginRequestState.value= ResponseState.Empty()
+                viewModel.loginRequestState.value = ResponseState.Empty()
             }
 
             is ResponseState.Loading -> {
                 binding.btnLogin.showLoading()
             }
+
             is ResponseState.Success -> {
                 state.data?.let { response ->
                     lifecycleScope.launch {
