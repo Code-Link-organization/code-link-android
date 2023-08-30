@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/color_background"
-    tools:context=".ui.main.ProfileFragment">
+    tools:context=".ui.main.profile.ProfileFragment">
 
     <ImageView
         android:id="@+id/background_curve"
@@ -22,7 +22,7 @@
         android:layout_marginTop="-80dp"
         android:adjustViewBounds="true"
         android:background="@color/color_secondary_background"
-        android:elevation="8.01dp"
+        android:elevation="4.01dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/profile_wrapper"
@@ -38,7 +38,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="-100dp"
         app:cardCornerRadius="30dp"
-        app:cardElevation="8dp"
+        app:cardElevation="2dp"
         app:cardBackgroundColor="@color/color_secondary_background"
         app:layout_constraintTop_toBottomOf="@id/background_curve">
 
@@ -50,7 +50,7 @@
                 android:id="@+id/iv_settings"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:padding="4dp"
+                android:padding="6dp"
                 android:layout_margin="12dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/ic_settings"
@@ -61,7 +61,7 @@
                 android:id="@+id/iv_edit_profile"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:padding="4dp"
+                android:padding="8dp"
                 android:layout_margin="12dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/ic_edit_profile"
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="80dp"
                 android:textColor="@color/color_text"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -87,8 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:textColor="@color/color_hint"
-                android:textSize="14sp"
-                android:textStyle="bold"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_user_name"
@@ -99,7 +98,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical"
-                android:paddingBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_user_email">
 
@@ -123,10 +121,16 @@
                     android:id="@+id/btn_reciew"
                     layout="@layout/profile_section_card"
                     />
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
                 <include
                     android:id="@+id/btn_logout"
                     layout="@layout/profile_section_card"
                     />
+                </FrameLayout>
+
             </LinearLayout>
 
 

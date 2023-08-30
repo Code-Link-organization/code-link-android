@@ -51,7 +51,8 @@ class MainActivity : AppCompatActivity() {
             R.drawable.ic_chat,
             R.drawable.avd_chat,
             R.id.chatsFragment
-        ), CbnMenuItem(
+        )
+        , CbnMenuItem(
             R.drawable.ic_profile,
             R.drawable.avd_profile,
             R.id.profileFragment

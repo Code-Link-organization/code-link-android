@@ -1,6 +1,8 @@
 package com.ieee.codelink.common
 
 import android.content.Context
+import android.content.DialogInterface
+import android.os.Build
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -30,7 +32,8 @@ fun showDialog(
     title: String,
     message: String,
     positiveClicked: () -> Unit,
-    negativeClicked: () -> Unit = {}
+    negativeClicked: () -> Unit = {},
+    setOnDismiss : () -> Unit = {}
 ) {
     val builder = AlertDialog.Builder(context, R.style.CustomAlertDialog)
     builder.setTitle(title)
@@ -39,11 +42,23 @@ fun showDialog(
         positiveClicked()
         dialog.dismiss()
     }
+    val positiveButton = builder.show().getButton(DialogInterface.BUTTON_POSITIVE)
+    positiveButton.setBackgroundResource(R.drawable.custom_button_ripple)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        positiveButton.setTextColor(context.resources.getColor(R.color.color_text))
+    }
     builder.setNegativeButton("No") { dialog, _ ->
+        negativeClicked()
         dialog.dismiss()
     }
+    val negativeButton = builder.show().getButton(DialogInterface.BUTTON_NEGATIVE)
+    negativeButton.setBackgroundResource(R.drawable.custom_button_ripple)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        negativeButton.setTextColor(context.resources.getColor(R.color.color_text))
+    }
     builder.setOnDismissListener {
-        negativeClicked()
+        setOnDismiss()
     }
     builder.show()
+
 }

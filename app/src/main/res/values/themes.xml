@@ -44,16 +44,22 @@
         <item name="android:background">@drawable/keyboard_button</item>
     </style>
 
-    <style name="CustomAlertDialog" parent="Theme.AppCompat.Dialog.Alert">
-        <!-- Customize the positive button's text color -->
-        <item name="colorAccent">@color/color_primary</item>
-
-        <item name="android:textColor">@color/color_text</item>
-
-        <!-- Customize the negative button's text color -->
-        <item name="android:textColorSecondary">@color/color_text</item>
-
-        <!-- Customize the negative button's background color -->
-        <item name="android:colorBackground">@color/color_background</item>
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:background">@drawable/custom_dialog_background</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:textColorPrimary">@color/color_text</item>
     </style>
+
+    <style name="CustomDialogPositiveButton" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@drawable/custom_button_ripple</item>
+        <item name="textColor">@color/color_text</item>
+    </style>
+
+    <style name="CustomDialogNegativeButton" parent="Widget.Material3.Button.TextButton.Dialog">
+        <item name="android:background">@drawable/custom_button_ripple</item>
+        <item name="textColor">@color/color_text</item>
+    </style>
+
+
+
 </resources>
