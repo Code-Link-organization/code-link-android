@@ -5,11 +5,11 @@
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryVariant">@color/color_primary</item>
         <item name="colorOnPrimary">@color/accent_color</item>
-        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:statusBarColor">@color/color_primary</item>
+        <item name="android:navigationBarColor">@color/color_primary</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
 
         <!-- Customize your theme here. -->
-        <item name="android:navigationBarColor">@color/white</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
 
         <item name="fontFamily">@font/mulish_regular</item>
