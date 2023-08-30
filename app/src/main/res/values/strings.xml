@@ -20,7 +20,7 @@
     <string name="welcome_back">Welcome Back!</string>
     <string name="don_t_have_an_account">Don’t have an account?</string>
     <string name="forget_password">Forget Password?</string>
-    <string name="if_you_didn_t_receive_any_code_resend">If You Didn’t Receive Any Code,Resend</string>
+    <string name="if_you_didn_t_receive_any_code_resend">If You Didn’t Receive Any Code,</string>
     <string name="submit_code">Submit Code</string>
     <string name="enter_your_code_here">Enter Your Code Here</string>
     <string name="new_password">New Password</string>
