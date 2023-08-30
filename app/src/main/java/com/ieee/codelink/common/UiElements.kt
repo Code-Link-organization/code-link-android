@@ -17,7 +17,7 @@ fun showSnackbar(message: String, context: Context, view: View) {
     )
     snackbar.setActionTextColor(ContextCompat.getColor(context, R.color.color_text))
     snackbar.setTextColor(ContextCompat.getColor(context, R.color.color_text))
-    snackbar.setBackgroundTint(ContextCompat.getColor(context, R.color.color_otp_background))
+    snackbar.setBackgroundTint(ContextCompat.getColor(context, R.color.color_secondary_background))
     snackbar.show()
 }
 

@@ -5,56 +5,60 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.ieee.codelink.R
+import com.ieee.codelink.core.BaseFragment
+import com.ieee.codelink.core.BaseViewModel
+import com.ieee.codelink.databinding.FragmentLoginBinding
+import com.ieee.codelink.databinding.FragmentProfileBinding
+import com.ieee.codelink.ui.auth.login.LoginViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+@AndroidEntryPoint
+class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override val viewModel: BaseViewModel by viewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setViews()
+    }
+
+    private fun setViews() {
+        setSectionsViews()
+        setUserViews()
+    }
+    private fun setSectionsViews() {
+        binding.apply {
+
+            btnMyContacts.ivSectionImage.setImageResource(R.drawable.ic_profile)
+            btnMyContacts.tvSectionTitle.text = getString(R.string.my_contacts)
+
+            btnShare.ivSectionImage.setImageResource(R.drawable.ic_share)
+            btnShare.tvSectionTitle.text = getString(R.string.share_with_friends)
+
+            btnCourseMates.ivSectionImage.setImageResource(R.drawable.ic_class_mates)
+            btnCourseMates.tvSectionTitle.text = getString(R.string.course_mates)
+
+            btnInfo.ivSectionImage.setImageResource(R.drawable.ic_info)
+            btnInfo.tvSectionTitle.text = getString(R.string.info)
+
+            btnReciew.ivSectionImage.setImageResource(R.drawable.ic_chat)
+            btnReciew.tvSectionTitle.text = getString(R.string.review)
+
+            btnLogout.ivSectionImage.setImageResource(R.drawable.ic_logout)
+            btnLogout.tvSectionTitle.text = getString(R.string.logout)
+
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun setUserViews() {
+        //todo user email image and name
+        binding.apply {
+            ivUserImage.setImageResource(R.drawable.ic_onboarding_3)
+            tvUserName.text = "Mohamed Emad"
+            tvUserEmail.text = "mohamed_Emad@btats.com"
+        }
     }
 }
