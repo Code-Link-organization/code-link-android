@@ -1,34 +1,52 @@
-package com.ieee.codelink.ui.main
+package com.ieee.codelink.ui.main.profile
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.ieee.codelink.R
+import com.ieee.codelink.common.showDialog
 import com.ieee.codelink.core.BaseFragment
-import com.ieee.codelink.core.BaseViewModel
-import com.ieee.codelink.databinding.FragmentLoginBinding
 import com.ieee.codelink.databinding.FragmentProfileBinding
-import com.ieee.codelink.ui.auth.login.LoginViewModel
+import com.ieee.codelink.domain.models.User
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
 
-    override val viewModel: BaseViewModel by viewModels()
+    override val viewModel: ProfileViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setViews()
+        setObservers()
     }
+
 
     private fun setViews() {
         setSectionsViews()
-        setUserViews()
+        setOnClicks()
     }
+
+    private fun setObservers() {
+        viewModel.user.awareCollect {
+            it?.let{user ->  
+                updateUserViews(user)
+            }
+        }
+    }
+
+    private fun updateUserViews(user: User) {
+        binding.apply {
+            // TODO: change image 
+            ivUserImage.setImageResource(R.drawable.ic_onboarding_3)
+            tvUserName.text = user.name
+            tvUserEmail.text = user.email
+        }
+    }
+
+
     private fun setSectionsViews() {
         binding.apply {
 
@@ -44,7 +62,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             btnInfo.ivSectionImage.setImageResource(R.drawable.ic_info)
             btnInfo.tvSectionTitle.text = getString(R.string.info)
 
-            btnReciew.ivSectionImage.setImageResource(R.drawable.ic_chat)
+            btnReciew.ivSectionImage.setImageResource(R.drawable.ic_reviews)
             btnReciew.tvSectionTitle.text = getString(R.string.review)
 
             btnLogout.ivSectionImage.setImageResource(R.drawable.ic_logout)
@@ -52,13 +70,22 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
         }
     }
+    private fun setOnClicks() {
+        binding.apply{
+            btnLogout.root.setOnClickListener {
+                showDialog(requireContext(),
+                    "Log Out ?" ,
+                    "Are you sure you want to log out?",
+                    positiveClicked = logOut
+                    )
 
-    private fun setUserViews() {
-        //todo user email image and name
-        binding.apply {
-            ivUserImage.setImageResource(R.drawable.ic_onboarding_3)
-            tvUserName.text = "Mohamed Emad"
-            tvUserEmail.text = "mohamed_Emad@btats.com"
+            }
         }
     }
+
+    private val logOut:() -> Unit = {
+        viewModel.logout()
+        goToAuthActivity()
+    }
+
 }

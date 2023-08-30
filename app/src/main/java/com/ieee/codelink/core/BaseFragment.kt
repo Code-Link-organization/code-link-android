@@ -168,5 +168,11 @@ abstract class BaseFragment
         requireActivity().finish()
     }
 
+     fun goToAuthActivity(){
+        val intent = Intent(requireContext() , AuthActivity::class.java)
+         startActivity(intent)
+         requireActivity().finish()
+    }
+
 
 }

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="50dp"
+    android:background="@drawable/profile_section_ripple"
     xmlns:tools="http://schemas.android.com/tools">
 
     <View
@@ -14,8 +15,8 @@
 
     <ImageView
         android:id="@+id/iv_section_image"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,9 +30,8 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:textColor="@color/color_text"
-           android:textSize="16dp"
+           android:textSize="14dp"
            tools:text="My Contact"
-           android:textStyle="bold"
            android:layout_marginStart="8dp"
            app:layout_constraintBottom_toBottomOf="parent"
            app:layout_constraintTop_toTopOf="parent"
@@ -45,9 +45,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:src="@drawable/ic_next_arrow"
         app:tint="@color/color_text"
+        android:padding="5dp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
