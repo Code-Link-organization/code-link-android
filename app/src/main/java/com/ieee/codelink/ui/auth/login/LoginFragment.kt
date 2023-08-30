@@ -38,10 +38,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             }
 
             btnLogin.setOnClickListener {
-//                lifecycleScope.launch {
-//                    login()
-//                }
-                navigateToHome("fds")
+                lifecycleScope.launch {
+                    login()
+                }
             }
 
             tvForgetPassword.setOnClickListener {

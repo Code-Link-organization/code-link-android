@@ -31,4 +31,10 @@
     <string name="password_section_text">Your new password must be different from previously used password</string>
     <string name="password_reset_successfully">Password Changed</string>
     <string name="resend_code">Code Was Sent To Your Email</string>
+    <string name="my_contacts">My Contacts</string>
+    <string name="share_with_friends">Share with friends</string>
+    <string name="course_mates">Course Mates</string>
+    <string name="info">Info</string>
+    <string name="review">Review</string>
+    <string name="logout">Log Out</string>
 </resources>
