@@ -1,6 +1,8 @@
 package com.ieee.codelink.ui.auth
 
 import android.os.Bundle
+import androidx.core.splashscreen.SplashScreen
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
@@ -18,7 +20,7 @@ class AuthActivity : BaseActivity() {
     private lateinit var navController: NavController
     private lateinit var binding: ActivityAuthBinding
     private lateinit var graph: NavGraph
-
+    private lateinit var splashScreen: SplashScreen
 
     @Inject
     lateinit var sharedPreferences: SharedPreferenceManger
@@ -26,6 +28,7 @@ class AuthActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthBinding.inflate(layoutInflater)
+        splashScreen = installSplashScreen()
         setContentView(binding.root)
 
         val navHostFragment =
@@ -38,6 +41,7 @@ class AuthActivity : BaseActivity() {
             sharedPreferences.isOnboardingFinished -> {
                 graph.setStartDestination(R.id.loginFragment)
             }
+
             else -> {
                 graph.setStartDestination(R.id.onBoardingFragment)
             }

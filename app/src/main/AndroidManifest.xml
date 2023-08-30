@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
 
     <application
@@ -12,27 +12,26 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/ic_logo"
-        android:roundIcon="@drawable/ic_logo"
         android:label="@string/app_name"
-        tools:replace="android:supportsRtl"
+        android:roundIcon="@drawable/ic_logo"
         android:supportsRtl="false"
-        android:theme="@style/Theme.CodeLink"
+        android:theme="@style/Theme.App.Starting"
+        tools:replace="android:supportsRtl"
         tools:targetApi="31">
         <activity
             android:name=".ui.main.MainActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.App.Starting" />
         <activity
             android:name=".ui.auth.AuthActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.splash.SplashActivity"
             android:exported="true"
-            >
+            android:theme="@style/Theme.App.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
