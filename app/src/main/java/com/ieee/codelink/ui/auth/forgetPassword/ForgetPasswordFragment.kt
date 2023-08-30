@@ -96,6 +96,7 @@ class ForgetPasswordFragment :
 
     private fun showEmailSection() {
         binding.apply {
+            binding.ivLockState.setImageResource(R.drawable.ic_question_mark)
             sendOtpToEmailGroup.visibility = View.VISIBLE
             changePasswordGroup.visibility = View.GONE
             tvMessage.text = getString(R.string.email_section_text)
@@ -104,6 +105,7 @@ class ForgetPasswordFragment :
 
     private fun showPasswordSection() {
         binding.apply {
+            binding.ivLockState.setImageResource(R.drawable.ic_check)
             sendOtpToEmailGroup.visibility = View.GONE
             changePasswordGroup.visibility = View.VISIBLE
             tvMessage.text = getString(R.string.password_section_text)
