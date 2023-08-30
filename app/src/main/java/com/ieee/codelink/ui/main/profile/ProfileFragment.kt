@@ -50,20 +50,20 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     private fun setSectionsViews() {
         binding.apply {
 
-            btnMyContacts.ivSectionImage.setImageResource(R.drawable.ic_profile)
-            btnMyContacts.tvSectionTitle.text = getString(R.string.my_contacts)
+            btnUpdateProfile.ivSectionImage.setImageResource(R.drawable.ic_profile)
+            btnUpdateProfile.tvSectionTitle.text = getString(R.string.edit_profile)
 
             btnShare.ivSectionImage.setImageResource(R.drawable.ic_share)
             btnShare.tvSectionTitle.text = getString(R.string.share_with_friends)
 
-            btnCourseMates.ivSectionImage.setImageResource(R.drawable.ic_class_mates)
-            btnCourseMates.tvSectionTitle.text = getString(R.string.course_mates)
+            btnMyTeams.ivSectionImage.setImageResource(R.drawable.ic_user_teams)
+            btnMyTeams.tvSectionTitle.text = getString(R.string.my_teams)
 
             btnInfo.ivSectionImage.setImageResource(R.drawable.ic_info)
             btnInfo.tvSectionTitle.text = getString(R.string.info)
 
-            btnReciew.ivSectionImage.setImageResource(R.drawable.ic_reviews)
-            btnReciew.tvSectionTitle.text = getString(R.string.review)
+            btnReview.ivSectionImage.setImageResource(R.drawable.ic_reviews)
+            btnReview.tvSectionTitle.text = getString(R.string.review)
 
             btnLogout.ivSectionImage.setImageResource(R.drawable.ic_logout)
             btnLogout.tvSectionTitle.text = getString(R.string.logout)
@@ -72,15 +72,66 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     }
     private fun setOnClicks() {
         binding.apply{
-            btnLogout.root.setOnClickListener {
-                showDialog(requireContext(),
-                    "Log Out ?" ,
-                    "Are you sure you want to log out?",
-                    positiveClicked = logOut
-                    )
 
+            ivUserImage.setOnClickListener {
+                userImageClicked()
             }
+
+            ivSettings.setOnClickListener {
+                settingsClicked()
+            }
+
+            btnUpdateProfile.root.setOnClickListener{
+                updateProfileClicked()
+            }
+            btnShare.root.setOnClickListener{
+                shareProfileClicked()
+            }
+            btnMyTeams.root.setOnClickListener{
+                myTeamsClicked()
+            }
+            btnInfo.root.setOnClickListener{
+                btnAboutUsClicked()
+            }
+            btnReview.root.setOnClickListener{
+                btnReviewClicked()
+            }
+            btnLogout.root.setOnClickListener {
+                logoutClicked()
+            }
+
         }
+    }
+
+
+    private fun userImageClicked() {
+       // TODO("Not yet implemented")
+    }
+    private fun settingsClicked() {
+        //TODO("Not yet implemented")
+    }
+    private fun updateProfileClicked() {
+        //TODO("Not yet implemented")
+    }
+    private fun myTeamsClicked() {
+        //TODO("Not yet implemented")
+    }
+    private fun shareProfileClicked() {
+        //TODO("Not yet implemented")
+    }
+    private fun btnAboutUsClicked() {
+        //TODO("Not yet implemented")
+    }
+    private fun btnReviewClicked() {
+       // TODO("Not yet implemented")
+    }
+
+    private fun logoutClicked() {
+        showDialog(requireContext(),
+            "Logout ?" ,
+            "Are you sure you want to log out?",
+            positiveClicked = logOut
+        )
     }
 
     private val logOut:() -> Unit = {

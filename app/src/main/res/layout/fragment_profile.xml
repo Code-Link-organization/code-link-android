@@ -17,9 +17,9 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_user_image"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="-80dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="-70dp"
         android:adjustViewBounds="true"
         android:background="@color/color_secondary_background"
         android:elevation="4.01dp"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="@id/profile_wrapper"
         app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
         app:strokeColor="@color/color_secondary_background"
-        app:strokeWidth="2dp"
+        app:strokeWidth="1dp"
         tools:src="@drawable/ic_onboarding_3" />
 
     <androidx.cardview.widget.CardView
@@ -57,22 +57,22 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/iv_edit_profile"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:padding="8dp"
-                android:layout_margin="12dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/ic_edit_profile"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+<!--            <com.google.android.material.imageview.ShapeableImageView-->
+<!--                android:id="@+id/iv_edit_profile"-->
+<!--                android:layout_width="35dp"-->
+<!--                android:layout_height="35dp"-->
+<!--                android:padding="8dp"-->
+<!--                android:layout_margin="12dp"-->
+<!--                android:adjustViewBounds="true"-->
+<!--                android:src="@drawable/ic_edit_profile"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
 
             <TextView
                 android:id="@+id/tv_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="70dp"
                 android:textColor="@color/color_text"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -102,15 +102,15 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_user_email">
 
                 <include
-                    android:id="@+id/btn_my_contacts"
+                    android:id="@+id/btn_update_profile"
                     layout="@layout/profile_section_card"
                     />
+
+                <include
+                    android:id="@+id/btn_my_teams"
+                    layout="@layout/profile_section_card" />
                 <include
                     android:id="@+id/btn_share"
-                    layout="@layout/profile_section_card"
-                    />
-                <include
-                    android:id="@+id/btn_course_mates"
                     layout="@layout/profile_section_card"
                     />
                 <include
@@ -118,7 +118,7 @@
                     layout="@layout/profile_section_card"
                     />
                 <include
-                    android:id="@+id/btn_reciew"
+                    android:id="@+id/btn_review"
                     layout="@layout/profile_section_card"
                     />
                 <FrameLayout
