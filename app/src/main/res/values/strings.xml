@@ -32,9 +32,11 @@
     <string name="password_reset_successfully">Password Changed</string>
     <string name="resend_code">Code Was Sent To Your Email</string>
     <string name="my_contacts">My Contacts</string>
-    <string name="share_with_friends">Share with friends</string>
+    <string name="share_with_friends">Share Profile</string>
     <string name="course_mates">Course Mates</string>
-    <string name="info">Info</string>
+    <string name="info">About Us</string>
     <string name="review">Review</string>
     <string name="logout">Log Out</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="my_teams">My Teams</string>
 </resources>

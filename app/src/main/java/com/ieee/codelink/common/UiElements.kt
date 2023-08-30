@@ -42,23 +42,27 @@ fun showDialog(
         positiveClicked()
         dialog.dismiss()
     }
-    val positiveButton = builder.show().getButton(DialogInterface.BUTTON_POSITIVE)
-    positiveButton.setBackgroundResource(R.drawable.custom_button_ripple)
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        positiveButton.setTextColor(context.resources.getColor(R.color.color_text))
-    }
     builder.setNegativeButton("No") { dialog, _ ->
         negativeClicked()
         dialog.dismiss()
     }
-    val negativeButton = builder.show().getButton(DialogInterface.BUTTON_NEGATIVE)
-    negativeButton.setBackgroundResource(R.drawable.custom_button_ripple)
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        negativeButton.setTextColor(context.resources.getColor(R.color.color_text))
-    }
     builder.setOnDismissListener {
         setOnDismiss()
     }
-    builder.show()
+    builder.show().apply {
+        val positiveButton = getButton(DialogInterface.BUTTON_POSITIVE)
+        positiveButton.setBackgroundResource(R.drawable.custom_button_ripple)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            positiveButton.setTextColor(context.resources.getColor(R.color.color_text))
+        }
+
+        val negativeButton = getButton(DialogInterface.BUTTON_NEGATIVE)
+        negativeButton.setBackgroundResource(R.drawable.custom_button_ripple)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            negativeButton.setTextColor(context.resources.getColor(R.color.color_text))
+        }
+    }
+
+
 
 }
