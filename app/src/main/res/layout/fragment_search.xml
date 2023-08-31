@@ -1,16 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.SearchFragment"
-    android:background="@color/color_background"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.main.search.SearchFragment"
+    android:background="@color/color_background">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <FrameLayout
+        android:id="@+id/frame_search"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/horizontal_padding"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <include
+            android:id="@+id/search_bar"
+            layout="@layout/search_bar" />
+
+    </FrameLayout>
+
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rv_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/frame_search"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_what_you_want"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/color_text"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_items"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:clipToPadding="false"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

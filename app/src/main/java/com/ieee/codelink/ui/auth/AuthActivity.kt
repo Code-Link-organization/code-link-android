@@ -1,5 +1,6 @@
 package com.ieee.codelink.ui.auth
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -11,6 +12,7 @@ import com.ieee.codelink.R
 import com.ieee.codelink.core.BaseActivity
 import com.ieee.codelink.databinding.ActivityAuthBinding
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
+import com.ieee.codelink.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -37,6 +39,10 @@ class AuthActivity : BaseActivity() {
         val inflater = navHostFragment.navController.navInflater
         graph = inflater.inflate(R.navigation.auth_navigation)
 
+        if (sharedPreferences.hasLoggedIn){
+            goToMainScreen()
+        }
+
         when {
             sharedPreferences.isOnboardingFinished -> {
                 graph.setStartDestination(R.id.loginFragment)
@@ -50,5 +56,11 @@ class AuthActivity : BaseActivity() {
         navController = navHostFragment.findNavController()
         navHostFragment.navController.graph = graph
 
+    }
+
+    private fun goToMainScreen() {
+        val intent = Intent(this , MainActivity::class.java)
+        startActivity(intent)
+        this.finish()
     }
 }

@@ -15,17 +15,17 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_logo"
         android:supportsRtl="false"
-        android:theme="@style/Theme.App.Starting"
+        android:theme="@style/Theme.CodeLink"
         tools:replace="android:supportsRtl"
         tools:targetApi="31">
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.App.Starting" />
+            android:theme="@style/Theme.CodeLink" />
         <activity
             android:name=".ui.auth.AuthActivity"
             android:exported="true"
-            android:theme="@style/Theme.App.Starting">
+            android:theme="@style/Theme.CodeLink">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

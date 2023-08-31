@@ -3,6 +3,7 @@ package com.ieee.codelink.common
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -22,6 +23,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import org.json.JSONObject
 import java.io.File
+import kotlin.math.roundToInt
 
 fun getColorFromHex(colorString: String?): Int {
     return try {
@@ -207,3 +209,5 @@ fun parseErrorMessage(responseBody: String?): String {
         "General Error" // Return a default message if parsing fails
     }
 }
+
+fun Int.dp() : Int = (this * Resources.getSystem().displayMetrics.density).roundToInt()
