@@ -7,4 +7,8 @@
     <dimen name="button_padding_vertical">16dp</dimen>
     <dimen name="keyboard_line_hieght">55dp</dimen>
     <dimen name="app_btn_radius">16dp</dimen>
+    <dimen name="margin_30">30dp</dimen>
+    <dimen name="margin_80">80dp</dimen>
+    <dimen name="no_margin">0dp</dimen>
+    <dimen name="negative80_margin">-80dp</dimen>
 </resources>

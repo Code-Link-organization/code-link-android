@@ -39,4 +39,6 @@
     <string name="logout">Logout</string>
     <string name="edit_profile">Edit profile</string>
     <string name="my_teams">My Teams</string>
+    <string name="search">Search</string>
+    <string name="choose_what_you_want">Choose what you want!</string>
 </resources>

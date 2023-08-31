@@ -14,15 +14,14 @@
 
         <item name="fontFamily">@font/mulish_regular</item>
 
-    </style>
-
-    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
-        <!-- Set the splash screen background, animated icon, and animation duration. -->
+<!--        splash-->
         <item name="windowSplashScreenBackground">@color/white</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/splash_inset</item>
         <item name="windowSplashScreenAnimationDuration">200</item>
         <item name="postSplashScreenTheme">@style/Theme.CodeLink</item>
     </style>
+
+
 
     <style name="roundedImageViewRounded">
         <item name="cornerFamily">rounded</item>
