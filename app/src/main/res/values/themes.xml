@@ -16,7 +16,7 @@
         <item name="textColor">@color/color_text</item>
 
 <!--        splash-->
-        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenBackground">@color/color_background</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/splash_inset</item>
         <item name="windowSplashScreenAnimationDuration">200</item>
         <item name="postSplashScreenTheme">@style/Theme.CodeLink</item>

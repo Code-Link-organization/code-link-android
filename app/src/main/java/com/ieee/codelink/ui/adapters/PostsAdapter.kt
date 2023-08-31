@@ -3,6 +3,7 @@ package com.ieee.codelink.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.ieee.codelink.R
 import com.ieee.codelink.databinding.CardPostBinding
 import com.ieee.codelink.domain.models.TempPost
 
@@ -27,9 +28,8 @@ class PostsAdapter(
         )
     }
 
-    override fun getItemCount(): Int {
-        return posts.size
-    }
+    override fun getItemCount(): Int = posts.size
+
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val post = posts[position]
@@ -48,6 +48,13 @@ class PostsAdapter(
             tvCommertsCounter.text = post.comments.toString()
             tvLikesCounter.text = post.likes.toString()
             tvSharesCounter.text = post.shares.toString()
+
+            btnLike.ivBtnImg.setImageResource(R.drawable.ic_like)
+            btnLike.tvTxt.text = "Like"
+            btnComment.ivBtnImg.setImageResource(R.drawable.ic_comment)
+            btnComment.tvTxt.text = "comment"
+            btnShare.ivBtnImg.setImageResource(R.drawable.ic_mini_share)
+            btnShare.tvTxt.text = "share"
 
         }
     }

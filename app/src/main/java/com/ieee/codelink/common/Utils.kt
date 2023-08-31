@@ -24,6 +24,7 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import org.json.JSONObject
 import java.io.File
 import kotlin.math.roundToInt
+import kotlin.random.Random
 
 fun getColorFromHex(colorString: String?): Int {
     return try {
@@ -211,3 +212,17 @@ fun parseErrorMessage(responseBody: String?): String {
 }
 
 fun Int.dp() : Int = (this * Resources.getSystem().displayMetrics.density).roundToInt()
+
+fun createRandomString(size: Int): String {
+    val characterPool = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+    val random = Random.Default
+    val stringBuilder = StringBuilder(size)
+
+    repeat(size) {
+        val randomIndex = random.nextInt(characterPool.length)
+        val randomChar = characterPool[randomIndex]
+        stringBuilder.append(randomChar)
+    }
+
+    return stringBuilder.toString()
+}
