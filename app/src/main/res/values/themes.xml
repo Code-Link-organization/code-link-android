@@ -13,6 +13,7 @@
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
 
         <item name="fontFamily">@font/mulish_regular</item>
+        <item name="textColor">@color/color_text</item>
 
 <!--        splash-->
         <item name="windowSplashScreenBackground">@color/white</item>
