@@ -1,27 +1,44 @@
 package com.ieee.codelink.ui.main.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.ieee.codelink.R
+import androidx.fragment.app.viewModels
+import com.ieee.codelink.core.BaseFragment
+import com.ieee.codelink.databinding.FragmentHomeBinding
+import com.ieee.codelink.ui.adapters.PostsAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
 
-class HomeFragment : Fragment() {
+@AndroidEntryPoint
+class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
+
+    override val viewModel: HomeViewModel by viewModels()
+    private lateinit var postsAdapter: PostsAdapter
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupRecyclerView()
 
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+
+    private fun setupRecyclerView() {
+        postsAdapter = PostsAdapter(
+            viewModel.getFakePosts(),
+            likeClicked = {
+                showToast("Like")
+            },
+            commentsClicked = {
+                showToast("comment")
+            },
+            sharesClicked = {
+                showToast("share")
+            }
+        )
+
+        binding.rvHome.adapter = postsAdapter
     }
 
 

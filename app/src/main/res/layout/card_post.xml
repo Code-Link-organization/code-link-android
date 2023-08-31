@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-        tools:src="@drawable/ic_onboarding_1" />
+        android:src="@drawable/ic_onboarding_1" />
 
     <TextView
         android:id="@+id/tv_user_name"
@@ -40,8 +40,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:textColor="@color/color_text"
-        android:textSize="16sp"
+        android:textColor="@color/color_primary"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@id/iv_user_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/iv_user_image"
@@ -54,6 +54,7 @@
         android:layout_marginTop="4dp"
         android:adjustViewBounds="true"
         android:maxHeight="250dp"
+        android:background="@color/color_hint"
         android:scaleType="fitCenter"
         app:layout_constraintTop_toBottomOf="@id/iv_user_image"
         tools:src="@drawable/ic_onboarding_2" />
@@ -95,7 +96,7 @@
         app:layout_constraintStart_toEndOf="@id/tv_likes_counter"
         app:layout_constraintTop_toTopOf="@id/tv_likes_counter"
         app:tint="@color/color_text"
-        tools:src="@drawable/ic_like" />
+        android:src="@drawable/ic_like" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_share"
@@ -107,7 +108,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_likes_counter"
         app:tint="@color/color_text"
-        tools:src="@drawable/ic_mini_share" />
+        android:src="@drawable/ic_mini_share" />
 
     <TextView
         android:id="@+id/tv_shares_counter"
@@ -132,7 +133,7 @@
         app:layout_constraintEnd_toStartOf="@id/tv_shares_counter"
         app:layout_constraintTop_toTopOf="@id/tv_likes_counter"
         app:tint="@color/color_text"
-        tools:src="@drawable/ic_comment" />
+        android:src="@drawable/ic_comment" />
 
     <TextView
         android:id="@+id/tv_commerts_counter"
