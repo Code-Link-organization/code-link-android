@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ieee.codelink.databinding.CardTrackBinding
-import com.ieee.codelink.domain.models.TempModel
+import com.ieee.codelink.domain.models.TempSearchItem
 
 
 class SearchItemsAdapter(
-    var items: ArrayList<TempModel> ,
-    var itemClicked : (TempModel) -> Unit
+    var items: ArrayList<TempSearchItem>,
+    var itemClicked : (TempSearchItem) -> Unit
 ) : RecyclerView.Adapter<SearchItemsAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: CardTrackBinding) :

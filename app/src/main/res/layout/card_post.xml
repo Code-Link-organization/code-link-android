@@ -157,6 +157,7 @@
 
     <LinearLayout
         android:id="@+id/linear_buttons"
+        android:layout_marginTop="4dp"
         app:layout_constraintTop_toBottomOf="@id/guide_view"
         android:layout_width="match_parent"
         android:layout_height="35dp"
@@ -164,10 +165,13 @@
         >
 
         <include layout="@layout/layout_post_button"
+            android:id="@+id/btn_like"
             />
         <include layout="@layout/layout_post_button"
+            android:id="@+id/btn_comment"
             />
         <include layout="@layout/layout_post_button"
+            android:id="@+id/btn_share"
             />
 
     </LinearLayout>
