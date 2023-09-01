@@ -1,10 +1,8 @@
 package com.ieee.codelink.ui.main.search
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.databinding.adapters.ViewBindingAdapter.setPadding
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +10,7 @@ import com.ieee.codelink.R
 import com.ieee.codelink.common.dp
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.databinding.FragmentSearchBinding
-import com.ieee.codelink.domain.models.TempModel
+import com.ieee.codelink.domain.models.TempSearchItem
 import com.ieee.codelink.ui.adapters.SearchItemsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -110,7 +108,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
 
 
-    private fun initRecyclerView(rv: RecyclerView, list: ArrayList<TempModel>) {
+    private fun initRecyclerView(rv: RecyclerView, list: ArrayList<TempSearchItem>) {
         myAdapter = SearchItemsAdapter(list) {
             viewModel.x++
             if (viewModel.x % 2 == 0) {

@@ -54,4 +54,6 @@
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
             tools:src="@drawable/ic_onboarding_1" />
     </LinearLayout>
+
+
 </androidx.cardview.widget.CardView>
