@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CodeLink</string>
+    <string name="network_error">لا يوجد انترنت</string>
+    <string name="un_authorized">حساب غير مفعل</string>
+    <string name="unkown_error">حدث خطأ، اعد المحاولة</string>
+    <string name="can_t_use_camera_without_permission">تحتاج الي اذن الوصول الي الكاميرا</string>
+    <string name="choose_image">اختر صورة</string>
+    <string name="skip">تخطي</string>
+    <string name="next">التالي</string>
+    <string name="LetsStart">لنبدأ</string>
+    <string name="name">الاسم</string>
+    <string name="email">البريد الالكتروني</string>
+    <string name="password">كلمة المرور</string>
+    <string name="confirm_password">تأكيد كلمة المرور</string>
+    <string name="signup">سجل معنا</string>
+    <string name="already_have_an_account">لديك حساب بلفعل؟</string>
+    <string name="login">سجل دخول</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome_back">مرحبا مجددا !</string>
+    <string name="don_t_have_an_account">ليس لديك حساب ؟</string>
+    <string name="forget_password">نسيت كلمة المرور</string>
+    <string name="if_you_didn_t_receive_any_code_resend">اذا لم تتلق اي اكواد، </string>
+    <string name="submit_code">ارسل الكود</string>
+    <string name="enter_your_code_here">ادخل الكود هنا</string>
+    <string name="new_password">كلمة المرور الجديدة</string>
+    <string name="send">ارسل</string>
+    <string name="something_went_wrong">حدث خطأ ما</string>
+    <string name="invalid_otp">كود غير صالح</string>
+    <string name="email_section_text">ادخل بريدك الالكتروني حتي نرسل لك الكود</string>
+    <string name="password_section_text">كلمة المرور الجديدة يجب ان تحتلف عن القديمة</string>
+    <string name="password_reset_successfully">تم تغيير كلمة المرور</string>
+    <string name="resend_code">تم ارسال الكود لبريدك الالكتروني</string>
+    <string name="my_contacts">جهات اتصالي</string>
+    <string name="share_with_friends">مشاركة الملف الشخصي</string>
+    <string name="course_mates">رفاق الدروس</string>
+    <string name="info">اعرف عنا</string>
+    <string name="review">تقييم</string>
+    <string name="logout">تسجيل خروج</string>
+    <string name="edit_profile">تعديل الملف الشخصي</string>
+    <string name="my_teams">فرقي</string>
+    <string name="search">بحث</string>
+    <string name="choose_what_you_want">اختر ما تريد !</string>
+    <string name="settings">الاعدادات</string>
+    <string name="interfacee">الواجهة</string>
+    <string name="language_region">اللغة و المنطقة</string>
+    <string name="support">الدعم</string>
+    <string name="dark_mode">الوضع المظلم</string>
+    <string name="notifications">الاشعارات</string>
+    <string name="privacy_policy">سياسة الخصوصيه</string>
+    <string name="my_courses">دروسي</string>
+    <string name="logout_from_dialog">Log out </string>
+    <string name="do_you_want_to_log_out">هل انت متأكد انك تريد تسجيل الخروج ؟</string>
+</resources>
