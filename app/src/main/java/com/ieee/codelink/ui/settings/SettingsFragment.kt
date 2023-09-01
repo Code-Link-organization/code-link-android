@@ -74,6 +74,13 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         binding.btnLogout.root.setOnClickListener {
             logoutClicked()
         }
+        binding.btnSecurity.root.setOnClickListener {
+
+        }
+
+        binding.btnAboutUs.root.setOnClickListener {
+
+        }
     }
 
     private fun logoutClicked() {
