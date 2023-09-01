@@ -13,6 +13,7 @@ import com.ieee.codelink.core.BaseActivity
 import com.ieee.codelink.databinding.ActivityAuthBinding
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.ui.main.MainActivity
+import com.zeugmasolutions.localehelper.Locales
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -29,6 +30,8 @@ class AuthActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+       // setSavedLanguage()
+
         binding = ActivityAuthBinding.inflate(layoutInflater)
         splashScreen = installSplashScreen()
         setContentView(binding.root)
@@ -57,6 +60,19 @@ class AuthActivity : BaseActivity() {
         navHostFragment.navController.graph = graph
 
     }
+
+    private fun setSavedLanguage() {
+        if (getCurrentLanguage() == "Arabic"){
+            updateLocale(Locales.Arabic)
+        }else{
+            updateLocale(Locales.English)
+        }
+    }
+
+    private fun getCurrentLanguage(): String = sharedPreferences.getStringValue(
+        SharedPreferenceManger.CURRENT_LANGUAGE,
+        "English"
+    )
 
     private fun goToMainScreen() {
         val intent = Intent(this , MainActivity::class.java)

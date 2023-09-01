@@ -53,5 +53,16 @@ class AuthRepository(
         }
     }
 
+    fun getCurrentLanguage(): String {
+        return sharedPreferenceManger.getStringValue(
+            SharedPreferenceManger.CURRENT_LANGUAGE,
+            "English"
+        )
+    }
+
+    fun setOnBoardingFinished(onBoardingFinished: Boolean) {
+        sharedPreferenceManger.setValue(SharedPreferenceManger.IS_ONBOARDING_FINISHED, onBoardingFinished)
+    }
+
 
 }

@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="40dp"
-        android:text="Welcome to our community!"
+        android:text="@string/welcome_to_our_community"
         android:textColor="@color/color_text"
         android:textSize="16sp"
         android:textStyle="bold"

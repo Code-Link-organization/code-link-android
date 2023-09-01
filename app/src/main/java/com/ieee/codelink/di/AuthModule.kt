@@ -1,5 +1,7 @@
 package com.ieee.codelink.data.remote.di
 
+import android.app.Application
+import android.content.Context
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.data.remote.ApiAuthService
 import com.ieee.codelink.data.remote.AuthInterceptor
@@ -34,4 +36,10 @@ object AuthModule {
     @Provides
     @Singleton
     fun provideApplicationScope() = CoroutineScope(SupervisorJob())
+
+    @Provides
+    @Singleton
+    fun provideContext(application: Application): Context {
+        return application.applicationContext
+    }
 }

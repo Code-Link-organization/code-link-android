@@ -36,8 +36,8 @@ class SharedPreferenceManger @Inject constructor(
         get() = "Bearer ${getStringValue(TOKEN)}"
 
     var language: String
-        get() = getStringValue(LANGUAGE, defaultValue = INITIAL_LANG)
-        set(value) = setValue(LANGUAGE, value)
+        get() = getStringValue(CURRENT_LANGUAGE, defaultValue = INITIAL_LANG)
+        set(value) = setValue(CURRENT_LANGUAGE, value)
 
     var lat: Float
         get() = getFloatValue(LAT)
@@ -106,10 +106,10 @@ class SharedPreferenceManger @Inject constructor(
         private const val TOKEN = "TOKEN"
         private const val LAT = "LAT"
         private const val LNG = "LNG"
-        const val LANGUAGE = "LANGUAGE"
         const val INITIAL_LANG = "en"
         const val IS_ONBOARDING_FINISHED = "onBoarding"
         const val CACHED_USER = "user"
+        const val CURRENT_LANGUAGE = "currentLanguage"
 
     }
 }
