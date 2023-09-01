@@ -52,4 +52,17 @@
     <string name="my_courses">دروسي</string>
     <string name="logout_from_dialog">Log out </string>
     <string name="do_you_want_to_log_out">هل انت متأكد انك تريد تسجيل الخروج ؟</string>
+    <string name="language">اللغة</string>
+    <string name="Arabic">العربية</string>
+    <string name="English">الانجليزية</string>
+    <string name="on_boarding_1">منصتنا تسمح لهؤلاء المهتمين بالمجال التقني ليجدو ما يناسبهم..</string>
+    <string name="on_boarding_2">يمكنك ايضا انشاء او الانضمام لفريق من اجل المشاريع الجماعية..</string>
+    <string name="on_boarding_3">اجعل عملية التعلم اكثر متعة و سهولة..</string>
+    <string name="resend"> أعد الارسال</string>
+    <string name="welcome_to_our_community">مرحبا بك في مجتمعنا !</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+
+
+
 </resources>

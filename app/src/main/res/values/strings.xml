@@ -51,4 +51,14 @@
     <string name="my_courses">My courses</string>
     <string name="logout_from_dialog">Log out </string>
     <string name="do_you_want_to_log_out">are you sure you want to log out?</string>
+    <string name="language">Language</string>
+    <string name="Arabic">Arabic</string>
+    <string name="English">English</string>
+    <string name="on_boarding_1">Our platform helps those interested in the field of Software to find what matches their interests..</string>
+    <string name="on_boarding_2">You can also create or join teams for group projects..</string>
+    <string name="on_boarding_3">Make the learning process more easier and enjoyable..</string>
+    <string name="resend"> Resend</string>
+    <string name="welcome_to_our_community">Welcome to our community!</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

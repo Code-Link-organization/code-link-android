@@ -2,14 +2,20 @@ package com.ieee.codelink.ui.settings
 
 import android.os.Bundle
 import android.view.View
+import android.widget.RadioButton
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.ieee.codelink.R
+import com.ieee.codelink.common.extension.onBackPress
 import com.ieee.codelink.common.showDialog
 import com.ieee.codelink.core.BaseFragment
-import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.databinding.FragmentSettingsBinding
+import com.ieee.codelink.ui.main.MainActivity
+import com.zeugmasolutions.localehelper.Locales
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsBinding::inflate) {
@@ -19,6 +25,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setViews()
+        setSelectedLanguage()
         setOnClicks()
     }
 
@@ -40,12 +47,18 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
             btnSecurity.tvSectionTitle.text = getString(R.string.privacy_policy)
             btnSecurity.ivSectionImage.setImageResource(R.drawable.ic_privacy_policy)
 
+            binding.tvSelectedOption.text = viewModel.getCurrentLanguageAsSystem()
+
         }
     }
 
     private fun setOnClicks() {
+        onBackPress {
+            (requireActivity() as MainActivity).saveSettings()
+        }
+
         binding.btnBack.setOnClickListener {
-            findNavController().navigateUp()
+            (requireActivity() as MainActivity).saveSettings()
         }
         interfaceSectionClicks()
         languageSectionClicks()
@@ -67,8 +80,24 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
 
 
     private fun languageSectionClicks() {
-        //TODO("Not yet implemented")
+        binding.language.setOnClickListener {
+            toggleLanguageListVisibility()
+            viewModel.setLanguageFlagValue(true)
+        }
+
+
+        binding.spinnerRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+            if (viewModel.dialogLanguageFlag.value) {
+                val checkedLanguage = group.findViewById<RadioButton>(checkedId).text.toString()
+                lifecycleScope.launch(Dispatchers.Main) {
+                    viewModel.changeLanguage(checkedLanguage)
+                    changeAppLanguage(checkedLanguage)
+                }
+            }
+        }
+
     }
+
 
     private fun supportSectionClicks() {
         binding.btnLogout.root.setOnClickListener {
@@ -91,9 +120,46 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         )
     }
 
-    private val logOut:() -> Unit = {
+    private val logOut: () -> Unit = {
         viewModel.logout()
         goToAuthActivity()
     }
 
+    private fun setSelectedLanguage() {
+        viewModel.setLanguageFlagValue(false)
+        lifecycleScope.launch(Dispatchers.Main) {
+            if (viewModel.getCurrentLanguage() == "Arabic") {
+                binding.tvSelectedOption.text = getString(R.string.Arabic)
+                binding.optionArabic.isChecked = true
+            } else {
+                binding.tvSelectedOption.text = getString(R.string.English)
+                binding.optionEnglish.isChecked = true
+            }
+        }
+    }
+
+    private fun toggleLanguageListVisibility() {
+        viewModel.toggleLanguageRadioVisibility()
+        if (viewModel.languageRadioVisible.value) {
+            binding.spinnerRadioGroup.visibility = View.VISIBLE
+            binding.optionsArrow.setImageResource(R.drawable.ic_upper_arrow)
+        } else {
+            binding.spinnerRadioGroup.visibility = View.GONE
+            binding.optionsArrow.setImageResource(R.drawable.ic_bottom_arrow)
+        }
+    }
+
+    private fun changeAppLanguage(lang: String) {
+        when (lang) {
+            getString(R.string.Arabic) -> {
+                viewModel.toggleLanguageRadioVisibility()
+                (activity as MainActivity).updateLocale(Locales.Arabic)
+            }
+
+            getString(R.string.English) -> {
+                viewModel.toggleLanguageRadioVisibility()
+                (activity as MainActivity).updateLocale(Locales.English)
+            }
+        }
+    }
 }

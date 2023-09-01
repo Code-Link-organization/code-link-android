@@ -1,17 +1,21 @@
 package com.ieee.codelink.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.ieee.codelink.R
+import com.ieee.codelink.common.showToast
+import com.ieee.codelink.core.BaseActivity
 import com.ieee.codelink.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import np.com.susanthapa.curved_bottom_navigation.BottomNavItemView
 import np.com.susanthapa.curved_bottom_navigation.CbnMenuItem
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
@@ -27,7 +31,17 @@ class MainActivity : AppCompatActivity() {
             setContentView(root)
         }
         setUpVisibilityOfBottomBar()
+        checkIfSettingsChanged()
 
+
+    }
+
+    private fun checkIfSettingsChanged() {
+        if (intent.getStringExtra("target") == "profile"){
+            //todo Navigate to profile
+            //navController.navigate(R.id.profileFragment)
+            //binding.bottomNavigation.invalidate()
+        }
     }
 
     private fun initNavHost() {
@@ -75,5 +89,28 @@ class MainActivity : AppCompatActivity() {
 
     private fun bottomBarNavigationVisibility(isVisible: Boolean) {
         binding.bottomNavigation.isVisible = isVisible
+    }
+
+    fun saveSettings() {
+        restart()
+    }
+
+
+    fun restart() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("target", "profile")
+        this.finish()
+        this.overridePendingTransition(0, 0)
+        this.startActivity(intent)
+        this.overridePendingTransition(0, 0)
+    }
+
+    fun resetNavGraph() {
+        val currentGraph = navController.graph
+        val inflater = navController.navInflater
+        val newGraph = inflater.inflate(R.navigation.main_nav)
+        newGraph.addAll(currentGraph)
+        newGraph.setStartDestination(R.id.homeFragment)
+        navController.graph = newGraph
     }
 }

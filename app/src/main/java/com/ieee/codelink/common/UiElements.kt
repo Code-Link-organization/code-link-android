@@ -38,11 +38,11 @@ fun showDialog(
     val builder = AlertDialog.Builder(context, R.style.CustomAlertDialog)
     builder.setTitle(title)
     builder.setMessage(message)
-    builder.setPositiveButton("Yes") { dialog, _ ->
+    builder.setPositiveButton(context.getString(R.string.yes)) { dialog, _ ->
         positiveClicked()
         dialog.dismiss()
     }
-    builder.setNegativeButton("No") { dialog, _ ->
+    builder.setNegativeButton(context.getString(R.string.no)) { dialog, _ ->
         negativeClicked()
         dialog.dismiss()
     }
