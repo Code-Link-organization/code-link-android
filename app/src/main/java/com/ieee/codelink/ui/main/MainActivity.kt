@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         ),
         CbnMenuItem(
             R.drawable.ic_chat,
-            R.drawable.ic_chat,
+            R.drawable.avd_chat,
             R.id.chatsFragment
         )
         , CbnMenuItem(
