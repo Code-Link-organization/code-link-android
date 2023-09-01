@@ -107,29 +107,25 @@
                     />
 
                 <include
-                    android:id="@+id/btn_my_teams"
-                    layout="@layout/profile_section_card" />
-                <include
                     android:id="@+id/btn_share"
                     layout="@layout/profile_section_card"
                     />
+
                 <include
-                    android:id="@+id/btn_info"
+                    android:id="@+id/btn_my_courses"
                     layout="@layout/profile_section_card"
                     />
+
+                <include
+                    android:id="@+id/btn_my_teams"
+                    layout="@layout/profile_section_card" />
+
                 <include
                     android:id="@+id/btn_review"
                     layout="@layout/profile_section_card"
                     />
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    >
-                <include
-                    android:id="@+id/btn_logout"
-                    layout="@layout/profile_section_card"
-                    />
-                </FrameLayout>
+
+
 
             </LinearLayout>
 

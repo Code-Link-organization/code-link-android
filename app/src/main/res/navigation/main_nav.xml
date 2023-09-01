@@ -19,10 +19,19 @@
         android:id="@+id/profileFragment"
         android:name="com.ieee.codelink.ui.main.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/chatsFragment"
         android:name="com.ieee.codelink.ui.main.ChatsFragment"
         android:label="fragment_chats"
         tools:layout="@layout/fragment_chats" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.ieee.codelink.ui.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
