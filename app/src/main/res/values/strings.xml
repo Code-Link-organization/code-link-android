@@ -36,7 +36,7 @@
     <string name="course_mates">Course mates</string>
     <string name="info">About us</string>
     <string name="review">Review</string>
-    <string name="logout">Logout</string>
+    <string name="logout">Log out</string>
     <string name="edit_profile">Edit profile</string>
     <string name="my_teams">My Teams</string>
     <string name="search">Search</string>
@@ -49,6 +49,6 @@
     <string name="notifications">Notifications</string>
     <string name="privacy_policy">Privacy policy</string>
     <string name="my_courses">My courses</string>
-    <string name="logout_from_dialog">Logout ?</string>
+    <string name="logout_from_dialog">Log out </string>
     <string name="do_you_want_to_log_out">are you sure you want to log out?</string>
 </resources>
