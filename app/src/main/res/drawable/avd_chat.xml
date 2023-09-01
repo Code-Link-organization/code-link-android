@@ -7,23 +7,8 @@
             android:viewportWidth="24"
             android:viewportHeight="24">
             <path
-                android:name="path_1"
-                android:fillAlpha="0.4"
-                android:fillColor="#00000000"
-                android:pathData="M18.47,16.83L18.86,19.99C18.96,20.82 18.07,21.4 17.36,20.97L13.17,18.48C12.71,18.48 12.26,18.45 11.82,18.39C12.56,17.52 13,16.42 13,15.23C13,12.39 10.54,10.09 7.5,10.09C6.34,10.09 5.27,10.42 4.38,11C4.35,10.75 4.34,10.5 4.34,10.24C4.34,5.69 8.29,2 13.17,2C18.05,2 22,5.69 22,10.24C22,12.94 20.61,15.33 18.47,16.83Z"
-                android:strokeWidth="2"
-                android:strokeAlpha="1.0"
-                android:strokeColor="@color/bottom_nav_icon_color"
-                android:strokeLineCap="round"
-                android:strokeLineJoin="round"  />
-            <path
-                android:name="path_1"
-                android:fillColor="#00000000"
-                android:pathData="M13,15.23C13,16.42 12.56,17.52 11.82,18.39C10.83,19.59 9.26,20.36 7.5,20.36L4.89,21.91C4.45,22.18 3.89,21.81 3.95,21.3L4.2,19.33C2.86,18.4 2,16.91 2,15.23C2,13.47 2.94,11.92 4.38,11C5.27,10.42 6.34,10.09 7.5,10.09C10.54,10.09 13,12.39 13,15.23Z"
-                android:strokeWidth="2"
-                android:strokeColor="@color/bottom_nav_icon_color"
-                android:strokeLineCap="round"
-                android:strokeLineJoin="round" />
+                android:pathData="M5.656,20.479A1,1 0,0 1,4 19.743L4,17.5a2,2 0,0 1,-2 -2L2,8.5a2,2 0,0 1,2 -2h11a2,2 0,0 1,2 2v7a2,2 0,0 1,-2 2L10.003,17.5l-4.347,2.979zM18,12.517a7.136,7.136 0,0 0,0 0.369v-0.37c0.005,-0.107 0.006,-1.447 0.004,-4.019a3,3 0,0 0,-3 -2.997L7,5.5L7,4.5a2,2 0,0 1,2 -2h11a2,2 0,0 1,2 2v7a2,2 0,0 1,-2 2v2.243a1,1 0,0 1,-1.656 0.736L18,16.243v-3.726z"
+                android:fillColor="@color/color_text"/>
         </vector>
 
     </aapt:attr>

@@ -1,9 +1,9 @@
 package com.ieee.codelink.ui.main.profile
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.ieee.codelink.R
 import com.ieee.codelink.common.showDialog
 import com.ieee.codelink.core.BaseFragment
@@ -50,7 +50,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     private fun setSectionsViews() {
         binding.apply {
 
-            btnUpdateProfile.ivSectionImage.setImageResource(R.drawable.ic_profile)
+            btnUpdateProfile.ivSectionImage.setImageResource(R.drawable.ic_edit_profile)
             btnUpdateProfile.tvSectionTitle.text = getString(R.string.edit_profile)
 
             btnShare.ivSectionImage.setImageResource(R.drawable.ic_share)
@@ -59,14 +59,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             btnMyTeams.ivSectionImage.setImageResource(R.drawable.ic_user_teams)
             btnMyTeams.tvSectionTitle.text = getString(R.string.my_teams)
 
-            btnInfo.ivSectionImage.setImageResource(R.drawable.ic_info)
-            btnInfo.tvSectionTitle.text = getString(R.string.info)
+            btnMyCourses.ivSectionImage.setImageResource(R.drawable.ic_class_mates)
+            btnMyCourses.tvSectionTitle.text = getString(R.string.my_courses)
 
             btnReview.ivSectionImage.setImageResource(R.drawable.ic_reviews)
             btnReview.tvSectionTitle.text = getString(R.string.review)
-
-            btnLogout.ivSectionImage.setImageResource(R.drawable.ic_logout)
-            btnLogout.tvSectionTitle.text = getString(R.string.logout)
 
         }
     }
@@ -90,14 +87,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             btnMyTeams.root.setOnClickListener{
                 myTeamsClicked()
             }
-            btnInfo.root.setOnClickListener{
-                btnAboutUsClicked()
+            btnMyCourses.root.setOnClickListener{
+                btnMyCourcesClicked()
             }
             btnReview.root.setOnClickListener{
                 btnReviewClicked()
-            }
-            btnLogout.root.setOnClickListener {
-                logoutClicked()
             }
 
         }
@@ -108,7 +102,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
        // TODO("Not yet implemented")
     }
     private fun settingsClicked() {
-        //TODO("Not yet implemented")
+        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToSettingsFragment())
     }
     private fun updateProfileClicked() {
         //TODO("Not yet implemented")
@@ -119,24 +113,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     private fun shareProfileClicked() {
         //TODO("Not yet implemented")
     }
-    private fun btnAboutUsClicked() {
+    private fun btnMyCourcesClicked() {
         //TODO("Not yet implemented")
     }
     private fun btnReviewClicked() {
        // TODO("Not yet implemented")
-    }
-
-    private fun logoutClicked() {
-        showDialog(requireContext(),
-            "Logout ?" ,
-            "Are you sure you want to log out?",
-            positiveClicked = logOut
-        )
-    }
-
-    private val logOut:() -> Unit = {
-        viewModel.logout()
-        goToAuthActivity()
     }
 
 }

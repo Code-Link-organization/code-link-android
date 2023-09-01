@@ -11,4 +11,7 @@
     <dimen name="margin_80">80dp</dimen>
     <dimen name="no_margin">0dp</dimen>
     <dimen name="negative80_margin">-80dp</dimen>
+    <dimen name="thumb">22dp</dimen>
+    <dimen name="track_h">22dp</dimen>
+    <dimen name="track_w">30dp</dimen>
 </resources>

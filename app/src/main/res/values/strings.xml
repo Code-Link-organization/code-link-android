@@ -41,4 +41,14 @@
     <string name="my_teams">My Teams</string>
     <string name="search">Search</string>
     <string name="choose_what_you_want">Choose what you want!</string>
+    <string name="settings">Settings</string>
+    <string name="interfacee">Interface</string>
+    <string name="language_region"><![CDATA[Language & region]]></string>
+    <string name="support">Support</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="notifications">Notifications</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="my_courses">My courses</string>
+    <string name="logout_from_dialog">Logout ?</string>
+    <string name="do_you_want_to_log_out">are you sure you want to log out?</string>
 </resources>
