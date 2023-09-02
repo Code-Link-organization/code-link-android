@@ -153,11 +153,13 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         when (lang) {
             getString(R.string.Arabic) -> {
                 viewModel.toggleLanguageRadioVisibility()
+                binding.tvSelectedOption.text = getString(R.string.Arabic)
                 (activity as MainActivity).updateLocale(Locales.Arabic)
             }
 
             getString(R.string.English) -> {
                 viewModel.toggleLanguageRadioVisibility()
+                binding.tvSelectedOption.text = getString(R.string.English)
                 (activity as MainActivity).updateLocale(Locales.English)
             }
         }
