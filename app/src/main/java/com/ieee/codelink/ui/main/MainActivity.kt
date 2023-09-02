@@ -54,8 +54,8 @@ class MainActivity : BaseActivity() {
 
     private val menuItems = arrayOf(
         CbnMenuItem(
-            R.drawable.ic_home,
-            R.drawable.avd_home,
+            R.drawable.ic_home2,
+            R.drawable.avd_home2,
             R.id.homeFragment
         ),
         CbnMenuItem(
@@ -64,8 +64,8 @@ class MainActivity : BaseActivity() {
             R.id.searchFragment
         ),
         CbnMenuItem(
-            R.drawable.ic_chat,
-            R.drawable.avd_chat,
+            R.drawable.ic_chat2,
+            R.drawable.avd_chat2,
             R.id.chatsFragment
         )
         , CbnMenuItem(

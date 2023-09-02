@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.editProfile.EditProfileFragment">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/btn_back"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="@dimen/horizontal_padding"
+        android:adjustViewBounds="true"
+        android:background="@drawable/background_ripple"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_title"
+        app:layout_constraintBottom_toBottomOf="@id/tv_title"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+        app:tint="@color/color_text"
+        android:src="@drawable/ic_back_arrow" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/edit_profile"
+        android:textColor="@color/color_text"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_user_image"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="20dp"
+        android:adjustViewBounds="true"
+        android:background="@color/color_secondary_background"
+        android:elevation="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+        app:strokeColor="@color/color_secondary_background"
+        app:strokeWidth="1dp"
+        tools:src="@drawable/ic_onboarding_3" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_camera"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:adjustViewBounds="true"
+        android:elevation="2.1dp"
+        app:tint="@color/color_text"
+        android:background="@color/color_background"
+        app:layout_constraintEnd_toEndOf="@id/iv_user_image"
+        app:layout_constraintBottom_toBottomOf="@id/iv_user_image"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+        tools:src="@drawable/ic_camera" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

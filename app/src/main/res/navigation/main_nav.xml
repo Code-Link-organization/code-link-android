@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/chatsFragment"
-        android:name="com.ieee.codelink.ui.main.ChatsFragment"
+        android:name="com.ieee.codelink.ui.main.chat.ChatsFragment"
         android:label="fragment_chats"
         tools:layout="@layout/fragment_chats" />
     <fragment
