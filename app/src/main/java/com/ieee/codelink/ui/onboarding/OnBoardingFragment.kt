@@ -55,11 +55,15 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>(FragmentOnboa
             override fun onPageSelected(position: Int) {
                 setActionButtonText(position)
                 setActionButtonSize(position)
+                setActionButtonBackground(position)
                 setSkipButtonVisibility(position)
                 setIndicatorVisibility(position)
             }
         })
     }
+
+
+
 
     private fun setActionButtonText(currentPage: Int) {
         binding.btnAction.text =
@@ -73,23 +77,33 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>(FragmentOnboa
     private fun setActionButtonSize(currentPage: Int) {
         var layoutParams = binding.btnAction.layoutParams as ConstraintLayout.LayoutParams
 
-        layoutParams = setActionButtomMargins(layoutParams)
+        layoutParams = setActionButtomMargins(layoutParams , currentPage)
         setActionButtomPadding()
         layoutParams = setActionButtonWidth(layoutParams , currentPage)
-
         binding.btnAction.layoutParams = layoutParams
     }
-    private fun setActionButtomMargins(layoutParams: ConstraintLayout.LayoutParams): ConstraintLayout.LayoutParams {
+    private fun setActionButtomMargins(
+        layoutParams: ConstraintLayout.LayoutParams,
+        currentPage: Int
+    ): ConstraintLayout.LayoutParams {
+        if (viewModel.isLastPage(currentPage)) {
+            layoutParams.width = ConstraintLayout.LayoutParams.MATCH_PARENT
+            layoutParams.bottomMargin = resources.getDimensionPixelSize(R.dimen.margin_60)
+            binding.btnAction.elevation = 4f
+        } else {
+            layoutParams.width = ConstraintLayout.LayoutParams.WRAP_CONTENT
+            layoutParams.bottomMargin = resources.getDimensionPixelSize(R.dimen.margin_20)
+            binding.btnAction.elevation = 0f
+        }
         layoutParams.marginStart = resources.getDimensionPixelSize(R.dimen.horizontal_padding)
         layoutParams.marginEnd = resources.getDimensionPixelSize(R.dimen.horizontal_padding)
-        layoutParams.bottomMargin = resources.getDimensionPixelSize(R.dimen.margin_20)
         return layoutParams
     }
     private fun setActionButtomPadding() {
         binding.btnAction.setPadding(
-            resources.getDimensionPixelSize(R.dimen.button_padding_horizontal),
+            resources.getDimensionPixelSize(R.dimen._30dp),
             resources.getDimensionPixelSize(R.dimen.button_padding_vertical),
-            resources.getDimensionPixelSize(R.dimen.button_padding_horizontal),
+            resources.getDimensionPixelSize(R.dimen._30dp),
             resources.getDimensionPixelSize(R.dimen.button_padding_vertical)
         )
     }
@@ -100,6 +114,14 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>(FragmentOnboa
             layoutParams.width = ConstraintLayout.LayoutParams.WRAP_CONTENT
         }
         return layoutParams
+    }
+
+    private fun setActionButtonBackground(currentPage: Int) {
+        if (viewModel.isLastPage(currentPage)) {
+           binding.btnAction.setBackgroundResource(R.drawable.app_button_ripple)
+        } else {
+            binding.btnAction.setBackgroundResource(R.drawable.onboarding_button_ripple)
+        }
     }
 
     private fun setSkipButtonVisibility(currentPage: Int) {
