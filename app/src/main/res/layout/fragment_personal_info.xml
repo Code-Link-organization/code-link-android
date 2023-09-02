@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_background"
+    tools:context=".ui.personalInfo.PersonalInfoFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginStart="@dimen/horizontal_padding"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_logo"
+                app:tint="@color/color_text" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:text="@string/app_name"
+                android:textColor="@color/color_text"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/password_field"
+            style="@style/roundInputTextField"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="@dimen/horizontal_padding"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/personal_info_edit_text"
+            android:hint="@string/governate"
+            android:maxLines="1"
+            android:paddingHorizontal="12dp"
+            android:textColorHint="@color/color_hint" />
+
+        <EditText
+            style="@style/roundInputTextField"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="@dimen/horizontal_padding"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/personal_info_edit_text"
+            android:hint="@string/university"
+            android:maxLines="1"
+            android:paddingHorizontal="12dp"
+            android:textColorHint="@color/color_hint" />
+
+        <EditText
+            style="@style/roundInputTextField"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="@dimen/horizontal_padding"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/personal_info_edit_text"
+            android:hint="@string/faculty"
+            android:maxLines="1"
+            android:paddingHorizontal="12dp"
+            android:textColorHint="@color/color_hint" />
+
+        <EditText
+            style="@style/roundInputTextField"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="@dimen/horizontal_padding"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/personal_info_edit_text"
+            android:hint="@string/track"
+            android:maxLines="1"
+            android:paddingHorizontal="12dp"
+            android:textColorHint="@color/color_hint" />
+
+        <EditText
+            style="@style/roundInputTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/horizontal_padding"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/personal_info_edit_text"
+            android:gravity="start"
+            android:hint="@string/my_projects"
+            android:minHeight="90dp"
+            android:paddingHorizontal="12dp"
+            android:paddingTop="12dp"
+            android:textColorHint="@color/color_hint" />
+
+
+        <EditText
+            style="@style/roundInputTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/horizontal_padding"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/personal_info_edit_text"
+            android:gravity="start"
+            android:hint="@string/skills"
+            android:minHeight="90dp"
+            android:paddingHorizontal="12dp"
+            android:paddingTop="12dp"
+            android:textColorHint="@color/color_hint"
+            android:layout_marginBottom="20dp"
+            />
+    </LinearLayout>
+</ScrollView>

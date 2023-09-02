@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_profileFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_personalInfoFragment"
+            app:destination="@id/personalInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatsFragment"
@@ -34,4 +37,9 @@
         android:name="com.ieee.codelink.ui.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/personalInfoFragment"
+        android:name="com.ieee.codelink.ui.personalInfo.PersonalInfoFragment"
+        android:label="fragment_personal_info"
+        tools:layout="@layout/fragment_personal_info" />
 </navigation>
