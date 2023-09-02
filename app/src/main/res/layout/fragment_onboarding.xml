@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_background"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.viewpager.widget.ViewPager
@@ -42,7 +43,7 @@
         android:layout_centerInParent="true"
         app:dotColor="@color/color_primary"
         app:dotCount="3"
-        app:dotSelectedColor="@color/color_text"
+        app:dotSelectedColor="@color/accent_color"
         app:dotSize="12dp"
         app:layout_constraintBottom_toTopOf="@id/btn_action"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,17 +52,18 @@
         app:dotSpacing="12dp" />
 
 
-    <androidx.appcompat.widget.AppCompatButton
+    <TextView
         android:id="@+id/btn_action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_20"
         android:layout_marginEnd="@dimen/horizontal_padding"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@drawable/app_button_ripple"
-        android:paddingHorizontal="@dimen/button_padding_horizontal"
+        android:background="@drawable/onboarding_button_ripple"
+        android:paddingHorizontal="@dimen/_30dp"
         android:paddingVertical="@dimen/button_padding_vertical"
         android:text="@string/next"
+        android:gravity="center"
         android:textAllCaps="false"
         android:textColor="@color/color_text"
         android:textSize="@dimen/big_txt"
@@ -77,9 +79,9 @@
         android:layout_marginBottom="20dp"
         android:layout_marginStart="16dp"
         android:textSize="16sp"
-        android:paddingVertical="8dp"
-        android:paddingHorizontal="16dp"
-        android:textColor="@color/color_text"
-        />
+        android:background="@drawable/onboarding_button_ripple"
+        android:paddingHorizontal="@dimen/_30dp"
+        android:paddingVertical="@dimen/button_padding_vertical"
+        android:textColor="@color/color_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

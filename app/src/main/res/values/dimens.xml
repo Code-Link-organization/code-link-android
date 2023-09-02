@@ -3,6 +3,8 @@
     <dimen name="big_txt">16sp</dimen>
     <dimen name="horizontal_padding">16dp</dimen>
     <dimen name="margin_20">20dp</dimen>
+    <dimen name="margin_40">40dp</dimen>
+    <dimen name="margin_60">60dp</dimen>
     <dimen name="negative_margin_20">-20dp</dimen>
     <dimen name="button_padding_horizontal">45dp</dimen>
     <dimen name="button_padding_vertical">16dp</dimen>
@@ -16,4 +18,5 @@
     <dimen name="thumb">22dp</dimen>
     <dimen name="track_h">22dp</dimen>
     <dimen name="track_w">30dp</dimen>
+    <dimen name="_30dp">30dp</dimen>
 </resources>
