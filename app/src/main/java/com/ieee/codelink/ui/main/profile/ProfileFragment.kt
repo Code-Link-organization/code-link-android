@@ -109,7 +109,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToSettingsFragment())
     }
     private fun updateProfileClicked() {
-        //TODO("Not yet implemented")
+        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment())
     }
     private fun myTeamsClicked() {
         //TODO("Not yet implemented")

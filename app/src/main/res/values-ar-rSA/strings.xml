@@ -68,6 +68,8 @@
     <string name="track">Track</string>
     <string name="my_projects">My Projects</string>
     <string name="skills">Skills</string>
+    <string name="bio">Bio</string>
+    <string name="save">Save</string>
 
 
 </resources>
