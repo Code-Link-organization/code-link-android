@@ -62,7 +62,12 @@
     <string name="welcome_to_our_community">مرحبا بك في مجتمعنا !</string>
     <string name="yes">نعم</string>
     <string name="no">لا</string>
-
+    <string name="governate">Governate</string>
+    <string name="university">University</string>
+    <string name="faculty">Faculty</string>
+    <string name="track">Track</string>
+    <string name="my_projects">My Projects</string>
+    <string name="skills">Skills</string>
 
 
 </resources>

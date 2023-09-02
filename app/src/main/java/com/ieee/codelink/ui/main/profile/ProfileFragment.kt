@@ -94,6 +94,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 btnReviewClicked()
             }
 
+            binding.ivPersonalInfo.setOnClickListener{
+                personalInfoClicked()
+            }
+
         }
     }
 
@@ -119,5 +123,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     private fun btnReviewClicked() {
        // TODO("Not yet implemented")
     }
+    private fun personalInfoClicked() {
+        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToPersonalInfoFragment())
+    }
+
 
 }

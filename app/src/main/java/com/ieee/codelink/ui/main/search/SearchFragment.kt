@@ -2,6 +2,7 @@ package com.ieee.codelink.ui.main.search
 
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -28,6 +29,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         setViews()
         getLastScreen()
     }
+
+
 
     private fun getLastScreen() {
         if (viewModel.x % 2 == 0) {
