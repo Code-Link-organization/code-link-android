@@ -67,7 +67,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
 
         rvLayout.layoutParams = constraints
-        binding.rvItems.setPadding(8.dp(),0,8.dp(),0)
+        binding.rvItems.setPadding(8.dp(),10.dp(),8.dp(),0)
 
     }
 
@@ -84,7 +84,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
         rvLayout.layoutParams = constraints
      //   rvLayout.setPadding(0,0,0,R.dimen.margin_80)
-        binding.rvItems.setPadding(8.dp(),0,8.dp(),150.dp())
+        binding.rvItems.setPadding(8.dp(),10.dp(),8.dp(),150.dp())
 
     }
 

@@ -3,6 +3,7 @@
     <dimen name="big_txt">16sp</dimen>
     <dimen name="horizontal_padding">16dp</dimen>
     <dimen name="margin_20">20dp</dimen>
+    <dimen name="negative_margin_20">-20dp</dimen>
     <dimen name="button_padding_horizontal">45dp</dimen>
     <dimen name="button_padding_vertical">16dp</dimen>
     <dimen name="keyboard_line_hieght">55dp</dimen>
@@ -11,6 +12,7 @@
     <dimen name="margin_80">80dp</dimen>
     <dimen name="no_margin">0dp</dimen>
     <dimen name="negative80_margin">-80dp</dimen>
+    <dimen name="negative120_margin">-120dp</dimen>
     <dimen name="thumb">22dp</dimen>
     <dimen name="track_h">22dp</dimen>
     <dimen name="track_w">30dp</dimen>
