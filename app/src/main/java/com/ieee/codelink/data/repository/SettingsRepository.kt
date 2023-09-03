@@ -19,5 +19,37 @@ class SettingsRepository(
         )
     }
 
+    fun getDarkMode(): Boolean {
+     return sharedPreferenceManger.getBooleanValue(
+         SharedPreferenceManger.DARK_MODE,
+         false
+     )
+    }
+
+    fun isNotificationsEnabled(): Boolean {
+        return sharedPreferenceManger.getBooleanValue(
+            SharedPreferenceManger.NOTIFICATIONS,
+            true
+        )
+    }
+
+    fun toggleDarkMode() :Boolean  {
+        val newState =  getDarkMode().not()
+
+        sharedPreferenceManger.setValue(
+            SharedPreferenceManger.DARK_MODE,
+            newState
+        )
+        return newState
+    }
+    fun toggleNotifications() :Boolean {
+        val newState =  isNotificationsEnabled().not()
+        sharedPreferenceManger.setValue(
+            SharedPreferenceManger.NOTIFICATIONS,
+            newState
+        )
+        return newState
+    }
+
 
 }

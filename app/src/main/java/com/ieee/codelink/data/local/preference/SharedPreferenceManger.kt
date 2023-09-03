@@ -110,6 +110,8 @@ class SharedPreferenceManger @Inject constructor(
         const val IS_ONBOARDING_FINISHED = "onBoarding"
         const val CACHED_USER = "user"
         const val CURRENT_LANGUAGE = "currentLanguage"
+        const val DARK_MODE = "darkMode"
+        const val NOTIFICATIONS = "notifications"
 
     }
 }

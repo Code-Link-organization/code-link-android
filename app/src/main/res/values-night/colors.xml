@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    color scheme-->
+    <color name="color_primary">#746346</color>
+    <color name="white">#FFFFFF</color>
+    <color name="accent_color">#4E4532</color>
+    <color name="color_text">#E6F3EEEE</color>
+    <color name="color_background">#222222</color>
+    <color name="color_hint">#B8B8B8</color>
+    <color name="color_secondary_background">#000000</color>
+    <color name="bottom_nav_icon_color">#3B3A3A</color>
+
+</resources>

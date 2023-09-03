@@ -30,6 +30,7 @@
         android:layoutDirection="ltr"
         app:cbn_fabBg="@color/accent_color"
         app:cbn_selectedColor="@color/white"
+        app:cbn_bg="@color/color_secondary_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

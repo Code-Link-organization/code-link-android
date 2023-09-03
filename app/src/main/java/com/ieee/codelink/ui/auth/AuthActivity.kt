@@ -2,6 +2,7 @@ package com.ieee.codelink.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
@@ -31,6 +32,7 @@ class AuthActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        // setSavedLanguage()
+        setAppDarkMode()
 
         binding = ActivityAuthBinding.inflate(layoutInflater)
         splashScreen = installSplashScreen()
@@ -59,6 +61,18 @@ class AuthActivity : BaseActivity() {
         navController = navHostFragment.findNavController()
         navHostFragment.navController.graph = graph
 
+    }
+
+    private fun setAppDarkMode() {
+        val isDarkMode = sharedPreferences.getBooleanValue(
+            SharedPreferenceManger.DARK_MODE,
+            false
+        )
+        if (isDarkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 
     private fun setSavedLanguage() {

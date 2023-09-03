@@ -1,21 +1,12 @@
 package com.ieee.codelink.ui.settings
 
-import android.app.Application
 import android.content.Context
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 import com.ieee.codelink.R
 import com.ieee.codelink.core.BaseViewModel
-import com.ieee.codelink.core.ResponseState
-import com.ieee.codelink.data.repository.AuthRepository
 import com.ieee.codelink.data.repository.SettingsRepository
 import com.ieee.codelink.data.repository.UserRepository
-import com.ieee.codelink.domain.models.AuthResponse
-import com.ieee.codelink.domain.models.User
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -61,6 +52,13 @@ class SettingsViewModel @Inject constructor(
         return if (language == "Arabic") context.getString(R.string.Arabic)
         else context.getString(R.string.English)
     }
+
+    fun isDarkMode(): Boolean = settingsRepository.getDarkMode()
+    fun isNotificationsEnabled(): Boolean = settingsRepository.isNotificationsEnabled()
+    fun toggleDarkMode() = settingsRepository.toggleDarkMode()
+
+    fun toggleNotifocationsEnabled() : Boolean = settingsRepository.toggleNotifications()
+
 
 
 }

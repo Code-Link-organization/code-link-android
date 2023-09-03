@@ -3,9 +3,9 @@ package com.ieee.codelink.ui.settings
 import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.ieee.codelink.R
 import com.ieee.codelink.common.extension.onBackPress
 import com.ieee.codelink.common.showDialog
@@ -30,6 +30,16 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
     }
 
     private fun setViews() {
+        setButtonsIcons()
+        setInitialButtonsStates()
+    }
+
+    private fun setInitialButtonsStates() {
+        binding.btnDarkMode.sw.isChecked = viewModel.isDarkMode()
+        binding.btnNotifications.sw.isChecked = viewModel.isNotificationsEnabled()
+    }
+
+    private fun setButtonsIcons() {
         binding.apply {
             btnDarkMode.tvSectionTitle.text = getString(R.string.dark_mode)
             btnDarkMode.ivSectionImage.setImageResource(R.drawable.ic_dark_mode)
@@ -70,12 +80,22 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         binding.apply {
             btnDarkMode.root.setOnClickListener {
                 btnDarkMode.sw.toggle()
+                val isDarkMode = viewModel.toggleDarkMode()
+                changeDarkMode(isDarkMode)
+
             }
 
             btnNotifications.root.setOnClickListener {
                 btnNotifications.sw.toggle()
+                viewModel.toggleNotifocationsEnabled()
             }
         }
+    }
+
+    private fun changeDarkMode(isDarkMode: Boolean) = if (isDarkMode) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+    } else {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 
 
