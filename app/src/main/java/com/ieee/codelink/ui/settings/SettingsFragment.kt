@@ -80,9 +80,11 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         binding.apply {
             btnDarkMode.root.setOnClickListener {
                 btnDarkMode.sw.toggle()
-                val isDarkMode = viewModel.toggleDarkMode()
-                changeDarkMode(isDarkMode)
-
+                lifecycleScope.launch {
+                    viewModel.toggleDarkMode()
+                    val isDarkMode = btnDarkMode.sw.isChecked
+                    changeDarkMode(isDarkMode)
+                }
             }
 
             btnNotifications.root.setOnClickListener {
@@ -183,5 +185,11 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
                 (activity as MainActivity).updateLocale(Locales.English)
             }
         }
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        setViews()
     }
 }

@@ -1,6 +1,8 @@
 package com.ieee.codelink.data.repository
 
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class SettingsRepository(
     private val sharedPreferenceManger: SharedPreferenceManger
@@ -33,14 +35,13 @@ class SettingsRepository(
         )
     }
 
-    fun toggleDarkMode() :Boolean  {
+    suspend fun toggleDarkMode() :Boolean = withContext(Dispatchers.IO) {
         val newState =  getDarkMode().not()
-
         sharedPreferenceManger.setValue(
             SharedPreferenceManger.DARK_MODE,
             newState
         )
-        return newState
+        newState
     }
     fun toggleNotifications() :Boolean {
         val newState =  isNotificationsEnabled().not()

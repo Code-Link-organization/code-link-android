@@ -55,7 +55,7 @@ class SettingsViewModel @Inject constructor(
 
     fun isDarkMode(): Boolean = settingsRepository.getDarkMode()
     fun isNotificationsEnabled(): Boolean = settingsRepository.isNotificationsEnabled()
-    fun toggleDarkMode() = settingsRepository.toggleDarkMode()
+    suspend fun toggleDarkMode() = settingsRepository.toggleDarkMode()
 
     fun toggleNotifocationsEnabled() : Boolean = settingsRepository.toggleNotifications()
 
