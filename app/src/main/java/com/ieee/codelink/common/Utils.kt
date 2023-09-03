@@ -11,6 +11,7 @@ import android.util.Log
 import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.facebook.shimmer.Shimmer

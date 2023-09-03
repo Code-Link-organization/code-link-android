@@ -64,7 +64,7 @@
         app:layout_constraintEnd_toEndOf="@id/iv_user_image"
         app:layout_constraintBottom_toBottomOf="@id/iv_user_image"
         app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-        tools:src="@drawable/ic_camera" />
+        android:src="@drawable/ic_camera" />
 
     <TextView
         android:id="@+id/tv_user_name"
@@ -114,7 +114,7 @@
         android:textColorHint="@color/color_hint"
         app:hintTextColor="@color/color_hint"
         app:layout_constraintTop_toBottomOf="@id/tv_name"
-        app:startIconDrawable="@drawable/ic_profile"
+        app:startIconDrawable="@drawable/ic_person"
         app:startIconTint="@color/color_hint">
 
         <com.google.android.material.textfield.TextInputEditText

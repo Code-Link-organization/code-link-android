@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.ieee.codelink.R
 import com.ieee.codelink.common.extension.onBackPress
+import com.ieee.codelink.common.openBrowser
 import com.ieee.codelink.common.showDialog
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.databinding.FragmentSettingsBinding
@@ -125,12 +126,19 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         binding.btnLogout.root.setOnClickListener {
             logoutClicked()
         }
-        binding.btnSecurity.root.setOnClickListener {
 
+        binding.btnSecurity.root.setOnClickListener {
+            openBrowser(
+                requireContext(),
+                "https://gist.github.com/Mohamed02Emad/643d8ea2e5922f33988149bcb6980f9c"
+            )
         }
 
         binding.btnAboutUs.root.setOnClickListener {
-
+            openBrowser(
+                requireContext(),
+                "https://gist.github.com/Mohamed02Emad/0e3b816e5f0e5e78dbaad1400c786cf5"
+            )
         }
     }
 
@@ -192,4 +200,6 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         super.onResume()
         setViews()
     }
+
+
 }
