@@ -94,6 +94,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 btnReviewClicked()
             }
 
+            binding.ivPersonalInfo.setOnClickListener{
+                personalInfoClicked()
+            }
+
         }
     }
 
@@ -105,7 +109,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToSettingsFragment())
     }
     private fun updateProfileClicked() {
-        //TODO("Not yet implemented")
+        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment())
     }
     private fun myTeamsClicked() {
         //TODO("Not yet implemented")
@@ -119,5 +123,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     private fun btnReviewClicked() {
        // TODO("Not yet implemented")
     }
+    private fun personalInfoClicked() {
+        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToPersonalInfoFragment())
+    }
+
 
 }

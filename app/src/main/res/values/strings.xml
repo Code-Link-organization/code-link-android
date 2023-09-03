@@ -61,4 +61,12 @@
     <string name="welcome_to_our_community">Welcome to our community!</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="governate">Governate</string>
+    <string name="university">University</string>
+    <string name="faculty">Faculty</string>
+    <string name="track">Track</string>
+    <string name="my_projects">My Projects</string>
+    <string name="skills">Skills</string>
+    <string name="bio">Bio</string>
+    <string name="save">Save</string>
 </resources>

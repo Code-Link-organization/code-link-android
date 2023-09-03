@@ -2,6 +2,7 @@ package com.ieee.codelink.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -31,6 +32,7 @@ class MainActivity : BaseActivity() {
             setContentView(root)
         }
         setUpVisibilityOfBottomBar()
+        setUpKeyBoardRules()
         checkIfSettingsChanged()
 
 
@@ -52,8 +54,8 @@ class MainActivity : BaseActivity() {
 
     private val menuItems = arrayOf(
         CbnMenuItem(
-            R.drawable.ic_home,
-            R.drawable.avd_home,
+            R.drawable.ic_home2,
+            R.drawable.avd_home2,
             R.id.homeFragment
         ),
         CbnMenuItem(
@@ -62,8 +64,8 @@ class MainActivity : BaseActivity() {
             R.id.searchFragment
         ),
         CbnMenuItem(
-            R.drawable.ic_chat,
-            R.drawable.avd_chat,
+            R.drawable.ic_chat2,
+            R.drawable.avd_chat2,
             R.id.chatsFragment
         )
         , CbnMenuItem(
@@ -80,13 +82,29 @@ class MainActivity : BaseActivity() {
                 R.id.searchFragment,
                 R.id.profileFragment,
                 R.id.chatsFragment
-                -> bottomBarNavigationVisibility(true)
-
-                else -> bottomBarNavigationVisibility(false)
+                -> {
+                    bottomBarNavigationVisibility(true)
+                }
+                else -> {
+                    bottomBarNavigationVisibility(false)
+                }
             }
         }
     }
 
+    private fun setUpKeyBoardRules() {
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            when (destination.id) {
+                R.id.searchFragment,
+                -> {
+                    disableKeyBoardPushingViews()
+                }
+                else -> {
+                    enableKeyBoardPushingViews()
+                }
+            }
+        }
+    }
     private fun bottomBarNavigationVisibility(isVisible: Boolean) {
         binding.bottomNavigation.isVisible = isVisible
     }
@@ -113,4 +131,12 @@ class MainActivity : BaseActivity() {
         newGraph.setStartDestination(R.id.homeFragment)
         navController.graph = newGraph
     }
+
+    private fun disableKeyBoardPushingViews() {
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+    }
+    private fun enableKeyBoardPushingViews() {
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+    }
+
 }
