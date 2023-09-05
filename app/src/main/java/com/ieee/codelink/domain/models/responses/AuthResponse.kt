@@ -1,13 +1,14 @@
-package com.ieee.codelink.domain.models
+package com.ieee.codelink.domain.models.responses
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 import com.ieee.codelink.core.BaseResponse
+import com.ieee.codelink.domain.models.UserData
 
 @Keep
 data class AuthResponse(
     @SerializedName("result")
-    var sucess: Boolean ,
+    var sucess: Boolean,
     @SerializedName("data")
-    var `data`: Data,
+    var `data`: UserData,
 ):BaseResponse()

@@ -1,12 +1,8 @@
 package com.ieee.codelink.ui.main.profile
 
-import android.app.Application
 import androidx.lifecycle.viewModelScope
 import com.ieee.codelink.core.BaseViewModel
-import com.ieee.codelink.core.ResponseState
-import com.ieee.codelink.data.repository.AuthRepository
 import com.ieee.codelink.data.repository.UserRepository
-import com.ieee.codelink.domain.models.AuthResponse
 import com.ieee.codelink.domain.models.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

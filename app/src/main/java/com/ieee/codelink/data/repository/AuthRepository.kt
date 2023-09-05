@@ -2,7 +2,7 @@ package com.ieee.codelink.data.repository
 
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.data.remote.ApiAuthService
-import com.ieee.codelink.domain.models.AuthResponse
+import com.ieee.codelink.domain.models.responses.AuthResponse
 import com.ieee.codelink.domain.models.User
 import retrofit2.Response
 

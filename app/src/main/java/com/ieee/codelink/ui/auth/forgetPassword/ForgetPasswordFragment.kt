@@ -11,7 +11,7 @@ import com.ieee.codelink.common.extension.onBackPress
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentForgetPasswordBinding
-import com.ieee.codelink.domain.models.AuthResponse
+import com.ieee.codelink.domain.models.responses.AuthResponse
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

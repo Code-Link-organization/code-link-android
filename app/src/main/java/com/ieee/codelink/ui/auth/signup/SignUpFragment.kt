@@ -5,15 +5,11 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.facebook.appevents.AppEventsLogger.Companion.getUserData
-import com.ieee.codelink.R
 import com.ieee.codelink.common.extension.animateLoadingButton
 import com.ieee.codelink.common.extension.clickWithThrottle
 import com.ieee.codelink.common.extension.navigateToAction
 import com.ieee.codelink.core.BaseFragment
-import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentSignUpBinding
-import com.ieee.codelink.domain.models.AuthResponse
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

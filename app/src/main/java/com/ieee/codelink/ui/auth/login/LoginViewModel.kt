@@ -1,15 +1,13 @@
 package com.ieee.codelink.ui.auth.login
 
 import android.app.Application
-import com.ieee.codelink.common.parseErrorMessage
 import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.data.repository.AuthRepository
-import com.ieee.codelink.domain.models.AuthResponse
+import com.ieee.codelink.domain.models.responses.AuthResponse
 import com.ieee.codelink.domain.models.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
