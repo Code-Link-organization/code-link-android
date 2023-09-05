@@ -1,4 +1,4 @@
-package com.ieee.codelink.domain.models
+package com.ieee.codelink.domain.tempModels
 
 data class TempPost(
     val userName : String,
