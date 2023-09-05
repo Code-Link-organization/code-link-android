@@ -4,7 +4,7 @@ import android.util.Log
 import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.data.repository.AuthRepository
-import com.ieee.codelink.domain.models.AuthResponse
+import com.ieee.codelink.domain.models.responses.AuthResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject

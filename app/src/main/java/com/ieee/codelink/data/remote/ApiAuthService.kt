@@ -1,13 +1,17 @@
 package com.ieee.codelink.data.remote
 
-import com.ieee.codelink.domain.models.AuthResponse
+import com.ieee.codelink.domain.models.responses.AuthResponse
+import com.ieee.codelink.domain.models.responses.PostsResponse
 import retrofit2.Response
+import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface ApiAuthService {
 
+
+    //AUTH
     @POST(LOGIN_END_POINT)
     suspend fun loginUser(
         @Query("email")
@@ -51,4 +55,12 @@ interface ApiAuthService {
         @Query("password_confirmation")
         passwordConfirmation: String? = null
     ): Response<AuthResponse>
+
+    //HOME
+
+    @GET(GET_POSTS)
+    suspend fun getPosts(
+        @Header("Authorization")
+        token: String
+    ):Response<PostsResponse>
 }

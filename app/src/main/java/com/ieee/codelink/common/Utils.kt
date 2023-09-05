@@ -24,6 +24,15 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import org.json.JSONObject
 import java.io.File
+import java.text.SimpleDateFormat
+import java.time.Duration
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneOffset
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
+import java.util.concurrent.TimeUnit
 import kotlin.math.roundToInt
 import kotlin.random.Random
 
@@ -226,4 +235,34 @@ fun createRandomString(size: Int): String {
     }
 
     return stringBuilder.toString()
+}
+
+fun getTimeDifference(dateStr: String): String {
+    val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'", Locale.US)
+    sdf.timeZone = TimeZone.getTimeZone("UTC")
+    val inputDate = sdf.parse(dateStr)
+    val currentDate = Date()
+
+    val timeDifferenceMillis = currentDate.time - inputDate.time
+    val minutesDifference = TimeUnit.MILLISECONDS.toMinutes(timeDifferenceMillis)
+    val hoursDifference = TimeUnit.MILLISECONDS.toHours(timeDifferenceMillis)
+    val daysDifference = TimeUnit.MILLISECONDS.toDays(timeDifferenceMillis)
+
+    return when {
+        daysDifference == 0L -> {
+            when {
+                hoursDifference == 0L -> {
+                    when {
+                        minutesDifference == 0L -> "now"
+                        else -> "$minutesDifference m"
+                    }
+                }
+                else -> "$hoursDifference h"
+            }
+        }
+        daysDifference < 7 -> "$daysDifference d"
+        daysDifference < 30 -> "${(daysDifference / 7).toInt()} w"
+        daysDifference < 365 -> "${(daysDifference / 30).toInt()} months"
+        else -> "${(daysDifference / 365).toInt()} y"
+    }
 }

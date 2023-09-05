@@ -2,7 +2,6 @@ package com.ieee.codelink.ui.auth.verification
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -12,7 +11,7 @@ import com.ieee.codelink.common.showSnackbar
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentVerificationBinding
-import com.ieee.codelink.domain.models.AuthResponse
+import com.ieee.codelink.domain.models.responses.AuthResponse
 import com.ieee.codelink.ui.auth.login.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

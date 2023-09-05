@@ -1,5 +1,5 @@
 package com.ieee.codelink.domain.models
 
-data class Data(
+data class UserData(
     var user: User
 )
