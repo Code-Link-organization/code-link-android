@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,46 +7,86 @@
     tools:context=".ui.main.home.HomeFragment"
     android:background="@color/color_background">
 
-    <FrameLayout
-        android:id="@+id/frame_search"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/horizontal_padding"
-        android:paddingVertical="20dp"
-        android:background="@color/color_secondary_background"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="@color/color_background"
+        android:layout_height="wrap_content">
 
-        <include
-            android:id="@+id/search_bar"
-            layout="@layout/search_bar"
-            />
-    </FrameLayout>
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbarFadeDuration="500"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:scrimAnimationDuration="500"
+            app:titleCollapseMode="scale">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <FrameLayout
+                    android:id="@+id/frame_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_secondary_background"
+                    android:paddingHorizontal="@dimen/horizontal_padding"
+                    android:paddingVertical="20dp"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <include
+                        android:id="@+id/search_bar"
+                        layout="@layout/search_bar" />
+                </FrameLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_stories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@color/color_secondary_background"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="8dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/frame_search"
+                    tools:listitem="@layout/card_user_story" />
 
 
-    <androidx.recyclerview.widget.RecyclerView
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--        <androidx.appcompat.widget.Toolbar-->
+            <!--            android:id="@+id/my_toolbar"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="?attr/actionBarSize"-->
+            <!--            app:layout_collapseMode="pin"-->
+            <!--            app:popupTheme="@style/Theme.CodeLink" />-->
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:id="@+id/rv_stories"
-        android:layout_height="wrap_content"
-        android:clipToPadding="true"
-        android:background="@color/color_secondary_background"
-        android:layout_marginTop="6dp"
-        android:paddingHorizontal="8dp"
-        android:orientation="horizontal"
-        tools:listitem="@layout/card_user_story"
-        app:layout_constraintTop_toBottomOf="@id/frame_search"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_posts"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="6dp"
-        android:paddingHorizontal="16dp"
-        android:clipToPadding="true"
-        tools:listitem="@layout/card_post"
-        app:layout_constraintTop_toBottomOf="@id/rv_stories"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_posts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="6dp"
+                android:clipToPadding="true"
+                android:paddingHorizontal="16dp"
+                android:paddingBottom="100dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/card_post" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
