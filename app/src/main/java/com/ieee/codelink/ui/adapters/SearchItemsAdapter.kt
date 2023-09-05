@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ieee.codelink.databinding.CardTrackBinding
-import com.ieee.codelink.domain.models.TempSearchItem
+import com.ieee.codelink.domain.tempModels.TempSearchItem
 
 
 class SearchItemsAdapter(

@@ -7,10 +7,46 @@
     tools:context=".ui.main.home.HomeFragment"
     android:background="@color/color_background">
 
+    <FrameLayout
+        android:id="@+id/frame_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/horizontal_padding"
+        android:paddingVertical="20dp"
+        android:background="@color/color_secondary_background"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/search_bar"
+            layout="@layout/search_bar"
+            />
+    </FrameLayout>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/rv_home"
+        android:id="@+id/rv_stories"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:background="@color/color_secondary_background"
+        android:layout_marginTop="6dp"
+        android:paddingHorizontal="8dp"
+        android:orientation="horizontal"
+        tools:listitem="@layout/card_user_story"
+        app:layout_constraintTop_toBottomOf="@id/frame_search"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_posts"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="6dp"
+        android:paddingHorizontal="16dp"
+        android:clipToPadding="true"
+        tools:listitem="@layout/card_post"
+        app:layout_constraintTop_toBottomOf="@id/rv_stories"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

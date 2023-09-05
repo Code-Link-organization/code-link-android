@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.databinding.FragmentHomeBinding
 import com.ieee.codelink.ui.adapters.PostsAdapter
+import com.ieee.codelink.ui.adapters.StoriesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -14,17 +15,32 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     override val viewModel: HomeViewModel by viewModels()
     private lateinit var postsAdapter: PostsAdapter
+    private lateinit var storiesAdapter: StoriesAdapter
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        setupRecyclerView()
+        setupRecyclerViews()
 
     }
 
 
-    private fun setupRecyclerView() {
+    private fun setupRecyclerViews() {
+        setStoriesRV()
+        setPostsRV()
+    }
+
+    private fun setStoriesRV() {
+        storiesAdapter = StoriesAdapter(
+            viewModel.getFakeStories(),
+            storyClicked = {
+                showToast("Click")
+            }
+        )
+        binding.rvStories.adapter = storiesAdapter
+    }
+
+    private fun setPostsRV() {
         postsAdapter = PostsAdapter(
             viewModel.getFakePosts(),
             likeClicked = {
@@ -37,8 +53,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 showToast("share")
             }
         )
-
-        binding.rvHome.adapter = postsAdapter
+        binding.rvPosts.adapter = postsAdapter
     }
 
 

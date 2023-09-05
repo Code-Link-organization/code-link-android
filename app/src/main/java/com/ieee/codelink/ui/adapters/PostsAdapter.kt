@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ieee.codelink.R
 import com.ieee.codelink.databinding.CardPostBinding
-import com.ieee.codelink.domain.models.TempPost
+import com.ieee.codelink.domain.tempModels.TempPost
 
 
 class PostsAdapter(

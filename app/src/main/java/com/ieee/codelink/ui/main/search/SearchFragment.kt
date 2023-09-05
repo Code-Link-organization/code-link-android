@@ -2,7 +2,6 @@ package com.ieee.codelink.ui.main.search
 
 import android.os.Bundle
 import android.view.View
-import android.view.WindowManager
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -11,7 +10,7 @@ import com.ieee.codelink.R
 import com.ieee.codelink.common.dp
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.databinding.FragmentSearchBinding
-import com.ieee.codelink.domain.models.TempSearchItem
+import com.ieee.codelink.domain.tempModels.TempSearchItem
 import com.ieee.codelink.ui.adapters.SearchItemsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
