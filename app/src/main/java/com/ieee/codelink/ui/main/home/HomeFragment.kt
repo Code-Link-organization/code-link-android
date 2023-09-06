@@ -82,6 +82,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 state.data?.let { response ->
                     lifecycleScope.launch {
                         dismissDialog()
+                        callData()
                     }
                 }
             }
