@@ -1,6 +1,7 @@
 package com.ieee.codelink.ui.main
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.core.view.isVisible
@@ -22,6 +23,7 @@ class MainActivity : BaseActivity() {
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
+      //  window.statusBarColor = Color.TRANSPARENT
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

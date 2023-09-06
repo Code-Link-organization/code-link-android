@@ -50,6 +50,7 @@ class PostsAdapter(
             setPostButtons(holder, post)
     }
 
+
     private fun setPostButtons(holder: PostsAdapter.ViewHolder, post: Post) {
         holder.binding.apply {
             btnLike.ivBtnImg.setImageResource(R.drawable.ic_like)
