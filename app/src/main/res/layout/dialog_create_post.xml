@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/app_dialog_fragment"
     android:orientation="vertical">
 
@@ -17,10 +19,19 @@
 
     <View
         android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        />
+    <View
+        android:layout_width="match_parent"
         android:layout_height="8dp"
-        android:layout_marginVertical="20dp"
         android:background="@color/color_secondary_background" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        />
 
     <EditText
         android:id="@+id/et_content"
@@ -28,19 +39,119 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/horizontal_padding"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
         android:background="@drawable/personal_info_edit_text"
         android:gravity="start"
         android:hint="Content"
-        android:minHeight="120dp"
+        android:maxLines="10"
+        android:minHeight="180dp"
         android:paddingHorizontal="12dp"
         android:paddingTop="12dp"
         android:textColorHint="@color/color_hint" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        />
 
-    <Button
-        android:id="@+id/btn_create"
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_gallery"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="@dimen/horizontal_padding"
+        android:adjustViewBounds="true"
+        android:background="@drawable/background_ripple"
+        android:src="@drawable/ic_gallery"
+        app:tint="@color/color_text" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        />
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="create" />
+        android:orientation="horizontal">
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1"
+        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/post_privacy"
+            android:textColor="@color/color_text"
+            android:layout_marginEnd="8dp"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:textSize="14sp"
+            android:textColor="@color/color_text"
+            android:background="@drawable/app_button_ripple"
+            android:text="public"
+            android:layout_marginEnd="16dp"
+            android:layout_marginVertical="4dp"
+            />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/iv_img"
+        android:layout_width="60dp"
+        android:layout_height="100dp"
+        android:adjustViewBounds="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginVertical="8dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:textSize="14sp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:paddingHorizontal="20dp"
+            android:textColor="@color/color_text"
+            android:background="@drawable/onboarding_button_ripple"
+            android:text="@string/cancel"
+            android:textAllCaps="false"
+            android:layout_marginEnd="16dp"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_create"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:textSize="14sp"
+            android:textColor="@color/color_text"
+            android:background="@drawable/app_button_ripple"
+            android:text="@string/publish"
+            android:textAllCaps="false"
+            android:layout_marginEnd="16dp"
+            android:layout_marginVertical="4dp"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        />
 </LinearLayout>

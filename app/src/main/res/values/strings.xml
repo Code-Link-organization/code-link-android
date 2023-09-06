@@ -69,4 +69,7 @@
     <string name="skills">Skills</string>
     <string name="bio">Bio</string>
     <string name="save">Save</string>
+    <string name="post_privacy">Post privacy</string>
+    <string name="publish">publish</string>
+    <string name="cancel">Cancel</string>
 </resources>
