@@ -1,11 +1,16 @@
 package com.ieee.codelink.data.remote
 
+import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.domain.models.responses.AuthResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Query
 
 interface ApiAuthService {
@@ -63,4 +68,15 @@ interface ApiAuthService {
         @Header("Authorization")
         token: String
     ):Response<PostsResponse>
+
+    @Multipart
+    @POST(CREATE_POST)
+    suspend fun createPost(
+        @Header("Authorization")
+        token: String,
+        @Part
+        file_path: MultipartBody.Part?,
+        @Part("content")
+        content: RequestBody?
+    ): Response<BaseResponse>
 }

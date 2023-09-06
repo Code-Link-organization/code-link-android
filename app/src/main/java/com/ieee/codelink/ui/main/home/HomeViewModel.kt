@@ -1,9 +1,15 @@
 package com.ieee.codelink.ui.main.home
 
+import android.content.Context
 import com.ieee.codelink.R
+import com.ieee.codelink.common.cacheImageToFile
+import com.ieee.codelink.common.createMultipartBodyPartFromFile
+import com.ieee.codelink.common.getImageFileFromRealPath
+import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.data.repository.PostsRepository
+import com.ieee.codelink.domain.CreatePostModel
 import com.ieee.codelink.domain.models.responses.PostsResponse
 import com.ieee.codelink.domain.tempModels.TempUserStory
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,10 +19,14 @@ import kotlin.random.Random
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val postsRepository: PostsRepository
+    private val postsRepository: PostsRepository,
+    private val context: Context
 ) : BaseViewModel() {
 
     val postsRequestState: MutableStateFlow<ResponseState<PostsResponse>> =
+        MutableStateFlow(ResponseState.Empty())
+
+    val createPostsRequestState: MutableStateFlow<ResponseState<BaseResponse>> =
         MutableStateFlow(ResponseState.Empty())
 
 
@@ -69,4 +79,20 @@ class HomeViewModel @Inject constructor(
         return TempUserStory(thumb, userImage)
 
     }
+
+
+   suspend fun createPost(createPostModel: CreatePostModel){
+       val imgPart = if (createPostModel.images !=null){
+           val path = cacheImageToFile( context , createPostModel.images[0])
+           val file = getImageFileFromRealPath(path)
+            createMultipartBodyPartFromFile(file , "file_path")
+       } else{
+           null
+       }
+       createPostsRequestState.value=ResponseState.Loading()
+       val response = postsRepository.createPost(createPostModel.content, imgPart)
+       createPostsRequestState.value = handleResponse(response)
+   }
+
+
 }

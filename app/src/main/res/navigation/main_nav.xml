@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.ieee.codelink.ui.main.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_createPostDialogFragment"
+            app:destination="@id/createPostDialogFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.ieee.codelink.ui.main.search.SearchFragment"
@@ -50,4 +54,8 @@
         android:name="com.ieee.codelink.ui.editProfile.EditProfileFragment"
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" />
+    <dialog
+        android:id="@+id/createPostDialogFragment"
+        android:name="com.ieee.codelink.ui.dialogs.CreatePostDialogFragment"
+        android:label="CreatePostDialogFragment" />
 </navigation>
