@@ -1,14 +1,19 @@
 package com.ieee.codelink.common
 
+import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Build
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.ieee.codelink.R
+import com.labters.imagestackviewer.data.ImageData
+import com.labters.imagestackviewer.data.ResourceType
+import com.labters.imagestackviewer.presentation.StackImageViewer
 
 fun showSnackbar(message: String, context: Context, view: View) {
 
@@ -63,6 +68,13 @@ fun showDialog(
         }
     }
 
+}
 
-
+fun openZoomableImage(imageUrl: String, activity : Activity, imageView: ImageView) {
+    StackImageViewer.openStackViewer(
+        activity = activity,
+        list = listOf(
+            ImageData(ResourceType.UrlResource(imageUrl)),
+        ), view = imageView
+    )
 }

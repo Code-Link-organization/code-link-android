@@ -5,6 +5,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -23,7 +24,8 @@ class PostsAdapter(
     var sharesClicked: (Post) -> Unit,
     var blockClicked: (Post) -> Unit,
     var saveClicked: (Post) -> Unit,
-    var deleteClicked: (Post) -> Unit
+    var deleteClicked: (Post) -> Unit,
+    var openPostImage : (String?, ImageView) -> Unit
 ) : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: CardPostBinding) :
@@ -124,6 +126,13 @@ class PostsAdapter(
         holder.binding.ivMore.setOnClickListener {
             moreClicked(post , it , holder)
         }
+        holder.binding.ivPostImage.setOnClickListener {
+            post.image_path?.let { url ->
+                if (url.isNotBlank()) {
+                    openPostImage(BASE_URL_FOR_IMAGE + post.image_path, holder.binding.ivPostImage)
+                }
+            }
+        }
 
     }
 
@@ -145,7 +154,7 @@ class PostsAdapter(
                     blockClicked(post)
                     true
                 }
-                R.id.delete -> {
+                R.id.hide -> {
                     deleteClicked(post)
                     true
                 }

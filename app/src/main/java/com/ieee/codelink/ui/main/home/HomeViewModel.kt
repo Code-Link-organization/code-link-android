@@ -1,6 +1,7 @@
 package com.ieee.codelink.ui.main.home
 
 import android.content.Context
+import com.bumptech.glide.request.RequestCoordinator.RequestState
 import com.ieee.codelink.R
 import com.ieee.codelink.common.cacheImageToFile
 import com.ieee.codelink.common.createMultipartBodyPartFromFile
@@ -8,8 +9,11 @@ import com.ieee.codelink.common.getImageFileFromRealPath
 import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.core.ResponseState
+import com.ieee.codelink.core.isSuccess
 import com.ieee.codelink.data.repository.PostsRepository
 import com.ieee.codelink.domain.CreatePostModel
+import com.ieee.codelink.domain.models.Post
+import com.ieee.codelink.domain.models.PostsResponseData
 import com.ieee.codelink.domain.models.responses.PostsResponse
 import com.ieee.codelink.domain.tempModels.TempUserStory
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,12 +34,26 @@ class HomeViewModel @Inject constructor(
         MutableStateFlow(ResponseState.Empty())
 
 
+    private var postsList : List<Post>? = null
+
     suspend fun getHomePosts() {
         postsRequestState.value = ResponseState.Loading()
         val response = postsRepository.getPosts()
         postsRequestState.value = handleResponse(response)
+        saveNewPosts()
     }
 
+    fun loadPosts() {
+        val postsResponse = PostsResponse(true , PostsResponseData(postsList!!))
+        postsRequestState.value = ResponseState.Success(postsResponse)
+    }
+    private fun saveNewPosts() {
+        if (postsRequestState.value.isSuccess){
+            postsRequestState.value.data?.let {
+                postsList =  it.data.postData
+            }
+        }
+    }
 
     fun getFakeStories(): ArrayList<TempUserStory> {
         val list = ArrayList<TempUserStory>()
@@ -93,6 +111,9 @@ class HomeViewModel @Inject constructor(
        val response = postsRepository.createPost(createPostModel.content, imgPart)
        createPostsRequestState.value = handleResponse(response)
    }
+
+    fun isFirstCall(): Boolean = postsList == null
+
 
 
 }

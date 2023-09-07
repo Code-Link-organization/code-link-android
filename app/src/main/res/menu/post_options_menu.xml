@@ -4,8 +4,8 @@
         android:id="@+id/block"
         android:title="@string/block" />
     <item
-        android:id="@+id/delete"
-        android:title="@string/delete" />
+        android:id="@+id/hide"
+        android:title="@string/hide" />
     <item
         android:id="@+id/save"
         android:title="@string/save" />

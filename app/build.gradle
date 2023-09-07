@@ -170,6 +170,12 @@ dependencies {
     //for multi language
     implementation 'com.zeugmasolutions.localehelper:locale-helper-android:1.5.1'
 
+    //image stack preview
+    implementation("com.jsibbold:zoomage:1.3.1")
+    implementation("com.github.mayuce:ImageStackViewer:1.1.0")
+    implementation ("androidx.palette:palette-ktx:1.0.0")
+
+
 }
 
 kapt {

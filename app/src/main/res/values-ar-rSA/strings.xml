@@ -62,14 +62,18 @@
     <string name="welcome_to_our_community">مرحبا بك في مجتمعنا !</string>
     <string name="yes">نعم</string>
     <string name="no">لا</string>
-    <string name="governate">Governate</string>
-    <string name="university">University</string>
-    <string name="faculty">Faculty</string>
-    <string name="track">Track</string>
-    <string name="my_projects">My Projects</string>
-    <string name="skills">Skills</string>
-    <string name="bio">Bio</string>
-    <string name="save">Save</string>
-
+    <string name="governate">المحافظة</string>
+    <string name="university">الجامعة</string>
+    <string name="faculty">الكلية</string>
+    <string name="track">التخصص</string>
+    <string name="my_projects">مشاريعي</string>
+    <string name="skills">المهارات</string>
+    <string name="bio">عني</string>
+    <string name="save">حفظ</string>
+    <string name="post_privacy">خصوصية المنشور</string>
+    <string name="publish">نشر</string>
+    <string name="cancel">الغاء</string>
+    <string name="block">حظر</string>
+    <string name="hide">اخفاء</string>
 
 </resources>
