@@ -72,4 +72,6 @@
     <string name="post_privacy">Post privacy</string>
     <string name="publish">publish</string>
     <string name="cancel">Cancel</string>
+    <string name="block">Block</string>
+    <string name="delete">Delete</string>
 </resources>
