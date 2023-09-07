@@ -139,6 +139,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             },
             sharesClicked = {
                 showToast("share")
+            },
+            blockClicked = {
+                showToast("block")
+            },
+            saveClicked = {
+                showToast("save")
+            },
+            deleteClicked = {
+                showToast("delete")
             }
         )
         binding.rvPosts.adapter = postsAdapter
@@ -154,4 +163,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         createPostDialog.dismiss()
     } catch (_: Exception) {
     }
+
+
 }

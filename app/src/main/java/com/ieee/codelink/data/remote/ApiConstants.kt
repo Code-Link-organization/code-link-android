@@ -18,4 +18,5 @@ const val CREATE_POST = "posts/create"
 const val SHOW_POST = "posts/show/2"
 const val EDIT_POST = "posts/edit/1"
 const val DELETE_POST = "posts/delete/2"
+const val USER_POSTS = "posts/user/1"
 

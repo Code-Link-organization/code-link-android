@@ -1,8 +1,11 @@
 package com.ieee.codelink.ui.adapters
 
 import android.view.LayoutInflater
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -17,7 +20,10 @@ class PostsAdapter(
     var posts: List<Post>,
     var likeClicked: (Post) -> Unit,
     var commentsClicked: (Post) -> Unit,
-    var sharesClicked: (Post) -> Unit
+    var sharesClicked: (Post) -> Unit,
+    var blockClicked: (Post) -> Unit,
+    var saveClicked: (Post) -> Unit,
+    var deleteClicked: (Post) -> Unit
 ) : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: CardPostBinding) :
@@ -115,8 +121,41 @@ class PostsAdapter(
         holder.binding.btnShare.root.setOnClickListener {
             sharesClicked(post)
         }
+        holder.binding.ivMore.setOnClickListener {
+            moreClicked(post , it , holder)
+        }
 
     }
 
+    private fun moreClicked (post: Post, iv: View, holder: ViewHolder) {
+        val popupMenu = PopupMenu(iv.context, holder.binding.ivMore)
+
+        val inflater: MenuInflater = popupMenu.menuInflater
+        inflater.inflate(R.menu.post_options_menu, popupMenu.menu)
+
+        setPostsMenuOnClicks(popupMenu , post)
+
+        popupMenu.show()
+    }
+
+    private fun setPostsMenuOnClicks(popupMenu: PopupMenu, post : Post) {
+        popupMenu.setOnMenuItemClickListener { item: MenuItem ->
+            when (item.itemId) {
+                R.id.block -> {
+                    blockClicked(post)
+                    true
+                }
+                R.id.delete -> {
+                    deleteClicked(post)
+                    true
+                }
+                R.id.save -> {
+                    saveClicked(post)
+                    true
+                }
+                else -> false
+            }
+        }
+    }
 
 }
