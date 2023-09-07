@@ -1,10 +1,13 @@
 package com.ieee.codelink.ui.main.home
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.ieee.codelink.R
+import com.ieee.codelink.common.openZoomableImage
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.core.ResponseState
@@ -29,7 +32,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        callData()
+
+        if (viewModel.isFirstCall()) {
+            callData()
+        }else{
+            viewModel.loadPosts()
+        }
         //setStoriesRV()
         setOnClicks()
         setObservers()
@@ -79,7 +87,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             }
 
             is ResponseState.Success -> {
-                state.data?.let { response ->
+                state.data?.let {
                     lifecycleScope.launch {
                         dismissDialog()
                         callData()
@@ -110,7 +118,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             is ResponseState.Success -> {
                 state.data?.let { response ->
                     lifecycleScope.launch {
-                        setPostsRV(response.data.postData!!)
+                        setPostsRV(response.data.postData)
                     }
                 }
             }
@@ -148,6 +156,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             },
             deleteClicked = {
                 showToast("delete")
+            },
+            openPostImage = {imgUrl , iv->
+                imgUrl?.let{
+                    openImageView(
+                        imgUrl,
+                        iv,
+                        requireActivity()
+                    )
+                }
             }
         )
         binding.rvPosts.adapter = postsAdapter
@@ -164,5 +181,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     } catch (_: Exception) {
     }
 
+    private val openImageView : (String, ImageView, Activity) -> Unit = {url,iv,activity ->
+        openZoomableImage(
+            url,
+            activity,
+            iv
+        )
+    }
 
 }
