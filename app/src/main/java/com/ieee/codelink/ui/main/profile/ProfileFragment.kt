@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
-import com.ieee.codelink.common.showDialog
 import com.ieee.codelink.core.BaseFragment
+import com.ieee.codelink.data.remote.BASE_URL_FOR_IMAGE
 import com.ieee.codelink.databinding.FragmentProfileBinding
 import com.ieee.codelink.domain.models.User
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,13 +22,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setViews()
+        setOnClicks()
         setObservers()
     }
 
 
     private fun setViews() {
         setSectionsViews()
-        setOnClicks()
     }
 
     private fun setObservers() {
@@ -39,8 +41,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
     private fun updateUserViews(user: User) {
         binding.apply {
-            // TODO: change image 
-            ivUserImage.setImageResource(R.drawable.ic_onboarding_3)
+
+            Glide.with(binding.ivUserImage)
+                .load(BASE_URL_FOR_IMAGE + user.imageUrl)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerInside()
+                .placeholder(R.drawable.ic_profile)
+                .error(R.drawable.ic_profile)
+                .into(binding.ivUserImage)
+
             tvUserName.text = user.name
             tvUserEmail.text = user.email
         }
