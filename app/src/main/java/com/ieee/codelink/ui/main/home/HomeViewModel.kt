@@ -15,6 +15,7 @@ import com.ieee.codelink.domain.models.CreatePostModel
 import com.ieee.codelink.domain.models.Post
 import com.ieee.codelink.domain.models.PostsResponseData
 import com.ieee.codelink.domain.models.User
+import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
 import com.ieee.codelink.domain.tempModels.TempUserStory
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,6 +34,9 @@ class HomeViewModel @Inject constructor(
         MutableStateFlow(ResponseState.Empty())
 
     val createPostsRequestState: MutableStateFlow<ResponseState<BaseResponse>> =
+        MutableStateFlow(ResponseState.Empty())
+
+    val postLikesRequestState: MutableStateFlow<ResponseState<LikesResponse>> =
         MutableStateFlow(ResponseState.Empty())
 
 
@@ -128,6 +132,11 @@ class HomeViewModel @Inject constructor(
             null
     }
 
+    suspend fun getPostLikes(post : Post){
+        postLikesRequestState.value = ResponseState.Loading()
+        val response = postsRepository.getPostLikes(post.id)
+        postLikesRequestState.value = handleResponse(response)
+    }
 
 }
 

@@ -1,4 +1,4 @@
-package com.ieee.codelink.domain.models.responses
+package com.ieee.codelink.domain.models
 
 data class LikeData(
     var id: Int,

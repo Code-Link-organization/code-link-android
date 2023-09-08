@@ -16,10 +16,13 @@ import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.data.remote.BASE_URL_FOR_IMAGE
 import com.ieee.codelink.databinding.FragmentHomeBinding
 import com.ieee.codelink.domain.models.CreatePostModel
+import com.ieee.codelink.domain.models.LikeData
 import com.ieee.codelink.domain.models.Post
+import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
 import com.ieee.codelink.ui.adapters.PostsAdapter
 import com.ieee.codelink.ui.dialogs.CreatePostDialogFragment
+import com.ieee.codelink.ui.dialogs.LikesDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -81,6 +84,41 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             createPostsObserver(state)
         }
 
+        viewModel.postLikesRequestState.awareCollect { state ->
+            postLikesObserver(state)
+        }
+
+    }
+
+    private fun postLikesObserver(state: ResponseState<LikesResponse>) {
+        when (state) {
+            is ResponseState.Empty,
+            is ResponseState.NotAuthorized,
+            is ResponseState.UnKnownError -> {
+            }
+
+            is ResponseState.NetworkError -> {
+                showToast(getString(R.string.network_error))
+            }
+
+            is ResponseState.Error -> {
+                com.ieee.codelink.common.showToast(state.message.toString(), requireContext())
+                viewModel.postLikesRequestState.value = ResponseState.Empty()
+            }
+
+            is ResponseState.Loading -> {
+                //todo : if there is time add loading bars to the app
+            }
+
+            is ResponseState.Success -> {
+                state.data?.let {response ->
+                    lifecycleScope.launch {
+                       openLikesScreen(response.data.likeData)
+                    }
+                }
+            }
+
+        }
     }
 
     private fun createPostsObserver(state: ResponseState<BaseResponse>) {
@@ -177,7 +215,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
               showToast("showComments")
             },
             showLikes = {
-                showToast("showLikes")
+                lifecycleScope.launch {
+                    viewModel.getPostLikes(it)
+                }
             }
         )
         binding.rvPosts.adapter = postsAdapter
@@ -207,6 +247,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             activity,
             iv
         )
+    }
+
+    private fun openLikesScreen(likeData: List<LikeData>) {
+        val likesScreen = LikesDialogFragment(
+            likeData as MutableList<LikeData>,
+            openProfile ={
+              showToast("Open Profile")
+            },
+            followAction ={
+              showToast("Follow")
+            }
+        )
+        likesScreen.show(childFragmentManager, "likesScreen")
     }
 
 }

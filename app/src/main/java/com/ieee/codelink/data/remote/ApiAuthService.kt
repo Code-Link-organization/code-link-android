@@ -2,7 +2,6 @@ package com.ieee.codelink.data.remote
 
 import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.domain.models.responses.AuthResponse
-import com.ieee.codelink.domain.models.responses.LikeData
 import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
 import okhttp3.MultipartBody
