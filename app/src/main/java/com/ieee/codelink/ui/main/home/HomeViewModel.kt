@@ -18,6 +18,7 @@ import com.ieee.codelink.domain.models.PostsResponseData
 import com.ieee.codelink.domain.models.User
 import com.ieee.codelink.domain.models.responses.CommentsResponse
 import com.ieee.codelink.domain.models.responses.LikesResponse
+
 import com.ieee.codelink.domain.models.responses.PostsResponse
 import com.ieee.codelink.domain.tempModels.TempUserStory
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,6 +34,7 @@ class HomeViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     var openedPostId : Int?= null
+
 
     val postsRequestState: MutableStateFlow<ResponseState<PostsResponse>> =
         MutableStateFlow(ResponseState.Empty())
@@ -163,5 +165,3 @@ class HomeViewModel @Inject constructor(
     }
 
 }
-
-

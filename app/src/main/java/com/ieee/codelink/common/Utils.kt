@@ -266,11 +266,11 @@ fun getTimeDifference(dateStr: String): String {
         daysDifference < 365 -> "${(daysDifference / 30).toInt()} months"
         else -> "${(daysDifference / 365).toInt()} y"
     }
-}
+
 
 fun getCurrentUtcDateTime(): String {
     val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
     dateFormat.timeZone = TimeZone.getTimeZone("UTC")
     val currentDate = Date()
     return dateFormat.format(currentDate)
-}
+

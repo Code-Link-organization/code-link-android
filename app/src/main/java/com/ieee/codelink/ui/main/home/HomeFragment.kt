@@ -32,6 +32,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
+
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
@@ -160,6 +161,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             }
 
         }
+
     }
 
     private fun createPostsObserver(state: ResponseState<BaseResponse>) {
@@ -180,6 +182,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
             is ResponseState.Loading -> {
                 //todo : if there is time add loading bars to the app
+
             }
 
             is ResponseState.Success -> {
@@ -219,11 +222,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             }
 
         }
+
+
     }
 
     private fun setPostsRV(list : List<Post>) {
         postsAdapter = PostsAdapter(
             list as MutableList<Post>,
+
             likeClicked = {
                 likePost(it)
             },
@@ -246,6 +252,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             },
             openPostImage = { imgUrl, iv ->
                 imgUrl?.let {
+
                     openImageView(
                         imgUrl,
                         iv,
@@ -262,6 +269,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 lifecycleScope.launch {
                     viewModel.getPostLikes(it)
                 }
+
             }
         )
         binding.rvPosts.adapter = postsAdapter
@@ -279,6 +287,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             viewModel.createPost(createPostModel)
             callData()
             postsAdapter.notifyDataSetChanged()
+
         }
     }
 
@@ -322,5 +331,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             commentsScreen.show(childFragmentManager, "commentsScreen")
         }
     }
+
 
 }

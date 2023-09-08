@@ -30,6 +30,7 @@ class PostsAdapter(
     var openPostImage: (String?, ImageView) -> Unit,
     var showComments: (Post) -> Unit,
     var showLikes: (Post) -> Unit
+
 ) : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: CardPostBinding) :
@@ -173,6 +174,7 @@ class PostsAdapter(
         val inflater: MenuInflater = popupMenu.menuInflater
         inflater.inflate(R.menu.post_options_menu, popupMenu.menu)
 
+
         if (post.user_id == post.shareduser_id) {
             val menuItemIdToHide = R.id.block
             popupMenu.menu.removeItem(menuItemIdToHide)
@@ -199,12 +201,10 @@ class PostsAdapter(
                     deleteClicked(post)
                     true
                 }
-
                 R.id.save -> {
                     saveClicked(post)
                     true
                 }
-
                 else -> false
             }
         }

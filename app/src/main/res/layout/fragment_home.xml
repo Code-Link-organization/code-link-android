@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content">
                 <FrameLayout
                     android:id="@+id/frame_add_post"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/color_secondary_background"
@@ -37,6 +38,7 @@
                     <include
                         android:id="@+id/add_post_bar"
                         layout="@layout/home_bar" />
+
                 </FrameLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -52,6 +54,7 @@
                     android:paddingVertical="8dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@id/frame_add_post"
+
                     tools:listitem="@layout/card_user_story" />
 
 
