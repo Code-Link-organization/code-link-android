@@ -9,5 +9,6 @@
     <color name="color_hint">#B8B8B8</color>
     <color name="color_secondary_background">#FFFFFF</color>
     <color name="bottom_nav_icon_color">#393939</color>
+    <color name="color_dark_stroke">#00393939</color>
 
 </resources>

@@ -6,17 +6,19 @@ import android.view.View
 import android.widget.ImageView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
 import com.ieee.codelink.common.openZoomableImage
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.core.ResponseState
+import com.ieee.codelink.data.remote.BASE_URL_FOR_IMAGE
 import com.ieee.codelink.databinding.FragmentHomeBinding
-import com.ieee.codelink.domain.CreatePostModel
+import com.ieee.codelink.domain.models.CreatePostModel
 import com.ieee.codelink.domain.models.Post
 import com.ieee.codelink.domain.models.responses.PostsResponse
 import com.ieee.codelink.ui.adapters.PostsAdapter
-import com.ieee.codelink.ui.adapters.StoriesAdapter
 import com.ieee.codelink.ui.dialogs.CreatePostDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -27,24 +29,38 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     override val viewModel: HomeViewModel by viewModels()
     private lateinit var postsAdapter: PostsAdapter
-    private lateinit var storiesAdapter: StoriesAdapter
     private lateinit var createPostDialog: CreatePostDialogFragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setViews()
+        loadData()
+        setOnClicks()
+        setObservers()
+    }
 
+    private fun loadData() {
         if (viewModel.isFirstCall()) {
             callData()
         }else{
             viewModel.loadPosts()
         }
-        //setStoriesRV()
-        setOnClicks()
-        setObservers()
+    }
+
+    private fun setViews() {
+        binding.apply {
+            Glide.with(binding.addPostBar.ivUserImage)
+                .load(BASE_URL_FOR_IMAGE + viewModel.getUser().imageUrl)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerInside()
+                .placeholder(R.drawable.ic_profile)
+                .error(R.drawable.ic_profile)
+                .into(binding.addPostBar.ivUserImage)
+        }
     }
 
     private fun setOnClicks() {
-        binding.frameSearch.setOnClickListener {
+        binding.frameAddPost.setOnClickListener {
             createPostDialog = CreatePostDialogFragment(createPost)
             createPostDialog.show(childFragmentManager, "create_post")
         }
@@ -84,6 +100,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             }
 
             is ResponseState.Loading -> {
+                //todo : if there is time add loading bars to the app
             }
 
             is ResponseState.Success -> {
@@ -126,21 +143,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-    private fun setStoriesRV() {
-        storiesAdapter = StoriesAdapter(
-            viewModel.getFakeStories(),
-            storyClicked = {
-                showToast("Click")
-            }
-        )
-        binding.rvStories.adapter = storiesAdapter
-    }
-
     private fun setPostsRV(list : List<Post>) {
         postsAdapter = PostsAdapter(
-            list,
+            list as MutableList<Post>,
             likeClicked = {
-                showToast("Like")
+                likePost(it)
             },
             commentsClicked = {
                 showToast("comment")
@@ -157,17 +164,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             deleteClicked = {
                 showToast("delete")
             },
-            openPostImage = {imgUrl , iv->
-                imgUrl?.let{
+            openPostImage = { imgUrl, iv ->
+                imgUrl?.let {
                     openImageView(
                         imgUrl,
                         iv,
                         requireActivity()
                     )
                 }
+            },
+            showComments = {
+              showToast("showComments")
+            },
+            showLikes = {
+                showToast("showLikes")
             }
         )
         binding.rvPosts.adapter = postsAdapter
+    }
+
+    private fun likePost(post: Post) {
+        lifecycleScope.launch {
+            val isLiked = viewModel.likePost(post)
+            postsAdapter.like(post , isLiked)
+        }
     }
 
     private val createPost: (CreatePostModel) -> Unit = { createPostModel ->

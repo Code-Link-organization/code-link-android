@@ -1,5 +1,7 @@
 package com.ieee.codelink.ui.adapters
 
+import android.os.Build
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -18,14 +20,16 @@ import com.ieee.codelink.domain.models.Post
 
 
 class PostsAdapter(
-    var posts: List<Post>,
+    var posts: MutableList<Post>,
     var likeClicked: (Post) -> Unit,
     var commentsClicked: (Post) -> Unit,
     var sharesClicked: (Post) -> Unit,
     var blockClicked: (Post) -> Unit,
     var saveClicked: (Post) -> Unit,
     var deleteClicked: (Post) -> Unit,
-    var openPostImage : (String?, ImageView) -> Unit
+    var openPostImage: (String?, ImageView) -> Unit,
+    var showComments: (Post) -> Unit,
+    var showLikes: (Post) -> Unit
 ) : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: CardPostBinding) :
@@ -72,9 +76,9 @@ class PostsAdapter(
 
     private fun setPostCounters(holder: PostsAdapter.ViewHolder, post: Post) {
         holder.binding.apply {
-            tvCommertsCounter.text = "50"
-            tvLikesCounter.text = "40"
-            tvSharesCounter.text = "100"
+            tvCommertsCounter.text = post.comments_count.toString()
+            tvLikesCounter.text = post.likes_count.toString()
+            tvSharesCounter.text = post.shares_count.toString()
         }
     }
 
@@ -124,7 +128,7 @@ class PostsAdapter(
             sharesClicked(post)
         }
         holder.binding.ivMore.setOnClickListener {
-            moreClicked(post , it , holder)
+            moreClicked(post, it, holder)
         }
         holder.binding.ivPostImage.setOnClickListener {
             post.image_path?.let { url ->
@@ -134,15 +138,52 @@ class PostsAdapter(
             }
         }
 
+        holder.binding.likeIcon.setOnClickListener {
+            showLikes(post)
+        }
+
+        holder.binding.tvLikesCounter.setOnClickListener {
+            showLikes(post)
+        }
+
+        holder.binding.tvCommertsCounter.setOnClickListener {
+            showComments(post)
+        }
+
+        holder.binding.tvCommertsCounter.setOnClickListener {
+            showComments(post)
+        }
+
+
     }
 
     private fun moreClicked (post: Post, iv: View, holder: ViewHolder) {
-        val popupMenu = PopupMenu(iv.context, holder.binding.ivMore)
 
+        val popupMenu = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            PopupMenu(
+                iv.context,
+                holder.binding.ivMore,
+                Gravity.END,
+                0,
+                R.style.PopupMenuStyle
+            )
+        } else {
+            PopupMenu(iv.context, holder.binding.ivMore)
+        }
         val inflater: MenuInflater = popupMenu.menuInflater
         inflater.inflate(R.menu.post_options_menu, popupMenu.menu)
 
-        setPostsMenuOnClicks(popupMenu , post)
+        if (post.user_id == post.shareduser_id) {
+            val menuItemIdToHide = R.id.block
+            popupMenu.menu.removeItem(menuItemIdToHide)
+        }
+
+        if (post.image_path == null) {
+            val menuItemIdToHide = R.id.save
+            popupMenu.menu.removeItem(menuItemIdToHide)
+        }
+
+        setPostsMenuOnClicks(popupMenu, post)
 
         popupMenu.show()
     }
@@ -158,12 +199,32 @@ class PostsAdapter(
                     deleteClicked(post)
                     true
                 }
+
                 R.id.save -> {
                     saveClicked(post)
                     true
                 }
+
                 else -> false
             }
+        }
+    }
+
+    fun like(post: Post, isLiked: Boolean?) {
+        isLiked?.let {
+            val index = posts.indexOf(post)
+            if (isLiked) {
+                val updatedIndex = posts[index]
+                updatedIndex.likes_count++
+                posts[index] = updatedIndex
+            } else {
+                val updatedIndex = posts[index]
+                if (updatedIndex.likes_count > 0) {
+                    updatedIndex.likes_count--
+                    posts[index] = updatedIndex
+                }
+            }
+            this.notifyItemChanged(index)
         }
     }
 

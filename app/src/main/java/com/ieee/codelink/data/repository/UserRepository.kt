@@ -9,7 +9,7 @@ class UserRepository(
     private val sharedPreferenceManger: SharedPreferenceManger
 ) {
 
-    suspend fun getCachedUser(): User {
+     fun getCachedUser(): User {
         return sharedPreferenceManger.getCachedUser()!!
     }
 

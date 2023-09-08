@@ -1,4 +1,4 @@
-package com.ieee.codelink.domain
+package com.ieee.codelink.domain.models
 
 import android.net.Uri
 

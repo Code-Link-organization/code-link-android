@@ -1,7 +1,6 @@
 package com.ieee.codelink.ui.main.home
 
 import android.content.Context
-import com.bumptech.glide.request.RequestCoordinator.RequestState
 import com.ieee.codelink.R
 import com.ieee.codelink.common.cacheImageToFile
 import com.ieee.codelink.common.createMultipartBodyPartFromFile
@@ -11,9 +10,11 @@ import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.core.isSuccess
 import com.ieee.codelink.data.repository.PostsRepository
-import com.ieee.codelink.domain.CreatePostModel
+import com.ieee.codelink.data.repository.UserRepository
+import com.ieee.codelink.domain.models.CreatePostModel
 import com.ieee.codelink.domain.models.Post
 import com.ieee.codelink.domain.models.PostsResponseData
+import com.ieee.codelink.domain.models.User
 import com.ieee.codelink.domain.models.responses.PostsResponse
 import com.ieee.codelink.domain.tempModels.TempUserStory
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,6 +25,7 @@ import kotlin.random.Random
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val postsRepository: PostsRepository,
+    private val userRepository: UserRepository,
     private val context: Context
 ) : BaseViewModel() {
 
@@ -107,13 +109,26 @@ class HomeViewModel @Inject constructor(
        } else{
            null
        }
-       createPostsRequestState.value=ResponseState.Loading()
+       createPostsRequestState.value = ResponseState.Loading()
        val response = postsRepository.createPost(createPostModel.content, imgPart)
        createPostsRequestState.value = handleResponse(response)
    }
 
     fun isFirstCall(): Boolean = postsList == null
 
+    fun getUser(): User = userRepository.getCachedUser()
+
+    suspend fun likePost(post: Post): Boolean? {
+        val response = postsRepository.likePost(postId = post.id)
+        val responseState = handleResponse(response)
+        return if (responseState.isSuccess) {
+            val message = responseState.data!!.message
+            message != "Post unliked successfully"
+        } else
+            null
+    }
 
 
 }
+
+
