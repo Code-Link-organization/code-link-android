@@ -29,6 +29,7 @@ import java.time.Duration
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
@@ -265,4 +266,11 @@ fun getTimeDifference(dateStr: String): String {
         daysDifference < 365 -> "${(daysDifference / 30).toInt()} months"
         else -> "${(daysDifference / 365).toInt()} y"
     }
+}
+
+fun getCurrentUtcDateTime(): String {
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+    dateFormat.timeZone = TimeZone.getTimeZone("UTC")
+    val currentDate = Date()
+    return dateFormat.format(currentDate)
 }

@@ -2,6 +2,8 @@ package com.ieee.codelink.data.remote
 
 import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.domain.models.responses.AuthResponse
+import com.ieee.codelink.domain.models.responses.CommentsResponse
+import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -12,6 +14,7 @@ import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Query
+import retrofit2.http.Url
 
 interface ApiAuthService {
 
@@ -81,4 +84,33 @@ interface ApiAuthService {
     ): Response<BaseResponse>
 
 
+    @POST
+    suspend fun likePost(
+        @Url url: String,
+        @Header("Authorization")
+        token: String,
+    ): Response<BaseResponse>
+
+    @GET
+    suspend fun getPostLikes(
+        @Url url: String,
+        @Header("Authorization")
+        token: String,
+    ): Response<LikesResponse>
+
+    @GET
+    suspend fun getPostComments(
+        @Url url: String,
+        @Header("Authorization")
+        token: String,
+    ):Response<CommentsResponse>
+
+    @POST
+    suspend fun createComment(
+        @Url url: String,
+        @Header("Authorization")
+        token: String,
+        @Query("content")
+        content: String
+    ):Response<BaseResponse>
 }

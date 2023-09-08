@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp"
+    android:background="@drawable/profile_section_ripple"
+    >
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_user_image"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:adjustViewBounds="true"
+        android:layout_marginVertical="10dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+        tools:src="@drawable/ic_friends_img" />
+
+    <TextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:textColor="@color/color_text"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@id/iv_user_image"
+        app:layout_constraintBottom_toTopOf="@id/tv_comment"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="14sp"
+        tools:text="Mohamed Emad"
+        />
+    <TextView
+        android:id="@+id/tv_comment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:textSize="10sp"
+        android:layout_marginTop="4dp"
+        android:gravity="start"
+        android:textColor="@color/color_text"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintStart_toEndOf="@id/iv_user_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_name"
+        tools:text="Android Developer"
+        tools:ignore="SmallSp" />
+
+    <TextView
+        android:id="@+id/tv_post_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:textColor="@color/color_hint"
+        android:textSize="12sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="12dp"
+        tools:text="yesterday" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

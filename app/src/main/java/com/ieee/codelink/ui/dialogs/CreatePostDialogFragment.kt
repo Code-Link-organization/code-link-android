@@ -13,9 +13,8 @@ import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
-import com.ieee.codelink.common.showToast
 import com.ieee.codelink.databinding.DialogCreatePostBinding
-import com.ieee.codelink.domain.CreatePostModel
+import com.ieee.codelink.domain.models.CreatePostModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

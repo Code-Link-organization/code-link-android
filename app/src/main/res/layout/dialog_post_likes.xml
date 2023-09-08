@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/app_dialog_fragment"
+    android:orientation="vertical">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_cancel"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="12dp"
+        android:adjustViewBounds="true"
+        android:layout_gravity="end"
+        android:background="@drawable/onboarding_button_ripple"
+        android:src="@drawable/ic_x"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="@string/likes"
+        android:layout_marginTop="-30dp"
+        android:textColor="@color/color_text"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/color_secondary_background" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_likes"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/card_like_person"
+        android:paddingVertical="20dp"
+        />
+</LinearLayout>

@@ -13,7 +13,7 @@
 
         <!-- Customize your theme here. -->
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
-
+        <item name="android:itemTextAppearance">@style/itemTextStyle.AppTheme</item>
         <item name="fontFamily">@font/mulish_regular</item>
         <item name="textColor">@color/color_text</item>
 
@@ -22,6 +22,7 @@
         <item name="windowSplashScreenAnimatedIcon">@drawable/splash_inset</item>
         <item name="windowSplashScreenAnimationDuration">200</item>
         <item name="postSplashScreenTheme">@style/Theme.CodeLink</item>
+
     </style>
 
 
@@ -69,6 +70,16 @@
     <style name="CustomDialogNegativeButton" parent="Widget.Material3.Button.TextButton.Dialog">
         <item name="android:background">@drawable/custom_button_ripple</item>
         <item name="textColor">@color/color_text</item>
+    </style>
+
+    <style name="PopupMenuStyle" parent="@android:style/Widget.PopupMenu">
+        <item name="android:popupBackground">@color/color_secondary_background</item>
+        <item name="android:textColor">@color/color_text</item>
+    </style>
+
+    <style name="itemTextStyle.AppTheme" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
+        <item name="android:textColor">@color/color_text</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
 
