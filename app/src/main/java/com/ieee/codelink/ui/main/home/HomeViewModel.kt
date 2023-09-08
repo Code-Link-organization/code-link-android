@@ -1,6 +1,7 @@
 package com.ieee.codelink.ui.main.home
 
 import android.content.Context
+import com.bumptech.glide.request.RequestCoordinator.RequestState
 import com.ieee.codelink.R
 import com.ieee.codelink.common.cacheImageToFile
 import com.ieee.codelink.common.createMultipartBodyPartFromFile
@@ -15,6 +16,7 @@ import com.ieee.codelink.domain.models.CreatePostModel
 import com.ieee.codelink.domain.models.Post
 import com.ieee.codelink.domain.models.PostsResponseData
 import com.ieee.codelink.domain.models.User
+import com.ieee.codelink.domain.models.responses.CommentsResponse
 import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
 import com.ieee.codelink.domain.tempModels.TempUserStory
@@ -30,6 +32,8 @@ class HomeViewModel @Inject constructor(
     private val context: Context
 ) : BaseViewModel() {
 
+    var openedPostId : Int?= null
+
     val postsRequestState: MutableStateFlow<ResponseState<PostsResponse>> =
         MutableStateFlow(ResponseState.Empty())
 
@@ -37,6 +41,9 @@ class HomeViewModel @Inject constructor(
         MutableStateFlow(ResponseState.Empty())
 
     val postLikesRequestState: MutableStateFlow<ResponseState<LikesResponse>> =
+        MutableStateFlow(ResponseState.Empty())
+
+    val postCommentsRequestState: MutableStateFlow<ResponseState<CommentsResponse>> =
         MutableStateFlow(ResponseState.Empty())
 
 
@@ -136,6 +143,23 @@ class HomeViewModel @Inject constructor(
         postLikesRequestState.value = ResponseState.Loading()
         val response = postsRepository.getPostLikes(post.id)
         postLikesRequestState.value = handleResponse(response)
+    }
+
+    suspend fun getPostComments(post: Post){
+        postCommentsRequestState.value = ResponseState.Loading()
+        val response = postsRepository.getPostComments(post.id)
+        openedPostId = post.id
+        postCommentsRequestState.value = handleResponse(response)
+    }
+
+    suspend fun addComment(postId: Int , content : String): Boolean? {
+        val response = postsRepository.createComment(postId = postId , content = content)
+        val responseState = handleResponse(response)
+        return if (responseState.isSuccess) {
+            val message = responseState.data!!.message
+            message == "Comment created successfully"
+        } else
+            null
     }
 
 }

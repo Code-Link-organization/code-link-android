@@ -6,27 +6,33 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.ieee.codelink.common.getCurrentUtcDateTime
 import com.ieee.codelink.common.showToast
+import com.ieee.codelink.databinding.DialogPostCommentsBinding
 import com.ieee.codelink.databinding.DialogPostLikesBinding
+import com.ieee.codelink.domain.models.Comment
 import com.ieee.codelink.domain.models.LikeData
+import com.ieee.codelink.ui.adapters.CommentsAdapter
 import com.ieee.codelink.ui.adapters.LikesAdapter
 import kotlinx.coroutines.NonDisposableHandle.parent
 
-class LikesDialogFragment(
-    private val likes: MutableList<LikeData>,
-    private val openProfile: (LikeData) -> Unit,
-    private val followAction : (LikeData) -> Unit
+class CommentsDialogFragment(
+    private val comments: MutableList<Comment>,
+    private val postId : Int,
+    private val addComment: (Int , String) -> Unit
 ) : DialogFragment() {
 
-    private lateinit var binding: DialogPostLikesBinding
-    private lateinit var likesAdapter: LikesAdapter
+    private lateinit var binding: DialogPostCommentsBinding
+    private lateinit var commentsAdapter: CommentsAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DialogPostLikesBinding.inflate(layoutInflater)
+        binding = DialogPostCommentsBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -37,18 +43,30 @@ class LikesDialogFragment(
     }
 
     private fun setUpRv() {
-        likesAdapter = LikesAdapter(
-            likes,
-            openProfile,
-            followAction
+        comments.reverse()
+        commentsAdapter = CommentsAdapter(
+            comments
         )
-        binding.rvLikes.adapter = likesAdapter
+        binding.rvComments.adapter = commentsAdapter
+//        binding.rvComments.layoutManager = LinearLayoutManager(requireActivity()).apply {
+//            reverseLayout = true
+//        }
     }
 
     private fun setOnClicks() {
       binding.ivCancel.setOnClickListener {
           this.dismiss()
       }
+
+        binding.tvPost.setOnClickListener {
+            binding.etComment.text?.let{
+                if (it.toString().isNotBlank()){
+                    addComment(postId , it.toString())
+                    binding.etComment.setText("")
+                    this.dismiss()
+                }
+            }
+        }
     }
 
     override fun onResume() {
@@ -62,7 +80,8 @@ class LikesDialogFragment(
         val metrics = resources.displayMetrics
         val width = metrics.widthPixels
         val height = metrics.heightPixels
-        this.dialog!!.window!!.setLayout(((9 * width) / 10), (8 * height) / 10)
+        this.dialog!!.window!!.setLayout(((9 * width) / 10), (5 * height) / 10)
+     //   dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
     }
 
 

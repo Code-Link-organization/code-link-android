@@ -22,4 +22,6 @@ const val DELETE_POST = "$GET_POSTS/delete/2"
 const val USER_POSTS = "$GET_POSTS/user/1"
 const val GET_LIKED_USERS = "likes"
 const val LIKE_A_POST = "like"
+const val GET_POST_COMMENTS = "comments"
+const val CREATE_COMMENT = "create"
 

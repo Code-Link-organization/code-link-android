@@ -76,4 +76,7 @@
     <string name="hide">Hide</string>
     <string name="what_s_on_your_mind">What’s on your mind?</string>
     <string name="likes">Likes</string>
+    <string name="comments">Comments</string>
+    <string name="post">Post</string>
+    <string name="add_comment">add comment</string>
 </resources>

@@ -3,9 +3,12 @@ package com.ieee.codelink.data.repository
 import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.data.remote.ApiAuthService
+import com.ieee.codelink.data.remote.CREATE_COMMENT
 import com.ieee.codelink.data.remote.GET_LIKED_USERS
 import com.ieee.codelink.data.remote.GET_POSTS
+import com.ieee.codelink.data.remote.GET_POST_COMMENTS
 import com.ieee.codelink.data.remote.LIKE_A_POST
+import com.ieee.codelink.domain.models.responses.CommentsResponse
 import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
 import okhttp3.MediaType.Companion.toMediaType
@@ -55,12 +58,35 @@ class PostsRepository(
     }
 
 
-    suspend fun getPostLikes(postId : Int): Response<LikesResponse>? {
+    suspend fun getPostLikes(postId: Int): Response<LikesResponse>? {
         val userToken = sharedPreferenceManger.bearerToken
         val token = "Bearer $userToken"
         val url = "$GET_POSTS/$postId/$GET_LIKED_USERS"
         return try {
             api.getPostLikes(url, token)
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    suspend fun getPostComments(postId: Int): Response<CommentsResponse>? {
+        val userToken = sharedPreferenceManger.bearerToken
+        val token = "Bearer $userToken"
+        val url = "$GET_POSTS/$postId/$GET_POST_COMMENTS"
+        return try {
+            api.getPostComments(url, token)
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+
+    suspend fun createComment(postId: Int, content: String): Response<BaseResponse>? {
+        val userToken = sharedPreferenceManger.bearerToken
+        val token = "Bearer $userToken"
+        val url = "$GET_POSTS/$postId/$GET_POST_COMMENTS/$CREATE_COMMENT"
+        return try {
+            api.createComment(url, token, content)
         } catch (e: Exception) {
             null
         }
