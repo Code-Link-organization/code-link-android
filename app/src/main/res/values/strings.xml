@@ -79,4 +79,8 @@
     <string name="comments">Comments</string>
     <string name="post">Post</string>
     <string name="add_comment">add comment</string>
+    <string name="name_of_team">Name Of team</string>
+    <string name="name_of_project">Name of Project</string>
+    <string name="description_of_the_project">Description of the project</string>
+    <string name="create">Create</string>
 </resources>
