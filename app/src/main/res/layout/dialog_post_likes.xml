@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/app_dialog_fragment"
+    android:paddingHorizontal="1dp"
     android:orientation="vertical">
 
     <com.google.android.material.imageview.ShapeableImageView

@@ -45,6 +45,9 @@ class MainViewModel @Inject constructor(
     val postCommentsRequestState: MutableStateFlow<ResponseState<CommentsResponse>> =
         MutableStateFlow(ResponseState.Empty())
 
+    val createCommentsRequestState: MutableStateFlow<ResponseState<CommentsResponse>> =
+        MutableStateFlow(ResponseState.Empty())
+
 
     private var postsList : List<Post>? = null
 
@@ -150,14 +153,10 @@ class MainViewModel @Inject constructor(
         postCommentsRequestState.value = handleResponse(response)
     }
 
-    suspend fun addComment(postId: Int , content : String): Boolean? {
+    suspend fun addComment(postId: Int , content : String) {
+        createCommentsRequestState.value = ResponseState.Loading()
         val response = postsRepository.createComment(postId = postId , content = content)
-        val responseState = handleResponse(response)
-        return if (responseState.isSuccess) {
-            val message = responseState.data!!.message
-            message == "Comment created successfully"
-        } else
-            null
+        createCommentsRequestState.value = handleResponse(response)
     }
 
     fun isFirstCall(): Boolean = postsList == null

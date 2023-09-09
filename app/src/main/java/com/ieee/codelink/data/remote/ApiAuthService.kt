@@ -113,7 +113,7 @@ interface ApiAuthService {
         token: String,
         @Query("content")
         content: String
-    ):Response<BaseResponse>
+    ):Response<CommentsResponse>
 
     @POST
     suspend fun sharePost(
