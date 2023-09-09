@@ -86,6 +86,18 @@
         <item name="android:textColor">@color/color_text</item>
         <item name="android:textSize">14sp</item>
     </style>
+    <style name="tabText" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily">@font/mulish_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
 
-
+    <style name="Base.Widget.Design.TabLayout" parent="android:Widget">
+        <item name="fontFamily">@font/mulish_regular</item>
+        <item name="tabIndicatorColor">?attr/colorPrimary</item>
+        <item name="tabPaddingStart">12dp</item>
+        <item name="tabPaddingEnd">12dp</item>
+        <item name="tabBackground">?attr/selectableItemBackground</item>
+        <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
+    </style>
 </resources>
