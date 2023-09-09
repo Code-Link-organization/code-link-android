@@ -154,6 +154,21 @@ class PostsAdapter(
             showComments(post)
         }
 
+        holder.binding.tvDescription.setOnClickListener {
+            val index = getPostIndexById(post.id)
+            index?.let { index ->
+                val post = posts[index]
+                post.isExpanded = !post.isExpanded
+                posts[index] = post
+                holder.binding.tvDescription.maxLines = if (post.isExpanded) {
+                    Integer.MAX_VALUE // Show all lines
+                } else {
+                    3 // Show only 3 lines
+                }
+                this.notifyItemChanged(index)
+            }
+        }
+
 
     }
 
