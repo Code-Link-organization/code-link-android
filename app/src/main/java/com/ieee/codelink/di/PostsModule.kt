@@ -1,10 +1,8 @@
 package com.ieee.codelink.di
 
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
-import com.ieee.codelink.data.remote.ApiAuthService
+import com.ieee.codelink.data.remote.ApiRemoteService
 import com.ieee.codelink.data.repository.PostsRepository
-import com.ieee.codelink.data.repository.SettingsRepository
-import com.ieee.codelink.data.repository.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,7 +15,7 @@ object PostsModule {
     @Provides
     @Singleton
     fun providePostsRepository(
-        api: ApiAuthService,
+        api: ApiRemoteService,
         sharedPreferenceManger: SharedPreferenceManger
     ): PostsRepository = PostsRepository(api, sharedPreferenceManger )
 
