@@ -19,6 +19,7 @@
         android:id="@+id/iv_user_image"
         android:layout_width="140dp"
         android:layout_height="140dp"
+        android:scaleType="centerCrop"
         android:layout_marginTop="-70dp"
         android:adjustViewBounds="true"
         android:background="@color/color_secondary_background"
