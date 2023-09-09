@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
@@ -20,12 +21,15 @@ import com.ieee.codelink.domain.models.CreatePostModel
 import com.ieee.codelink.domain.models.LikeData
 import com.ieee.codelink.domain.models.Post
 import com.ieee.codelink.domain.models.responses.CommentsResponse
+import com.ieee.codelink.domain.models.responses.CreatePostResponse
 import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
+import com.ieee.codelink.domain.models.responses.ShareResponse
 import com.ieee.codelink.ui.adapters.PostsAdapter
 import com.ieee.codelink.ui.dialogs.CommentsDialogFragment
 import com.ieee.codelink.ui.dialogs.CreatePostDialogFragment
 import com.ieee.codelink.ui.dialogs.LikesDialogFragment
+import com.ieee.codelink.ui.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,9 +39,10 @@ import kotlinx.coroutines.withContext
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
-    override val viewModel: HomeViewModel by viewModels()
+    override val viewModel: MainViewModel by activityViewModels<MainViewModel>()
     private lateinit var postsAdapter: PostsAdapter
     private lateinit var createPostDialog: CreatePostDialogFragment
+    private lateinit var commentsScreen : CommentsDialogFragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -98,6 +103,79 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             postCommentsObserver(state)
         }
 
+        viewModel.createCommentsRequestState.awareCollect { state ->
+            createComment(state)
+        }
+
+        viewModel.sharePostRequestState.awareCollect { state ->
+            postSharedObserver(state)
+        }
+
+    }
+    private fun postSharedObserver(state: ResponseState<ShareResponse>) {
+        when (state) {
+            is ResponseState.Empty,
+            is ResponseState.NotAuthorized,
+            is ResponseState.UnKnownError -> {
+            }
+
+            is ResponseState.NetworkError -> {
+                showToast(getString(R.string.network_error))
+            }
+
+            is ResponseState.Error -> {
+                com.ieee.codelink.common.showToast(state.message.toString(), requireContext())
+                viewModel.sharePostRequestState.value = ResponseState.Empty()
+            }
+
+            is ResponseState.Loading -> {
+                //todo : if there is time add loading bars to the app
+            }
+
+            is ResponseState.Success -> {
+                state.data?.let { response ->
+                    lifecycleScope.launch {
+                        val postId = response.data.post_id
+                        postsAdapter.increaseSharesforPost(postId)
+                        com.ieee.codelink.common.showToast(getString(R.string.shared),requireContext())
+                    }
+                }
+            }
+
+        }
+    }
+
+    private fun createComment(state: ResponseState<CommentsResponse>) {
+        when (state) {
+            is ResponseState.Empty,
+            is ResponseState.NotAuthorized,
+            is ResponseState.UnKnownError -> {
+            }
+
+            is ResponseState.NetworkError -> {
+                showToast(getString(R.string.network_error))
+            }
+
+            is ResponseState.Error -> {
+                com.ieee.codelink.common.showToast(state.message.toString(), requireContext())
+                viewModel.createCommentsRequestState.value = ResponseState.Empty()
+            }
+
+            is ResponseState.Loading -> {
+                //todo : if there is time add loading bars to the app
+            }
+
+            is ResponseState.Success -> {
+                state.data?.let { response ->
+                    lifecycleScope.launch {
+                        val newComment = response.data.comments.last()
+                        postsAdapter.increaseCommentCount(newComment.post_id)
+                        commentsScreen.addCommentToList(newComment)
+                    }
+                }
+            }
+
+        }
     }
 
     private fun postCommentsObserver(state: ResponseState<CommentsResponse>) {
@@ -162,7 +240,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-    private fun createPostsObserver(state: ResponseState<BaseResponse>) {
+    private fun createPostsObserver(state: ResponseState<CreatePostResponse>) {
         when (state) {
             is ResponseState.Empty,
             is ResponseState.NotAuthorized,
@@ -183,15 +261,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             }
 
             is ResponseState.Success -> {
-                state.data?.let {
+                state.data?.let {response ->
                     lifecycleScope.launch {
                         dismissDialog()
-                        callData()
+                        addPostToList(response.data.post)
                     }
                 }
             }
 
         }
+    }
+
+    private fun addPostToList(post: Post) {
+       postsAdapter.addPost(post)
     }
 
     private fun postsObserver(state: ResponseState<PostsResponse>) {
@@ -233,7 +315,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 }
             },
             sharesClicked = {
-                showToast("share")
+               lifecycleScope.launch {
+                   viewModel.sharePost(it.id)
+               }
             },
             blockClicked = {
                 showToast("block")
@@ -310,7 +394,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun openCommentsScreen(comments: List<Comment>,postId: Int?) {
         postId?.let {
-            val commentsScreen = CommentsDialogFragment(
+             commentsScreen = CommentsDialogFragment(
                 comments = comments as MutableList<Comment>,
                 postId = postId,
                 addComment = { postId, content ->

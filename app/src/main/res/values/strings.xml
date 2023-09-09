@@ -87,4 +87,6 @@
     <string name="lorem_ipsum_is_placeholder_text_commonly_used_in_the_graphic_print_and_publishing_more_lorem_ipsum_is_placeholder_text_commonly_used_in_the_graphic_print_and_publishing_more">Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing..more Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing..more</string>
     <string name="team_members_names">Team members names</string>
     <string name="join">Join</string>
+    <string name="shared">Post was Shared</string>
+
 </resources>

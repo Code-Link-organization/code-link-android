@@ -16,6 +16,7 @@
         android:layout_height="35dp"
         android:layout_marginStart="@dimen/horizontal_padding"
         android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
         android:background="@drawable/background_ripple"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_title"

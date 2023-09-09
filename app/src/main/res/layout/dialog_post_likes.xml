@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/app_dialog_fragment"
+    android:paddingHorizontal="1dp"
     android:orientation="vertical">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -33,8 +34,9 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
+        android:alpha="0.5"
         android:layout_marginTop="16dp"
-        android:background="@color/color_secondary_background" />
+        android:background="@color/color_hint" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_likes"

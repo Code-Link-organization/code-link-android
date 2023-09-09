@@ -1,19 +1,16 @@
 package com.ieee.codelink.ui.main
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.WindowManager
+import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.ieee.codelink.R
-import com.ieee.codelink.common.showToast
 import com.ieee.codelink.core.BaseActivity
 import com.ieee.codelink.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import np.com.susanthapa.curved_bottom_navigation.BottomNavItemView
 import np.com.susanthapa.curved_bottom_navigation.CbnMenuItem
 
 @AndroidEntryPoint
@@ -21,6 +18,7 @@ class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+    private val viewModel : MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
       //  window.statusBarColor = Color.TRANSPARENT

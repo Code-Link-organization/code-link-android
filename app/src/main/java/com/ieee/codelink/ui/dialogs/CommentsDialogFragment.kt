@@ -63,7 +63,7 @@ class CommentsDialogFragment(
                 if (it.toString().isNotBlank()){
                     addComment(postId , it.toString())
                     binding.etComment.setText("")
-                    this.dismiss()
+                   // this.dismiss()
                 }
             }
         }
@@ -82,6 +82,11 @@ class CommentsDialogFragment(
         val height = metrics.heightPixels
         this.dialog!!.window!!.setLayout(((9 * width) / 10), (5 * height) / 10)
      //   dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+    }
+
+    fun addCommentToList(newComment: Comment) {
+      commentsAdapter.addComment(newComment)
+      binding.rvComments.smoothScrollToPosition(0)
     }
 
 
