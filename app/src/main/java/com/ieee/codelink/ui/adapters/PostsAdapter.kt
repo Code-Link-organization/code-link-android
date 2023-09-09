@@ -138,19 +138,11 @@ class PostsAdapter(
             }
         }
 
-        holder.binding.likeIcon.setOnClickListener {
+        holder.binding.btnLikesCounter.setOnClickListener {
             showLikes(post)
         }
 
-        holder.binding.tvLikesCounter.setOnClickListener {
-            showLikes(post)
-        }
-
-        holder.binding.tvCommertsCounter.setOnClickListener {
-            showComments(post)
-        }
-
-        holder.binding.tvCommertsCounter.setOnClickListener {
+        holder.binding.btnCommentsCounter.setOnClickListener {
             showComments(post)
         }
 
@@ -168,8 +160,6 @@ class PostsAdapter(
                 this.notifyItemChanged(index)
             }
         }
-
-
     }
 
     private fun moreClicked (post: Post, iv: View, holder: ViewHolder) {
