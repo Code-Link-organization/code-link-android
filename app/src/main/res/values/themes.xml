@@ -32,6 +32,11 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="rounded30">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">30%</item>
+    </style>
+
 
     <style name="roundInputTextField" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="android:layout_width">match_parent</item>

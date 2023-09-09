@@ -81,32 +81,32 @@
             android:textCursorDrawable="@drawable/color_cursor" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/description_field"
-        style="@style/roundInputTextField"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="24dp"
-        android:textColorHint="@color/color_hint"
-        app:hintTextColor="@color/color_hint"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_of_project_field">
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/description_field"-->
+<!--        style="@style/roundInputTextField"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="20dp"-->
+<!--        android:layout_marginTop="24dp"-->
+<!--        android:textColorHint="@color/color_hint"-->
+<!--        app:hintTextColor="@color/color_hint"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/name_of_project_field">-->
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/description_et"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:backgroundTint="@color/white"
-            android:hint="@string/description_of_the_project"
-            android:inputType="text"
-            android:maxLines="1"
-            android:textColor="@color/color_text"
-            android:textColorHint="#757575"
-            android:textCursorDrawable="@drawable/color_cursor" />
-    </com.google.android.material.textfield.TextInputLayout>
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:id="@+id/description_et"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:backgroundTint="@color/white"-->
+<!--            android:hint="@string/description_of_the_project"-->
+<!--            android:inputType="text"-->
+<!--            android:maxLines="1"-->
+<!--            android:textColor="@color/color_text"-->
+<!--            android:textColorHint="#757575"-->
+<!--            android:textCursorDrawable="@drawable/color_cursor" />-->
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
 
 
     <com.kusu.loadingbutton.LoadingButton
@@ -122,7 +122,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description_field"
+        app:layout_constraintTop_toBottomOf="@+id/name_of_project_field"
         app:lb_buttonColor="@color/color_primary"
         app:lb_cornerRadius="@dimen/app_btn_radius"
         app:lb_isShadowEnable="false"
