@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_searchFragment_to_searchTeamsFragment"
             app:destination="@id/searchTeamsFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_searchUserFragment"
+            app:destination="@id/searchUserFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -67,6 +70,15 @@
         android:name="com.ieee.codelink.ui.main.search.searchScreens.teams.SearchTeamsFragment"
         android:label="fragment_search_teams"
         tools:layout="@layout/fragment_search_teams" >
+        <argument
+            android:name="track"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchUserFragment"
+        android:name="com.ieee.codelink.ui.main.search.searchScreens.friends.SearchUserFragment"
+        android:label="fragment_seatch_user"
+        tools:layout="@layout/fragment_seatch_user" >
         <argument
             android:name="track"
             app:argType="string" />

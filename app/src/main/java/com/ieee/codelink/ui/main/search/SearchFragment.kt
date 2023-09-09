@@ -112,7 +112,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         myAdapter = SearchItemsAdapter(list) {
             if (viewModel.firstOption == null) {
                 if (it.title == "Teams"){
-                 openSearchTeamsScrees(it)
+                 openSearchTeamsScreen(it)
                 }else {
                     viewModel.firstOption = it.title
                     setTrackLayout()
@@ -142,16 +142,25 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             }
 
             "Friends" -> {
-
+               openSearchUsersScreen(it)
             }
         }
     }
 
-    private fun openSearchTeamsScrees(track: TempSearchItem) {
+    private fun openSearchTeamsScreen(track: TempSearchItem) {
         myAdapter = null
         viewModel.firstOption = null
         findNavController().navigate(
             SearchFragmentDirections.actionSearchFragmentToSearchTeamsFragment(
+                track.title
+            )
+        )
+    }
+    private fun openSearchUsersScreen(track: TempSearchItem) {
+        myAdapter = null
+        viewModel.firstOption = null
+        findNavController().navigate(
+            SearchFragmentDirections.actionSearchFragmentToSearchUserFragment(
                 track.title
             )
         )
