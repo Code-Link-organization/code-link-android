@@ -13,6 +13,7 @@ import com.ieee.codelink.domain.models.responses.CommentsResponse
 import com.ieee.codelink.domain.models.responses.CreatePostResponse
 import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
+import com.ieee.codelink.domain.models.responses.ShareResponse
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -95,10 +96,10 @@ class PostsRepository(
     }
 
 
-    suspend fun sharePost(postId: Int): Response<BaseResponse>? {
+    suspend fun sharePost(postId: Int): Response<ShareResponse>? {
         val userToken = sharedPreferenceManger.bearerToken
         val token = "Bearer $userToken"
-        val url = "$GET_POSTS/$postId/$GET_POST_COMMENTS/$SHARE_POST"
+        val url = "$GET_POSTS/$postId/$SHARE_POST"
         return try {
             api.sharePost(url, token)
         } catch (e: Exception) {

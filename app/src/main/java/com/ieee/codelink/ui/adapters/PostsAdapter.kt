@@ -243,12 +243,22 @@ class PostsAdapter(
         }
     }
 
+    fun increaseSharesforPost(postId: Int) {
+        val index = getPostIndexById(postId)
+        index?.let { index->
+            val updatedIndex = posts[index]
+            updatedIndex.shares_count++
+            posts[index] = updatedIndex
+            this.notifyItemChanged(index)
+        }
+    }
+
     private fun getPostIndexById(postId: Int?): Int? {
-       for (i  in 0 until posts.size){
-           if (posts[i].id == postId){
-               return i
-           }
-       }
+        for (i  in 0 until posts.size){
+            if (posts[i].id == postId){
+                return i
+            }
+        }
         return null
     }
 
