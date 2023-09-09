@@ -6,6 +6,7 @@ import com.ieee.codelink.domain.models.responses.CommentsResponse
 import com.ieee.codelink.domain.models.responses.CreatePostResponse
 import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
+import com.ieee.codelink.domain.models.responses.ShareResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -120,5 +121,5 @@ interface ApiAuthService {
         @Url url: String,
         @Header("Authorization")
         token: String
-    ):Response<BaseResponse>
+    ):Response<ShareResponse>
 }

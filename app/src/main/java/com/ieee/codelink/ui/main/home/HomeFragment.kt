@@ -24,6 +24,7 @@ import com.ieee.codelink.domain.models.responses.CommentsResponse
 import com.ieee.codelink.domain.models.responses.CreatePostResponse
 import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
+import com.ieee.codelink.domain.models.responses.ShareResponse
 import com.ieee.codelink.ui.adapters.PostsAdapter
 import com.ieee.codelink.ui.dialogs.CommentsDialogFragment
 import com.ieee.codelink.ui.dialogs.CreatePostDialogFragment
@@ -106,6 +107,42 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             createComment(state)
         }
 
+        viewModel.sharePostRequestState.awareCollect { state ->
+            postSharedObserver(state)
+        }
+
+    }
+    private fun postSharedObserver(state: ResponseState<ShareResponse>) {
+        when (state) {
+            is ResponseState.Empty,
+            is ResponseState.NotAuthorized,
+            is ResponseState.UnKnownError -> {
+            }
+
+            is ResponseState.NetworkError -> {
+                showToast(getString(R.string.network_error))
+            }
+
+            is ResponseState.Error -> {
+                com.ieee.codelink.common.showToast(state.message.toString(), requireContext())
+                viewModel.sharePostRequestState.value = ResponseState.Empty()
+            }
+
+            is ResponseState.Loading -> {
+                //todo : if there is time add loading bars to the app
+            }
+
+            is ResponseState.Success -> {
+                state.data?.let { response ->
+                    lifecycleScope.launch {
+                        val postId = response.data.post_id
+                        postsAdapter.increaseSharesforPost(postId)
+                        com.ieee.codelink.common.showToast(getString(R.string.shared),requireContext())
+                    }
+                }
+            }
+
+        }
     }
 
     private fun createComment(state: ResponseState<CommentsResponse>) {
@@ -278,7 +315,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 }
             },
             sharesClicked = {
-                showToast("share")
+               lifecycleScope.launch {
+                   viewModel.sharePost(it.id)
+               }
             },
             blockClicked = {
                 showToast("block")
