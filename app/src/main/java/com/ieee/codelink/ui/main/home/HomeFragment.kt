@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
+import com.ieee.codelink.common.extension.onBackPress
 import com.ieee.codelink.common.openZoomableImage
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.BaseResponse
@@ -73,6 +74,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     private fun setOnClicks() {
+
+        onBackPress {
+            requireActivity().finish()
+        }
+
         binding.frameAddPost.setOnClickListener {
             createPostDialog = CreatePostDialogFragment(createPost)
             createPostDialog.show(childFragmentManager, "create_post")

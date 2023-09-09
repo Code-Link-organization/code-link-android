@@ -9,6 +9,7 @@ import kotlin.random.Random
 class FakeDataProvider {
 
     var fakeTracks: List<TempSearchItem>
+    var fakeServices: List<TempSearchItem>
     var fakeUsers: List<TempUserSearch>
     var fakeTeams: List<TempTeam>
 
@@ -16,6 +17,7 @@ class FakeDataProvider {
         fakeTracks = initFakeTracks()
         fakeUsers = initfakeUsers()
         fakeTeams = initfakeTeams()
+        fakeServices = initFakeServices()
     }
 
     private fun initfakeTeams(): MutableList<TempTeam> {
@@ -97,7 +99,24 @@ class FakeDataProvider {
     }
 
     private fun getFakeTeamFirstName(): Any {
-        val names = arrayOf("Galaxy", "Stars", "Egy", "Code", "Skill", "Star", "IEEE", "State")
+        val names = arrayOf(
+            "Galaxy",
+            "Stars",
+            "Egy",
+            "Code",
+            "Skill",
+            "Star",
+            "IEEE",
+            "State",
+            "Home",
+            "Lazy",
+            "Universe",
+            "Tech",
+            "Swift",
+            "Bright",
+            "Fusion"
+        )
+
         if (names.isEmpty()) {
             throw IllegalArgumentException("The input array is empty.")
         }
@@ -114,7 +133,11 @@ class FakeDataProvider {
             "Heroes",
             "Stars",
             "Leaders",
-            "Founders"
+            "Founders",
+            "Owners",
+            "Creators",
+            "Champions",
+            "Engineers",
         )
         if (names.isEmpty()) {
             throw IllegalArgumentException("The input array is empty.")
@@ -219,6 +242,15 @@ class FakeDataProvider {
         list.add(TempSearchItem("Flutter", R.drawable.ic_onboarding_1))
         list.add(TempSearchItem("AI", R.drawable.ic_onboarding_2))
         list.add(TempSearchItem("Data Science", R.drawable.ic_onboarding_1))
+        return list
+    }
+
+    private fun initFakeServices(): MutableList<TempSearchItem> {
+        val list = ArrayList<TempSearchItem>()
+        list.add(TempSearchItem("Teams", R.drawable.ic_teams_img))
+        list.add(TempSearchItem("Courses", R.drawable.ic_courses_img))
+        list.add(TempSearchItem("Mentor", R.drawable.ic_mentor_img))
+        list.add(TempSearchItem("Friends", R.drawable.ic_friends_img))
         return list
     }
 }

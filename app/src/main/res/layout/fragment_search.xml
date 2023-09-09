@@ -11,6 +11,7 @@
         android:id="@+id/frame_search"
         android:layout_width="match_parent"
         android:layout_marginTop="30dp"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/horizontal_padding"
         app:layout_constraintTop_toTopOf="parent">

@@ -80,4 +80,6 @@
     <string name="post">Post</string>
     <string name="add_comment">add comment</string>
     <string name="shared">Post was Shared</string>
+    <string name="join">Join</string>
+    <string name="choose_your_technical_circle">Choose your technical circle!</string>
 </resources>

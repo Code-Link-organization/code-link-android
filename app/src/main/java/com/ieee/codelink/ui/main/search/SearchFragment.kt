@@ -1,13 +1,13 @@
 package com.ieee.codelink.ui.main.search
 
-import android.os.Bundle
-import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ieee.codelink.R
 import com.ieee.codelink.common.dp
+import com.ieee.codelink.common.extension.onBackPress
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.databinding.FragmentSearchBinding
 import com.ieee.codelink.domain.tempModels.TempSearchItem
@@ -22,27 +22,24 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     private var myAdapter: SearchItemsAdapter? = null
 
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setViews()
-        getLastScreen()
+    override fun onResume() {
+        super.onResume()
+        setOnClickListeners()
+        setServiceLayout()
     }
 
 
-
-    private fun getLastScreen() {
-        if (viewModel.x % 2 == 0) {
-            setServiceLayout()
-        } else {
-            setTrackLayout()
+    private fun setOnClickListeners() {
+        onBackPress {
+            if (viewModel.firstOption != null) {
+                viewModel.firstOption=null
+                setServiceLayout()
+            } else {
+                findNavController().navigate(R.id.homeFragment)
+            }
         }
     }
 
-    private fun setViews() {
-        val userImage = R.drawable.ic_onboarding_1
-        binding.searchBar.ivUserImage.setImageResource(userImage)
-    }
 
     private fun setServiceLayout() {
         setUpServiceLayoutDimentions()
@@ -85,26 +82,27 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         constraints.height = 0
 
         rvLayout.layoutParams = constraints
-     //   rvLayout.setPadding(0,0,0,R.dimen.margin_80)
         binding.rvItems.setPadding(8.dp(),10.dp(),8.dp(),150.dp())
 
     }
 
     private fun setUpServicesRecyclerView() = try {
-        myAdapter!!.items = viewModel.getServices()
+        binding.tvTitle.text = getString(R.string.choose_what_you_want)
+        myAdapter!!.items = viewModel.fakeDataProvider.fakeServices as ArrayList<TempSearchItem>
         myAdapter!!.notifyDataSetChanged()
     } catch (e: Exception) {
         val rv = binding.rvItems
-        initRecyclerView(rv, viewModel.getServices())
+        initRecyclerView(rv, viewModel.fakeDataProvider.fakeServices as ArrayList<TempSearchItem>)
     }
 
 
     private fun setUpTrackRecyclerView() = try {
-        myAdapter!!.items = viewModel.getTracks()
+        binding.tvTitle.text = getString(R.string.choose_your_technical_circle)
+        myAdapter!!.items = viewModel.fakeDataProvider.fakeTracks as ArrayList<TempSearchItem>
         myAdapter!!.notifyDataSetChanged()
     } catch (e: Exception) {
         val rv = binding.rvItems
-        initRecyclerView(rv, viewModel.getTracks())
+        initRecyclerView(rv, viewModel.fakeDataProvider.fakeTracks as ArrayList<TempSearchItem>)
     }
 
 
@@ -112,11 +110,15 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
     private fun initRecyclerView(rv: RecyclerView, list: ArrayList<TempSearchItem>) {
         myAdapter = SearchItemsAdapter(list) {
-            viewModel.x++
-            if (viewModel.x % 2 == 0) {
-                setServiceLayout()
+            if (viewModel.firstOption == null) {
+                if (it.title == "Teams"){
+                 openSearchTeamsScrees(it)
+                }else {
+                    viewModel.firstOption = it.title
+                    setTrackLayout()
+                }
             } else {
-                setTrackLayout()
+                goToSearch(viewModel.firstOption!!, it)
             }
         }
         rv.adapter = myAdapter
@@ -127,6 +129,32 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             false
         )
         rv.layoutManager = gridLayoutManager
+    }
+
+    private fun goToSearch(firstOption: String, it: TempSearchItem) {
+        when (firstOption) {
+            "Courses" -> {
+
+            }
+
+            "Mentor" -> {
+
+            }
+
+            "Friends" -> {
+
+            }
+        }
+    }
+
+    private fun openSearchTeamsScrees(track: TempSearchItem) {
+        myAdapter = null
+        viewModel.firstOption = null
+        findNavController().navigate(
+            SearchFragmentDirections.actionSearchFragmentToSearchTeamsFragment(
+                track.title
+            )
+        )
     }
 
 }
