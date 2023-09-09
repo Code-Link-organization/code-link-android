@@ -1,7 +1,6 @@
-package com.ieee.codelink.ui.main.home
+package com.ieee.codelink.ui.main
 
 import android.content.Context
-import com.bumptech.glide.request.RequestCoordinator.RequestState
 import com.ieee.codelink.R
 import com.ieee.codelink.common.cacheImageToFile
 import com.ieee.codelink.common.createMultipartBodyPartFromFile
@@ -17,8 +16,10 @@ import com.ieee.codelink.domain.models.Post
 import com.ieee.codelink.domain.models.PostsResponseData
 import com.ieee.codelink.domain.models.User
 import com.ieee.codelink.domain.models.responses.CommentsResponse
+import com.ieee.codelink.domain.models.responses.CreatePostResponse
 import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
+import com.ieee.codelink.domain.models.responses.ShareResponse
 import com.ieee.codelink.domain.tempModels.TempUserStory
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,7 +27,7 @@ import javax.inject.Inject
 import kotlin.random.Random
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class MainViewModel @Inject constructor(
     private val postsRepository: PostsRepository,
     private val userRepository: UserRepository,
     private val context: Context
@@ -37,7 +38,7 @@ class HomeViewModel @Inject constructor(
     val postsRequestState: MutableStateFlow<ResponseState<PostsResponse>> =
         MutableStateFlow(ResponseState.Empty())
 
-    val createPostsRequestState: MutableStateFlow<ResponseState<BaseResponse>> =
+    val createPostsRequestState: MutableStateFlow<ResponseState<CreatePostResponse>> =
         MutableStateFlow(ResponseState.Empty())
 
     val postLikesRequestState: MutableStateFlow<ResponseState<LikesResponse>> =
@@ -46,8 +47,14 @@ class HomeViewModel @Inject constructor(
     val postCommentsRequestState: MutableStateFlow<ResponseState<CommentsResponse>> =
         MutableStateFlow(ResponseState.Empty())
 
+    val createCommentsRequestState: MutableStateFlow<ResponseState<CommentsResponse>> =
+        MutableStateFlow(ResponseState.Empty())
 
-    private var postsList : List<Post>? = null
+    val sharePostRequestState: MutableStateFlow<ResponseState<ShareResponse>> =
+        MutableStateFlow(ResponseState.Empty())
+
+
+    private var postsList: List<Post>? = null
 
     suspend fun getHomePosts() {
         postsRequestState.value = ResponseState.Loading()
@@ -125,7 +132,6 @@ class HomeViewModel @Inject constructor(
        createPostsRequestState.value = handleResponse(response)
    }
 
-    fun isFirstCall(): Boolean = postsList == null
 
     fun getUser(): User = userRepository.getCachedUser()
 
@@ -152,16 +158,18 @@ class HomeViewModel @Inject constructor(
         postCommentsRequestState.value = handleResponse(response)
     }
 
-    suspend fun addComment(postId: Int , content : String): Boolean? {
-        val response = postsRepository.createComment(postId = postId , content = content)
-        val responseState = handleResponse(response)
-        return if (responseState.isSuccess) {
-            val message = responseState.data!!.message
-            message == "Comment created successfully"
-        } else
-            null
+    suspend fun addComment(postId: Int, content: String) {
+        createCommentsRequestState.value = ResponseState.Loading()
+        val response = postsRepository.createComment(postId = postId, content = content)
+        createCommentsRequestState.value = handleResponse(response)
+    }
+
+    fun isFirstCall(): Boolean = postsList == null
+
+    suspend fun sharePost(postId: Int) {
+        sharePostRequestState.value = ResponseState.Loading()
+        val response = postsRepository.sharePost(postId)
+        sharePostRequestState.value = handleResponse(response)
     }
 
 }
-
-

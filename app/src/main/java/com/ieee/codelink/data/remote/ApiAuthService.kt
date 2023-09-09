@@ -3,8 +3,10 @@ package com.ieee.codelink.data.remote
 import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.domain.models.responses.AuthResponse
 import com.ieee.codelink.domain.models.responses.CommentsResponse
+import com.ieee.codelink.domain.models.responses.CreatePostResponse
 import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
+import com.ieee.codelink.domain.models.responses.ShareResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -81,7 +83,7 @@ interface ApiAuthService {
         file_path: MultipartBody.Part?,
         @Part("content")
         content: RequestBody?
-    ): Response<BaseResponse>
+    ): Response<CreatePostResponse>
 
 
     @POST
@@ -112,5 +114,12 @@ interface ApiAuthService {
         token: String,
         @Query("content")
         content: String
-    ):Response<BaseResponse>
+    ):Response<CommentsResponse>
+
+    @POST
+    suspend fun sharePost(
+        @Url url: String,
+        @Header("Authorization")
+        token: String
+    ):Response<ShareResponse>
 }

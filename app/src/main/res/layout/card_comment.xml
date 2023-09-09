@@ -16,6 +16,7 @@
         android:layout_marginVertical="10dp"
         android:layout_marginStart="12dp"
         app:layout_constraintStart_toStartOf="parent"
+        android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
         tools:src="@drawable/ic_friends_img" />

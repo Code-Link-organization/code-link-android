@@ -59,5 +59,9 @@ class CommentsAdapter(
     private fun setOnClicks(holder: ViewHolder, comment: Comment) {
     }
 
+    fun addComment(comment:Comment){
+        comments.add(0, comment)
+        this.notifyItemInserted(0)
+    }
 
 }

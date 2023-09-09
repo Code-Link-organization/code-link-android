@@ -138,23 +138,28 @@ class PostsAdapter(
             }
         }
 
-        holder.binding.likeIcon.setOnClickListener {
+        holder.binding.btnLikesCounter.setOnClickListener {
             showLikes(post)
         }
 
-        holder.binding.tvLikesCounter.setOnClickListener {
-            showLikes(post)
-        }
-
-        holder.binding.tvCommertsCounter.setOnClickListener {
+        holder.binding.btnCommentsCounter.setOnClickListener {
             showComments(post)
         }
 
-        holder.binding.tvCommertsCounter.setOnClickListener {
-            showComments(post)
+        holder.binding.tvDescription.setOnClickListener {
+            val index = getPostIndexById(post.id)
+            index?.let { index ->
+                val post = posts[index]
+                post.isExpanded = !post.isExpanded
+                posts[index] = post
+                holder.binding.tvDescription.maxLines = if (post.isExpanded) {
+                    Integer.MAX_VALUE // Show all lines
+                } else {
+                    3 // Show only 3 lines
+                }
+                this.notifyItemChanged(index)
+            }
         }
-
-
     }
 
     private fun moreClicked (post: Post, iv: View, holder: ViewHolder) {
@@ -226,6 +231,40 @@ class PostsAdapter(
             }
             this.notifyItemChanged(index)
         }
+    }
+
+    fun addPost(post: Post) {
+       posts.add(post)
+
+    }
+
+    fun increaseCommentCount(postId: Int?) {
+       val index = getPostIndexById(postId)
+        index?.let { index->
+            val updatedIndex = posts[index]
+            updatedIndex.comments_count++
+            posts[index] = updatedIndex
+            this.notifyItemChanged(index)
+        }
+    }
+
+    fun increaseSharesforPost(postId: Int) {
+        val index = getPostIndexById(postId)
+        index?.let { index->
+            val updatedIndex = posts[index]
+            updatedIndex.shares_count++
+            posts[index] = updatedIndex
+            this.notifyItemChanged(index)
+        }
+    }
+
+    private fun getPostIndexById(postId: Int?): Int? {
+        for (i  in 0 until posts.size){
+            if (posts[i].id == postId){
+                return i
+            }
+        }
+        return null
     }
 
 }

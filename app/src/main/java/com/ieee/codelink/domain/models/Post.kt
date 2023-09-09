@@ -13,5 +13,6 @@ data class Post(
     var created_at: String,
     var updated_at: String,
     var user_name: String,
-    var user_imageUrl: String?
+    var user_imageUrl: String?,
+    var isExpanded :Boolean= false
 )
