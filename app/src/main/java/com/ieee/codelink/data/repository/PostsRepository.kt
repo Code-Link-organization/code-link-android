@@ -83,7 +83,7 @@ class PostsRepository(
     }
 
 
-    suspend fun createComment(postId: Int, content: String): Response<BaseResponse>? {
+    suspend fun createComment(postId: Int, content: String): Response<CommentsResponse>? {
         val userToken = sharedPreferenceManger.bearerToken
         val token = "Bearer $userToken"
         val url = "$GET_POSTS/$postId/$GET_POST_COMMENTS/$CREATE_COMMENT"

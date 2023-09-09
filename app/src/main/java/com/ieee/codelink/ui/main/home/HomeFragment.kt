@@ -41,6 +41,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     override val viewModel: MainViewModel by activityViewModels<MainViewModel>()
     private lateinit var postsAdapter: PostsAdapter
     private lateinit var createPostDialog: CreatePostDialogFragment
+    private lateinit var commentsScreen : CommentsDialogFragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -101,6 +102,43 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             postCommentsObserver(state)
         }
 
+        viewModel.createCommentsRequestState.awareCollect { state ->
+            createComment(state)
+        }
+
+    }
+
+    private fun createComment(state: ResponseState<CommentsResponse>) {
+        when (state) {
+            is ResponseState.Empty,
+            is ResponseState.NotAuthorized,
+            is ResponseState.UnKnownError -> {
+            }
+
+            is ResponseState.NetworkError -> {
+                showToast(getString(R.string.network_error))
+            }
+
+            is ResponseState.Error -> {
+                com.ieee.codelink.common.showToast(state.message.toString(), requireContext())
+                viewModel.createCommentsRequestState.value = ResponseState.Empty()
+            }
+
+            is ResponseState.Loading -> {
+                //todo : if there is time add loading bars to the app
+            }
+
+            is ResponseState.Success -> {
+                state.data?.let { response ->
+                    lifecycleScope.launch {
+                        val newComment = response.data.comments.last()
+                        postsAdapter.increaseCommentCount(newComment.post_id)
+                        commentsScreen.addCommentToList(newComment)
+                    }
+                }
+            }
+
+        }
     }
 
     private fun postCommentsObserver(state: ResponseState<CommentsResponse>) {
@@ -317,7 +355,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun openCommentsScreen(comments: List<Comment>,postId: Int?) {
         postId?.let {
-            val commentsScreen = CommentsDialogFragment(
+             commentsScreen = CommentsDialogFragment(
                 comments = comments as MutableList<Comment>,
                 postId = postId,
                 addComment = { postId, content ->
