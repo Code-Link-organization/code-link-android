@@ -3,6 +3,7 @@ package com.ieee.codelink.data.remote
 import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.domain.models.responses.AuthResponse
 import com.ieee.codelink.domain.models.responses.CommentsResponse
+import com.ieee.codelink.domain.models.responses.CreatePostResponse
 import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
 import okhttp3.MultipartBody
@@ -81,7 +82,7 @@ interface ApiAuthService {
         file_path: MultipartBody.Part?,
         @Part("content")
         content: RequestBody?
-    ): Response<BaseResponse>
+    ): Response<CreatePostResponse>
 
 
     @POST
@@ -112,5 +113,12 @@ interface ApiAuthService {
         token: String,
         @Query("content")
         content: String
+    ):Response<BaseResponse>
+
+    @POST
+    suspend fun sharePost(
+        @Url url: String,
+        @Header("Authorization")
+        token: String
     ):Response<BaseResponse>
 }

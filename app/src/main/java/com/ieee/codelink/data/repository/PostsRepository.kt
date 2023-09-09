@@ -8,7 +8,9 @@ import com.ieee.codelink.data.remote.GET_LIKED_USERS
 import com.ieee.codelink.data.remote.GET_POSTS
 import com.ieee.codelink.data.remote.GET_POST_COMMENTS
 import com.ieee.codelink.data.remote.LIKE_A_POST
+import com.ieee.codelink.data.remote.SHARE_POST
 import com.ieee.codelink.domain.models.responses.CommentsResponse
+import com.ieee.codelink.domain.models.responses.CreatePostResponse
 import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
 import okhttp3.MediaType.Companion.toMediaType
@@ -31,7 +33,7 @@ class PostsRepository(
     }
 
 
-    suspend fun createPost(content: String?, imgPart: MultipartBody.Part?): Response<BaseResponse>? {
+    suspend fun createPost(content: String?, imgPart: MultipartBody.Part?): Response<CreatePostResponse>? {
         val userToken = sharedPreferenceManger.bearerToken
         val token = "Bearer $userToken"
         val mediaType = "multipart/form-data".toMediaType()
@@ -87,6 +89,18 @@ class PostsRepository(
         val url = "$GET_POSTS/$postId/$GET_POST_COMMENTS/$CREATE_COMMENT"
         return try {
             api.createComment(url, token, content)
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+
+    suspend fun sharePost(postId: Int): Response<BaseResponse>? {
+        val userToken = sharedPreferenceManger.bearerToken
+        val token = "Bearer $userToken"
+        val url = "$GET_POSTS/$postId/$GET_POST_COMMENTS/$SHARE_POST"
+        return try {
+            api.sharePost(url, token)
         } catch (e: Exception) {
             null
         }

@@ -228,4 +228,9 @@ class PostsAdapter(
         }
     }
 
+    fun addPost(post: Post) {
+       posts.add(post)
+
+    }
+
 }

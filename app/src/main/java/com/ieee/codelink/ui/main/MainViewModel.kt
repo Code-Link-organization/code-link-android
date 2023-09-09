@@ -1,12 +1,10 @@
-package com.ieee.codelink.ui.main.home
+package com.ieee.codelink.ui.main
 
 import android.content.Context
-import com.bumptech.glide.request.RequestCoordinator.RequestState
 import com.ieee.codelink.R
 import com.ieee.codelink.common.cacheImageToFile
 import com.ieee.codelink.common.createMultipartBodyPartFromFile
 import com.ieee.codelink.common.getImageFileFromRealPath
-import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.core.isSuccess
@@ -17,6 +15,7 @@ import com.ieee.codelink.domain.models.Post
 import com.ieee.codelink.domain.models.PostsResponseData
 import com.ieee.codelink.domain.models.User
 import com.ieee.codelink.domain.models.responses.CommentsResponse
+import com.ieee.codelink.domain.models.responses.CreatePostResponse
 import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
 import com.ieee.codelink.domain.tempModels.TempUserStory
@@ -26,7 +25,7 @@ import javax.inject.Inject
 import kotlin.random.Random
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class MainViewModel @Inject constructor(
     private val postsRepository: PostsRepository,
     private val userRepository: UserRepository,
     private val context: Context
@@ -37,7 +36,7 @@ class HomeViewModel @Inject constructor(
     val postsRequestState: MutableStateFlow<ResponseState<PostsResponse>> =
         MutableStateFlow(ResponseState.Empty())
 
-    val createPostsRequestState: MutableStateFlow<ResponseState<BaseResponse>> =
+    val createPostsRequestState: MutableStateFlow<ResponseState<CreatePostResponse>> =
         MutableStateFlow(ResponseState.Empty())
 
     val postLikesRequestState: MutableStateFlow<ResponseState<LikesResponse>> =
@@ -125,7 +124,6 @@ class HomeViewModel @Inject constructor(
        createPostsRequestState.value = handleResponse(response)
    }
 
-    fun isFirstCall(): Boolean = postsList == null
 
     fun getUser(): User = userRepository.getCachedUser()
 
@@ -162,6 +160,6 @@ class HomeViewModel @Inject constructor(
             null
     }
 
+    fun isFirstCall(): Boolean = postsList == null
+
 }
-
-

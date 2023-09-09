@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
@@ -20,12 +21,14 @@ import com.ieee.codelink.domain.models.CreatePostModel
 import com.ieee.codelink.domain.models.LikeData
 import com.ieee.codelink.domain.models.Post
 import com.ieee.codelink.domain.models.responses.CommentsResponse
+import com.ieee.codelink.domain.models.responses.CreatePostResponse
 import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
 import com.ieee.codelink.ui.adapters.PostsAdapter
 import com.ieee.codelink.ui.dialogs.CommentsDialogFragment
 import com.ieee.codelink.ui.dialogs.CreatePostDialogFragment
 import com.ieee.codelink.ui.dialogs.LikesDialogFragment
+import com.ieee.codelink.ui.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,7 +38,7 @@ import kotlinx.coroutines.withContext
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
-    override val viewModel: HomeViewModel by viewModels()
+    override val viewModel: MainViewModel by activityViewModels<MainViewModel>()
     private lateinit var postsAdapter: PostsAdapter
     private lateinit var createPostDialog: CreatePostDialogFragment
 
@@ -162,7 +165,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-    private fun createPostsObserver(state: ResponseState<BaseResponse>) {
+    private fun createPostsObserver(state: ResponseState<CreatePostResponse>) {
         when (state) {
             is ResponseState.Empty,
             is ResponseState.NotAuthorized,
@@ -183,15 +186,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             }
 
             is ResponseState.Success -> {
-                state.data?.let {
+                state.data?.let {response ->
                     lifecycleScope.launch {
                         dismissDialog()
-                        callData()
+                        addPostToList(response.data.post)
                     }
                 }
             }
 
         }
+    }
+
+    private fun addPostToList(post: Post) {
+       postsAdapter.addPost(post)
     }
 
     private fun postsObserver(state: ResponseState<PostsResponse>) {
