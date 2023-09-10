@@ -3,6 +3,7 @@ package com.ieee.codelink.ui.othersProfile
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -12,6 +13,7 @@ import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.databinding.FragmentOthersProfileBinding
 import com.ieee.codelink.domain.tempModels.TempUserProfile
 import com.ieee.codelink.domain.tempModels.TempUserSearch
+import com.ieee.codelink.domain.tempModels.toTempUserProfile
 import com.ieee.codelink.ui.adapters.tempAdapters.FollowersAdapter
 import com.ieee.codelink.ui.adapters.tempAdapters.ProfilePostsAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -116,7 +118,7 @@ class OthersProfileFragment :
         followersAdapter = FollowersAdapter(
             userData.followers as MutableList<TempUserSearch>
         ) { user ->
-            showToast("user clicked")
+            openUserProfile(user)
         }
 
         binding.followersSectiom.rvFollowers.adapter = followersAdapter
@@ -132,4 +134,11 @@ class OthersProfileFragment :
         binding.postsSection.rvPosts.adapter = postsAdapter
 
     }
+
+
+    private fun openUserProfile(user: TempUserSearch) {
+      val profileUser = user.toTempUserProfile()
+      findNavController().navigate(OthersProfileFragmentDirections.actionOthersProfileSelf(profileUser))
+    }
+
 }

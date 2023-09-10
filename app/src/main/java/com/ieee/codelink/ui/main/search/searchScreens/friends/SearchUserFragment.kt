@@ -3,9 +3,11 @@ package com.ieee.codelink.ui.main.search.searchScreens.friends
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.databinding.FragmentSeatchUserBinding
 import com.ieee.codelink.domain.tempModels.TempUserSearch
+import com.ieee.codelink.domain.tempModels.toTempUserProfile
 import com.ieee.codelink.ui.adapters.tempAdapters.UsersAdapter
 import com.ieee.codelink.ui.main.search.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,13 +27,21 @@ class SearchUserFragment : BaseFragment<FragmentSeatchUserBinding>(FragmentSeatc
         usersAdapter = UsersAdapter(
             viewModel.fakeDataProvider.fakeUsers as MutableList<TempUserSearch>,
             openProfile = {
-                showToast("Open profile")
+                openProfile(it)
             },
             followAction = {
                 showToast("Follow Action")
             }
         )
         binding.rvUsers.adapter = usersAdapter
+    }
+
+    private fun openProfile(it: TempUserSearch) {
+        findNavController().navigate(
+            SearchUserFragmentDirections.actionSearchUserFragmentToOthersProfile(
+                it.toTempUserProfile()
+            )
+        )
     }
 
 

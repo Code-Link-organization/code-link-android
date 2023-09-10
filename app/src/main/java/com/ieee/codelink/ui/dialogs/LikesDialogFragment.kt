@@ -7,11 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.ieee.codelink.common.showToast
 import com.ieee.codelink.databinding.DialogPostLikesBinding
 import com.ieee.codelink.domain.models.LikeData
 import com.ieee.codelink.ui.adapters.LikesAdapter
-import kotlinx.coroutines.NonDisposableHandle.parent
 
 class LikesDialogFragment(
     private val likes: MutableList<LikeData>,
@@ -39,7 +37,10 @@ class LikesDialogFragment(
     private fun setUpRv() {
         likesAdapter = LikesAdapter(
             likes,
-            openProfile,
+            openProfile = {
+                openProfile(it)
+                this.dismiss()
+            },
             followAction
         )
         binding.rvLikes.adapter = likesAdapter
@@ -49,6 +50,7 @@ class LikesDialogFragment(
       binding.ivCancel.setOnClickListener {
           this.dismiss()
       }
+
     }
 
     override fun onResume() {

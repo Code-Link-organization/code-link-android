@@ -16,3 +16,4 @@ data class Post(
     var user_imageUrl: String?,
     var isExpanded :Boolean= false
 )
+

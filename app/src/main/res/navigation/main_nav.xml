@@ -100,5 +100,8 @@
         <argument
             android:name="user"
             app:argType="com.ieee.codelink.domain.tempModels.TempUserProfile" />
+        <action
+            android:id="@+id/action_othersProfile_self"
+            app:destination="@id/othersProfile" />
     </fragment>
 </navigation>

@@ -7,6 +7,7 @@ import android.widget.ImageView
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
@@ -26,6 +27,7 @@ import com.ieee.codelink.domain.models.responses.CreatePostResponse
 import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
 import com.ieee.codelink.domain.models.responses.ShareResponse
+import com.ieee.codelink.domain.models.toProfileUser
 import com.ieee.codelink.ui.adapters.PostsAdapter
 import com.ieee.codelink.ui.dialogs.CommentsDialogFragment
 import com.ieee.codelink.ui.dialogs.CreatePostDialogFragment
@@ -389,7 +391,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         val likesScreen = LikesDialogFragment(
             likeData as MutableList<LikeData>,
             openProfile = {
-                showToast("Open Profile")
+                openUserProfile(it)
             },
             followAction = {
                 showToast("Follow")
@@ -411,6 +413,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             )
             commentsScreen.show(childFragmentManager, "commentsScreen")
         }
+    }
+
+    private fun openUserProfile(likeData: LikeData) {
+        val user = likeData.toProfileUser()
+        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToOthersProfile(user))
     }
 
 }
