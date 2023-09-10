@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_createPostDialogFragment"
             app:destination="@id/createPostDialogFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_othersProfile"
+            app:destination="@id/othersProfile" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -45,7 +48,11 @@
         android:id="@+id/chatsFragment"
         android:name="com.ieee.codelink.ui.main.chat.ChatsFragment"
         android:label="fragment_chats"
-        tools:layout="@layout/fragment_chats" />
+        tools:layout="@layout/fragment_chats" >
+        <action
+            android:id="@+id/action_chatsFragment_to_othersProfile"
+            app:destination="@id/othersProfile" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.ieee.codelink.ui.settings.SettingsFragment"
@@ -82,5 +89,16 @@
         <argument
             android:name="track"
             app:argType="string" />
+        <action
+            android:id="@+id/action_searchUserFragment_to_othersProfile"
+            app:destination="@id/othersProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/othersProfile"
+        android:name="com.ieee.codelink.ui.othersProfile.OthersProfileFragment"
+        android:label="OthersProfile" >
+        <argument
+            android:name="user"
+            app:argType="com.ieee.codelink.domain.tempModels.TempUserProfile" />
     </fragment>
 </navigation>

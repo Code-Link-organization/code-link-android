@@ -1,4 +1,4 @@
-package com.ieee.codelink.ui.adapters
+package com.ieee.codelink.ui.adapters.tempAdapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
-import com.ieee.codelink.data.remote.BASE_URL_FOR_IMAGE
 import com.ieee.codelink.databinding.CardTeamBinding
 import com.ieee.codelink.domain.tempModels.TempTeam
 
@@ -39,7 +38,7 @@ class TeamsAdapter(
         setOnClicks(holder, team)
     }
 
-    private fun setViews(holder: TeamsAdapter.ViewHolder, team: TempTeam) {
+    private fun setViews(holder: ViewHolder, team: TempTeam) {
         holder.binding.apply {
             tvTeamName.text = team.name
             Glide.with(holder.binding.ivTeamImage)

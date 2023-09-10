@@ -1,18 +1,13 @@
 package com.ieee.codelink.ui.main.search.searchScreens.teams
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.ieee.codelink.R
 import com.ieee.codelink.core.BaseFragment
-import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.databinding.FragmentSearchTeamsBinding
 import com.ieee.codelink.domain.tempModels.TempTeam
-import com.ieee.codelink.ui.adapters.TeamsAdapter
+import com.ieee.codelink.ui.adapters.tempAdapters.TeamsAdapter
 import com.ieee.codelink.ui.main.search.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

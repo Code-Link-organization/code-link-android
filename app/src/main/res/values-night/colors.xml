@@ -10,6 +10,7 @@
     <color name="color_secondary_background">#1B1919</color>
     <color name="bottom_nav_icon_color">#3B3A3A</color>
     <color name="color_dark_stroke">#B8B8B8</color>
+    <color name="color_icons">#746346</color>
 
 
 </resources>

@@ -15,7 +15,7 @@ class FakeDataProvider {
 
     init {
         fakeTracks = initFakeTracks()
-        fakeUsers = initfakeUsers()
+        fakeUsers = getFakeUsers()
         fakeTeams = initfakeTeams()
         fakeServices = initFakeServices()
     }
@@ -27,7 +27,7 @@ class FakeDataProvider {
             var teamDescription = getFakeTeamBio()
             var image = getRandomImage()
             val numberOfUsers = Random.nextInt(9) + 1
-            var users = initfakeUsers(numberOfUsers)
+            var users = getFakeUsers(numberOfUsers)
             list.add(
                 TempTeam(
                     name = name,
@@ -40,7 +40,7 @@ class FakeDataProvider {
         return list
     }
 
-    private fun initfakeUsers(num: Int = 26): MutableList<TempUserSearch> {
+     fun getFakeUsers(num: Int = 26): MutableList<TempUserSearch> {
         val list = mutableListOf<TempUserSearch>()
         for (i in 0 until num) {
             var firstName: String
@@ -73,7 +73,6 @@ class FakeDataProvider {
             "David",
             "Samuel",
             "Ahmed",
-            "Ella",
             "Michael",
             "Robert",
             "Richard",
@@ -168,7 +167,7 @@ class FakeDataProvider {
         return names[randomIndex]
     }
 
-    private fun getRandomTrack(): String {
+     fun getRandomTrack(): String {
         val names = arrayOf(
             "Android Developer",
             "IOS Developer",
@@ -184,7 +183,7 @@ class FakeDataProvider {
         return names[randomIndex]
     }
 
-    private fun getRandomGirlImage(): Int {
+     fun getRandomGirlImage(): Int {
         val images = arrayOf(
             R.drawable.girl1,
             R.drawable.girl2,
@@ -197,7 +196,7 @@ class FakeDataProvider {
         return images[randomIndex]
     }
 
-    private fun getRandomManImage(): Int {
+     fun getRandomManImage(): Int {
         val images = arrayOf(
             R.drawable.man1,
             R.drawable.man2,
@@ -210,7 +209,7 @@ class FakeDataProvider {
         return images[randomIndex]
     }
 
-    private fun getRandomImage(): Int {
+     fun getRandomImage(): Int {
         val images = arrayOf(
             R.drawable.ic_onboarding_1,
             R.drawable.ic_onboarding_2,
@@ -253,4 +252,6 @@ class FakeDataProvider {
         list.add(TempSearchItem("Friends", R.drawable.ic_friends_img))
         return list
     }
+
+
 }

@@ -5,10 +5,8 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.databinding.FragmentSeatchUserBinding
-import com.ieee.codelink.domain.tempModels.TempTeam
 import com.ieee.codelink.domain.tempModels.TempUserSearch
-import com.ieee.codelink.ui.adapters.LikesAdapter
-import com.ieee.codelink.ui.adapters.UsersAdapter
+import com.ieee.codelink.ui.adapters.tempAdapters.UsersAdapter
 import com.ieee.codelink.ui.main.search.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

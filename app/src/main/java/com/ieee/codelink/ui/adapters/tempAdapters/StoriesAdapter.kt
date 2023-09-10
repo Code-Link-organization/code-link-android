@@ -1,4 +1,4 @@
-package com.ieee.codelink.ui.adapters
+package com.ieee.codelink.ui.adapters.tempAdapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -34,7 +34,7 @@ class StoriesAdapter(
         setOnClicks(holder, story)
     }
 
-    private fun setViews(holder: StoriesAdapter.ViewHolder, story: TempUserStory) {
+    private fun setViews(holder: ViewHolder, story: TempUserStory) {
         holder.binding.apply {
             ivUserImage.setImageResource(story.userImage)
             storyThumbnail.setImageResource(story.thunbnail)

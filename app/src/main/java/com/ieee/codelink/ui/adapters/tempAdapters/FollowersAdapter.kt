@@ -1,4 +1,4 @@
-package com.ieee.codelink.ui.adapters
+package com.ieee.codelink.ui.adapters.tempAdapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,22 +6,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
+import com.ieee.codelink.databinding.CardFollowerBinding
 import com.ieee.codelink.databinding.CardLikePersonBinding
 import com.ieee.codelink.domain.tempModels.TempUserSearch
 
 
-class UsersAdapter(
+class FollowersAdapter(
     var users: MutableList<TempUserSearch>,
-    private val openProfile: (TempUserSearch) -> Unit,
-    private val followAction: (TempUserSearch) -> Unit
-) : RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
+    private val openProfile: (TempUserSearch) -> Unit
+) : RecyclerView.Adapter<FollowersAdapter.ViewHolder>() {
 
-    inner class ViewHolder(val binding: CardLikePersonBinding) :
+    inner class ViewHolder(val binding: CardFollowerBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            CardLikePersonBinding.inflate(
+            CardFollowerBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -38,10 +38,9 @@ class UsersAdapter(
         setOnClicks(holder, like)
     }
 
-    private fun setViews(holder: UsersAdapter.ViewHolder, user: TempUserSearch) {
+    private fun setViews(holder: ViewHolder, user: TempUserSearch) {
         holder.binding.apply {
-            tvUserName.text = user.name
-            tvUserTrack.text = user.track
+            tvUserNamer.text = user.name
             Glide.with(holder.binding.ivUserImage)
                 .load(user.image)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -55,9 +54,6 @@ class UsersAdapter(
     private fun setOnClicks(holder: ViewHolder, like: TempUserSearch) {
         holder.binding.root.setOnClickListener {
             openProfile(like)
-        }
-        holder.binding.btnFollow.setOnClickListener {
-            followAction(like)
         }
     }
 
