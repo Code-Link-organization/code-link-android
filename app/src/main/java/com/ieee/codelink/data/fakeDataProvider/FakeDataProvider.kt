@@ -1,22 +1,59 @@
 package com.ieee.codelink.data.fakeDataProvider
 
 import com.ieee.codelink.R
+import com.ieee.codelink.domain.tempModels.TempMentor
 import com.ieee.codelink.domain.tempModels.TempSearchItem
 import com.ieee.codelink.domain.tempModels.TempTeam
 import com.ieee.codelink.domain.tempModels.TempUserSearch
+import com.ieee.codelink.domain.tempModels.toMentor
 import kotlin.random.Random
 
 class FakeDataProvider {
 
-    var fakeTracks: List<TempSearchItem>
-    var fakeUsers: List<TempUserSearch>
-    var fakeTeams: List<TempTeam>
+    var fakeTracks: MutableList<TempSearchItem>
+    var fakeServices: MutableList<TempSearchItem>
+    var fakeUsers: MutableList<TempUserSearch>
+    var fakeTeams: MutableList<TempTeam>
 
     init {
         fakeTracks = initFakeTracks()
-        fakeUsers = initfakeUsers()
+        fakeUsers = getFakeUsers()
         fakeTeams = initfakeTeams()
+        fakeServices = initFakeServices()
     }
+
+
+    fun getFakeCourses(track : String):List<TempUserSearch>{
+        val list = mutableListOf<TempUserSearch>()
+        val names = arrayOf(
+            "Advanced",
+            "Basics",
+            "Intermediate",
+            "Professional",
+            "in 3 hours",
+            "Pro",
+            "Lvl1",
+            "Lvl2",
+            "Lvl3",
+            "Lvl4",
+            "Lvl5",
+            "Legacy",
+            "In 30 days",
+            "From professionals",
+            "Start now"
+        )
+        for (i in 0 until names.size) {
+           list.add(
+               TempUserSearch(
+                   name = "$track ${names[i]}",
+                   image = getRandomImage(),
+                   track = track
+               )
+           )
+        }
+      return list
+    }
+
 
     private fun initfakeTeams(): MutableList<TempTeam> {
         val list = mutableListOf<TempTeam>()
@@ -25,7 +62,7 @@ class FakeDataProvider {
             var teamDescription = getFakeTeamBio()
             var image = getRandomImage()
             val numberOfUsers = Random.nextInt(9) + 1
-            var users = initfakeUsers(numberOfUsers)
+            var users = getFakeUsers(numberOfUsers)
             list.add(
                 TempTeam(
                     name = name,
@@ -38,7 +75,7 @@ class FakeDataProvider {
         return list
     }
 
-    private fun initfakeUsers(num: Int = 26): MutableList<TempUserSearch> {
+     fun getFakeUsers(num: Int = 26): MutableList<TempUserSearch> {
         val list = mutableListOf<TempUserSearch>()
         for (i in 0 until num) {
             var firstName: String
@@ -58,7 +95,8 @@ class FakeDataProvider {
                     name = "$firstName $secondName",
                     image = img,
                     track = track,
-                    isFollowed = Random.nextBoolean()
+                    isFollowed = Random.nextBoolean(),
+                    isMan = isMan
                 )
             )
         }
@@ -71,7 +109,6 @@ class FakeDataProvider {
             "David",
             "Samuel",
             "Ahmed",
-            "Ella",
             "Michael",
             "Robert",
             "Richard",
@@ -97,7 +134,24 @@ class FakeDataProvider {
     }
 
     private fun getFakeTeamFirstName(): Any {
-        val names = arrayOf("Galaxy", "Stars", "Egy", "Code", "Skill", "Star", "IEEE", "State")
+        val names = arrayOf(
+            "Galaxy",
+            "Stars",
+            "Egy",
+            "Code",
+            "Skill",
+            "Star",
+            "IEEE",
+            "State",
+            "Home",
+            "Lazy",
+            "Universe",
+            "Tech",
+            "Swift",
+            "Bright",
+            "Fusion"
+        )
+
         if (names.isEmpty()) {
             throw IllegalArgumentException("The input array is empty.")
         }
@@ -114,7 +168,11 @@ class FakeDataProvider {
             "Heroes",
             "Stars",
             "Leaders",
-            "Founders"
+            "Founders",
+            "Owners",
+            "Creators",
+            "Champions",
+            "Engineers",
         )
         if (names.isEmpty()) {
             throw IllegalArgumentException("The input array is empty.")
@@ -145,7 +203,7 @@ class FakeDataProvider {
         return names[randomIndex]
     }
 
-    private fun getRandomTrack(): String {
+     fun getRandomTrack(): String {
         val names = arrayOf(
             "Android Developer",
             "IOS Developer",
@@ -161,7 +219,7 @@ class FakeDataProvider {
         return names[randomIndex]
     }
 
-    private fun getRandomGirlImage(): Int {
+     fun getRandomGirlImage(): Int {
         val images = arrayOf(
             R.drawable.girl1,
             R.drawable.girl2,
@@ -174,7 +232,7 @@ class FakeDataProvider {
         return images[randomIndex]
     }
 
-    private fun getRandomManImage(): Int {
+     fun getRandomManImage(): Int {
         val images = arrayOf(
             R.drawable.man1,
             R.drawable.man2,
@@ -187,7 +245,32 @@ class FakeDataProvider {
         return images[randomIndex]
     }
 
-    private fun getRandomImage(): Int {
+     fun getRandomManMentorImage(): Int {
+        val images = arrayOf(
+            R.drawable.man_mentor_1,
+            R.drawable.man_mentor_2,
+            R.drawable.man_mentor_3
+        )
+        if (images.isEmpty()) {
+            throw IllegalArgumentException("The input array is empty.")
+        }
+        val randomIndex = Random.nextInt(images.size)
+        return images[randomIndex]
+    }
+     fun getRandomGirlMentorImage(): Int {
+        val images = arrayOf(
+            R.drawable.woman_mentor_1,
+            R.drawable.woman_mentor_2,
+            R.drawable.woman_mentor_3
+        )
+        if (images.isEmpty()) {
+            throw IllegalArgumentException("The input array is empty.")
+        }
+        val randomIndex = Random.nextInt(images.size)
+        return images[randomIndex]
+    }
+
+     fun getRandomImage(): Int {
         val images = arrayOf(
             R.drawable.ic_onboarding_1,
             R.drawable.ic_onboarding_2,
@@ -221,4 +304,25 @@ class FakeDataProvider {
         list.add(TempSearchItem("Data Science", R.drawable.ic_onboarding_1))
         return list
     }
+
+    private fun initFakeServices(): MutableList<TempSearchItem> {
+        val list = ArrayList<TempSearchItem>()
+        list.add(TempSearchItem("Teams", R.drawable.ic_teams_img))
+        list.add(TempSearchItem("Courses", R.drawable.ic_courses_img))
+        list.add(TempSearchItem("Mentor", R.drawable.ic_mentor_img))
+        list.add(TempSearchItem("Friends", R.drawable.ic_friends_img))
+        list.add(TempSearchItem("Communities", R.drawable.ic_connecting_teams))
+        list.add(TempSearchItem("Hackathons", R.drawable.ic_team_goal))
+        return list
+    }
+
+    fun getFakeMentors(): MutableList<TempMentor> {
+      val list = getFakeUsers(Random.nextInt(15)+9)
+      val mentors = mutableListOf<TempMentor>()
+      for (user in list) {
+          mentors.add(user.toMentor())
+      }
+        return mentors
+    }
+
 }

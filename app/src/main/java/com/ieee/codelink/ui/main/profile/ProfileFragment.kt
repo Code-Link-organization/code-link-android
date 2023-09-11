@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
+import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.data.remote.BASE_URL_FOR_IMAGE
 import com.ieee.codelink.databinding.FragmentProfileBinding
@@ -42,13 +43,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     private fun updateUserViews(user: User) {
         binding.apply {
 
-            Glide.with(binding.ivUserImage)
-                .load(BASE_URL_FOR_IMAGE + user.imageUrl)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .centerInside()
-                .placeholder(R.drawable.ic_profile)
-                .error(R.drawable.ic_profile)
-                .into(binding.ivUserImage)
+            setImageUsingGlide(
+                view =binding.ivUserImage,
+                image = BASE_URL_FOR_IMAGE + user.imageUrl
+            )
 
             tvUserName.text = user.name
             tvUserEmail.text = user.email

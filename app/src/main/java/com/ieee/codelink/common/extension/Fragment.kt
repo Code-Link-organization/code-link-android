@@ -52,6 +52,4 @@ fun Fragment.onBackPress(action: () -> Unit) {
             }
         }
     )
-
-
 }

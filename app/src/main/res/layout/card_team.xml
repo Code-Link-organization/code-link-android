@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_team_image"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="@dimen/horizontal_padding"
+        android:layout_marginVertical="8dp"
+        android:adjustViewBounds="true"
+        android:background="@color/color_primary"
+        android:elevation="0dp"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/ic_onboarding_1" />
+
+    <TextView
+        android:id="@+id/tv_team_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text ="Code Link"
+        android:layout_marginStart="16dp"
+        android:textSize="14sp"
+        android:textColor="@color/color_text"
+        />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        />
+    
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_join"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/join"
+        android:layout_marginVertical="4dp"
+        android:textColor="@color/color_text"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        android:background="@drawable/app_button_ripple"
+        />
+
+
+</LinearLayout>

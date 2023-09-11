@@ -11,11 +11,12 @@ import android.util.Log
 import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerDrawable
+import com.ieee.codelink.R
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -25,11 +26,6 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import org.json.JSONObject
 import java.io.File
 import java.text.SimpleDateFormat
-import java.time.Duration
-import java.time.Instant
-import java.time.LocalDateTime
-import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
@@ -96,14 +92,24 @@ fun setImageUsingGlide(
     view: ImageView,
     image: Any?,
     placeholder: Drawable = getShimmerDrawable(),
-    errorImage: Any? = null,
+    errorImage: Any? = R.drawable.ic_profile,
 ) {
     try {
-        Glide.with(view.context)
-            .load(image)
-            .placeholder(placeholder)
-            .error(errorImage)
-            .into(view)
+        if (image == null){
+            Glide.with(view)
+                .load(errorImage)
+                .centerInside()
+                .into(view)
+        }else {
+            Glide.with(view)
+                .load(image)
+                .placeholder(placeholder)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(errorImage)
+                .centerInside()
+                .into(view)
+        }
+
     } catch (e: Exception) {
         Log.e("setImageUsingGlide", e.localizedMessage ?: "Unknown error")
     }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="4dp"
+    android:gravity="center"
+    android:background="@drawable/profile_section_ripple"
+    android:orientation="vertical">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_user_image"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/onboarding_button_ripple"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+        tools:src="@drawable/man1" />
+
+    <TextView
+        android:id="@+id/tv_user_namer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:autoSizeMaxTextSize="20sp"
+        android:autoSizeMinTextSize="8sp"
+        android:autoSizeTextType="uniform"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:textColor="@color/color_text"
+        android:textSize="12sp"
+        tools:text="Mohamed Emad" />
+
+
+</LinearLayout>

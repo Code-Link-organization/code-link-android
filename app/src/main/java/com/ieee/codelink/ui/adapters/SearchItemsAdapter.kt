@@ -3,6 +3,9 @@ package com.ieee.codelink.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.ieee.codelink.R
+import com.ieee.codelink.common.setImageUsingGlide
+import com.ieee.codelink.data.remote.BASE_URL_FOR_IMAGE
 import com.ieee.codelink.databinding.CardTrackBinding
 import com.ieee.codelink.domain.tempModels.TempSearchItem
 
@@ -37,7 +40,12 @@ class SearchItemsAdapter(
         }
 
         holder.binding.apply{
-            itemImage.setImageResource(item.img)
+
+            setImageUsingGlide(
+                view = itemImage,
+                image = item.img
+            )
+
             itemName.text = item.title
         }
 

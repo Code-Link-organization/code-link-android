@@ -7,10 +7,13 @@ import android.widget.ImageView
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
+import com.ieee.codelink.common.extension.onBackPress
 import com.ieee.codelink.common.openZoomableImage
+import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.core.ResponseState
@@ -25,6 +28,7 @@ import com.ieee.codelink.domain.models.responses.CreatePostResponse
 import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
 import com.ieee.codelink.domain.models.responses.ShareResponse
+import com.ieee.codelink.domain.models.toProfileUser
 import com.ieee.codelink.ui.adapters.PostsAdapter
 import com.ieee.codelink.ui.dialogs.CommentsDialogFragment
 import com.ieee.codelink.ui.dialogs.CreatePostDialogFragment
@@ -62,17 +66,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun setViews() {
         binding.apply {
-            Glide.with(binding.addPostBar.ivUserImage)
-                .load(BASE_URL_FOR_IMAGE + viewModel.getUser().imageUrl)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .centerInside()
-                .placeholder(R.drawable.ic_profile)
-                .error(R.drawable.ic_profile)
-                .into(binding.addPostBar.ivUserImage)
+            setImageUsingGlide(
+                view = binding.addPostBar.ivUserImage,
+                image = BASE_URL_FOR_IMAGE + viewModel.getUser().imageUrl,
+            )
+
         }
     }
 
     private fun setOnClicks() {
+
+        onBackPress {
+            requireActivity().finish()
+        }
+
         binding.frameAddPost.setOnClickListener {
             createPostDialog = CreatePostDialogFragment(createPost)
             createPostDialog.show(childFragmentManager, "create_post")
@@ -383,7 +390,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         val likesScreen = LikesDialogFragment(
             likeData as MutableList<LikeData>,
             openProfile = {
-                showToast("Open Profile")
+                openUserProfile(it)
             },
             followAction = {
                 showToast("Follow")
@@ -405,6 +412,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             )
             commentsScreen.show(childFragmentManager, "commentsScreen")
         }
+    }
+
+    private fun openUserProfile(likeData: LikeData) {
+        val user = likeData.toProfileUser()
+        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToOthersProfile(user))
     }
 
 }

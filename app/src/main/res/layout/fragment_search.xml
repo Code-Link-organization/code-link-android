@@ -11,6 +11,7 @@
         android:id="@+id/frame_search"
         android:layout_width="match_parent"
         android:layout_marginTop="30dp"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/horizontal_padding"
         app:layout_constraintTop_toTopOf="parent">
@@ -50,6 +51,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:clipToPadding="false"
+            tools:listitem="@layout/card_track"
+            app:spanCount="2"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
