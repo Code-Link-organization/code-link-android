@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingVertical="8dp"
+        android:background="@drawable/mentor_card_ripple">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/icon_message"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:scaleType="centerInside"
+            tools:background="@color/color_primary"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="4dp"
+            android:adjustViewBounds="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_chat3"/>
+
+        <TextView
+            android:id="@+id/tv_first_period"
+            android:layout_width="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/icon_message"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textColor="@color/color_text"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="11Am to 1pm" />
+        <TextView
+            android:id="@+id/tv_second_period"
+            android:layout_width="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/icon_message"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="12dp"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textColor="@color/color_text"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_first_period"
+            tools:text="4Pm to 7pm" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_user_image"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="4dp"
+            android:adjustViewBounds="true"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="4dp"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:layout_constraintTop_toBottomOf="@id/tv_second_period"
+            android:src="@drawable/man3"/>
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="0dp"
+            app:layout_constraintStart_toEndOf="@id/iv_user_image"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="4dp"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toEndOf="@id/tv_price"
+            android:gravity="start"
+            android:maxLines="2"
+            android:textColor="@color/color_text"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="@id/iv_user_image"
+            app:layout_constraintBottom_toTopOf="@id/tv_user_name"
+            tools:text="Eng / Mohamed Emad" />
+        <TextView
+            android:id="@+id/tv_user_track"
+            android:layout_width="0dp"
+            app:layout_constraintStart_toEndOf="@id/iv_user_image"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="4dp"
+            android:autoSizeMaxTextSize="12sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toEndOf="@id/tv_price"
+            android:gravity="start"
+            android:maxLines="1"
+            android:textColor="@color/color_text"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_name"
+            app:layout_constraintBottom_toBottomOf="@id/iv_user_image"
+            tools:text="Android Developer" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="4dp"
+            android:autoSizeMaxTextSize="12sp"
+            android:autoSizeMinTextSize="8sp"
+            android:layout_marginTop="3dp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textColor="@color/color_text"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_track"
+            tools:text="20$" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

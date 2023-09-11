@@ -1,7 +1,10 @@
 package com.ieee.codelink.ui.main.search
 
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +16,8 @@ import com.ieee.codelink.databinding.FragmentSearchBinding
 import com.ieee.codelink.domain.tempModels.TempSearchItem
 import com.ieee.codelink.ui.adapters.SearchItemsAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -32,6 +37,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     private fun setOnClickListeners() {
         onBackPress {
             if (viewModel.firstOption != null) {
+                startRvAnimationSlideOut()
                 viewModel.firstOption=null
                 setServiceLayout()
             } else {
@@ -42,14 +48,19 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
 
     private fun setServiceLayout() {
-        setUpServiceLayoutDimentions()
-        setUpServicesRecyclerView()
+        lifecycleScope.launch(Dispatchers.Main) {
+            startRvAnimationSlideIn()
+            setUpServiceLayoutDimentions()
+            setUpServicesRecyclerView()
+        }
     }
 
-
     private fun setTrackLayout() {
-        setUpTrackLayoutDimentions()
-         setUpTrackRecyclerView()
+        lifecycleScope.launch(Dispatchers.Main) {
+            startRvAnimationSlideIn()
+            setUpTrackLayoutDimentions()
+            setUpTrackRecyclerView()
+        }
     }
 
 
@@ -64,10 +75,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         constraints.width = ConstraintLayout.LayoutParams.MATCH_PARENT
         constraints.height = ConstraintLayout.LayoutParams.WRAP_CONTENT
 
-
         rvLayout.layoutParams = constraints
         binding.rvItems.setPadding(8.dp(),10.dp(),8.dp(),0)
-
     }
 
     private fun setUpTrackLayoutDimentions() {
@@ -134,22 +143,35 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     private fun goToSearch(firstOption: String, it: TempSearchItem) {
         when (firstOption) {
             "Courses" -> {
-
+             openCoursesScrean(it)
             }
 
             "Mentor" -> {
-
+                openSearchMentorsScreen(it)
             }
 
             "Friends" -> {
-               openSearchUsersScreen(it)
+                openSearchUsersScreen(it)
             }
         }
     }
 
+    private fun openSearchMentorsScreen(it: TempSearchItem) {
+        reset()
+        findNavController().navigate(
+            SearchFragmentDirections.actionSearchFragmentToSearchMentorsFragment(it.title)
+        )
+    }
+
+    private fun openCoursesScrean(it: TempSearchItem) {
+        reset()
+        findNavController().navigate(
+            SearchFragmentDirections.actionSearchFragmentToSearchCoursesFragment(it.title)
+        )
+    }
+
     private fun openSearchTeamsScreen(track: TempSearchItem) {
-        myAdapter = null
-        viewModel.firstOption = null
+        reset()
         findNavController().navigate(
             SearchFragmentDirections.actionSearchFragmentToSearchTeamsFragment(
                 track.title
@@ -157,13 +179,30 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         )
     }
     private fun openSearchUsersScreen(track: TempSearchItem) {
-        myAdapter = null
-        viewModel.firstOption = null
+        reset()
         findNavController().navigate(
             SearchFragmentDirections.actionSearchFragmentToSearchUserFragment(
                 track.title
             )
         )
     }
+
+    private fun reset(){
+        lifecycleScope.launch {
+            myAdapter = null
+            viewModel.firstOption = null
+        }
+    }
+
+    private fun startRvAnimationSlideIn() {
+        val slideInAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right)
+        binding.rvLayout.startAnimation(slideInAnimation)
+    }
+    private fun startRvAnimationSlideOut() {
+        val slideOutAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_out_left)
+        binding.rvLayout.startAnimation(slideOutAnimation)
+    }
+
+
 
 }

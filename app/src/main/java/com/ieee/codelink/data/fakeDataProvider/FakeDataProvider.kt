@@ -1,6 +1,7 @@
 package com.ieee.codelink.data.fakeDataProvider
 
 import com.ieee.codelink.R
+import com.ieee.codelink.domain.tempModels.TempMentor
 import com.ieee.codelink.domain.tempModels.TempSearchItem
 import com.ieee.codelink.domain.tempModels.TempTeam
 import com.ieee.codelink.domain.tempModels.TempUserSearch
@@ -8,10 +9,10 @@ import kotlin.random.Random
 
 class FakeDataProvider {
 
-    var fakeTracks: List<TempSearchItem>
-    var fakeServices: List<TempSearchItem>
-    var fakeUsers: List<TempUserSearch>
-    var fakeTeams: List<TempTeam>
+    var fakeTracks: MutableList<TempSearchItem>
+    var fakeServices: MutableList<TempSearchItem>
+    var fakeUsers: MutableList<TempUserSearch>
+    var fakeTeams: MutableList<TempTeam>
 
     init {
         fakeTracks = initFakeTracks()
@@ -19,6 +20,39 @@ class FakeDataProvider {
         fakeTeams = initfakeTeams()
         fakeServices = initFakeServices()
     }
+
+
+    fun getFakeCourses(track : String):List<TempUserSearch>{
+        val list = mutableListOf<TempUserSearch>()
+        val names = arrayOf(
+            "Advanced",
+            "Basics",
+            "Intermediate",
+            "Professional",
+            "in 3 hours",
+            "Pro",
+            "Lvl1",
+            "Lvl2",
+            "Lvl3",
+            "Lvl4",
+            "Lvl5",
+            "Legacy",
+            "In 30 days",
+            "From professionals",
+            "Start now"
+        )
+        for (i in 0 until names.size) {
+           list.add(
+               TempUserSearch(
+                   name = "$track ${names[i]}",
+                   image = getRandomImage(),
+                   track = track
+               )
+           )
+        }
+      return list
+    }
+
 
     private fun initfakeTeams(): MutableList<TempTeam> {
         val list = mutableListOf<TempTeam>()
@@ -252,6 +286,8 @@ class FakeDataProvider {
         list.add(TempSearchItem("Friends", R.drawable.ic_friends_img))
         return list
     }
+
+
 
 
 }

@@ -12,6 +12,7 @@ import com.ieee.codelink.domain.tempModels.TempUserSearch
 
 class UsersAdapter(
     var users: MutableList<TempUserSearch>,
+    var track :String,
     private val openProfile: (TempUserSearch) -> Unit,
     private val followAction: (TempUserSearch) -> Unit
 ) : RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
@@ -41,7 +42,7 @@ class UsersAdapter(
     private fun setViews(holder: ViewHolder, user: TempUserSearch) {
         holder.binding.apply {
             tvUserName.text = user.name
-            tvUserTrack.text = user.track
+            tvUserTrack.text = track
             Glide.with(holder.binding.ivUserImage)
                 .load(user.image)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)

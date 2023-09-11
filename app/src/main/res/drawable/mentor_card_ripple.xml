@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:color="@color/color_hint"> <!-- Set the desired ripple color -->
+
+    <item>
+        <shape >
+            <solid android:color="@color/color_secondary_background" />
+            <stroke android:color="@color/color_primary"
+                android:width="0.4dp"
+                />
+            <corners android:radius="16dp"/>
+        </shape>
+    </item>
+
+</ripple>

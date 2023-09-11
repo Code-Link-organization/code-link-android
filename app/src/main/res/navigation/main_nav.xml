@@ -12,10 +12,20 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_createPostDialogFragment"
-            app:destination="@id/createPostDialogFragment" />
+            app:destination="@id/createPostDialogFragment"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
         <action
             android:id="@+id/action_homeFragment_to_othersProfile"
-            app:destination="@id/othersProfile" />
+            app:destination="@id/othersProfile"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -24,10 +34,36 @@
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_searchFragment_to_searchTeamsFragment"
-            app:destination="@id/searchTeamsFragment" />
+            app:destination="@id/searchTeamsFragment"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
         <action
             android:id="@+id/action_searchFragment_to_searchUserFragment"
-            app:destination="@id/searchUserFragment" />
+            app:destination="@id/searchUserFragment"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_searchFragment_to_searchCoursesFragment"
+            app:destination="@id/searchCoursesFragment"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_searchFragment_to_searchMentorsFragment"
+            app:destination="@id/searchMentorsFragment"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -36,13 +72,28 @@
         tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_profileFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settingsFragment"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
         <action
             android:id="@+id/action_profileFragment_to_personalInfoFragment"
-            app:destination="@id/personalInfoFragment" />
+            app:destination="@id/personalInfoFragment"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
-            app:destination="@id/editProfileFragment" />
+            app:destination="@id/editProfileFragment"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/chatsFragment"
@@ -51,7 +102,12 @@
         tools:layout="@layout/fragment_chats" >
         <action
             android:id="@+id/action_chatsFragment_to_othersProfile"
-            app:destination="@id/othersProfile" />
+            app:destination="@id/othersProfile"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -91,7 +147,12 @@
             app:argType="string" />
         <action
             android:id="@+id/action_searchUserFragment_to_othersProfile"
-            app:destination="@id/othersProfile" />
+            app:destination="@id/othersProfile"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/othersProfile"
@@ -102,6 +163,27 @@
             app:argType="com.ieee.codelink.domain.tempModels.TempUserProfile" />
         <action
             android:id="@+id/action_othersProfile_self"
-            app:destination="@id/othersProfile" />
+            app:destination="@id/othersProfile"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
+    </fragment>
+    <fragment
+        android:id="@+id/searchCoursesFragment"
+        android:name="com.ieee.codelink.ui.main.search.searchScreens.cources.SearchCoursesFragment"
+        android:label="SearchCoursesFragment" >
+        <argument
+            android:name="track"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchMentorsFragment"
+        android:name="com.ieee.codelink.ui.main.search.searchScreens.mentors.SearchMentorsFragment"
+        android:label="SearchMentorsFragment" >
+        <argument
+            android:name="track"
+            app:argType="string" />
     </fragment>
 </navigation>

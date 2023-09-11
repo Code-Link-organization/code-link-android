@@ -14,7 +14,7 @@
     <string name="password">كلمة المرور</string>
     <string name="confirm_password">تأكيد كلمة المرور</string>
     <string name="signup">سجل معنا</string>
-    <string name="already_have_an_account">لديك حساب بلفعل؟</string>
+    <string name="already_have_an_account">لديك حساب بالفعل؟</string>
     <string name="login">سجل دخول</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -42,13 +42,13 @@
     <string name="my_teams">فرقي</string>
     <string name="search">بحث</string>
     <string name="choose_what_you_want">اختر ما تريد !</string>
-    <string name="settings">الاعدادات</string>
+    <string name="settings">الإعدادات</string>
     <string name="interfacee">الواجهة</string>
     <string name="language_region">اللغة و المنطقة</string>
     <string name="support">الدعم</string>
     <string name="dark_mode">الوضع المظلم</string>
-    <string name="notifications">الاشعارات</string>
-    <string name="privacy_policy">سياسة الخصوصيه</string>
+    <string name="notifications">الإشعارات</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
     <string name="my_courses">دروسي</string>
     <string name="logout_from_dialog">Log out </string>
     <string name="do_you_want_to_log_out">هل انت متأكد انك تريد تسجيل الخروج ؟</string>
@@ -75,5 +75,20 @@
     <string name="cancel">الغاء</string>
     <string name="block">حظر</string>
     <string name="hide">اخفاء</string>
+    <string name="what_s_on_your_mind">فيما تفكر ؟</string>
+    <string name="likes">الأعجابات</string>
+    <string name="comments">التعليقات</string>
+    <string name="post">منشور</string>
+    <string name="add_comment">اضف تعليق</string>
+    <string name="shared">تم نشر المنشور</string>
+    <string name="join">انضمام</string>
+    <string name="choose_your_technical_circle">اختر المجال التقني !</string>
+    <string name="find_users">ابحث عن اعضاء</string>
+    <string name="follow">متابعة</string>
+    <string name="following">تتابع</string>
+    <string name="followers">متابعون</string>
+    <string name="social">الصفحات الاجتماعية</string>
+    <string name="view_all">عرض الكل</string>
+    <string name="posts">المنشورات</string>
 
 </resources>

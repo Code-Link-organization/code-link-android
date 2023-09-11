@@ -86,7 +86,7 @@
                     android:clipToPadding="false"
                     android:overScrollMode="never"
                     android:paddingTop="8dp"
-                    android:paddingBottom="90dp"
+                    android:paddingBottom="30dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/card_like_person" />
             </FrameLayout>
