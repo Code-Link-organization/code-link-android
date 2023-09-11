@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
+import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.databinding.CardMentorBinding
 import com.ieee.codelink.domain.tempModels.TempMentor
 
@@ -40,18 +41,14 @@ class MentorsAdapter(
         }
 
         holder.binding.apply {
-            tvFirstPeriod.text = item.firstPeriod
-            tvSecondPeriod.text = item.secondPeriod
-            tvPrice.text = "${item.price}$"
-            tvUserName.text = item.name
-            tvUserTrack.text = item.track
-            Glide.with(ivUserImage)
-                .load(item.image)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .centerInside()
-                .placeholder(R.drawable.ic_profile)
-                .error(R.drawable.ic_profile)
-                .into(ivUserImage)
+            tvMentorName.text = item.name
+            tvPrice.text = item.price.toString()
+            tvTrack.text = item.track
+
+            setImageUsingGlide(
+                view = holder.binding.ivMentorImage,
+                image = item.image
+            )
         }
 
     }

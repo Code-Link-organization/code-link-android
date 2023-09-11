@@ -37,7 +37,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     private fun setOnClickListeners() {
         onBackPress {
             if (viewModel.firstOption != null) {
-                startRvAnimationSlideOut()
+              //  startRvAnimationSlideOut()
                 viewModel.firstOption=null
                 setServiceLayout()
             } else {
@@ -95,21 +95,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
     }
 
-    private fun setUpServicesRecyclerView() = try {
-        binding.tvTitle.text = getString(R.string.choose_what_you_want)
-        myAdapter!!.items = viewModel.fakeDataProvider.fakeServices as ArrayList<TempSearchItem>
-        myAdapter!!.notifyDataSetChanged()
-    } catch (e: Exception) {
+    private fun setUpServicesRecyclerView() {
         val rv = binding.rvItems
         initRecyclerView(rv, viewModel.fakeDataProvider.fakeServices as ArrayList<TempSearchItem>)
     }
 
 
-    private fun setUpTrackRecyclerView() = try {
-        binding.tvTitle.text = getString(R.string.choose_your_technical_circle)
-        myAdapter!!.items = viewModel.fakeDataProvider.fakeTracks as ArrayList<TempSearchItem>
-        myAdapter!!.notifyDataSetChanged()
-    } catch (e: Exception) {
+    private fun setUpTrackRecyclerView(){
         val rv = binding.rvItems
         initRecyclerView(rv, viewModel.fakeDataProvider.fakeTracks as ArrayList<TempSearchItem>)
     }
@@ -131,13 +123,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             }
         }
         rv.adapter = myAdapter
-        val gridLayoutManager = GridLayoutManager(
-            binding.root.context,
-            2,
-            GridLayoutManager.VERTICAL,
-            false
-        )
-        rv.layoutManager = gridLayoutManager
     }
 
     private fun goToSearch(firstOption: String, it: TempSearchItem) {

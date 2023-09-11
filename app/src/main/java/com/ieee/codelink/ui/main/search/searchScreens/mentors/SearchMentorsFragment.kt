@@ -25,11 +25,7 @@ class SearchMentorsFragment :
     }
 
     private fun setRv() {
-        val listOfUsers = viewModel.fakeDataProvider.fakeUsers
-        val mentors = mutableListOf<TempMentor>()
-        for (user in listOfUsers){
-            mentors.add(user.toMentor())
-        }
+        val mentors = viewModel.fakeDataProvider.getFakeMentors()
         mentorsAdapter = MentorsAdapter(
             mentors
         ) {

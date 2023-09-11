@@ -1,6 +1,6 @@
 package com.ieee.codelink.data.remote.di
 
-import com.ieee.codelink.data.remote.ApiAuthService
+import com.ieee.codelink.data.remote.ApiRemoteService
 import com.ieee.codelink.data.remote.AuthInterceptor
 import com.ieee.codelink.data.remote.BASE_URL
 import dagger.Module
@@ -55,8 +55,8 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideApiService(retrofit: Retrofit): ApiAuthService =
-        retrofit.create(ApiAuthService::class.java)
+    fun provideApiService(retrofit: Retrofit): ApiRemoteService =
+        retrofit.create(ApiRemoteService::class.java)
 
     @ApplicationScope
     @Provides

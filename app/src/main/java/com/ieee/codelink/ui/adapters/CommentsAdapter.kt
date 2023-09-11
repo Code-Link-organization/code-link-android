@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
 import com.ieee.codelink.common.getTimeDifference
+import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.data.remote.BASE_URL_FOR_IMAGE
 import com.ieee.codelink.databinding.CardCommentBinding
 import com.ieee.codelink.domain.models.Comment
@@ -45,14 +46,10 @@ class CommentsAdapter(
             tvPostTime.text = if (comment.created_at != null) {
                 getTimeDifference(comment.created_at!!)
             } else "now"
-            Glide.with(holder.binding.ivUserImage)
-                .load(BASE_URL_FOR_IMAGE + comment.user_imageUrl)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .centerInside()
-                .placeholder(R.drawable.ic_profile)
-                .error(R.drawable.ic_profile)
-                .into(holder.binding.ivUserImage)
 
+            setImageUsingGlide(
+                view = holder.binding.ivUserImage,
+                image = BASE_URL_FOR_IMAGE + comment.user_imageUrl)
         }
     }
 

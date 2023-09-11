@@ -6,7 +6,6 @@ data class TempMentor (
     var name: String,
     var image : Int,
     var track : String,
-    var price : Double,
-    var firstPeriod : String,
-    var secondPeriod : String
+    var price : String,
+    var rate : Double = 4.0
 ):Serializable

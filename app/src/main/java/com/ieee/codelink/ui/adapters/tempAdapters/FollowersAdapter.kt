@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
+import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.databinding.CardFollowerBinding
 import com.ieee.codelink.databinding.CardLikePersonBinding
 import com.ieee.codelink.domain.tempModels.TempUserSearch
@@ -41,13 +42,11 @@ class FollowersAdapter(
     private fun setViews(holder: ViewHolder, user: TempUserSearch) {
         holder.binding.apply {
             tvUserNamer.text = user.name
-            Glide.with(holder.binding.ivUserImage)
-                .load(user.image)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .centerInside()
-                .placeholder(R.drawable.ic_profile)
-                .error(R.drawable.ic_profile)
-                .into(holder.binding.ivUserImage)
+
+            setImageUsingGlide(
+                view = holder.binding.ivUserImage,
+                image = user.image
+            )
         }
     }
 

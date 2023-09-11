@@ -1,13 +1,13 @@
 package com.ieee.codelink.data.repository
 
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
-import com.ieee.codelink.data.remote.ApiAuthService
+import com.ieee.codelink.data.remote.ApiRemoteService
 import com.ieee.codelink.domain.models.responses.AuthResponse
 import com.ieee.codelink.domain.models.User
 import retrofit2.Response
 
 class AuthRepository(
-    private val api: ApiAuthService,
+    private val api: ApiRemoteService,
     private val sharedPreferenceManger: SharedPreferenceManger
 ) {
     suspend fun loginUser(email: String, password: String): Response<AuthResponse>? {

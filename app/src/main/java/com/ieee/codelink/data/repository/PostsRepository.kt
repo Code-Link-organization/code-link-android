@@ -2,7 +2,7 @@ package com.ieee.codelink.data.repository
 
 import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
-import com.ieee.codelink.data.remote.ApiAuthService
+import com.ieee.codelink.data.remote.ApiRemoteService
 import com.ieee.codelink.data.remote.CREATE_COMMENT
 import com.ieee.codelink.data.remote.GET_LIKED_USERS
 import com.ieee.codelink.data.remote.GET_POSTS
@@ -20,7 +20,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Response
 
 class PostsRepository(
-    private val api: ApiAuthService,
+    private val api: ApiRemoteService,
     private val sharedPreferenceManger: SharedPreferenceManger
 ) {
     suspend fun getPosts(): Response<PostsResponse>? {

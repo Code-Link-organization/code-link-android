@@ -5,6 +5,7 @@ import com.ieee.codelink.domain.tempModels.TempMentor
 import com.ieee.codelink.domain.tempModels.TempSearchItem
 import com.ieee.codelink.domain.tempModels.TempTeam
 import com.ieee.codelink.domain.tempModels.TempUserSearch
+import com.ieee.codelink.domain.tempModels.toMentor
 import kotlin.random.Random
 
 class FakeDataProvider {
@@ -94,7 +95,8 @@ class FakeDataProvider {
                     name = "$firstName $secondName",
                     image = img,
                     track = track,
-                    isFollowed = Random.nextBoolean()
+                    isFollowed = Random.nextBoolean(),
+                    isMan = isMan
                 )
             )
         }
@@ -243,6 +245,31 @@ class FakeDataProvider {
         return images[randomIndex]
     }
 
+     fun getRandomManMentorImage(): Int {
+        val images = arrayOf(
+            R.drawable.man_mentor_1,
+            R.drawable.man_mentor_2,
+            R.drawable.man_mentor_3
+        )
+        if (images.isEmpty()) {
+            throw IllegalArgumentException("The input array is empty.")
+        }
+        val randomIndex = Random.nextInt(images.size)
+        return images[randomIndex]
+    }
+     fun getRandomGirlMentorImage(): Int {
+        val images = arrayOf(
+            R.drawable.woman_mentor_1,
+            R.drawable.woman_mentor_2,
+            R.drawable.woman_mentor_3
+        )
+        if (images.isEmpty()) {
+            throw IllegalArgumentException("The input array is empty.")
+        }
+        val randomIndex = Random.nextInt(images.size)
+        return images[randomIndex]
+    }
+
      fun getRandomImage(): Int {
         val images = arrayOf(
             R.drawable.ic_onboarding_1,
@@ -284,10 +311,18 @@ class FakeDataProvider {
         list.add(TempSearchItem("Courses", R.drawable.ic_courses_img))
         list.add(TempSearchItem("Mentor", R.drawable.ic_mentor_img))
         list.add(TempSearchItem("Friends", R.drawable.ic_friends_img))
+        list.add(TempSearchItem("Communities", R.drawable.ic_connecting_teams))
+        list.add(TempSearchItem("Hackathons", R.drawable.ic_team_goal))
         return list
     }
 
-
-
+    fun getFakeMentors(): MutableList<TempMentor> {
+      val list = getFakeUsers(Random.nextInt(15)+9)
+      val mentors = mutableListOf<TempMentor>()
+      for (user in list) {
+          mentors.add(user.toMentor())
+      }
+        return mentors
+    }
 
 }

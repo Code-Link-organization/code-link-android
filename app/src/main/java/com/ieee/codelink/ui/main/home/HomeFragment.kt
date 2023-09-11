@@ -13,6 +13,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
 import com.ieee.codelink.common.extension.onBackPress
 import com.ieee.codelink.common.openZoomableImage
+import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.core.ResponseState
@@ -65,13 +66,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun setViews() {
         binding.apply {
-            Glide.with(binding.addPostBar.ivUserImage)
-                .load(BASE_URL_FOR_IMAGE + viewModel.getUser().imageUrl)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .centerInside()
-                .placeholder(R.drawable.ic_profile)
-                .error(R.drawable.ic_profile)
-                .into(binding.addPostBar.ivUserImage)
+            setImageUsingGlide(
+                view = binding.addPostBar.ivUserImage,
+                image = BASE_URL_FOR_IMAGE + viewModel.getUser().imageUrl,
+            )
+
         }
     }
 

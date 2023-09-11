@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
+import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.common.showToast
 import com.ieee.codelink.data.remote.BASE_URL_FOR_IMAGE
 import com.ieee.codelink.databinding.CardLikePersonBinding
@@ -46,16 +47,10 @@ class LikesAdapter(
         holder.binding.apply {
             tvUserName.text = like.user_name
             tvUserTrack.text = like.user_name
-
-
-            Glide.with(holder.binding.ivUserImage)
-                .load(BASE_URL_FOR_IMAGE + like.user_imageUrl)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .centerInside()
-                .placeholder(R.drawable.ic_profile)
-                .error(R.drawable.ic_profile)
-                .into(holder.binding.ivUserImage)
-
+            setImageUsingGlide(
+                view = holder.binding.ivUserImage,
+                image = BASE_URL_FOR_IMAGE + like.user_imageUrl
+            )
         }
     }
 

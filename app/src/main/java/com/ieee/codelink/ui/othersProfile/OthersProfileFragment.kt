@@ -8,6 +8,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
+import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.databinding.FragmentOthersProfileBinding
@@ -44,13 +45,11 @@ class OthersProfileFragment :
             followingCount.text = userData.followingCount.toString()
             likesCount.text = userData.likesCount.toString()
 
-            Glide.with(ivUserImage)
-                .load(userData.image)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .centerInside()
-                .placeholder(R.drawable.ic_profile)
-                .error(R.drawable.ic_profile)
-                .into(ivUserImage)
+            setImageUsingGlide(
+                view = ivUserImage,
+                image = userData.image
+            )
+
         }
     }
 

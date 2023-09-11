@@ -1,7 +1,7 @@
 package com.ieee.codelink.di
 
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
-import com.ieee.codelink.data.remote.ApiAuthService
+import com.ieee.codelink.data.remote.ApiRemoteService
 import com.ieee.codelink.data.repository.SettingsRepository
 import com.ieee.codelink.data.repository.UserRepository
 import dagger.Module
@@ -16,7 +16,7 @@ object ProfileModule {
     @Provides
     @Singleton
     fun provideUserRepository(
-        api: ApiAuthService,
+        api: ApiRemoteService,
         sharedPreferenceManger: SharedPreferenceManger
     ): UserRepository = UserRepository(api, sharedPreferenceManger )
     @Provides

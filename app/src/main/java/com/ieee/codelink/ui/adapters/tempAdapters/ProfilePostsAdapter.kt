@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
+import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.databinding.CardFollowerBinding
 import com.ieee.codelink.databinding.CardPostProfileBinding
 import com.ieee.codelink.domain.tempModels.TempUserSearch
@@ -40,13 +41,11 @@ class ProfilePostsAdapter(
 
     private fun setViews(holder: ViewHolder, post: Int) {
         holder.binding.apply {
-            Glide.with(holder.binding.imageView)
-                .load(post)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .centerInside()
-                .placeholder(R.drawable.ic_profile)
-                .error(R.drawable.ic_profile)
-                .into(holder.binding.imageView)
+
+            setImageUsingGlide(
+                view = holder.binding.imageView,
+                image = post
+            )
         }
     }
 

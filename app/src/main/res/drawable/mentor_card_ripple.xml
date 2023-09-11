@@ -6,9 +6,9 @@
     <item>
         <shape >
             <solid android:color="@color/color_secondary_background" />
-            <stroke android:color="@color/color_primary"
-                android:width="0.4dp"
-                />
+<!--            <stroke android:color="@color/color_primary"-->
+<!--                android:width="0.4dp"-->
+<!--                />-->
             <corners android:radius="16dp"/>
         </shape>
     </item>

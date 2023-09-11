@@ -10,10 +10,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
 import com.ieee.codelink.common.getTimeDifference
+import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.data.remote.BASE_URL_FOR_IMAGE
 import com.ieee.codelink.databinding.CardPostBinding
 import com.ieee.codelink.domain.models.Post
@@ -93,28 +92,30 @@ class PostsAdapter(
     private fun setPostImage(holder: PostsAdapter.ViewHolder, post: Post) {
         if (post.image_path != null) {
             holder.binding.ivPostImage.visibility = View.VISIBLE
+            val imagePath = if (post.image_path != null)
+                BASE_URL_FOR_IMAGE + post.image_path
+            else null
 
-            Glide.with(holder.binding.ivPostImage)
-                .load(BASE_URL_FOR_IMAGE + post.image_path)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .centerInside()
-                .placeholder(R.drawable.ic_profile)
-                .error(R.drawable.ic_profile)
-                .into(holder.binding.ivPostImage)
+            setImageUsingGlide(
+                view = holder.binding.ivPostImage,
+                image = imagePath,
+                errorImage = R.drawable.ic_gallery
+            )
+
         }else{
             holder.binding.ivPostImage.visibility = View.GONE
         }
     }
 
     private fun setUserImage(holder: ViewHolder, post: Post) {
-        val userImage = post.user_imageUrl
-        Glide.with(holder.binding.ivUserImage)
-            .load(BASE_URL_FOR_IMAGE + userImage)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .centerInside()
-            .placeholder(R.drawable.ic_profile)
-            .error(R.drawable.ic_profile)
-            .into(holder.binding.ivUserImage)
+        val userImage = if (post.user_imageUrl != null)
+            BASE_URL_FOR_IMAGE + post.user_imageUrl
+        else null
+
+        setImageUsingGlide(
+            view = holder.binding.ivUserImage,
+            image = userImage
+        )
     }
 
     private fun setOnClicks(holder: ViewHolder, post: Post) {

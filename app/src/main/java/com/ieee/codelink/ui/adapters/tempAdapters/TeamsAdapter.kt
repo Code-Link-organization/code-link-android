@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
+import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.databinding.CardTeamBinding
 import com.ieee.codelink.domain.tempModels.TempTeam
 
@@ -41,14 +42,10 @@ class TeamsAdapter(
     private fun setViews(holder: ViewHolder, team: TempTeam) {
         holder.binding.apply {
             tvTeamName.text = team.name
-            Glide.with(holder.binding.ivTeamImage)
-                .load(team.image)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .centerInside()
-                .placeholder(R.drawable.ic_profile)
-                .error(R.drawable.ic_profile)
-                .into(holder.binding.ivTeamImage)
 
+            setImageUsingGlide(
+                view = holder.binding.ivTeamImage,
+                image = team.image)
         }
     }
 
