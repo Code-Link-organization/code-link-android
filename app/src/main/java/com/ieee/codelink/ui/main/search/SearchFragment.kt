@@ -114,7 +114,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             if (viewModel.firstOption == null) {
                 if (it.title == "Teams"){
                  openSearchTeamsScreen(it)
-                }else {
+                }else if (
+                    it.title == "Communities"||
+                    it.title == "Hackathons"
+                ){
+                    showToast("coming soon" , true)
+                }
+                else{
                     viewModel.firstOption = it.title
                     setTrackLayout()
                 }
