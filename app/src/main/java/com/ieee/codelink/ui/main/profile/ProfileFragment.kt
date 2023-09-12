@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
 import com.ieee.codelink.common.setImageUsingGlide
+import com.ieee.codelink.common.showDialog
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.data.remote.BASE_URL_FOR_IMAGE
 import com.ieee.codelink.databinding.FragmentProfileBinding
@@ -49,7 +48,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             )
 
             tvUserName.text = user.name
-            tvUserEmail.text = user.email
+            //todo update it to the track later
+            tvUserTrack.text = user.email
         }
     }
 
@@ -60,8 +60,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             btnUpdateProfile.ivSectionImage.setImageResource(R.drawable.ic_edit_profile)
             btnUpdateProfile.tvSectionTitle.text = getString(R.string.edit_profile)
 
-            btnShare.ivSectionImage.setImageResource(R.drawable.ic_share)
-            btnShare.tvSectionTitle.text = getString(R.string.share_with_friends)
+            btnSettings.ivSectionImage.setImageResource(R.drawable.ic_settings)
+            btnSettings.tvSectionTitle.text = getString(R.string.settings)
 
             btnMyTeams.ivSectionImage.setImageResource(R.drawable.ic_user_teams)
             btnMyTeams.tvSectionTitle.text = getString(R.string.my_teams)
@@ -69,8 +69,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             btnMyCourses.ivSectionImage.setImageResource(R.drawable.ic_class_mates)
             btnMyCourses.tvSectionTitle.text = getString(R.string.my_courses)
 
-            btnReview.ivSectionImage.setImageResource(R.drawable.ic_reviews)
-            btnReview.tvSectionTitle.text = getString(R.string.review)
+            btnLogout.ivSectionImage.setImageResource(R.drawable.ic_logout)
+            btnLogout.tvSectionTitle.text = getString(R.string.logout)
 
         }
     }
@@ -88,8 +88,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             btnUpdateProfile.root.setOnClickListener{
                 updateProfileClicked()
             }
-            btnShare.root.setOnClickListener{
-                shareProfileClicked()
+            btnSettings.root.setOnClickListener{
+                settingsClicked()
             }
             btnMyTeams.root.setOnClickListener{
                 myTeamsClicked()
@@ -97,8 +97,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             btnMyCourses.root.setOnClickListener{
                 btnMyCourcesClicked()
             }
-            btnReview.root.setOnClickListener{
-                btnReviewClicked()
+            btnLogout.root.setOnClickListener{
+                btnLogoutClicked()
             }
 
             binding.ivPersonalInfo.setOnClickListener{
@@ -127,12 +127,20 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     private fun btnMyCourcesClicked() {
         //TODO("Not yet implemented")
     }
-    private fun btnReviewClicked() {
-       // TODO("Not yet implemented")
+    private fun btnLogoutClicked() {
+        showDialog(requireContext(),
+            getString(R.string.logout_from_dialog) ,
+            getString(R.string.do_you_want_to_log_out),
+            positiveClicked = logOut
+        )
     }
     private fun personalInfoClicked() {
         findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToPersonalInfoFragment())
     }
 
+    private val logOut: () -> Unit = {
+        viewModel.logout()
+        goToAuthActivity()
+    }
 
 }

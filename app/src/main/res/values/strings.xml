@@ -91,7 +91,6 @@
     <string name="friends">Friends</string>
     <string name="call">Call</string>
     <string name="shared">Post was Shared</string>
-    <string name="join">Join</string>
     <string name="choose_your_technical_circle">Choose your technical circle!</string>
     <string name="find_users">Find Users</string>
     <string name="follow">Follow</string>
@@ -100,4 +99,6 @@
     <string name="social">Social contacts</string>
     <string name="view_all">View all</string>
     <string name="posts">Posts</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="delete_account">Delete account</string>
 </resources>

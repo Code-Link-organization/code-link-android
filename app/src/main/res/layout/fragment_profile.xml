@@ -52,11 +52,11 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:background="@drawable/profile_section_ripple"
-                android:padding="6dp"
                 app:tint="@color/color_text"
                 android:layout_margin="12dp"
+                app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                 android:adjustViewBounds="true"
-                android:src="@drawable/ic_settings"
+                android:src="@drawable/ic_share_small"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,11 +64,10 @@
                 android:id="@+id/iv_personal_info"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:padding="8dp"
                 android:layout_margin="12dp"
                 app:tint="@color/color_text"
                 android:adjustViewBounds="true"
-                android:src="@drawable/ic_edit_profile"
+                android:src="@drawable/ic_details_small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -86,7 +85,7 @@
                 tools:text="Mohamed Emad" />
 
             <TextView
-                android:id="@+id/tv_user_email"
+                android:id="@+id/tv_user_track"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -103,15 +102,10 @@
                 android:layout_marginTop="10dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_user_email">
+                app:layout_constraintTop_toBottomOf="@id/tv_user_track">
 
                 <include
                     android:id="@+id/btn_update_profile"
-                    layout="@layout/profile_section_card"
-                    />
-
-                <include
-                    android:id="@+id/btn_share"
                     layout="@layout/profile_section_card"
                     />
 
@@ -125,11 +119,14 @@
                     layout="@layout/profile_section_card" />
 
                 <include
-                    android:id="@+id/btn_review"
+                    android:id="@+id/btn_settings"
                     layout="@layout/profile_section_card"
                     />
 
-
+                <include
+                    android:id="@+id/btn_logout"
+                    layout="@layout/profile_section_card"
+                    />
 
             </LinearLayout>
 
