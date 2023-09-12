@@ -53,7 +53,20 @@
             android:layout_margin="12dp"
             android:adjustViewBounds="true"
             android:src="@drawable/ic_details_small"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/color_text" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_invite_user"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_margin="12dp"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_invite_user"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/color_text" />
 
