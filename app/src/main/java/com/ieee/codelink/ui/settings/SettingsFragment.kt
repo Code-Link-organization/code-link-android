@@ -51,8 +51,11 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
             btnAboutUs.tvSectionTitle.text = getString(R.string.info)
             btnAboutUs.ivSectionImage.setImageResource(R.drawable.ic_info)
 
-            btnLogout.tvSectionTitle.text = getString(R.string.logout)
-            btnLogout.ivSectionImage.setImageResource(R.drawable.ic_logout)
+            btnContactUs.tvSectionTitle.text = getString(R.string.contact_us)
+            btnContactUs.ivSectionImage.setImageResource(R.drawable.ic_contact_us)
+
+            btnDeleteAccount.tvSectionTitle.text = getString(R.string.delete_account)
+            btnDeleteAccount.ivSectionImage.setImageResource(R.drawable.ic_remove_user)
 
 
             btnSecurity.tvSectionTitle.text = getString(R.string.privacy_policy)
@@ -123,8 +126,12 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
 
 
     private fun supportSectionClicks() {
-        binding.btnLogout.root.setOnClickListener {
-            logoutClicked()
+        binding.btnContactUs.root.setOnClickListener {
+         showToast("contact us",true)
+        }
+
+        binding.btnDeleteAccount.root.setOnClickListener {
+         showToast("delete account",true)
         }
 
         binding.btnSecurity.root.setOnClickListener {
@@ -142,18 +149,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         }
     }
 
-    private fun logoutClicked() {
-        showDialog(requireContext(),
-            getString(R.string.logout_from_dialog) ,
-            getString(R.string.do_you_want_to_log_out),
-            positiveClicked = logOut
-        )
-    }
 
-    private val logOut: () -> Unit = {
-        viewModel.logout()
-        goToAuthActivity()
-    }
 
     private fun setSelectedLanguage() {
         viewModel.setLanguageFlagValue(false)
