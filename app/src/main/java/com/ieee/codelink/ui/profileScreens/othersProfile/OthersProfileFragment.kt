@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.BaseViewModel
@@ -46,7 +47,7 @@ class OthersProfileFragment :
 
             setImageUsingGlide(
                 view = ivUserImage,
-                image = userData.image
+                image = getImageForGlide(userData.image)
             )
 
         }

@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.ieee.codelink.R
 import com.ieee.codelink.common.extension.onBackPress
+import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.openZoomableImage
 import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.core.BaseFragment
@@ -64,9 +65,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.apply {
             setImageUsingGlide(
                 view = binding.addPostBar.ivUserImage,
-                image = BASE_URL_FOR_IMAGE + viewModel.getUser().imageUrl,
+                image = getImageForGlide(viewModel.getUser().imageUrl),
             )
-
         }
     }
 

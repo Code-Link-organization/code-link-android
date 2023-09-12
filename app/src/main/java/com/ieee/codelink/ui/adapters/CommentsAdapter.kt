@@ -3,9 +3,7 @@ package com.ieee.codelink.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.ieee.codelink.R
+import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.getTimeDifference
 import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.data.remote.BASE_URL_FOR_IMAGE
@@ -49,7 +47,8 @@ class CommentsAdapter(
 
             setImageUsingGlide(
                 view = holder.binding.ivUserImage,
-                image = BASE_URL_FOR_IMAGE + comment.user_imageUrl)
+                image = getImageForGlide(comment.user_imageUrl)
+            )
         }
     }
 

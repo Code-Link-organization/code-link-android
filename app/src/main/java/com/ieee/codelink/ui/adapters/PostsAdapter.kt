@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.ieee.codelink.R
+import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.getTimeDifference
 import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.data.remote.BASE_URL_FOR_IMAGE
@@ -92,13 +93,10 @@ class PostsAdapter(
     private fun setPostImage(holder: PostsAdapter.ViewHolder, post: Post) {
         if (post.image_path != null) {
             holder.binding.ivPostImage.visibility = View.VISIBLE
-            val imagePath = if (post.image_path != null)
-                BASE_URL_FOR_IMAGE + post.image_path
-            else null
 
             setImageUsingGlide(
                 view = holder.binding.ivPostImage,
-                image = imagePath,
+                image = getImageForGlide(post.image_path),
                 errorImage = R.drawable.ic_gallery
             )
 
@@ -108,13 +106,10 @@ class PostsAdapter(
     }
 
     private fun setUserImage(holder: ViewHolder, post: Post) {
-        val userImage = if (post.user_imageUrl != null)
-            BASE_URL_FOR_IMAGE + post.user_imageUrl
-        else null
 
         setImageUsingGlide(
             view = holder.binding.ivUserImage,
-            image = userImage
+            image = getImageForGlide(post.user_imageUrl)
         )
     }
 
