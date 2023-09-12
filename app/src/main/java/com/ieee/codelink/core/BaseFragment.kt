@@ -147,7 +147,7 @@ abstract class BaseFragment
 
     fun showToast(
         message: String,
-        success: Boolean = false,
+        success: Boolean = true,
         hideInRelease: Boolean = false,
     ) {
         if (hideInRelease) return

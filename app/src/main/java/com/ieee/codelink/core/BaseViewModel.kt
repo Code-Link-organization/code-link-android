@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ieee.codelink.common.network.globalNetworkCall
 import com.ieee.codelink.common.parseErrorMessage
+import com.ieee.codelink.data.fakeDataProvider.FakeDataProvider
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
 import retrofit2.Response
@@ -46,5 +47,7 @@ open class BaseViewModel : ViewModel() {
         val errorMessage = parseErrorMessage(errorBody)
         return ResponseState.Error(errorMessage , null)
     }
+
+    fun getFakeDataProvider() = FakeDataProvider()
 
 }

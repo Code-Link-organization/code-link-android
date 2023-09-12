@@ -97,13 +97,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
     private fun setUpServicesRecyclerView() {
         val rv = binding.rvItems
-        initRecyclerView(rv, viewModel.fakeDataProvider.fakeServices as ArrayList<TempSearchItem>)
+        initRecyclerView(rv, viewModel.getFakeDataProvider().fakeServices as ArrayList<TempSearchItem>)
     }
 
 
     private fun setUpTrackRecyclerView(){
         val rv = binding.rvItems
-        initRecyclerView(rv, viewModel.fakeDataProvider.fakeTracks as ArrayList<TempSearchItem>)
+        initRecyclerView(rv, viewModel.getFakeDataProvider().fakeTracks as ArrayList<TempSearchItem>)
     }
 
 

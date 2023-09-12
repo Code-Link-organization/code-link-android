@@ -25,7 +25,7 @@ class SearchMentorsFragment :
     }
 
     private fun setRv() {
-        val mentors = viewModel.fakeDataProvider.getFakeMentors()
+        val mentors = viewModel.getFakeDataProvider().getFakeMentors()
         mentorsAdapter = MentorsAdapter(
             mentors
         ) {
