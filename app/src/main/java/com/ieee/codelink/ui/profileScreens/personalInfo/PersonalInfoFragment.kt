@@ -1,4 +1,4 @@
-package com.ieee.codelink.ui.personalInfo
+package com.ieee.codelink.ui.profileScreens.personalInfo
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

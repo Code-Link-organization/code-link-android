@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
+    android:background="@drawable/profile_section_ripple"
     android:gravity="center_vertical">
 
     <com.google.android.material.imageview.ShapeableImageView

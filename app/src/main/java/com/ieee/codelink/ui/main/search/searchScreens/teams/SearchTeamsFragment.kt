@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.databinding.FragmentSearchTeamsBinding
@@ -34,11 +35,15 @@ class SearchTeamsFragment : BaseFragment<FragmentSearchTeamsBinding>(FragmentSea
                     showToast("Join Team")
                 },
                 openTeam = {
-                    showToast("Open Team")
+                    openTeam(it)
                 }
             )
             binding.rvTeams.adapter = teamsAdapter
         }
+    }
+
+    private fun openTeam(team: TempTeam) {
+       findNavController().navigate(SearchTeamsFragmentDirections.actionSearchTeamsFragmentToTeamDetailsFragment(team))
     }
 
     private fun setViews() {

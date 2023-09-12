@@ -1,4 +1,4 @@
-package com.ieee.codelink.ui.othersProfile
+package com.ieee.codelink.ui.profileScreens.othersProfile
 
 import android.os.Bundle
 import android.view.View
@@ -137,7 +137,11 @@ class OthersProfileFragment :
 
     private fun openUserProfile(user: TempUserSearch) {
       val profileUser = user.toTempUserProfile()
-      findNavController().navigate(OthersProfileFragmentDirections.actionOthersProfileSelf(profileUser))
+      findNavController().navigate(
+          OthersProfileFragmentDirections.actionOthersProfileSelf(
+              profileUser
+          )
+      )
     }
 
 }

@@ -4,47 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="2dp"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="6dp"
+    android:elevation="2dp"
     app:cardCornerRadius="17dp"
+    android:background="@drawable/profile_section_ripple"
     app:strokeColor="@color/accent_color"
     app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="8dp">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/shapeableImageView"
-            android:layout_width="@dimen/_70sdp"
-            android:layout_height="@dimen/_70sdp"
-            android:layout_marginTop="16dp"
+            android:id="@+id/iv_user_image"
+            android:layout_width="0dp"
+            android:layout_height="90dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/rounded30" />
+            android:adjustViewBounds="true"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            tools:src="@drawable/ic_onboarding_2" />
 
         <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_user_name"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="4dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:ellipsize="end"
-            android:maxLines="2"
+            android:layout_marginBottom="12dp"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             android:textColor="@color/color_text"
             android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/iv_user_image"
+            tools:text="Mohamed Emad" />
+
+        <TextView
+            android:id="@+id/tv_track"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textColor="@color/color_text"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shapeableImageView"
-            tools:text="Technical field" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_name"
+            tools:text="Android Developer" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/iv_remove_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_delete_member_frame" />
@@ -53,10 +81,10 @@
             android:id="@+id/imageView5"
             android:layout_width="@dimen/_12sdp"
             android:layout_height="@dimen/_12sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-            app:layout_constraintEnd_toEndOf="@+id/imageView4"
-            app:layout_constraintStart_toStartOf="@+id/imageView4"
-            app:layout_constraintTop_toTopOf="@+id/imageView4"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_remove_user"
+            app:layout_constraintEnd_toEndOf="@+id/iv_remove_user"
+            app:layout_constraintStart_toStartOf="@+id/iv_remove_user"
+            app:layout_constraintTop_toTopOf="@+id/iv_remove_user"
             app:srcCompat="@drawable/ic_delete_cross" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

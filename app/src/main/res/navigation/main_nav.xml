@@ -116,12 +116,12 @@
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/personalInfoFragment"
-        android:name="com.ieee.codelink.ui.personalInfo.PersonalInfoFragment"
+        android:name="com.ieee.codelink.ui.profileScreens.personalInfo.PersonalInfoFragment"
         android:label="fragment_personal_info"
         tools:layout="@layout/fragment_personal_info" />
     <fragment
         android:id="@+id/editProfileFragment"
-        android:name="com.ieee.codelink.ui.editProfile.EditProfileFragment"
+        android:name="com.ieee.codelink.ui.profileScreens.editProfile.EditProfileFragment"
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" />
     <dialog
@@ -136,6 +136,14 @@
         <argument
             android:name="track"
             app:argType="string" />
+        <action
+            android:id="@+id/action_searchTeamsFragment_to_teamDetailsFragment"
+            app:destination="@id/teamDetailsFragment"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/searchUserFragment"
@@ -156,7 +164,7 @@
     </fragment>
     <fragment
         android:id="@+id/othersProfile"
-        android:name="com.ieee.codelink.ui.othersProfile.OthersProfileFragment"
+        android:name="com.ieee.codelink.ui.profileScreens.othersProfile.OthersProfileFragment"
         android:label="OthersProfile" >
         <argument
             android:name="user"
@@ -185,5 +193,13 @@
         <argument
             android:name="track"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/teamDetailsFragment"
+        android:name="com.ieee.codelink.ui.teamsScreens.teamDetails.TeamDetailsFragment"
+        android:label="TeamDetailsFragment" >
+        <argument
+            android:name="team"
+            app:argType="com.ieee.codelink.domain.tempModels.TempTeam" />
     </fragment>
 </navigation>

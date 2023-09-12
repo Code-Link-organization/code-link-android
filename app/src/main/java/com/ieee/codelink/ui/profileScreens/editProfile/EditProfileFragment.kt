@@ -1,4 +1,4 @@
-package com.ieee.codelink.ui.editProfile
+package com.ieee.codelink.ui.profileScreens.editProfile
 
 import android.os.Bundle
 import android.view.View
