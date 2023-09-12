@@ -28,8 +28,8 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_facebook"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/profile_social_icon"
+            android:layout_height="@dimen/profile_social_icon"
             android:layout_marginStart="12dp"
             android:adjustViewBounds="true"
             android:background="@drawable/onboarding_button_ripple"
@@ -41,8 +41,8 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_twitter"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/profile_social_icon"
+            android:layout_height="@dimen/profile_social_icon"
             android:layout_marginStart="12dp"
             android:adjustViewBounds="true"
             android:background="@drawable/onboarding_button_ripple"
@@ -54,8 +54,8 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_linkedin"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/profile_social_icon"
+            android:layout_height="@dimen/profile_social_icon"
             android:layout_marginStart="12dp"
             android:adjustViewBounds="true"
             android:background="@drawable/onboarding_button_ripple"
@@ -67,8 +67,8 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_github"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/profile_social_icon"
+            android:layout_height="@dimen/profile_social_icon"
             android:layout_marginStart="12dp"
             android:adjustViewBounds="true"
             android:background="@drawable/onboarding_button_ripple"
@@ -80,8 +80,8 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_behance"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/profile_social_icon"
+            android:layout_height="@dimen/profile_social_icon"
             android:layout_marginStart="12dp"
             android:adjustViewBounds="true"
             android:background="@drawable/onboarding_button_ripple"

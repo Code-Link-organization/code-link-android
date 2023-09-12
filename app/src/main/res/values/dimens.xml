@@ -19,4 +19,5 @@
     <dimen name="track_h">22dp</dimen>
     <dimen name="track_w">30dp</dimen>
     <dimen name="_30dp">30dp</dimen>
+    <dimen name="profile_social_icon">30dp</dimen>
 </resources>

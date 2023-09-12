@@ -66,6 +66,7 @@
                 android:layout_height="35dp"
                 android:layout_margin="12dp"
                 app:tint="@color/color_text"
+                app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                 android:adjustViewBounds="true"
                 android:src="@drawable/ic_details_small"
                 app:layout_constraintEnd_toEndOf="parent"
