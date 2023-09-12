@@ -15,10 +15,8 @@ class SearchViewModel @Inject constructor(
     private val userRepository: UserRepository,
 ) : BaseViewModel() {
 
-
     var firstOption : String? = null
     val fakeDataProvider = FakeDataProvider()
-
 
     fun reset() {
         firstOption = null

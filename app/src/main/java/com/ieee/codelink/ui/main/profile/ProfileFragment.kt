@@ -119,8 +119,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment())
     }
     private fun myTeamsClicked() {
-        //TODO("Not yet implemented")
+        openMyTeamsScreen()
     }
+
+    private fun openMyTeamsScreen() {
+        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToMyTeamsFragment())
+    }
+
     private fun shareProfileClicked() {
         //TODO("Not yet implemented")
     }

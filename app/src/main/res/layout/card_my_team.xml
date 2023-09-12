@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:background="@drawable/profile_section_ripple"
+    android:gravity="center_vertical">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_team_image"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="@dimen/horizontal_padding"
+        android:layout_marginVertical="8dp"
+        android:adjustViewBounds="true"
+        android:background="@color/color_primary"
+        android:elevation="0dp"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/ic_onboarding_1" />
+
+    <TextView
+        android:id="@+id/tv_team_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text ="Code Link"
+        android:layout_marginStart="16dp"
+        android:textSize="14sp"
+        android:textColor="@color/color_text"
+        />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        />
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_next_arrow"
+        app:tint="@color/color_text"
+        android:padding="5dp"
+        />
+
+</LinearLayout>
