@@ -16,7 +16,6 @@ class SearchViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     var firstOption : String? = null
-    val fakeDataProvider = FakeDataProvider()
 
     fun reset() {
         firstOption = null

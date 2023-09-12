@@ -280,3 +280,5 @@ fun getCurrentUtcDateTime(): String {
     val currentDate = Date()
     return dateFormat.format(currentDate)
 }
+
+fun Boolean.toggle() = !this

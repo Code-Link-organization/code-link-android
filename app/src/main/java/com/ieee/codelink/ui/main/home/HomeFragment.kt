@@ -40,8 +40,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     override val viewModel: MainViewModel by activityViewModels<MainViewModel>()
     private lateinit var postsAdapter: PostsAdapter
-    private lateinit var createPostDialog: CreatePostDialogFragment
-    private lateinit var commentsScreen : CommentsDialogFragment
+    private var createPostDialog: CreatePostDialogFragment? = null
+    private var commentsScreen: CommentsDialogFragment? = null
+    private var likesScreen: LikesDialogFragment? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -77,7 +78,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
         binding.frameAddPost.setOnClickListener {
             createPostDialog = CreatePostDialogFragment(createPost)
-            createPostDialog.show(childFragmentManager, "create_post")
+
+            createPostDialog?.show(childFragmentManager, "create_post")
         }
     }
 
@@ -171,7 +173,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     lifecycleScope.launch {
                         val newComment = response.data.comments.last()
                         postsAdapter.increaseCommentCount(newComment.post_id)
-                        commentsScreen.addCommentToList(newComment)
+                        commentsScreen?.addCommentToList(newComment)
                     }
                 }
             }
@@ -183,22 +185,26 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             is ResponseState.Empty,
             is ResponseState.NotAuthorized,
             is ResponseState.UnKnownError -> {
+                stopLoadingAnimation()
             }
 
             is ResponseState.NetworkError -> {
+                stopLoadingAnimation()
                 showToast(getString(R.string.network_error))
             }
 
             is ResponseState.Error -> {
+                stopLoadingAnimation()
                 com.ieee.codelink.common.showToast(state.message.toString(), requireContext())
                 viewModel.postLikesRequestState.value = ResponseState.Empty()
             }
 
             is ResponseState.Loading -> {
-                //todo : if there is time add loading bars to the app
+                startLoadingAnimation()
             }
 
             is ResponseState.Success -> {
+                stopLoadingAnimation()
                 state.data?.let { response ->
                     lifecycleScope.launch {
                         openCommentsScreen(response.data.comments , postId = viewModel.openedPostId)
@@ -209,6 +215,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
     private fun postLikesObserver(state: ResponseState<LikesResponse>) {
+        stopLoadingAnimation()
         when (state) {
             is ResponseState.Empty,
             is ResponseState.NotAuthorized,
@@ -225,7 +232,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             }
 
             is ResponseState.Loading -> {
-                //todo : if there is time add loading bars to the app
+                startLoadingAnimation()
             }
 
             is ResponseState.Success -> {
@@ -261,7 +268,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             is ResponseState.Success -> {
                 state.data?.let { response ->
                     lifecycleScope.launch {
-                        dismissDialog()
+                        dismissCreatePostDialog()
                         addPostToList(response.data.post)
                     }
                 }
@@ -269,7 +276,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
         }
     }
-
     private fun postsObserver(state: ResponseState<PostsResponse>) {
         when (state) {
             is ResponseState.Empty,
@@ -369,11 +375,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-    private fun dismissDialog() = try {
-        createPostDialog.dismiss()
-    } catch (_: Exception) {
-    }
-
     private val openImageView : (String, ImageView, Activity) -> Unit = {url,iv,activity ->
         openZoomableImage(
             url,
@@ -383,7 +384,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     private fun openLikesScreen(likeData: List<LikeData>) {
-        val likesScreen = LikesDialogFragment(
+        likesScreen = LikesDialogFragment(
             likeData as MutableList<LikeData>,
             openProfile = {
                 openUserProfile(it)
@@ -392,7 +393,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 showToast("Follow")
             }
         )
-        likesScreen.show(childFragmentManager, "likesScreen")
+        likesScreen?.show(childFragmentManager, "likesScreen")
     }
 
     private fun openCommentsScreen(comments: List<Comment>,postId: Int?) {
@@ -406,7 +407,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     }
                 }
              )
-            commentsScreen.show(childFragmentManager, "commentsScreen")
+            commentsScreen?.show(childFragmentManager, "commentsScreen")
         }
     }
 
@@ -429,4 +430,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             cancelAnimation()
         }
     }
+
+    private fun dismissCreatePostDialog() = try {
+        createPostDialog?.dismiss()
+        createPostDialog = null
+    } catch (_: Exception) {
+    }
+
+    private fun dismissCommentsDialog() = try {
+        commentsScreen?.dismiss()
+        commentsScreen = null
+    } catch (_: Exception) {
+    }
+
+    private fun dismissLikesDialog() = try {
+        likesScreen?.dismiss()
+        likesScreen = null
+    } catch (_: Exception) {
+    }
+
+    override fun onResume() {
+        super.onResume()
+        dismissCreatePostDialog()
+        dismissCommentsDialog()
+        dismissLikesDialog()
+    }
+
 }

@@ -31,7 +31,7 @@ class SearchUserFragment : BaseFragment<FragmentSeatchUserBinding>(FragmentSeatc
     private fun setupRv() {
         lifecycleScope.launch(Dispatchers.Main) {
             usersAdapter = UsersAdapter(
-                viewModel.fakeDataProvider.fakeUsers,
+                viewModel.getFakeDataProvider().fakeUsers,
                 navArgs.track + " Developer",
                 openProfile = {
                     openProfile(it)

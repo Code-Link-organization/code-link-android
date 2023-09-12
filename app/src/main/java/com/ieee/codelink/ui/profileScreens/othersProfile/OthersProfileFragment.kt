@@ -5,9 +5,6 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.ieee.codelink.R
 import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.BaseViewModel
@@ -17,7 +14,9 @@ import com.ieee.codelink.domain.tempModels.TempUserSearch
 import com.ieee.codelink.domain.tempModels.toTempUserProfile
 import com.ieee.codelink.ui.adapters.tempAdapters.FollowersAdapter
 import com.ieee.codelink.ui.adapters.tempAdapters.ProfilePostsAdapter
+import com.ieee.codelink.ui.dialogs.InviteUserDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.random.Random
 
 @AndroidEntryPoint
 class OthersProfileFragment :
@@ -74,6 +73,9 @@ class OthersProfileFragment :
 
             ivUserImage.setOnClickListener {
                 showToast("open user image")
+            }
+            ivInviteUser.setOnClickListener {
+                openInviteUserDialog()
             }
         }
     }
@@ -142,6 +144,15 @@ class OthersProfileFragment :
               profileUser
           )
       )
+    }
+
+    private fun openInviteUserDialog() {
+        val inviteScreen = InviteUserDialogFragment(
+            viewModel.getFakeDataProvider().getFakeTeams(Random.nextInt(5)+2)
+        ){
+            showToast("invited to ${it.size} teams")
+        }
+        inviteScreen.show(childFragmentManager , "inviteScreen")
     }
 
 }

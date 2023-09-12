@@ -38,7 +38,7 @@ class SearchTeamsFragment : BaseFragment<FragmentSearchTeamsBinding>(FragmentSea
     private fun setRv() {
         lifecycleScope.launch(Dispatchers.Main) {
             teamsAdapter = TeamsAdapter(
-                viewModel.fakeDataProvider.fakeTeams ,
+                viewModel.getFakeDataProvider().fakeTeams ,
                 joinTeam = {
                     showToast("Join Team")
                 },

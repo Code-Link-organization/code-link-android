@@ -108,7 +108,6 @@
                     tools:listitem="@layout/card_post" />
 
             </FrameLayout>
-
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

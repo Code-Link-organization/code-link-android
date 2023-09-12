@@ -18,7 +18,7 @@ class FakeDataProvider {
     init {
         fakeTracks = initFakeTracks()
         fakeUsers = getFakeUsers()
-        fakeTeams = initfakeTeams()
+        fakeTeams = getFakeTeams()
         fakeServices = initFakeServices()
     }
 
@@ -55,9 +55,10 @@ class FakeDataProvider {
     }
 
 
-    private fun initfakeTeams(): MutableList<TempTeam> {
+
+     fun getFakeTeams(num: Int = 25): MutableList<TempTeam> {
         val list = mutableListOf<TempTeam>()
-        for (i in 0 until 50) {
+        for (i in 0 until num) {
             var name = "${getFakeTeamFirstName()} ${getFakeTeamLastName()}"
             var teamDescription = getFakeTeamBio()
             var image = getRandomImage()

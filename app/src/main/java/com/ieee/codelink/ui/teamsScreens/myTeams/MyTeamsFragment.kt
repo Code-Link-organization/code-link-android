@@ -43,7 +43,7 @@ class MyTeamsFragment :
     private fun setRv() {
         lifecycleScope.launch(Dispatchers.Main) {
             teamsAdapter = MyTeamsAdapter(
-                viewModel.fakeDataProvider.fakeTeams
+                viewModel.getFakeDataProvider().fakeTeams
             ) {
                 openTeam(it)
             }
