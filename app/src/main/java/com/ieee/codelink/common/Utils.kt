@@ -17,6 +17,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerDrawable
 import com.ieee.codelink.R
+import com.ieee.codelink.data.remote.BASE_URL_FOR_IMAGE
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -282,3 +283,10 @@ fun getCurrentUtcDateTime(): String {
 }
 
 fun Boolean.toggle() = !this
+
+fun getImageForGlide(url: String?) = if (url == null) {
+    null
+} else {
+    BASE_URL_FOR_IMAGE + url
+}
+fun getImageForGlide(image: Int?) = image

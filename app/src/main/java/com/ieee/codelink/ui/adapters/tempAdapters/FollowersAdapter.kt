@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
+import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.databinding.CardFollowerBinding
 import com.ieee.codelink.databinding.CardLikePersonBinding
@@ -45,7 +46,7 @@ class FollowersAdapter(
 
             setImageUsingGlide(
                 view = holder.binding.ivUserImage,
-                image = user.image
+                image = getImageForGlide(user.image)
             )
         }
     }
