@@ -28,7 +28,7 @@ class TeamDetailsFragment : BaseFragment<FragmentTeamDetailsBinding>(FragmentTea
 
     private fun setOnClickListeners() {
         binding.apply {
-            btnBack.setOnClickListener {
+            btnChat.setOnClickListener {
                 findNavController().navigateUp()
             }
         }

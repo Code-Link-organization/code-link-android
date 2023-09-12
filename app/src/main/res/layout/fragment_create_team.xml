@@ -110,7 +110,7 @@
 
 
     <com.kusu.loadingbutton.LoadingButton
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_create"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

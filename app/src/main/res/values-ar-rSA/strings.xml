@@ -90,5 +90,16 @@
     <string name="social">الصفحات الاجتماعية</string>
     <string name="view_all">عرض الكل</string>
     <string name="posts">المنشورات</string>
-
+    <string name="name_of_team">اسم الفريق</string>
+    <string name="name_of_project">اسم المشروع</string>
+    <string name="description_of_the_project">وصف الفريق</string>
+    <string name="create">انشئ</string>
+    <string name="team_name">اسم الفريق</string>
+    <string name="team_members_names">أعضاء الفريق</string>
+    <string name="inbox">الوارد</string>
+    <string name="friends">الاصدقاء</string>
+    <string name="call">المكالمات</string>
+    <string name="contact_us">تواصل معنا</string>
+    <string name="delete_account">حذف الحساب</string>
+    <string name="about">عنا</string>
 </resources>

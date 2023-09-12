@@ -94,6 +94,14 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_profileFragment_to_myTeamsFragment"
+            app:destination="@id/myTeamsFragment"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/chatsFragment"
@@ -139,6 +147,14 @@
         <action
             android:id="@+id/action_searchTeamsFragment_to_teamDetailsFragment"
             app:destination="@id/teamDetailsFragment"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_searchTeamsFragment_to_createTeamFragment"
+            app:destination="@id/createTeamFragment"
 
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@android:anim/slide_out_right"
@@ -201,5 +217,25 @@
         <argument
             android:name="team"
             app:argType="com.ieee.codelink.domain.tempModels.TempTeam" />
+    </fragment>
+    <fragment
+        android:id="@+id/createTeamFragment"
+        android:name="com.ieee.codelink.ui.teamsScreens.createTeam.CreateTeamFragment"
+        android:label="CreateTeamFragment" />
+    <fragment
+        android:id="@+id/myTeamsFragment"
+        android:name="com.ieee.codelink.ui.teamsScreens.myTeams.MyTeamsFragment"
+        android:label="MyTeamsFragment" >
+        <action
+            android:id="@+id/action_myTeamsFragment_to_createTeamFragment"
+            app:destination="@id/createTeamFragment"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_myTeamsFragment_to_teamDetailsFragment"
+            app:destination="@id/teamDetailsFragment" />
     </fragment>
 </navigation>

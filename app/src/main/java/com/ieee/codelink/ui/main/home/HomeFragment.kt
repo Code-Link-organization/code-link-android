@@ -4,18 +4,15 @@ import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import androidx.core.view.isGone
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
 import com.ieee.codelink.common.extension.onBackPress
 import com.ieee.codelink.common.openZoomableImage
 import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.core.BaseFragment
-import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.data.remote.BASE_URL_FOR_IMAGE
 import com.ieee.codelink.databinding.FragmentHomeBinding
@@ -35,9 +32,7 @@ import com.ieee.codelink.ui.dialogs.CreatePostDialogFragment
 import com.ieee.codelink.ui.dialogs.LikesDialogFragment
 import com.ieee.codelink.ui.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
@@ -151,7 +146,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
         }
     }
-
     private fun createComment(state: ResponseState<CommentsResponse>) {
         when (state) {
             is ResponseState.Empty,
@@ -184,7 +178,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
         }
     }
-
     private fun postCommentsObserver(state: ResponseState<CommentsResponse>) {
         when (state) {
             is ResponseState.Empty,
@@ -215,7 +208,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
         }
     }
-
     private fun postLikesObserver(state: ResponseState<LikesResponse>) {
         when (state) {
             is ResponseState.Empty,
@@ -246,7 +238,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
         }
     }
-
     private fun createPostsObserver(state: ResponseState<CreatePostResponse>) {
         when (state) {
             is ResponseState.Empty,
@@ -268,7 +259,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             }
 
             is ResponseState.Success -> {
-                state.data?.let {response ->
+                state.data?.let { response ->
                     lifecycleScope.launch {
                         dismissDialog()
                         addPostToList(response.data.post)
@@ -279,27 +270,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-    private fun addPostToList(post: Post) {
-       postsAdapter.addPost(post)
-    }
-
     private fun postsObserver(state: ResponseState<PostsResponse>) {
         when (state) {
             is ResponseState.Empty,
             is ResponseState.NotAuthorized,
             is ResponseState.UnKnownError -> {
+                stopLoadingAnimation()
             }
 
             is ResponseState.NetworkError -> {
                 showToast(getString(R.string.network_error))
             }
+
             is ResponseState.Error -> {
+                stopLoadingAnimation()
                 com.ieee.codelink.common.showToast(state.message.toString(), requireContext())
                 viewModel.postsRequestState.value = ResponseState.Empty()
             }
+
             is ResponseState.Loading -> {
+                startLoadingAnimation()
             }
+
             is ResponseState.Success -> {
+                stopLoadingAnimation()
                 state.data?.let { response ->
                     lifecycleScope.launch {
                         setPostsRV(response.data.postData)
@@ -309,7 +303,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
         }
     }
-
+    private fun addPostToList(post: Post) {
+       postsAdapter.addPost(post)
+    }
     private fun setPostsRV(list : List<Post>) {
         postsAdapter = PostsAdapter(
             list as MutableList<Post>,
@@ -409,7 +405,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                         viewModel.addComment(postId, content)
                     }
                 }
-            )
+             )
             commentsScreen.show(childFragmentManager, "commentsScreen")
         }
     }
@@ -419,4 +415,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToOthersProfile(user))
     }
 
+
+    private fun startLoadingAnimation() {
+        binding.animationView.apply {
+            isGone = false
+            playAnimation()
+        }
+    }
+
+    private fun stopLoadingAnimation() {
+        binding.animationView.apply {
+            isGone = true
+            cancelAnimation()
+        }
+    }
 }

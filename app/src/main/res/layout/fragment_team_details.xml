@@ -15,7 +15,7 @@ android:background="@color/color_background">
         android:paddingVertical="10dp"
         >
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/btn_back"
+            android:id="@+id/btn_chat"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginTop="2dp"
@@ -26,7 +26,7 @@ android:background="@color/color_background">
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
             app:tint="@color/color_text"
-            android:src="@drawable/ic_back_arrow" />
+            android:src="@drawable/ic_chat3" />
 
         <TextView
             android:id="@+id/tv_team_name"
@@ -58,8 +58,8 @@ android:background="@color/color_background">
             android:textColor="@color/color_text"
             android:textSize="@dimen/big_txt"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/btn_back"
-            app:layout_constraintBottom_toBottomOf="@id/btn_back"
+            app:layout_constraintTop_toTopOf="@id/btn_chat"
+            app:layout_constraintBottom_toBottomOf="@id/btn_chat"
             app:lb_buttonColor="@color/color_primary"
             app:lb_cornerRadius="@dimen/app_btn_radius"
             app:lb_isShadowEnable="false"
@@ -115,7 +115,10 @@ android:background="@color/color_background">
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="24dp"
                     android:textSize="14sp"
-                    android:text="@string/lorem_ipsum_is_placeholder_text_commonly_used_in_the_graphic_print_and_publishing_more_lorem_ipsum_is_placeholder_text_commonly_used_in_the_graphic_print_and_publishing_more"
+                    android:text="Lorem ipsum is placeholder text commonly
+                     used in the graphic, print, and publishing..more Lorem ipsum
+                     is placeholder text commonly used in
+                    the graphic, print, and publishing..more"
                     android:textColor="@color/color_text"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

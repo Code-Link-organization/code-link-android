@@ -175,6 +175,8 @@ dependencies {
     implementation("com.github.mayuce:ImageStackViewer:1.1.0")
     implementation ("androidx.palette:palette-ktx:1.0.0")
 
+    //lottie animations
+    implementation("com.airbnb.android:lottie:4.1.0")
 
 
 }
