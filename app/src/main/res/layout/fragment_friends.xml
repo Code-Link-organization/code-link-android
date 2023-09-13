@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/rv_inbox_chats"
-    android:background="@color/color_primary"
+    android:id="@+id/rv_friends_chats"
+    android:background="@color/color_background"
     android:clipToPadding="false"
+    android:paddingBottom="100dp"
     android:orientation="vertical"
     app:layoutManager=".common.components.SmoothScrollLayoutManager"
     tools:listitem="@layout/item_inbox_chat">

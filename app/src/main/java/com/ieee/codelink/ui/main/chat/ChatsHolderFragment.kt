@@ -46,5 +46,8 @@ class ChatsHolderFragment : BaseFragment<FragmentChatsBinding>(FragmentChatsBind
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = "  ${adapter.getPositionTitle(position)}  "
         }.attach()
+
+        viewPager.setCurrentItem(1,false)
+
     }
 }
