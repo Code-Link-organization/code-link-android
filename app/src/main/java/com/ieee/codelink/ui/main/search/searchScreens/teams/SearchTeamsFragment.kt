@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ieee.codelink.core.BaseFragment
+import com.ieee.codelink.data.fakeDataProvider.FakeProvider
 import com.ieee.codelink.databinding.FragmentSearchTeamsBinding
 import com.ieee.codelink.domain.tempModels.TempTeam
 import com.ieee.codelink.ui.adapters.tempAdapters.TeamsAdapter
@@ -38,7 +39,7 @@ class SearchTeamsFragment : BaseFragment<FragmentSearchTeamsBinding>(FragmentSea
     private fun setRv() {
         lifecycleScope.launch(Dispatchers.Main) {
             teamsAdapter = TeamsAdapter(
-                viewModel.getFakeDataProvider().fakeTeams ,
+                FakeProvider.fakeDataProvider.fakeTeams ,
                 joinTeam = {
                     showToast("Join Team")
                 },

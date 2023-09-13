@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.data.fakeDataProvider.FakeDataProvider
+import com.ieee.codelink.data.fakeDataProvider.FakeProvider
 import com.ieee.codelink.databinding.FragmentSearchCoursesBinding
 import com.ieee.codelink.ui.adapters.tempAdapters.CoursesItemsAdapter
 import com.ieee.codelink.ui.main.search.SearchViewModel
@@ -30,7 +31,7 @@ class SearchCoursesFragment :
 
     private fun setupRv() {
         lifecycleScope.launch(Dispatchers.Main){
-            val list = FakeDataProvider().getFakeCourses(navArgs.track)
+            val list = FakeProvider.fakeDataProvider.getFakeCourses(navArgs.track)
             coursesAdapter = CoursesItemsAdapter(
                 list
             ) {

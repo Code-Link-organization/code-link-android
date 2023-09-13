@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:lottie_rawRes="@raw/anim_loading"
         app:lottie_autoPlay="false"
-        android:visibility="gone"
+        android:visibility="visible"
         tools:visibility="visible"
         app:lottie_loop="true"/>
 

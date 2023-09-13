@@ -6,18 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.ieee.codelink.common.getCurrentUtcDateTime
-import com.ieee.codelink.common.showToast
 import com.ieee.codelink.databinding.DialogPostCommentsBinding
-import com.ieee.codelink.databinding.DialogPostLikesBinding
 import com.ieee.codelink.domain.models.Comment
-import com.ieee.codelink.domain.models.LikeData
 import com.ieee.codelink.ui.adapters.CommentsAdapter
-import com.ieee.codelink.ui.adapters.LikesAdapter
-import kotlinx.coroutines.NonDisposableHandle.parent
 
 class CommentsDialogFragment(
     private val comments: MutableList<Comment>,

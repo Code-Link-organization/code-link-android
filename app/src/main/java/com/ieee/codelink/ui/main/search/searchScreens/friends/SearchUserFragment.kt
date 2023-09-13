@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ieee.codelink.core.BaseFragment
+import com.ieee.codelink.data.fakeDataProvider.FakeProvider
 import com.ieee.codelink.databinding.FragmentSeatchUserBinding
 import com.ieee.codelink.domain.tempModels.TempUserSearch
 import com.ieee.codelink.domain.tempModels.toTempUserProfile
@@ -31,7 +32,7 @@ class SearchUserFragment : BaseFragment<FragmentSeatchUserBinding>(FragmentSeatc
     private fun setupRv() {
         lifecycleScope.launch(Dispatchers.Main) {
             usersAdapter = UsersAdapter(
-                viewModel.getFakeDataProvider().fakeUsers,
+                FakeProvider.fakeDataProvider.fakeUsers,
                 navArgs.track + " Developer",
                 openProfile = {
                     openProfile(it)

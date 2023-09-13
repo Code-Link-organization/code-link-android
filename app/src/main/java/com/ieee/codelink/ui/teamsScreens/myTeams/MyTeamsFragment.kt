@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.ieee.codelink.core.BaseFragment
+import com.ieee.codelink.data.fakeDataProvider.FakeProvider
 import com.ieee.codelink.databinding.FragmentMyTeamsBinding
 import com.ieee.codelink.databinding.FragmentSearchTeamsBinding
 import com.ieee.codelink.domain.tempModels.TempTeam
@@ -43,7 +44,7 @@ class MyTeamsFragment :
     private fun setRv() {
         lifecycleScope.launch(Dispatchers.Main) {
             teamsAdapter = MyTeamsAdapter(
-                viewModel.getFakeDataProvider().fakeTeams
+                FakeProvider.fakeDataProvider.fakeTeams
             ) {
                 openTeam(it)
             }

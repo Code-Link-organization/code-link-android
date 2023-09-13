@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.ieee.codelink.core.BaseFragment
+import com.ieee.codelink.data.fakeDataProvider.FakeProvider
 import com.ieee.codelink.databinding.FragmentSearchMentorsBinding
 import com.ieee.codelink.domain.tempModels.TempMentor
 import com.ieee.codelink.domain.tempModels.toMentor
@@ -25,7 +26,7 @@ class SearchMentorsFragment :
     }
 
     private fun setRv() {
-        val mentors = viewModel.getFakeDataProvider().getFakeMentors()
+        val mentors = FakeProvider.fakeDataProvider.getFakeMentors()
         mentorsAdapter = MentorsAdapter(
             mentors
         ) {
