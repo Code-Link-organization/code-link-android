@@ -6,7 +6,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/color_background">
 
-
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"

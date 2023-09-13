@@ -102,4 +102,6 @@
     <string name="contact_us">تواصل معنا</string>
     <string name="delete_account">حذف الحساب</string>
     <string name="about">عنا</string>
+    <string name="invite">ادعه</string>
+
 </resources>

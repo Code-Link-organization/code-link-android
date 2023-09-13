@@ -4,19 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="4dp">
+    android:background="@drawable/background_ripple"
+    android:paddingVertical="4dp"
+>
 
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/shapeableImageView2"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_50sdp"
-        android:layout_marginStart="24dp"
+        android:id="@+id/iv_user_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
         android:scaleType="centerCrop"
+        app:strokeWidth="0.5dp"
+        app:strokeColor="@color/color_text"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-        tools:src="@drawable/splash_inset" />
+        tools:src="@drawable/man2" />
 
     <TextView
         android:id="@+id/txt_name"
@@ -28,7 +33,7 @@
         android:textSize="14sp"
         android:textColor="@color/color_text"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/shapeableImageView2"
+        app:layout_constraintStart_toEndOf="@+id/iv_user_image"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -37,25 +42,60 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:maxLines="1"
-        android:textColor="#FF313131"
+        android:textColor="@color/color_text"
+        android:alpha="0.7"
         android:textSize="12sp"
         android:ellipsize="end"
         android:layout_marginBottom="7dp"
         android:text="are you interested in UI/UX??"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ll_right_part"
         app:layout_constraintStart_toStartOf="@+id/txt_name"
         app:layout_constraintTop_toBottomOf="@+id/txt_name" />
 
-    <TextView
-        android:id="@+id/txt_time_of_message"
+    <LinearLayout
+        android:id="@+id/ll_right_part"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="11:56 PM"
-        android:textColor="@color/color_text"
-        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+    <TextView
+        android:id="@+id/tv_time_of_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="11:56 PM"
+        android:textColor="@color/color_text"
+        android:textSize="12sp"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_end_icon"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="centerCrop"
+            android:background="@color/color_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            />
+
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:gravity="center"
+            tools:text="1"
+            android:layout_marginTop="-18dp"
+            android:textColor="@color/color_background"
+            android:textSize="10sp"/>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
