@@ -1,6 +1,9 @@
 package com.ieee.codelink.data.fakeDataProvider
 
+import android.app.Application
+import android.content.Context
 import com.ieee.codelink.R
+import com.ieee.codelink.core.BaseApplication
 import com.ieee.codelink.domain.tempModels.TempChatUser
 import com.ieee.codelink.domain.tempModels.TempMentor
 import com.ieee.codelink.domain.tempModels.TempSearchItem
@@ -11,7 +14,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import kotlin.random.Random
 
-class FakeDataProvider {
+class FakeDataProvider(val context: Context = BaseApplication.context) {
 
     var fakeTracks: MutableList<TempSearchItem>
     var fakeServices: MutableList<TempSearchItem>
@@ -317,12 +320,12 @@ class FakeDataProvider {
 
     private fun initFakeServices(): MutableList<TempSearchItem> {
         val list = ArrayList<TempSearchItem>()
-        list.add(TempSearchItem("Users", R.drawable.ic_friends_img))
-        list.add(TempSearchItem("Mentor", R.drawable.ic_mentor_img))
-        list.add(TempSearchItem("Teams", R.drawable.ic_teams_img))
-        list.add(TempSearchItem("Courses", R.drawable.ic_courses_img))
-        list.add(TempSearchItem("Communities", R.drawable.ic_connecting_teams))
-        list.add(TempSearchItem("Hackathons", R.drawable.ic_team_goal))
+        list.add(TempSearchItem(context.getString(R.string.individuals), R.drawable.ic_friends_img))
+        list.add(TempSearchItem(context.getString(R.string.mentors), R.drawable.ic_mentor_img))
+        list.add(TempSearchItem(context.getString(R.string.teams), R.drawable.ic_teams_img))
+        list.add(TempSearchItem(context.getString(R.string.courses), R.drawable.ic_courses_img))
+        list.add(TempSearchItem(context.getString(R.string.communities), R.drawable.ic_connecting_teams))
+        list.add(TempSearchItem(context.getString(R.string.hackathons), R.drawable.ic_team_goal))
         return list
     }
 
@@ -360,5 +363,5 @@ class FakeDataProvider {
         }
         return chats
     }
-
+    
 }

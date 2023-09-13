@@ -2,6 +2,7 @@ package com.ieee.codelink.ui.main.chat.chatScreens.inbox
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.ViewCompat.setNestedScrollingEnabled
 import androidx.fragment.app.viewModels
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.BaseViewModel
@@ -27,6 +28,7 @@ class FragmentInbox : BaseFragment<FragmentInboxBinding>(FragmentInboxBinding::i
         }
 
         binding.rvInboxChats.adapter = inboxAdapter
+        binding.rvInboxChats.isNestedScrollingEnabled = false
 
     }
 

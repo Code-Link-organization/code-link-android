@@ -9,7 +9,7 @@
     android:clipToPadding="false"
     android:orientation="vertical"
     android:paddingBottom="100dp"
+    android:nestedScrollingEnabled="false"
     app:layoutManager=".common.components.SmoothScrollLayoutManager"
     tools:listitem="@layout/item_inbox_chat">
-
 </androidx.recyclerview.widget.RecyclerView>

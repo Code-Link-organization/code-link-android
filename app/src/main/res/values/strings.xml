@@ -90,11 +90,11 @@
     <string name="join">Join</string>
     <string name="shared">Post was Shared</string>
     <string name="name_of_team">Team name</string>
-    <string name="name_of_project">Name of Project</string>
+    <string name="name_of_project">Project description</string>
     <string name="description_of_the_project">Team description</string>
     <string name="create">Create</string>
     <string name="team_name">Team Name</string>
-    <string name="team_members_names">Team members names</string>
+    <string name="team_members_names">Team Members</string>
     <string name="inbox">Inbox</string>
     <string name="friends">Friends</string>
     <string name="call">Call</string>
@@ -102,4 +102,12 @@
     <string name="delete_account">Delete account</string>
     <string name="about">About</string>
     <string name="invite">Invite</string>
+    <string name="individuals">Individuals</string>
+    <string name="mentor">Mentor</string>
+    <string name="teams">Teams</string>
+    <string name="courses">Courses</string>
+    <string name="communities">Communities</string>
+    <string name="hackathons">Hackathons</string>
+    <string name="mentors">Mentors</string>
+    <string name="choose_your_community">Choose your technical community!</string>
 </resources>

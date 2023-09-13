@@ -42,7 +42,7 @@ class ChatsHolderFragment : BaseFragment<FragmentChatsBinding>(FragmentChatsBind
         )
         val adapter = ChatPagerAdapter(this, fragmentList)
         viewPager.adapter = adapter
-
+        viewPager.offscreenPageLimit = 1
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = "  ${adapter.getPositionTitle(position)}  "
         }.attach()
