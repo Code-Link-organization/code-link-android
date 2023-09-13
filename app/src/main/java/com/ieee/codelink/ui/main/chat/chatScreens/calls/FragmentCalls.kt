@@ -28,6 +28,7 @@ class FragmentCalls : BaseFragment<FragmentCallsBinding>(FragmentCallsBinding::i
         }
 
         binding.rvInboxChats.adapter = callsAdapter
+        binding.rvInboxChats.isNestedScrollingEnabled = false
 
     }
 

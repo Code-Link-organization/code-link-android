@@ -8,6 +8,7 @@
     android:background="@color/color_background"
     android:clipToPadding="false"
     android:orientation="vertical"
+    android:nestedScrollingEnabled="false"
     app:layoutManager=".common.components.SmoothScrollLayoutManager"
     tools:listitem="@layout/item_call_chat">
 

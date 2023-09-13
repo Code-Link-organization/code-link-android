@@ -28,6 +28,7 @@ class FragmentChatFriends : BaseFragment<FragmentFriendsBinding>(FragmentFriends
             showToast("Open chat")
         }
         binding.rvFriendsChats.adapter = inboxAdapter
+        binding.rvFriendsChats.isNestedScrollingEnabled = false
     }
 
 }

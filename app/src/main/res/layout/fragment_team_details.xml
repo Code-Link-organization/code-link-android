@@ -146,7 +146,7 @@ android:background="@color/color_background">
                 android:layout_width="match_parent"
                 android:layout_height="4dp"
                 android:alpha="0.5"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:background="@color/color_hint"
                 />
             <TextView
@@ -154,7 +154,7 @@ android:background="@color/color_background">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/team_members_names"
                 android:textColor="@color/color_text"
                 android:textSize="16sp"

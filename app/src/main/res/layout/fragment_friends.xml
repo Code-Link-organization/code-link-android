@@ -8,6 +8,7 @@
     android:background="@color/color_background"
     android:clipToPadding="false"
     android:paddingBottom="100dp"
+    android:nestedScrollingEnabled="false"
     android:orientation="vertical"
     app:layoutManager=".common.components.SmoothScrollLayoutManager"
     tools:listitem="@layout/item_inbox_chat">

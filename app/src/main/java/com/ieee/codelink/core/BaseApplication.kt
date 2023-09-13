@@ -8,4 +8,16 @@ import com.zeugmasolutions.localehelper.LocaleHelperApplicationDelegate
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class BaseApplication : LocaleAwareApplication()
+class BaseApplication : LocaleAwareApplication() {
+    companion object {
+        lateinit var context: Context
+    }
+
+
+
+    override fun onCreate() {
+        super.onCreate()
+        context = applicationContext
+
+    }
+}

@@ -1,12 +1,10 @@
 package com.ieee.codelink.ui.main.search
 
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ieee.codelink.R
 import com.ieee.codelink.common.dp
@@ -38,7 +36,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     private fun setOnClickListeners() {
         onBackPress {
             if (viewModel.firstOption != null) {
-              //  startRvAnimationSlideOut()
                 viewModel.firstOption=null
                 setServiceLayout()
             } else {
@@ -49,6 +46,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
 
     private fun setServiceLayout() {
+        binding.tvTitle.text = getString(R.string.choose_what_you_want)
         lifecycleScope.launch(Dispatchers.Main) {
             startRvAnimationSlideIn()
             setUpServiceLayoutDimentions()
@@ -56,7 +54,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         }
     }
 
-    private fun setTrackLayout() {
+    private fun setTrackLayout(isCommunity: Boolean = false) {
+        if (isCommunity) {
+            binding.tvTitle.text = getString(R.string.choose_your_community)
+        } else {
+            binding.tvTitle.text = getString(R.string.choose_your_technical_circle)
+        }
+
         lifecycleScope.launch(Dispatchers.Main) {
             startRvAnimationSlideIn()
             setUpTrackLayoutDimentions()
@@ -108,23 +112,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     }
 
 
-
-
     private fun initRecyclerView(rv: RecyclerView, list: ArrayList<TempSearchItem>) {
         myAdapter = SearchItemsAdapter(list) {
             if (viewModel.firstOption == null) {
-                if (it.title == "Teams"){
-                 openSearchTeamsScreen(it)
-                }else if (
-                    it.title == "Communities"||
-                    it.title == "Hackathons"
-                ){
-                    showToast("coming soon" , true)
-                }
-                else{
-                    viewModel.firstOption = it.title
-                    setTrackLayout()
-                }
+                setFirstOptionsSearch(it)
             } else {
                 goToSearch(viewModel.firstOption!!, it)
             }
@@ -132,16 +123,30 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         rv.adapter = myAdapter
     }
 
+    private fun setFirstOptionsSearch(it: TempSearchItem) {
+        if (it.title == getString(R.string.teams)) {
+            openSearchTeamsScreen(it)
+        } else if (it.title == getString(R.string.mentors)) {
+            openSearchMentorsScreen(it)
+        } else if (it.title == getString(R.string.individuals)) {
+            openSearchUsersScreen(it)
+        } else if (
+            it.title == "Communities" ||
+            it.title == "Hackathons"
+        ) {
+            showToast("coming soon", true)
+        } else {
+            viewModel.firstOption = it.title
+            setTrackLayout()
+        }
+    }
+
     private fun goToSearch(firstOption: String, it: TempSearchItem) {
         when (firstOption) {
             "Courses" -> {
-             openCoursesScrean(it)
+                openCoursesScrean(it)
             }
-
-            "Mentor" -> {
-                openSearchMentorsScreen(it)
-            }
-
+            //todo: communities and hackathons
             "Friends" -> {
                 openSearchUsersScreen(it)
             }
@@ -194,7 +199,5 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         val slideOutAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_out_left)
         binding.rvLayout.startAnimation(slideOutAnimation)
     }
-
-
 
 }
