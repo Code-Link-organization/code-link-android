@@ -15,7 +15,6 @@ import com.ieee.codelink.common.openZoomableImage
 import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.ResponseState
-import com.ieee.codelink.data.remote.BASE_URL_FOR_IMAGE
 import com.ieee.codelink.databinding.FragmentHomeBinding
 import com.ieee.codelink.domain.models.Comment
 import com.ieee.codelink.domain.models.CreatePostModel
@@ -48,15 +47,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setViews()
-        loadData()
         setOnClicks()
         setObservers()
+        loadData()
     }
 
     private fun loadData() {
         if (viewModel.isFirstCall()) {
             callData()
         }else{
+            stopLoadingAnimation()
             viewModel.loadPosts()
         }
     }
@@ -77,9 +77,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
 
         binding.frameAddPost.setOnClickListener {
-            createPostDialog = CreatePostDialogFragment(createPost)
-
-            createPostDialog?.show(childFragmentManager, "create_post")
+           openCreatePostDialog()
         }
     }
 
@@ -90,10 +88,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     private fun setObservers() {
-
-        viewModel.postsRequestState.awareCollect { state ->
-            postsObserver(state)
-        }
 
         viewModel.createPostsRequestState.awareCollect { state ->
             createPostsObserver(state)
@@ -115,6 +109,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             postSharedObserver(state)
         }
 
+        viewModel.postsRequestState.awareCollect { state ->
+            postsObserver(state)
+        }
+
     }
     private fun postSharedObserver(state: ResponseState<ShareResponse>) {
         when (state) {
@@ -124,7 +122,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             }
 
             is ResponseState.NetworkError -> {
-                showToast(getString(R.string.network_error))
+                showToast(getString(R.string.network_error),false)
             }
 
             is ResponseState.Error -> {
@@ -150,13 +148,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
     private fun createComment(state: ResponseState<CommentsResponse>) {
         when (state) {
-            is ResponseState.Empty,
+            is ResponseState.Empty->{}
             is ResponseState.NotAuthorized,
             is ResponseState.UnKnownError -> {
+                viewModel.createCommentsRequestState.value = ResponseState.Empty()
             }
 
             is ResponseState.NetworkError -> {
-                showToast(getString(R.string.network_error))
+                showToast(getString(R.string.network_error),false)
+                viewModel.createCommentsRequestState.value = ResponseState.Empty()
             }
 
             is ResponseState.Error -> {
@@ -174,6 +174,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                         val newComment = response.data.comments.last()
                         postsAdapter.increaseCommentCount(newComment.post_id)
                         commentsScreen?.addCommentToList(newComment)
+                        viewModel.createCommentsRequestState.value = ResponseState.Empty()
                     }
                 }
             }
@@ -181,22 +182,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
     private fun postCommentsObserver(state: ResponseState<CommentsResponse>) {
+        stopLoadingAnimation()
         when (state) {
-            is ResponseState.Empty,
+            is ResponseState.Empty -> {}
             is ResponseState.NotAuthorized,
             is ResponseState.UnKnownError -> {
-                stopLoadingAnimation()
+                viewModel.postCommentsRequestState.value = ResponseState.Empty()
             }
 
             is ResponseState.NetworkError -> {
-                stopLoadingAnimation()
-                showToast(getString(R.string.network_error))
+                showToast(getString(R.string.network_error),false)
+                viewModel.postCommentsRequestState.value = ResponseState.Empty()
             }
 
             is ResponseState.Error -> {
-                stopLoadingAnimation()
                 com.ieee.codelink.common.showToast(state.message.toString(), requireContext())
-                viewModel.postLikesRequestState.value = ResponseState.Empty()
+                viewModel.postCommentsRequestState.value = ResponseState.Empty()
             }
 
             is ResponseState.Loading -> {
@@ -204,10 +205,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             }
 
             is ResponseState.Success -> {
-                stopLoadingAnimation()
                 state.data?.let { response ->
                     lifecycleScope.launch {
                         openCommentsScreen(response.data.comments , postId = viewModel.openedPostId)
+                        viewModel.postCommentsRequestState.value = ResponseState.Empty()
                     }
                 }
             }
@@ -217,13 +218,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private fun postLikesObserver(state: ResponseState<LikesResponse>) {
         stopLoadingAnimation()
         when (state) {
-            is ResponseState.Empty,
+            is ResponseState.Empty -> {}
             is ResponseState.NotAuthorized,
             is ResponseState.UnKnownError -> {
+                viewModel.postLikesRequestState.value = ResponseState.Empty()
             }
 
             is ResponseState.NetworkError -> {
-                showToast(getString(R.string.network_error))
+                showToast(getString(R.string.network_error),false)
+                viewModel.postLikesRequestState.value = ResponseState.Empty()
             }
 
             is ResponseState.Error -> {
@@ -239,6 +242,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 state.data?.let {response ->
                     lifecycleScope.launch {
                        openLikesScreen(response.data.likeData)
+                        viewModel.postLikesRequestState.value = ResponseState.Empty()
                     }
                 }
             }
@@ -253,7 +257,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             }
 
             is ResponseState.NetworkError -> {
-                showToast(getString(R.string.network_error))
+                showToast(getString(R.string.network_error),false)
             }
 
             is ResponseState.Error -> {
@@ -277,19 +281,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
     private fun postsObserver(state: ResponseState<PostsResponse>) {
+        stopLoadingAnimation()
         when (state) {
-            is ResponseState.Empty,
+            is ResponseState.Empty -> {}
             is ResponseState.NotAuthorized,
             is ResponseState.UnKnownError -> {
-                stopLoadingAnimation()
+                viewModel.postsRequestState.value = ResponseState.Empty()
             }
 
             is ResponseState.NetworkError -> {
-                showToast(getString(R.string.network_error))
+                showToast(getString(R.string.network_error),false)
+                viewModel.postsRequestState.value = ResponseState.Empty()
             }
 
             is ResponseState.Error -> {
-                stopLoadingAnimation()
                 com.ieee.codelink.common.showToast(state.message.toString(), requireContext())
                 viewModel.postsRequestState.value = ResponseState.Empty()
             }
@@ -299,7 +304,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             }
 
             is ResponseState.Success -> {
-                stopLoadingAnimation()
                 state.data?.let { response ->
                     lifecycleScope.launch {
                         setPostsRV(response.data.postData)
@@ -383,6 +387,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         )
     }
 
+    private fun openCreatePostDialog() {
+        createPostDialog = CreatePostDialogFragment(createPost)
+        createPostDialog?.show(childFragmentManager, "create_post")
+    }
+
+
     private fun openLikesScreen(likeData: List<LikeData>) {
         likesScreen = LikesDialogFragment(
             likeData as MutableList<LikeData>,
@@ -447,13 +457,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         likesScreen?.dismiss()
         likesScreen = null
     } catch (_: Exception) {
-    }
-
-    override fun onResume() {
-        super.onResume()
-        dismissCreatePostDialog()
-        dismissCommentsDialog()
-        dismissLikesDialog()
     }
 
 }

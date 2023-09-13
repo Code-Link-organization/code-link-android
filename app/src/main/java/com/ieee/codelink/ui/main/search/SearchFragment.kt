@@ -12,6 +12,7 @@ import com.ieee.codelink.R
 import com.ieee.codelink.common.dp
 import com.ieee.codelink.common.extension.onBackPress
 import com.ieee.codelink.core.BaseFragment
+import com.ieee.codelink.data.fakeDataProvider.FakeProvider
 import com.ieee.codelink.databinding.FragmentSearchBinding
 import com.ieee.codelink.domain.tempModels.TempSearchItem
 import com.ieee.codelink.ui.adapters.SearchItemsAdapter
@@ -97,13 +98,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
     private fun setUpServicesRecyclerView() {
         val rv = binding.rvItems
-        initRecyclerView(rv, viewModel.getFakeDataProvider().fakeServices as ArrayList<TempSearchItem>)
+        initRecyclerView(rv, FakeProvider.fakeDataProvider.fakeServices as ArrayList<TempSearchItem>)
     }
 
 
     private fun setUpTrackRecyclerView(){
         val rv = binding.rvItems
-        initRecyclerView(rv, viewModel.getFakeDataProvider().fakeTracks as ArrayList<TempSearchItem>)
+        initRecyclerView(rv, FakeProvider.fakeDataProvider.fakeTracks as ArrayList<TempSearchItem>)
     }
 
 

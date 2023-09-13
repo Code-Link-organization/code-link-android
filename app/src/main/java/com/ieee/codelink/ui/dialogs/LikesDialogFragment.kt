@@ -1,5 +1,6 @@
 package com.ieee.codelink.ui.dialogs
 
+import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -66,6 +67,5 @@ class LikesDialogFragment(
         val height = metrics.heightPixels
         this.dialog!!.window!!.setLayout(((9 * width) / 10), (8 * height) / 10)
     }
-
 
 }

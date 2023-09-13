@@ -9,6 +9,7 @@ import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.BaseViewModel
+import com.ieee.codelink.data.fakeDataProvider.FakeProvider
 import com.ieee.codelink.databinding.FragmentOthersProfileBinding
 import com.ieee.codelink.domain.tempModels.TempUserProfile
 import com.ieee.codelink.domain.tempModels.TempUserSearch
@@ -149,7 +150,7 @@ class OthersProfileFragment :
 
     private fun openInviteUserDialog() {
         val inviteScreen = InviteUserDialogFragment(
-            viewModel.getFakeDataProvider().getFakeTeams(Random.nextInt(5)+2)
+            FakeProvider.fakeDataProvider.getFakeTeams(Random.nextInt(5)+2)
         ){
             showToast("invited to ${it.size} teams")
         }
