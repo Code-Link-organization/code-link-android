@@ -81,8 +81,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 userImageClicked()
             }
 
-            ivSettings.setOnClickListener {
-                settingsClicked()
+            ivShareProfile.setOnClickListener {
+                shareProfileClicked()
             }
 
             btnUpdateProfile.root.setOnClickListener{

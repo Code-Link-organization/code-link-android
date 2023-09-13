@@ -3,23 +3,25 @@ package com.ieee.codelink.ui.adapters.tempAdapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.ieee.codelink.R
 import com.ieee.codelink.common.setImageUsingGlide
+import com.ieee.codelink.databinding.ItemCallChatBinding
 import com.ieee.codelink.databinding.ItemInboxChatBinding
 import com.ieee.codelink.domain.tempModels.TempChatUser
 import kotlin.random.Random
 
 
-class InboxAdapter(
+class CallsAdapter(
     var chats: MutableList<TempChatUser>,
     private val openChat: (TempChatUser) -> Unit,
-) : RecyclerView.Adapter<InboxAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<CallsAdapter.ViewHolder>() {
 
-    inner class ViewHolder(val binding: ItemInboxChatBinding) :
+    inner class ViewHolder(val binding: ItemCallChatBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemInboxChatBinding.inflate(
+            ItemCallChatBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -39,10 +41,7 @@ class InboxAdapter(
     private fun setViews(holder: ViewHolder, chat: TempChatUser) {
         holder.binding.apply {
             tvName.text = chat.name
-            tvMessage.text = chat.lastMessage
-            tvTimeOfMessage.text = chat.time
-            tvNum.text = (Random.nextInt(8)+1).toString()
-
+            tvMessage.text = chat.time
             setImageUsingGlide(
                 view = holder.binding.ivUserImage,
                 image = chat.image

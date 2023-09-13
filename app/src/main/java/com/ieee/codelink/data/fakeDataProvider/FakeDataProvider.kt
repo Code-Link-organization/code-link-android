@@ -317,10 +317,10 @@ class FakeDataProvider {
 
     private fun initFakeServices(): MutableList<TempSearchItem> {
         val list = ArrayList<TempSearchItem>()
+        list.add(TempSearchItem("Users", R.drawable.ic_friends_img))
+        list.add(TempSearchItem("Mentor", R.drawable.ic_mentor_img))
         list.add(TempSearchItem("Teams", R.drawable.ic_teams_img))
         list.add(TempSearchItem("Courses", R.drawable.ic_courses_img))
-        list.add(TempSearchItem("Mentor", R.drawable.ic_mentor_img))
-        list.add(TempSearchItem("Friends", R.drawable.ic_friends_img))
         list.add(TempSearchItem("Communities", R.drawable.ic_connecting_teams))
         list.add(TempSearchItem("Hackathons", R.drawable.ic_team_goal))
         return list
