@@ -11,11 +11,12 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_user_image"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:scaleType="centerCrop"
         app:strokeWidth="0.5dp"
+        android:padding="0.5dp"
         app:strokeColor="@color/color_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +25,7 @@
         tools:src="@drawable/man2" />
 
     <TextView
-        android:id="@+id/txt_name"
+        android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -37,7 +38,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txt_message"
+        android:id="@+id/tv_message"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -50,8 +51,8 @@
         android:text="are you interested in UI/UX??"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/ll_right_part"
-        app:layout_constraintStart_toStartOf="@+id/txt_name"
-        app:layout_constraintTop_toBottomOf="@+id/txt_name" />
+        app:layout_constraintStart_toStartOf="@+id/tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
     <LinearLayout
         android:id="@+id/ll_right_part"
@@ -80,6 +81,8 @@
             android:layout_height="18dp"
             android:layout_marginTop="8dp"
             android:scaleType="centerCrop"
+            android:layout_gravity="end"
+            android:layout_marginEnd="12dp"
             android:background="@color/color_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -92,6 +95,8 @@
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:gravity="center"
+            android:layout_marginEnd="12dp"
+            android:layout_gravity="end"
             tools:text="1"
             android:layout_marginTop="-18dp"
             android:textColor="@color/color_background"

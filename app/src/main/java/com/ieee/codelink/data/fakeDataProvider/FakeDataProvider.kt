@@ -1,11 +1,14 @@
 package com.ieee.codelink.data.fakeDataProvider
 
 import com.ieee.codelink.R
+import com.ieee.codelink.domain.tempModels.TempChatUser
 import com.ieee.codelink.domain.tempModels.TempMentor
 import com.ieee.codelink.domain.tempModels.TempSearchItem
 import com.ieee.codelink.domain.tempModels.TempTeam
 import com.ieee.codelink.domain.tempModels.TempUserSearch
 import com.ieee.codelink.domain.tempModels.toMentor
+import java.text.SimpleDateFormat
+import java.util.Date
 import kotlin.random.Random
 
 class FakeDataProvider {
@@ -14,12 +17,18 @@ class FakeDataProvider {
     var fakeServices: MutableList<TempSearchItem>
     var fakeUsers: MutableList<TempUserSearch>
     var fakeTeams: MutableList<TempTeam>
+    var fakeChatsInbox: MutableList<TempChatUser>
+    var fakeChatsFriends: MutableList<TempChatUser>
+    var fakeChatsCalls: MutableList<TempChatUser>
 
     init {
         fakeTracks = initFakeTracks()
         fakeUsers = getFakeUsers()
         fakeTeams = getFakeTeams()
         fakeServices = initFakeServices()
+        fakeChatsInbox = getFakeChats(Random.nextInt(15)+4)
+        fakeChatsCalls = getFakeChats(Random.nextInt(13)+6)
+        fakeChatsFriends = getFakeChats(Random.nextInt(16)+5)
     }
 
 
@@ -324,6 +333,32 @@ class FakeDataProvider {
           mentors.add(user.toMentor())
       }
         return mentors
+    }
+
+    fun generateRandomTime(): String {
+        val hour = Random.nextInt(1, 13) // Random hour between 1 and 12
+        val minute = Random.nextInt(0, 60) // Random minute between 0 and 59
+        val amPm = if (Random.nextBoolean()) "AM" else "PM" // Random AM or PM
+
+        // Format the time as "h:mm a"
+        val timeFormat = SimpleDateFormat("h:mm a")
+        val date = Date(0, 0, 0, hour, minute)
+        val formattedTime = timeFormat.format(date)
+
+        return formattedTime
+    }
+    fun getFakeChats(num: Int = 12):MutableList<TempChatUser>{
+        val users = getFakeUsers(12)
+        val chats = mutableListOf<TempChatUser>()
+        for (user in users) {
+            chats.add(TempChatUser(
+                name = user.name,
+                image = user.image,
+                time = generateRandomTime(),
+                lastMessage = getFakeTeamBio()
+            ))
+        }
+        return chats
     }
 
 }
