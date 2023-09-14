@@ -111,4 +111,15 @@
     <string name="mentors">Mentors</string>
     <string name="choose_your_community">Choose your technical community!</string>
     <string name="empty">Empty</string>
+    <string name="birth_date">Birth date</string>
+    <string name="e_mail">E-mail</string>
+    <string name="phone_number">Phone number</string>
+    <string name="my_projectss">My projects</string>
+    <string name="programming_languages">Programming languages</string>
+    <string name="cv_link">CV link</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
+    <string name="linkedin">LinkedIn</string>
+    <string name="github">GitHub</string>
+    <string name="behance">Behance</string>
 </resources>

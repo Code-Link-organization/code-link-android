@@ -11,6 +11,7 @@ import com.ieee.codelink.R
 import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.openBrowser
 import com.ieee.codelink.common.openFacebook
+import com.ieee.codelink.common.openZoomableImage
 import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.ResponseState
@@ -181,13 +182,17 @@ class OthersProfileFragment :
             }
 
             ivUserImage.setOnClickListener {
-                showToast("open user image")
+                userImageClicked(userData)
             }
             ivInviteUser.setOnClickListener {
                 openInviteUserDialog()
             }
+            ivPersonalInfo.setOnClickListener {
+                openInfoScreen(userData.id)
+            }
         }
     }
+
 
     private fun setSocialMediaClicks(userData: ProfileUser) {
 
@@ -319,10 +324,28 @@ class OthersProfileFragment :
         }
     }
 
-    private fun reCallData(){
+    private fun reCallData() {
         lifecycleScope.launch {
             delay(1000)
             callUser(navArgs.userId)
+        }
+    }
+
+    private fun openInfoScreen(id: Int) {
+        findNavController().navigate(
+            OthersProfileFragmentDirections.actionOthersProfileToPersonalInfoFragment(
+                id
+            )
+        )
+    }
+
+    private fun userImageClicked(user: ProfileUser) {
+        user.imageUrl?.let { imgUrl ->
+            openZoomableImage(
+                getImageForGlide(imgUrl)!!,
+                requireActivity(),
+                binding.upperSection.ivUserImage
+            )
         }
     }
 }

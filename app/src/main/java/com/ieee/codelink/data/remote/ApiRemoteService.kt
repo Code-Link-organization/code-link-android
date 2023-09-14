@@ -147,4 +147,39 @@ interface ApiRemoteService {
         bio: RequestBody?
     ): Response<AuthResponse>
 
+    @POST
+    suspend fun editUserInfo(
+        @Url url: String,
+        @Header("Authorization")
+        token: String,
+        @Query("governate")
+        governate: String?,
+        @Query("university")
+        university: String?,
+        @Query("faculty")
+        faculty: String?,
+        @Query("birthDate")
+        birthDate: String?,
+        @Query("emailProfile")
+        emailProfile: String?,
+        @Query("phoneNumber")
+        phoneNumber: String?,
+        @Query("projects")
+        projects: String?,
+        @Query("progLanguages")
+        progLanguages: String?,
+        @Query("cvUrl")
+        cvUrl: String?,
+        @Query("githubUrl")
+        githubUrl: String?,
+        @Query("linkedinUrl")
+        linkedinUrl: String?,
+        @Query("behanceUrl")
+        behanceUrl: String?,
+        @Query("twitterUrl")
+        twitterUrl: String?,
+        @Query("facebookUrl")
+        facebookUrl: String?
+    ): Response<BaseResponse>
+
 }
