@@ -239,8 +239,8 @@ class PostsAdapter(
     }
 
     fun addPost(post: Post) {
-       posts.add(post)
-
+        posts.add(0, post)
+        notifyItemInserted(0)
     }
 
     fun increaseCommentCount(postId: Int?) {
