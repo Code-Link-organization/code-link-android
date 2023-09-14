@@ -251,13 +251,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
     private fun createPostsObserver(state: ResponseState<CreatePostResponse>) {
         when (state) {
-            is ResponseState.Empty,
+            is ResponseState.Empty->{}
             is ResponseState.NotAuthorized,
             is ResponseState.UnKnownError -> {
+                viewModel.createPostsRequestState.value = ResponseState.Empty()
             }
 
             is ResponseState.NetworkError -> {
                 showToast(getString(R.string.network_error),false)
+                viewModel.createPostsRequestState.value = ResponseState.Empty()
             }
 
             is ResponseState.Error -> {
@@ -274,6 +276,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     lifecycleScope.launch {
                         dismissCreatePostDialog()
                         addPostToList(response.data.post)
+                        viewModel.createPostsRequestState.value = ResponseState.Empty()
                     }
                 }
             }
@@ -306,6 +309,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             is ResponseState.Success -> {
                 state.data?.let { response ->
                     lifecycleScope.launch {
+                        if (response.data.postData.isEmpty()){
+                            viewModel.postsRequestState.value = ResponseState.Empty()
+                            return@launch
+                        }
                         setPostsRV(response.data.postData)
                     }
                 }
@@ -314,7 +321,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
     private fun addPostToList(post: Post) {
-       postsAdapter.addPost(post)
+        try {
+            postsAdapter.addPost(post)
+        }catch (_:Exception) {
+            callData()
+        }
     }
     private fun setPostsRV(list : List<Post>) {
         postsAdapter = PostsAdapter(
@@ -359,6 +370,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 lifecycleScope.launch {
                     viewModel.getPostLikes(it)
                 }
+            },
+            openProfile = {
+               openUserProfile(it)
             }
         )
         binding.rvPosts.adapter = postsAdapter
@@ -374,8 +388,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private val createPost: (CreatePostModel) -> Unit = { createPostModel ->
         lifecycleScope.launch {
             viewModel.createPost(createPostModel)
-            callData()
-            postsAdapter.notifyDataSetChanged()
         }
     }
 
@@ -397,7 +409,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         likesScreen = LikesDialogFragment(
             likeData as MutableList<LikeData>,
             openProfile = {
-                openUserProfile(it)
+                openUserProfile(it.user_id)
             },
             followAction = {
                 showToast("Follow")
@@ -421,9 +433,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-    private fun openUserProfile(likeData: LikeData) {
-        val user = likeData.toProfileUser()
-        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToOthersProfile(user))
+    private fun openUserProfile(userId: Int) {
+        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToOthersProfile(userId))
     }
 
 

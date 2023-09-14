@@ -6,6 +6,7 @@ import com.ieee.codelink.domain.models.responses.CommentsResponse
 import com.ieee.codelink.domain.models.responses.CreatePostResponse
 import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
+import com.ieee.codelink.domain.models.responses.ProfileUserResponse
 import com.ieee.codelink.domain.models.responses.ShareResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -122,4 +123,13 @@ interface ApiRemoteService {
         @Header("Authorization")
         token: String
     ):Response<ShareResponse>
+
+    @GET
+    suspend fun getProfileUser(
+        @Url url: String,
+        @Header("Authorization")
+        token: String,
+    ):Response<ProfileUserResponse>
+
+
 }

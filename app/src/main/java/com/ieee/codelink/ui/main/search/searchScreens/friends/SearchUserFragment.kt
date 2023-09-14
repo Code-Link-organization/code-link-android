@@ -48,7 +48,7 @@ class SearchUserFragment : BaseFragment<FragmentSeatchUserBinding>(FragmentSeatc
     private fun openProfile(it: TempUserSearch) {
         findNavController().navigate(
             SearchUserFragmentDirections.actionSearchUserFragmentToOthersProfile(
-                it.toTempUserProfile()
+                it.toTempUserProfile().id
             )
         )
     }

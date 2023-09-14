@@ -5,6 +5,8 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ieee.codelink.R
+import com.ieee.codelink.common.getImageForGlide
+import com.ieee.codelink.common.openZoomableImage
 import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.common.showDialog
 import com.ieee.codelink.core.BaseFragment
@@ -41,18 +43,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
     private fun updateUserViews(user: User) {
         binding.apply {
-
             setImageUsingGlide(
                 view =binding.ivUserImage,
-                image = BASE_URL_FOR_IMAGE + user.imageUrl
+                image = getImageForGlide(user.imageUrl)
             )
-
             tvUserName.text = user.name
-            //todo update it to the track later
-            tvUserTrack.text = user.email
+            tvUserTrack.text = user.track
         }
     }
-
 
     private fun setSectionsViews() {
         binding.apply {
@@ -110,7 +108,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
 
     private fun userImageClicked() {
-       // TODO("Not yet implemented")
+        viewModel.user.value?.let {
+            it.imageUrl?.let {imgUrl->
+                openZoomableImage(
+                    imgUrl,
+                    requireActivity(),
+                    binding.ivUserImage
+                )
+            }
+        }
+
     }
     private fun settingsClicked() {
         findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToSettingsFragment())
@@ -127,10 +134,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     }
 
     private fun shareProfileClicked() {
-        //TODO("Not yet implemented")
+        //TODO("Share profile Not yet implemented")
     }
     private fun btnMyCourcesClicked() {
-        //TODO("Not yet implemented")
+        //TODO("My Coursrs not yet implemented")
     }
     private fun btnLogoutClicked() {
         showDialog(requireContext(),

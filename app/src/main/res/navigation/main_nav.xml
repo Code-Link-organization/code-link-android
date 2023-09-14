@@ -182,9 +182,6 @@
         android:id="@+id/othersProfile"
         android:name="com.ieee.codelink.ui.profileScreens.othersProfile.OthersProfileFragment"
         android:label="OthersProfile" >
-        <argument
-            android:name="user"
-            app:argType="com.ieee.codelink.domain.tempModels.TempUserProfile" />
         <action
             android:id="@+id/action_othersProfile_self"
             app:destination="@id/othersProfile"
@@ -193,6 +190,9 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_left"/>
+        <argument
+            android:name="userId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/searchCoursesFragment"

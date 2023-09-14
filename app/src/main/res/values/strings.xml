@@ -110,4 +110,5 @@
     <string name="hackathons">Hackathons</string>
     <string name="mentors">Mentors</string>
     <string name="choose_your_community">Choose your technical community!</string>
+    <string name="empty">Empty</string>
 </resources>
