@@ -8,7 +8,8 @@ data class TempUserSearch(
     val image: Int,
     var track: String,
     val isFollowed: Boolean = false,
-    val isMan: Boolean = false
+    val isMan: Boolean = false,
+    var id :Int = 1
 )
 
 fun TempUserSearch.toMentor(): TempMentor {

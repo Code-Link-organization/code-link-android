@@ -12,7 +12,8 @@ data class TempUserProfile(
     var followersCount: Int,
     var likesCount: Int,
     var followers: List<TempUserSearch>,
-    var posts: List<Int>
+    var posts: List<Int>,
+    var id : Int = 1
 ):Serializable
 
 

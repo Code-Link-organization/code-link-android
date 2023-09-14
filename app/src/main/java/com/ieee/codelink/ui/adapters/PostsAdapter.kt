@@ -29,7 +29,8 @@ class PostsAdapter(
     var deleteClicked: (Post) -> Unit,
     var openPostImage: (String?, ImageView) -> Unit,
     var showComments: (Post) -> Unit,
-    var showLikes: (Post) -> Unit
+    var showLikes: (Post) -> Unit,
+    var openProfile:(Int)-> Unit
 ) : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: CardPostBinding) :
@@ -132,6 +133,14 @@ class PostsAdapter(
                     openPostImage(BASE_URL_FOR_IMAGE + post.image_path, holder.binding.ivPostImage)
                 }
             }
+        }
+
+        holder.binding.ivUserImage.setOnClickListener {
+            openProfile(post.user_id)
+        }
+
+        holder.binding.tvUserName.setOnClickListener {
+            openProfile(post.user_id)
         }
 
         holder.binding.btnLikesCounter.setOnClickListener {

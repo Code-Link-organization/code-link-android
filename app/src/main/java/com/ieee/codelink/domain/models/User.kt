@@ -7,5 +7,6 @@ data class User(
     var name: String,
     var email: String,
     var imageUrl : String?,
+    var track : String? = null,
     var token: String? = null
 ):Serializable
