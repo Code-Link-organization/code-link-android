@@ -17,13 +17,9 @@ class ProfileViewModel @Inject constructor(
     val user: MutableStateFlow<User?> =
         MutableStateFlow(null)
 
-    init {
-        viewModelScope.launch {
-            user.value =getCachedUser()
-        }
-    }
     suspend fun getCachedUser() = userRepository.getCachedUser()
      fun logout() {
         userRepository.logout()
     }
+
 }

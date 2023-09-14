@@ -16,4 +16,8 @@ class UserRepository(
     fun logout() {
         sharedPreferenceManger.logout()
     }
+
+    fun cacheUser(newUser: User) {
+       sharedPreferenceManger.cacheUser(newUser)
+    }
 }

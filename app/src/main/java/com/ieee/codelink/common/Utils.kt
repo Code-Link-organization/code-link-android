@@ -115,6 +115,32 @@ fun setImageUsingGlide(
         Log.e("setImageUsingGlide", e.localizedMessage ?: "Unknown error")
     }
 }
+fun setImageUsingGlideCenterCrop(
+    view: ImageView,
+    image: Any?,
+    placeholder: Drawable = getShimmerDrawable(),
+    errorImage: Any? = R.drawable.ic_profile,
+) {
+    try {
+        if (image == null){
+            Glide.with(view)
+                .load(errorImage)
+                .centerCrop()
+                .into(view)
+        }else {
+            Glide.with(view)
+                .load(image)
+                .placeholder(placeholder)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(errorImage)
+                .centerCrop()
+                .into(view)
+        }
+
+    } catch (e: Exception) {
+        Log.e("setImageUsingGlide", e.localizedMessage ?: "Unknown error")
+    }
+}
 
 fun tryNow(
     tag: String = "tryNow",

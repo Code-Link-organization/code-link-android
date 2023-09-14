@@ -3,6 +3,7 @@ package com.ieee.codelink.ui.main.profile
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.ieee.codelink.R
 import com.ieee.codelink.common.getImageForGlide
@@ -14,6 +15,7 @@ import com.ieee.codelink.data.remote.BASE_URL_FOR_IMAGE
 import com.ieee.codelink.databinding.FragmentProfileBinding
 import com.ieee.codelink.domain.models.User
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -28,6 +30,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         setObservers()
     }
 
+    override fun onResume() {
+        super.onResume()
+        lifecycleScope.launch {
+            viewModel.user.value = viewModel.getCachedUser()
+        }
+    }
 
     private fun setViews() {
         setSectionsViews()
