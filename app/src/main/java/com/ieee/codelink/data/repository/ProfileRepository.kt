@@ -2,11 +2,13 @@ package com.ieee.codelink.data.repository
 
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.data.remote.ApiRemoteService
+import com.ieee.codelink.data.remote.EDIT_PROFILE
 import com.ieee.codelink.data.remote.GET_USER
 import com.ieee.codelink.domain.models.User
-import com.ieee.codelink.domain.models.responses.EditProfileResponse
+import com.ieee.codelink.domain.models.responses.AuthResponse
 import com.ieee.codelink.domain.models.responses.ProfileUserResponse
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Response
 
@@ -21,21 +23,6 @@ class ProfileRepository(
 
     fun logout() {
         sharedPreferenceManger.logout()
-    }
-    suspend fun editUserProfileData() : Response<EditProfileResponse>?{
-//        val userToken = sharedPreferenceManger.bearerToken
-//        val token = "Bearer $userToken"
-//        val mediaType = "multipart/form-data".toMediaType()
-//        return try {
-//            api.createPost(
-//                token = token,
-//                content = content?.toRequestBody(mediaType) ?: " ".toRequestBody(mediaType),
-//                file_path = imgPart
-//            )
-//        } catch (e: Exception) {
-//            null
-//        }
-        return null
     }
 
     suspend fun getProfileUser(userId:Int): Response<ProfileUserResponse>?{
@@ -53,12 +40,30 @@ class ProfileRepository(
     }
 
 
-    suspend fun inviteUserToTeams(){
-
+    suspend fun updateProfile(
+        userId: Int,
+        imgPart: MultipartBody.Part?,
+        name: String?,
+        track: String?,
+        bio: String?
+    ): Response<AuthResponse>? {
+        val url = EDIT_PROFILE + userId
+        val userToken = sharedPreferenceManger.bearerToken
+        val token = "Bearer $userToken"
+        val mediaType = "multipart/form-data".toMediaType()
+        return try {
+            api.updateProfile(
+                url = url,
+                token = token,
+                name = name?.toRequestBody(mediaType) ?: " ".toRequestBody(mediaType),
+                track = track?.toRequestBody(mediaType) ?: " ".toRequestBody(mediaType),
+                bio = bio?.toRequestBody(mediaType) ?: " ".toRequestBody(mediaType),
+                imageUrl = imgPart
+            )
+        } catch (e: Exception) {
+            null
+        }
     }
 
-    suspend fun getUserPersonalDetails(){
-
-    }
 
 }

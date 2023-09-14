@@ -28,4 +28,5 @@ const val SHARE_POST = "share"
 //profile
 const val PROFILE = "profile"
 const val EDIT_INFO = "$PROFILE/edit-info/"
+const val EDIT_PROFILE = "$PROFILE/edit-profile/"
 const val GET_USER = "users/show/"

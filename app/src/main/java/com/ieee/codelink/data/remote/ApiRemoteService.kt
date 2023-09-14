@@ -131,5 +131,20 @@ interface ApiRemoteService {
         token: String,
     ):Response<ProfileUserResponse>
 
+    @Multipart
+    @POST
+    suspend fun updateProfile(
+        @Url url: String,
+        @Header("Authorization")
+        token: String,
+        @Part
+        imageUrl: MultipartBody.Part?,
+        @Part("name")
+        name: RequestBody?,
+        @Part("track")
+        track: RequestBody?,
+        @Part("bio")
+        bio: RequestBody?
+    ): Response<AuthResponse>
 
 }
