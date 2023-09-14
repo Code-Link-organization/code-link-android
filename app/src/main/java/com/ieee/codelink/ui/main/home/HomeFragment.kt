@@ -18,14 +18,13 @@ import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentHomeBinding
 import com.ieee.codelink.domain.models.Comment
 import com.ieee.codelink.domain.models.CreatePostModel
-import com.ieee.codelink.domain.models.LikeData
+import com.ieee.codelink.domain.models.responseData.LikeData
 import com.ieee.codelink.domain.models.Post
 import com.ieee.codelink.domain.models.responses.CommentsResponse
 import com.ieee.codelink.domain.models.responses.CreatePostResponse
 import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
 import com.ieee.codelink.domain.models.responses.ShareResponse
-import com.ieee.codelink.domain.models.toProfileUser
 import com.ieee.codelink.ui.adapters.PostsAdapter
 import com.ieee.codelink.ui.dialogs.CommentsDialogFragment
 import com.ieee.codelink.ui.dialogs.CreatePostDialogFragment

@@ -1,6 +1,5 @@
 package com.ieee.codelink.ui.dialogs
 
-import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -9,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.ieee.codelink.databinding.DialogPostLikesBinding
-import com.ieee.codelink.domain.models.LikeData
+import com.ieee.codelink.domain.models.responseData.LikeData
 import com.ieee.codelink.ui.adapters.LikesAdapter
 
 class LikesDialogFragment(

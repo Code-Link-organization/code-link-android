@@ -5,7 +5,6 @@ import com.ieee.codelink.R
 import com.ieee.codelink.common.cacheImageToFile
 import com.ieee.codelink.common.createMultipartBodyPartFromFile
 import com.ieee.codelink.common.getImageFileFromRealPath
-import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.core.isSuccess
@@ -13,7 +12,7 @@ import com.ieee.codelink.data.repository.PostsRepository
 import com.ieee.codelink.data.repository.UserRepository
 import com.ieee.codelink.domain.models.CreatePostModel
 import com.ieee.codelink.domain.models.Post
-import com.ieee.codelink.domain.models.PostsResponseData
+import com.ieee.codelink.domain.models.responseData.PostsResponseData
 import com.ieee.codelink.domain.models.User
 import com.ieee.codelink.domain.models.responses.CommentsResponse
 import com.ieee.codelink.domain.models.responses.CreatePostResponse
