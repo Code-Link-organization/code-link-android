@@ -1,7 +1,9 @@
 package com.ieee.codelink.data.repository
 
+import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.data.remote.ApiRemoteService
+import com.ieee.codelink.data.remote.EDIT_INFO
 import com.ieee.codelink.data.remote.EDIT_PROFILE
 import com.ieee.codelink.data.remote.GET_USER
 import com.ieee.codelink.domain.models.User
@@ -59,6 +61,50 @@ class ProfileRepository(
                 track = track?.toRequestBody(mediaType) ?: " ".toRequestBody(mediaType),
                 bio = bio?.toRequestBody(mediaType) ?: " ".toRequestBody(mediaType),
                 imageUrl = imgPart
+            )
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    suspend fun updateUserInfo(
+        userId: Int,
+        governate: String? = null,
+        university: String? = null,
+        faculty: String? = null,
+        birthDate: String? = null,
+        emailProfile: String? = null,
+        phoneNumber: String? = null,
+        projects: String? = null,
+        progLanguages: String? = null,
+        cvUrl: String? = null,
+        githubUrl: String? = null,
+        linkedinUrl: String? = null,
+        behanceUrl: String? = null,
+        twitterUrl: String? = null,
+        facebookUrl: String? = null
+    ): Response<BaseResponse>? {
+        val url = EDIT_INFO + userId
+        val userToken = sharedPreferenceManger.bearerToken
+        val token = "Bearer $userToken"
+        return try {
+            api.editUserInfo(
+                url = url,
+                token = token,
+                governate = governate,
+                university = university,
+                faculty = faculty,
+                birthDate = birthDate,
+                emailProfile = emailProfile,
+                phoneNumber = phoneNumber,
+                projects = projects,
+                progLanguages = progLanguages,
+                cvUrl = cvUrl,
+                githubUrl = githubUrl,
+                linkedinUrl = linkedinUrl,
+                behanceUrl = behanceUrl,
+                twitterUrl = twitterUrl,
+                facebookUrl = facebookUrl
             )
         } catch (e: Exception) {
             null

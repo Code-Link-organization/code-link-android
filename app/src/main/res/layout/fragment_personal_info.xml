@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,7 +7,26 @@
     android:background="@color/color_background"
     tools:context=".ui.profileScreens.personalInfo.PersonalInfoFragment">
 
-    <LinearLayout
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:elevation="2dp"
+        android:layout_gravity="center"
+        app:lottie_rawRes="@raw/anim_loading"
+        app:lottie_autoPlay="false"
+        android:visibility="visible"
+        tools:visibility="visible"
+        app:lottie_loop="true"/>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible"
+        >
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -41,7 +60,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/password_field"
+            android:id="@+id/et_Governate"
             style="@style/roundInputTextField"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -54,6 +73,7 @@
             android:textColorHint="@color/color_hint" />
 
         <EditText
+            android:id="@+id/et_University"
             style="@style/roundInputTextField"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -66,6 +86,7 @@
             android:textColorHint="@color/color_hint" />
 
         <EditText
+            android:id="@+id/et_Faculty"
             style="@style/roundInputTextField"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -78,46 +99,175 @@
             android:textColorHint="@color/color_hint" />
 
         <EditText
+            android:id="@+id/et_Birth_date"
             style="@style/roundInputTextField"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginHorizontal="@dimen/horizontal_padding"
             android:layout_marginTop="20dp"
             android:background="@drawable/personal_info_edit_text"
-            android:hint="@string/track"
+            android:hint="@string/birth_date"
             android:maxLines="1"
             android:paddingHorizontal="12dp"
             android:textColorHint="@color/color_hint" />
 
         <EditText
+            android:id="@+id/et_email"
+            style="@style/roundInputTextField"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="@dimen/horizontal_padding"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/personal_info_edit_text"
+            android:hint="@string/e_mail"
+            android:maxLines="1"
+            android:paddingHorizontal="12dp"
+            android:textColorHint="@color/color_hint"/>
+        <EditText
+            android:id="@+id/et_phone_number"
+            style="@style/roundInputTextField"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="@dimen/horizontal_padding"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/personal_info_edit_text"
+            android:hint="@string/phone_number"
+            android:maxLines="1"
+            android:paddingHorizontal="12dp"
+            android:textColorHint="@color/color_hint"/>
+        <EditText
+            android:id="@+id/et_my_projects"
+            style="@style/roundInputTextField"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="@dimen/horizontal_padding"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/personal_info_edit_text"
+            android:hint="@string/my_projectss"
+            android:maxLines="1"
+            android:paddingHorizontal="12dp"
+            android:textColorHint="@color/color_hint"/>
+        <EditText
+            android:id="@+id/et_programming_languages"
             style="@style/roundInputTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/horizontal_padding"
             android:layout_marginTop="20dp"
-            android:background="@drawable/personal_info_edit_text"
-            android:gravity="start"
-            android:hint="@string/my_projects"
             android:minHeight="90dp"
+            android:background="@drawable/personal_info_edit_text"
+            android:hint="@string/programming_languages"
+            android:maxLines="8"
+            android:paddingTop="8dp"
+            android:gravity="start"
+            android:layout_marginBottom="20dp"
             android:paddingHorizontal="12dp"
-            android:paddingTop="12dp"
-            android:textColorHint="@color/color_hint" />
-
+            android:textColorHint="@color/color_hint"/>
 
         <EditText
+            android:id="@+id/et_cv_link"
+            style="@style/roundInputTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/horizontal_padding"
+            android:background="@drawable/personal_info_edit_text"
+            android:hint="@string/cv_link"
+            android:maxLines="2"
+            android:minHeight="50dp"
+            android:paddingHorizontal="12dp"
+            android:textColorHint="@color/color_hint"/>
+
+        <EditText
+            android:id="@+id/et_facebook"
             style="@style/roundInputTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/horizontal_padding"
             android:layout_marginTop="20dp"
             android:background="@drawable/personal_info_edit_text"
-            android:gravity="start"
-            android:hint="@string/skills"
-            android:minHeight="90dp"
+            android:hint="@string/facebook"
+            android:maxLines="2"
+            android:minHeight="50dp"
             android:paddingHorizontal="12dp"
-            android:paddingTop="12dp"
-            android:textColorHint="@color/color_hint"
-            android:layout_marginBottom="20dp"
-            />
+            android:textColorHint="@color/color_hint"/>
+
+        <EditText
+            android:id="@+id/et_twitter"
+            style="@style/roundInputTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/horizontal_padding"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/personal_info_edit_text"
+            android:hint="@string/twitter"
+            android:maxLines="2"
+            android:minHeight="50dp"
+            android:paddingHorizontal="12dp"
+            android:textColorHint="@color/color_hint"/>
+
+        <EditText
+            android:id="@+id/et_linkedIn"
+            style="@style/roundInputTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/horizontal_padding"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/personal_info_edit_text"
+            android:hint="@string/linkedin"
+            android:maxLines="2"
+            android:minHeight="50dp"
+            android:paddingHorizontal="12dp"
+            android:textColorHint="@color/color_hint"/>
+
+        <EditText
+            android:id="@+id/et_gitHub"
+            style="@style/roundInputTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/horizontal_padding"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/personal_info_edit_text"
+            android:hint="@string/github"
+            android:maxLines="2"
+            android:minHeight="50dp"
+            android:paddingHorizontal="12dp"
+            android:textColorHint="@color/color_hint"/>
+        <EditText
+            android:id="@+id/et_behance"
+            style="@style/roundInputTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/horizontal_padding"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/personal_info_edit_text"
+            android:hint="@string/behance"
+            android:maxLines="2"
+            android:minHeight="50dp"
+            android:paddingHorizontal="12dp"
+            android:textColorHint="@color/color_hint"/>
+
+        <com.kusu.loadingbutton.LoadingButton
+            android:id="@+id/btn_save"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            app:lb_cornerRadius="@dimen/app_btn_radius"
+            android:padding="8dp"
+            app:layout_constraintTop_toBottomOf="@id/bio_field"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
+            android:text="@string/save"
+            android:textAllCaps="false"
+            android:textColor="@color/color_text"
+            android:textSize="@dimen/big_txt"
+            app:lb_buttonColor="@color/color_primary"
+            app:lb_isShadowEnable="false"
+            app:lb_loaderColor="@color/white" />
+
     </LinearLayout>
-</ScrollView>
+    </ScrollView>
+
+</FrameLayout>

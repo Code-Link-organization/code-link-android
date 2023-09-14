@@ -5,6 +5,7 @@ import android.net.Uri
 import com.ieee.codelink.common.cacheImageToFile
 import com.ieee.codelink.common.createMultipartBodyPartFromFile
 import com.ieee.codelink.common.getImageFileFromRealPath
+import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.data.repository.ProfileRepository
@@ -26,6 +27,8 @@ class OthersProfileViewModel @Inject constructor(
     var imageUri: Uri? = null
 
     val updateProfileState: MutableStateFlow<ResponseState<AuthResponse>?> =
+        MutableStateFlow(null)
+    val updateUserDetailsState: MutableStateFlow<ResponseState<BaseResponse>?> =
         MutableStateFlow(null)
 
     val profileUserState: MutableStateFlow<ResponseState<ProfileUserResponse>?> =
@@ -55,6 +58,47 @@ class OthersProfileViewModel @Inject constructor(
         )
         updateProfileState.value = handleResponse(response)
     }
+
+
+    suspend fun updateUserInfo(
+        userId: Int,
+        governate: String? = null,
+        university: String? = null,
+        faculty: String? = null,
+        birthDate: String? = null,
+        emailProfile: String? = null,
+        phoneNumber: String? = null,
+        projects: String? = null,
+        progLanguages: String? = null,
+        cvUrl: String? = null,
+        githubUrl: String? = null,
+        linkedinUrl: String? = null,
+        behanceUrl: String? = null,
+        twitterUrl: String? = null,
+        facebookUrl: String? = null
+    ) {
+
+        updateUserDetailsState.value = ResponseState.Loading()
+        val response = profileRepository.updateUserInfo(
+            userId = userId,
+            governate = governate,
+            university = university,
+            faculty = faculty,
+            birthDate = birthDate,
+            emailProfile = emailProfile,
+            phoneNumber = phoneNumber,
+            projects = projects,
+            progLanguages = progLanguages,
+            cvUrl = cvUrl,
+            githubUrl = githubUrl,
+            linkedinUrl = linkedinUrl,
+            behanceUrl = behanceUrl,
+            twitterUrl = twitterUrl,
+            facebookUrl = facebookUrl
+        )
+        updateUserDetailsState.value = handleResponse(response)
+    }
+
 
     suspend fun getProfileUser(userId: Int) {
         profileUserState.value = ResponseState.Loading()

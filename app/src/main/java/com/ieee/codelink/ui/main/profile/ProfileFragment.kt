@@ -119,14 +119,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         viewModel.user.value?.let {
             it.imageUrl?.let {imgUrl->
                 openZoomableImage(
-                    imgUrl,
+                    getImageForGlide(imgUrl)!!,
                     requireActivity(),
                     binding.ivUserImage
                 )
             }
         }
-
     }
+
     private fun settingsClicked() {
         findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToSettingsFragment())
     }
@@ -155,7 +155,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         )
     }
     private fun personalInfoClicked() {
-        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToPersonalInfoFragment())
+        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToPersonalInfoFragment(viewModel.user.value?.id ?: -1))
     }
 
     private val logOut: () -> Unit = {
