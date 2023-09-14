@@ -167,7 +167,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchUserFragment"
-        android:name="com.ieee.codelink.ui.main.search.searchScreens.friends.SearchUserFragment"
+        android:name="com.ieee.codelink.ui.main.search.searchScreens.individuals.SearchUserFragment"
         android:label="fragment_seatch_user"
         tools:layout="@layout/fragment_seatch_user" >
         <argument

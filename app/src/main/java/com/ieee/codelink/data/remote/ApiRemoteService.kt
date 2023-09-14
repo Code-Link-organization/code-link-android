@@ -1,6 +1,7 @@
 package com.ieee.codelink.data.remote
 
 import com.ieee.codelink.core.BaseResponse
+import com.ieee.codelink.domain.models.responses.AllUsersResponse
 import com.ieee.codelink.domain.models.responses.AuthResponse
 import com.ieee.codelink.domain.models.responses.CommentsResponse
 import com.ieee.codelink.domain.models.responses.CreatePostResponse
@@ -181,5 +182,11 @@ interface ApiRemoteService {
         @Query("facebookUrl")
         facebookUrl: String?
     ): Response<BaseResponse>
+
+    @GET(GET_ALL_USERS)
+    suspend fun getAllUsers(
+        @Header("Authorization")
+        token: String
+    ): Response<AllUsersResponse>
 
 }

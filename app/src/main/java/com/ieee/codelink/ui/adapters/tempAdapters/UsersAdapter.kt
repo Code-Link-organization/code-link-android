@@ -3,19 +3,16 @@ package com.ieee.codelink.ui.adapters.tempAdapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.ieee.codelink.R
+import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.databinding.CardLikePersonBinding
-import com.ieee.codelink.domain.tempModels.TempUserSearch
+import com.ieee.codelink.domain.models.User
 
 
 class UsersAdapter(
-    var users: MutableList<TempUserSearch>,
-    var track :String,
-    private val openProfile: (TempUserSearch) -> Unit,
-    private val followAction: (TempUserSearch) -> Unit
+    var users: MutableList<User>,
+    private val openProfile: (User) -> Unit,
+    private val followAction: (User) -> Unit
 ) : RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: CardLikePersonBinding) :
@@ -35,28 +32,29 @@ class UsersAdapter(
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val like = users[position]
-        setViews(holder, like)
-        setOnClicks(holder, like)
+        val user = users[position]
+        setViews(holder, user)
+        setOnClicks(holder, user)
     }
 
-    private fun setViews(holder: ViewHolder, user: TempUserSearch) {
+    private fun setViews(holder: ViewHolder, user: User) {
         holder.binding.apply {
             tvUserName.text = user.name
-            tvUserTrack.text = track
+            tvUserTrack.text = user.track
 
             setImageUsingGlide(
                 view = holder.binding.ivUserImage,
-                image = user.image)
+                image = getImageForGlide(user.imageUrl)
+            )
         }
     }
 
-    private fun setOnClicks(holder: ViewHolder, like: TempUserSearch) {
+    private fun setOnClicks(holder: ViewHolder, user: User) {
         holder.binding.root.setOnClickListener {
-            openProfile(like)
+            openProfile(user)
         }
         holder.binding.btnFollow.setOnClickListener {
-            followAction(like)
+            followAction(user)
         }
     }
 
