@@ -25,6 +25,7 @@ import com.ieee.codelink.ui.adapters.tempAdapters.FollowersAdapter
 import com.ieee.codelink.ui.adapters.tempAdapters.ProfilePostsAdapter
 import com.ieee.codelink.ui.dialogs.InviteUserDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
@@ -39,6 +40,7 @@ class OthersProfileFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        hideAll()
         val userId = navArgs.userId
         callUser(userId)
         setObservers()
@@ -60,17 +62,20 @@ class OthersProfileFragment :
 
     private fun profileUserObserver(state: ResponseState<ProfileUserResponse>) {
         when (state) {
-            is ResponseState.Empty,
+            is ResponseState.Empty->{}
             is ResponseState.NotAuthorized,
             is ResponseState.UnKnownError -> {
+                reCallData()
             }
 
             is ResponseState.NetworkError -> {
                 showToast(getString(R.string.network_error), false)
+                reCallData()
             }
 
             is ResponseState.Error -> {
                 com.ieee.codelink.common.showToast(state.message.toString(), requireContext())
+                reCallData()
                 viewModel.profileUserState.value = ResponseState.Empty()
             }
 
@@ -82,6 +87,7 @@ class OthersProfileFragment :
                 state.data?.let { response ->
                     lifecycleScope.launch {
                         val profileUser = response.data.user
+                        showAll()
                         setScreenLogic(profileUser)
                     }
                 }
@@ -281,4 +287,42 @@ class OthersProfileFragment :
         inviteScreen.show(childFragmentManager , "inviteScreen")
     }
 
+    fun hideAll(){
+        startLoadingAnimation()
+        binding.apply {
+            llSections.isGone = true
+            myToolbar.isGone = true
+            frameRv.isGone = true
+        }
+    }
+
+    fun showAll(){
+        binding.apply {
+            llSections.isGone = false
+            myToolbar.isGone = false
+            frameRv.isGone = false
+        }
+        stopLoadingAnimation()
+    }
+
+    private fun startLoadingAnimation() {
+        binding.animationView.apply {
+            isGone = false
+            playAnimation()
+        }
+    }
+
+    private fun stopLoadingAnimation() {
+        binding.animationView.apply {
+            isGone = true
+            cancelAnimation()
+        }
+    }
+
+    private fun reCallData(){
+        lifecycleScope.launch {
+            delay(1000)
+            callUser(navArgs.userId)
+        }
+    }
 }
