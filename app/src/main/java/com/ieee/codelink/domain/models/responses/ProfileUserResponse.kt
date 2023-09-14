@@ -2,7 +2,7 @@ package com.ieee.codelink.domain.models.responses
 
 import com.google.gson.annotations.SerializedName
 import com.ieee.codelink.core.BaseResponse
-import com.ieee.codelink.domain.models.ProfileUserData
+import com.ieee.codelink.domain.models.responseData.ProfileUserData
 
 data class ProfileUserResponse(
     @SerializedName("result")

@@ -6,7 +6,8 @@ data class User(
     var id: Int,
     var name: String,
     var email: String,
-    var imageUrl : String?,
-    var track : String? = null,
+    var imageUrl: String?,
+    var track: String? = null,
+    var pivot: Pivot? = null,
     var token: String? = null
-):Serializable
+) : Serializable

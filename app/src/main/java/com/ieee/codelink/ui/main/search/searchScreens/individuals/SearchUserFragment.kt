@@ -80,12 +80,6 @@ class SearchUserFragment : BaseFragment<FragmentSeatchUserBinding>(FragmentSeatc
 
     }
 
-    private fun callData() {
-        lifecycleScope.launch {
-            viewModel.getAllUsers()
-        }
-    }
-
     private fun setupRv(users: List<User>) {
         lifecycleScope.launch(Dispatchers.Main) {
             usersAdapter = UsersAdapter(
@@ -110,7 +104,7 @@ class SearchUserFragment : BaseFragment<FragmentSeatchUserBinding>(FragmentSeatc
     }
 
     private fun startLoadingAnimation() {
-        if (binding.animationView.isVisible){
+        if (binding.animationView.isAnimating){
             return
         }
         binding.animationView.apply {
@@ -126,6 +120,11 @@ class SearchUserFragment : BaseFragment<FragmentSeatchUserBinding>(FragmentSeatc
         }
     }
 
+    private fun callData() {
+        lifecycleScope.launch {
+            viewModel.getAllUsers()
+        }
+    }
     private fun recallData(){
         lifecycleScope.launch {
             delay(1000)

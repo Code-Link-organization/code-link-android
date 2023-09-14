@@ -1,4 +1,4 @@
-package com.ieee.codelink.domain.models
+package com.ieee.codelink.domain.models.responseData
 
 data class SharePostData(
     var id: Int,

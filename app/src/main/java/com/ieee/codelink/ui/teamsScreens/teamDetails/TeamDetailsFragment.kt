@@ -6,11 +6,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ieee.codelink.R
+import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.databinding.FragmentTeamDetailsBinding
-import com.ieee.codelink.domain.tempModels.TempTeam
+import com.ieee.codelink.domain.models.Team
 import com.ieee.codelink.ui.adapters.tempAdapters.TeamMembersAdapter
 
 class TeamDetailsFragment : BaseFragment<FragmentTeamDetailsBinding>(FragmentTeamDetailsBinding::inflate) {
@@ -34,27 +35,30 @@ class TeamDetailsFragment : BaseFragment<FragmentTeamDetailsBinding>(FragmentTea
         }
     }
 
-    private fun setupRv(team: TempTeam) {
+    private fun setupRv(team: Team) {
         membersAdapter = TeamMembersAdapter(
-            team.users
+            team.members
         ){
-            showToast(it.name + " Clicked")
+            openProfileScreen(it.id)
         }
 
         binding.rvTeamMembers.adapter = membersAdapter
     }
 
-    private fun setViews(team: TempTeam) {
+    private fun setViews(team: Team) {
        binding.apply {
            tvTeamName.text = team.name
            tvTeamDescription.text = team.description
            setImageUsingGlide(
                ivTeamImage,
-               team.image,
+               getImageForGlide(team.imageUrl),
                errorImage = R.drawable.teamwork
            )
        }
     }
 
+    private fun openProfileScreen(id:Int){
+        findNavController().navigate(TeamDetailsFragmentDirections.actionTeamDetailsFragmentToOthersProfile(id))
+    }
 
 }

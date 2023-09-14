@@ -1,10 +1,12 @@
 package com.ieee.codelink.data.remote
 
 import com.ieee.codelink.core.BaseResponse
+import com.ieee.codelink.domain.models.responses.AllTeamsResponse
 import com.ieee.codelink.domain.models.responses.AllUsersResponse
 import com.ieee.codelink.domain.models.responses.AuthResponse
 import com.ieee.codelink.domain.models.responses.CommentsResponse
 import com.ieee.codelink.domain.models.responses.CreatePostResponse
+import com.ieee.codelink.domain.models.responses.CreateTeamResponse
 import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
 import com.ieee.codelink.domain.models.responses.ProfileUserResponse
@@ -188,5 +190,36 @@ interface ApiRemoteService {
         @Header("Authorization")
         token: String
     ): Response<AllUsersResponse>
+    @GET(GET_ALL_TEAMS)
+    suspend fun getAllTeams(
+        @Header("Authorization")
+        token: String
+    ): Response<AllTeamsResponse>
+
+    @Multipart
+    @POST(CREATE_TEAM)
+    suspend fun createTeam(
+        @Header("Authorization")
+        token: String,
+        @Part("name")
+        name: RequestBody,
+        @Part("description")
+        description: RequestBody,
+        @Part
+        imageUrl: MultipartBody.Part?,
+    ): Response<CreateTeamResponse>
+
+    @Multipart
+    @POST(EDIT_TEAM)
+    suspend fun editTeam(
+        @Header("Authorization")
+        token: String,
+        @Part("name")
+        name: RequestBody?,
+        @Part("description")
+        description: RequestBody?,
+        @Part
+        imageUrl: MultipartBody.Part?,
+    ): Response<CreateTeamResponse>
 
 }

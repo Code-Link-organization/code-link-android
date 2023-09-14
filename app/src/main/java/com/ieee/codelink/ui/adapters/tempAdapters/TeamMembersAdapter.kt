@@ -3,16 +3,18 @@ package com.ieee.codelink.ui.adapters.tempAdapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.databinding.CardCourseBinding
 import com.ieee.codelink.databinding.ItemTeamMemberBinding
+import com.ieee.codelink.domain.models.User
 import com.ieee.codelink.domain.tempModels.TempTeam
 import com.ieee.codelink.domain.tempModels.TempUserSearch
 
 
 class TeamMembersAdapter(
-    var items: List<TempUserSearch>,
-    var itemClicked : (TempUserSearch) -> Unit
+    var items: List<User>,
+    var itemClicked : (User) -> Unit
 ) : RecyclerView.Adapter<TeamMembersAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: ItemTeamMemberBinding) :
@@ -42,7 +44,7 @@ class TeamMembersAdapter(
         holder.binding.apply {
             setImageUsingGlide(
                 view = ivUserImage,
-                image = item.image
+                image = getImageForGlide(item.imageUrl)
             )
             tvUserName.text = item.name
             tvTrack.text = item.track

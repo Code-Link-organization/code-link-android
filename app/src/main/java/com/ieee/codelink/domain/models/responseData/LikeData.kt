@@ -1,7 +1,6 @@
-package com.ieee.codelink.domain.models
+package com.ieee.codelink.domain.models.responseData
 
 import com.ieee.codelink.data.fakeDataProvider.FakeDataProvider
-import com.ieee.codelink.domain.tempModels.TempUserProfile
 import com.ieee.codelink.domain.tempModels.TempUserSearch
 import com.ieee.codelink.domain.tempModels.toTempUserProfile
 

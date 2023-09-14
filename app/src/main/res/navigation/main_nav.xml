@@ -199,7 +199,12 @@
             app:argType="integer" />
         <action
             android:id="@+id/action_othersProfile_to_personalInfoFragment"
-            app:destination="@id/personalInfoFragment" />
+            app:destination="@id/personalInfoFragment"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/searchCoursesFragment"
@@ -223,7 +228,16 @@
         android:label="TeamDetailsFragment" >
         <argument
             android:name="team"
-            app:argType="com.ieee.codelink.domain.tempModels.TempTeam" />
+            app:argType="com.ieee.codelink.domain.models.Team" />
+        <action
+            android:id="@+id/action_teamDetailsFragment_to_othersProfile"
+            app:destination="@id/othersProfile"
+
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/createTeamFragment"

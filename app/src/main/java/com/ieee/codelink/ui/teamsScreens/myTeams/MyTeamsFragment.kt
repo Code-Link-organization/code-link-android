@@ -53,11 +53,11 @@ class MyTeamsFragment :
     }
 
     private fun openTeam(team: TempTeam) {
-        findNavController().navigate(
-            MyTeamsFragmentDirections.actionMyTeamsFragmentToTeamDetailsFragment(
-                team
-            )
-        )
+//        findNavController().navigate(
+//            MyTeamsFragmentDirections.actionMyTeamsFragmentToTeamDetailsFragment(
+//                team
+//            )
+//        )
     }
 
     private fun openCreateTeamScreen() {
