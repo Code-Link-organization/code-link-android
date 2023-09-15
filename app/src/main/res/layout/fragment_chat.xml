@@ -8,6 +8,7 @@
     android:focusableInTouchMode="true"
     android:orientation="vertical"
     tools:context=".ui.chat.ChatFragment">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
@@ -35,11 +36,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/mulish_bold"
+            android:layout_marginStart="14dp"
+            android:fontFamily="@font/mulish_regular"
             android:text="David Samuel"
             android:textColor="#FF000000"
+            android:textFontWeight="600"
             android:textSize="13sp"
-            app:layout_constraintStart_toEndOf="@id/ic_back" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ic_back"
+            app:layout_constraintTop_toTopOf="@+id/ic_back" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="@dimen/_25sdp"
@@ -85,7 +90,6 @@
         android:layout_width="match_parent"
         android:layout_height="1.5dp"
         android:background="#E6EEFAF8" />
-
 
 
 </LinearLayout>
