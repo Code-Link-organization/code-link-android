@@ -5,6 +5,7 @@ import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.data.remote.ApiRemoteService
 import com.ieee.codelink.data.remote.GET_TEAM
+import com.ieee.codelink.data.remote.INVITE_TO_TEAM
 import com.ieee.codelink.data.remote.JOIN_TEAM
 import com.ieee.codelink.domain.models.User
 import com.ieee.codelink.domain.models.responses.AllTeamsResponse
@@ -122,6 +123,20 @@ class TeamsRepository(
             api.requestToJoinTeam(
                 url,
                 token
+            )
+        } catch (e: Exception) {
+            null
+        }
+    }
+    suspend fun inviteToTeam(teamId: Int,userId : Int):Response<BaseResponse>?{
+        val userToken = sharedPreferenceManger.bearerToken
+        val token = "Bearer $userToken"
+        val url = "$INVITE_TO_TEAM/$teamId"
+        return try {
+            api.inviteToTeam(
+                url,
+                token,
+                userId
             )
         } catch (e: Exception) {
             null

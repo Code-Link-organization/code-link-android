@@ -114,7 +114,7 @@
                             android:layout_height="25dp"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginBottom="4dp"
-                            android:src="@drawable/ic_team"
+                            android:src="@drawable/ic_user_teams"
                             app:tint="@color/color_text" />
 
                         <TextView

@@ -2,7 +2,6 @@ package com.ieee.codelink.ui.teamsScreens
 
 import android.content.Context
 import android.net.Uri
-import androidx.lifecycle.viewModelScope
 import com.ieee.codelink.common.cacheImageToFile
 import com.ieee.codelink.common.createMultipartBodyPartFromFile
 import com.ieee.codelink.common.getImageFileFromRealPath
@@ -18,7 +17,6 @@ import com.ieee.codelink.domain.models.responses.CreateTeamResponse
 import com.ieee.codelink.domain.models.responses.TeamResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,11 +26,12 @@ class TeamsViewModel @Inject constructor(
     private val context: Context
 ) : BaseViewModel() {
 
-    var createTeamImgUri : Uri? = null
-    var editTeamImgUri : Uri? = null
+    var createTeamImgUri: Uri? = null
+    var editTeamImgUri: Uri? = null
 
     val joinTeamState: MutableStateFlow<ResponseState<BaseResponse>> =
         MutableStateFlow(ResponseState.Empty())
+
 
     val userTeamsState: MutableStateFlow<ResponseState<AllTeamsResponse>> =
         MutableStateFlow(ResponseState.Empty())
@@ -75,14 +74,15 @@ class TeamsViewModel @Inject constructor(
 
    fun isTeamLeader(team: Team,user: User = userRepository.getCachedUser() ): Boolean = user.id == team.leader_id
 
-    fun isTeamMember(team: Team,user: User = userRepository.getCachedUser() ): Boolean {
-        return team.members.any{it.id == user.id}
+    fun isTeamMember(team: Team, user: User = userRepository.getCachedUser()): Boolean {
+        return team.members.any { it.id == user.id }
     }
 
-    suspend fun requestToJoinTeam(team: Team){
+    suspend fun requestToJoinTeam(team: Team) {
         joinTeamState.value = ResponseState.Loading()
         val response = teamsRepository.requestToJoinTeam(team.id)
         joinTeamState.value = handleResponse(response)
     }
+
 
 }

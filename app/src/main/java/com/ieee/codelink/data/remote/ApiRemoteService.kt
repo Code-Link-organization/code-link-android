@@ -255,5 +255,13 @@ interface ApiRemoteService {
         @Header("Authorization")
         token: String,
     ): Response<BaseResponse>?
+    @POST
+    suspend fun inviteToTeam(
+        @Url url: String,
+        @Header("Authorization")
+        token: String,
+        @Query("user_id")
+        user_id: Int,
+    ): Response<BaseResponse>?
 
 }

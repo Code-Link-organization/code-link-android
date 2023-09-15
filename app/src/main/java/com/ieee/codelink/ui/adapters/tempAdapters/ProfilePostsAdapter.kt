@@ -2,6 +2,7 @@ package com.ieee.codelink.ui.adapters.tempAdapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -14,7 +15,7 @@ import com.ieee.codelink.domain.tempModels.TempUserSearch
 
 class ProfilePostsAdapter(
     var posts: MutableList<Int>,
-    private val opemImage: (Int) -> Unit
+    private val opemImage: (Int, ImageView) -> Unit
 ) : RecyclerView.Adapter<ProfilePostsAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: CardPostProfileBinding) :
@@ -51,7 +52,7 @@ class ProfilePostsAdapter(
 
     private fun setOnClicks(holder: ViewHolder, post: Int) {
         holder.binding.root.setOnClickListener {
-            opemImage(post)
+            opemImage(post, holder.binding.imageView)
         }
     }
 
