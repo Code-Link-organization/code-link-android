@@ -4,6 +4,7 @@ import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.data.remote.ApiRemoteService
 import com.ieee.codelink.data.remote.CREATE_COMMENT
+import com.ieee.codelink.data.remote.DELETE_POST
 import com.ieee.codelink.data.remote.GET_LIKED_USERS
 import com.ieee.codelink.data.remote.GET_POSTS
 import com.ieee.codelink.data.remote.GET_POST_COMMENTS
@@ -102,6 +103,17 @@ class PostsRepository(
         val url = "$GET_POSTS/$postId/$SHARE_POST"
         return try {
             api.sharePost(url, token)
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    suspend fun deletePost(postId: Int): Response<BaseResponse>? {
+        val userToken = sharedPreferenceManger.bearerToken
+        val token = "Bearer $userToken"
+        val url = "$DELETE_POST/$postId"
+        return try {
+            api.deletePost(url, token)
         } catch (e: Exception) {
             null
         }

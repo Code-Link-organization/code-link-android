@@ -14,6 +14,7 @@ import com.ieee.codelink.R
 import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.getTimeDifference
 import com.ieee.codelink.common.setImageUsingGlide
+import com.ieee.codelink.common.showDialog
 import com.ieee.codelink.data.remote.BASE_URL_FOR_IMAGE
 import com.ieee.codelink.databinding.CardPostBinding
 import com.ieee.codelink.domain.models.Post
@@ -21,6 +22,7 @@ import com.ieee.codelink.domain.models.Post
 
 class PostsAdapter(
     var posts: MutableList<Post>,
+    var cachedUserId : Int?,
     var likeClicked: (Post) -> Unit,
     var commentsClicked: (Post) -> Unit,
     var sharesClicked: (Post) -> Unit,
@@ -30,7 +32,8 @@ class PostsAdapter(
     var openPostImage: (String?, ImageView) -> Unit,
     var showComments: (Post) -> Unit,
     var showLikes: (Post) -> Unit,
-    var openProfile:(Int)-> Unit
+    var openProfile:(Int)-> Unit,
+    var deletePost:(Int)-> Unit
 ) : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: CardPostBinding) :
@@ -193,12 +196,17 @@ class PostsAdapter(
             popupMenu.menu.removeItem(menuItemIdToHide)
         }
 
-        setPostsMenuOnClicks(popupMenu, post)
+        if (post.user_id != cachedUserId) {
+            val menuItemIdToHide = R.id.delete
+            popupMenu.menu.removeItem(menuItemIdToHide)
+        }
+
+        setPostsMenuOnClicks(popupMenu, post , holder)
 
         popupMenu.show()
     }
 
-    private fun setPostsMenuOnClicks(popupMenu: PopupMenu, post : Post) {
+    private fun setPostsMenuOnClicks(popupMenu: PopupMenu, post: Post, holder: ViewHolder) {
         popupMenu.setOnMenuItemClickListener { item: MenuItem ->
             when (item.itemId) {
                 R.id.block -> {
@@ -212,6 +220,19 @@ class PostsAdapter(
 
                 R.id.save -> {
                     saveClicked(post)
+                    true
+                }
+
+                R.id.delete -> {
+                    val context =holder.binding.root.context
+                    showDialog(
+                        context,
+                        context.getString(R.string.delete_post),
+                        context.getString(R.string.sure_to_delete_post),
+                        positiveClicked = {
+                            deletePost(post.id)
+                        }
+                        )
                     true
                 }
 
@@ -270,6 +291,18 @@ class PostsAdapter(
             }
         }
         return null
+    }
+
+    fun removePostFromAdapterList(postId: Int?) {
+        postId?.let {
+            for (i in 0 until posts.size) {
+                if (posts[i].id == postId) {
+                    posts.removeAt(i)
+                    notifyItemRemoved(i)
+                    return
+                }
+            }
+        }
     }
 
 }

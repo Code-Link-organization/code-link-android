@@ -2,7 +2,7 @@ package com.ieee.codelink.data.remote
 
 
 //Base Url
-const val BASE_URL_FOR_IMAGE = "https://58e8-197-43-1-251.ngrok-free.app/"
+const val BASE_URL_FOR_IMAGE = "https://dd4e-197-43-1-251.ngrok-free.app/"
 const val BASE_URL = "${BASE_URL_FOR_IMAGE}api/"
 //Auth
 const val USER ="user"
@@ -18,7 +18,7 @@ const val GET_POSTS = "posts"
 const val CREATE_POST = "$GET_POSTS/create"
 const val SHOW_POST = "$GET_POSTS/show/2"
 const val EDIT_POST = "$GET_POSTS/edit/1"
-const val DELETE_POST = "$GET_POSTS/delete/2"
+const val DELETE_POST = "$GET_POSTS/delete"
 const val USER_POSTS = "$GET_POSTS/user/1"
 const val GET_LIKED_USERS = "likes"
 const val LIKE_A_POST = "like"

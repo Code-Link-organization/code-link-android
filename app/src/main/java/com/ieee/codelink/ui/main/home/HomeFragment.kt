@@ -8,19 +8,19 @@ import androidx.core.view.isGone
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.facebook.appevents.codeless.internal.ViewHierarchy.setOnClickListener
 import com.ieee.codelink.R
 import com.ieee.codelink.common.extension.onBackPress
 import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.openZoomableImage
 import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.core.BaseFragment
+import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentHomeBinding
 import com.ieee.codelink.domain.models.Comment
 import com.ieee.codelink.domain.models.CreatePostModel
-import com.ieee.codelink.domain.models.responseData.LikeData
 import com.ieee.codelink.domain.models.Post
+import com.ieee.codelink.domain.models.responseData.LikeData
 import com.ieee.codelink.domain.models.responses.CommentsResponse
 import com.ieee.codelink.domain.models.responses.CreatePostResponse
 import com.ieee.codelink.domain.models.responses.LikesResponse
@@ -126,7 +126,49 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             postsObserver(state)
         }
 
+        viewModel.deletePostState.awareCollect {pair->
+            deletePostObserver(pair)
+        }
+
     }
+
+    private fun deletePostObserver(pair: Pair<ResponseState<BaseResponse>, Int?>) {
+        val state = pair.first
+        val postId = pair.second
+        when (state) {
+            is ResponseState.Empty->{}
+            is ResponseState.NotAuthorized,
+            is ResponseState.UnKnownError -> {
+                viewModel.deletePostState.value = Pair(ResponseState.Empty(),null)
+            }
+
+            is ResponseState.NetworkError -> {
+                showToast(getString(R.string.network_error),false)
+                viewModel.deletePostState.value = Pair(ResponseState.Empty(),null)
+            }
+
+            is ResponseState.Error -> {
+                com.ieee.codelink.common.showToast(state.message.toString(), requireContext())
+                viewModel.deletePostState.value = Pair(ResponseState.Empty(),null)
+            }
+
+            is ResponseState.Loading -> {
+                //todo : if there is time add loading bars to the app
+            }
+
+            is ResponseState.Success -> {
+                state.data?.let { response ->
+                    lifecycleScope.launch {
+                        postsAdapter.removePostFromAdapterList(postId)
+                        viewModel.deletePostState.value = Pair(ResponseState.Empty(),null)
+                    }
+                }
+            }
+
+        }
+
+    }
+
     private fun postSharedObserver(state: ResponseState<ShareResponse>) {
         when (state) {
             is ResponseState.Empty,
@@ -346,6 +388,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private fun setPostsRV(list : List<Post>) {
         postsAdapter = PostsAdapter(
             list as MutableList<Post>,
+            cachedUserId = viewModel.getUser().id,
             likeClicked = {
                 likePost(it)
             },
@@ -389,6 +432,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             },
             openProfile = {
                openUserProfile(it)
+            },
+            deletePost = {
+                lifecycleScope.launch {
+                    viewModel.deletePost(it)
+                }
             }
         )
         binding.rvPosts.adapter = postsAdapter
@@ -437,13 +485,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private fun openCommentsScreen(comments: List<Comment>,postId: Int?) {
         postId?.let {
              commentsScreen = CommentsDialogFragment(
-                comments = comments as MutableList<Comment>,
-                postId = postId,
-                addComment = { postId, content ->
-                    lifecycleScope.launch {
-                        viewModel.addComment(postId, content)
-                    }
-                }
+                 comments = comments as MutableList<Comment>,
+                 postId = postId,
+                 addComment = { postId, content ->
+                     lifecycleScope.launch {
+                         viewModel.addComment(postId, content)
+                     }
+                 }
              )
             commentsScreen?.show(childFragmentManager, "commentsScreen")
         }
