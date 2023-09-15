@@ -13,6 +13,7 @@ import com.ieee.codelink.common.extension.onBackPress
 import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.openZoomableImage
 import com.ieee.codelink.common.setImageUsingGlide
+import com.ieee.codelink.common.setImageUsingGlideCenterCrop
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.core.ResponseState
@@ -64,7 +65,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun setViews() {
         binding.apply {
-            setImageUsingGlide(
+            setImageUsingGlideCenterCrop(
                 view = binding.addPostBar.ivUserImage,
                 image = getImageForGlide(viewModel.getUser().imageUrl),
             )
@@ -339,7 +340,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
     private fun postsObserver(state: ResponseState<PostsResponse>) {
-        stopLoadingAnimation()
         when (state) {
             is ResponseState.Empty -> {}
             is ResponseState.NotAuthorized,
@@ -351,6 +351,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             is ResponseState.NetworkError -> {
                 //showToast(getString(R.string.network_error),false)
                 reCallData()
+                stopLoadingAnimation()
+                startNoInternetAnimation()
                 viewModel.postsRequestState.value = ResponseState.Empty()
             }
 
@@ -367,6 +369,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             is ResponseState.Success -> {
                 state.data?.let { response ->
                     lifecycleScope.launch {
+                        stopLoadingAnimation()
+                        stopNoInternetAnimation()
                         if (response.data.postData.isEmpty()){
                             viewModel.postsRequestState.value = ResponseState.Empty()
                             return@launch
@@ -503,7 +507,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
 
     private fun startLoadingAnimation() {
-        if (binding.animationView.isAnimating)return
+        if (binding.animationView.isAnimating || binding.lottieNoConnection.isAnimating)return
         binding.animationView.apply {
             isGone = false
             playAnimation()
@@ -512,6 +516,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun stopLoadingAnimation() {
         binding.animationView.apply {
+            isGone = true
+            cancelAnimation()
+        }
+    }
+
+
+    private fun startNoInternetAnimation() {
+        if (binding.lottieNoConnection.isAnimating) return
+        binding.lottieNoConnection.apply {
+            isGone = false
+            playAnimation()
+        }
+    }
+
+    private fun stopNoInternetAnimation() {
+        binding.lottieNoConnection.apply {
             isGone = true
             cancelAnimation()
         }
