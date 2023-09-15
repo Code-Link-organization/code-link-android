@@ -18,8 +18,10 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_user_image"
-            android:layout_width="0dp"
+            android:layout_width="80dp"
             android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

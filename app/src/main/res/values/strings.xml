@@ -122,4 +122,5 @@
     <string name="linkedin">LinkedIn</string>
     <string name="github">GitHub</string>
     <string name="behance">Behance</string>
+    <string name="completeAll">Complete all fields</string>
 </resources>
