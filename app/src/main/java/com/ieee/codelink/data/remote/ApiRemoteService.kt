@@ -7,6 +7,7 @@ import com.ieee.codelink.domain.models.responses.AuthResponse
 import com.ieee.codelink.domain.models.responses.CommentsResponse
 import com.ieee.codelink.domain.models.responses.CreatePostResponse
 import com.ieee.codelink.domain.models.responses.CreateTeamResponse
+import com.ieee.codelink.domain.models.responses.InvitesResponse
 import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
 import com.ieee.codelink.domain.models.responses.ProfileUserResponse
@@ -263,5 +264,23 @@ interface ApiRemoteService {
         @Query("user_id")
         user_id: Int,
     ): Response<BaseResponse>?
+
+    @GET(INVITE_REQUESTS)
+    suspend fun getInvitations(
+        @Header("Authorization")
+        token: String,
+    ):Response<InvitesResponse>
+    @POST
+    suspend fun acceptInvitation(
+        @Url url : String,
+        @Header("Authorization")
+        token: String,
+    ):Response<BaseResponse>
+    @POST
+    suspend fun rejectInvitation(
+        @Url url : String,
+        @Header("Authorization")
+        token: String,
+    ):Response<BaseResponse>
 
 }

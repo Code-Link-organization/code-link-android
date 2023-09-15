@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="12dp"
+        android:background="@color/color_secondary_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -42,6 +43,7 @@
             android:textColor="#FF000000"
             android:textSize="13sp"
             android:textStyle="bold"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/ic_back"
             app:layout_constraintTop_toTopOf="@+id/ic_back" />
@@ -50,7 +52,7 @@
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_25sdp"
             android:layout_marginEnd="16dp"
-            android:background="#FFD9C6A4"
+            android:background="@drawable/app_button_ripple"
             android:src="@drawable/ic_phone"
             android:tint="@color/white"
             app:contentPadding="8dp"
@@ -64,9 +66,9 @@
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_25sdp"
             android:layout_marginEnd="16dp"
-            android:background="#FFD9C6A4"
             android:src="@drawable/ic_video"
             android:tint="@color/white"
+            android:background="@drawable/app_button_ripple"
             app:contentPadding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -80,7 +82,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:background="@color/color_background"
         android:orientation="vertical"
+        android:paddingVertical="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,7 +96,8 @@
         android:id="@+id/user_typing_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="0.5dp"
+        android:background="@color/color_secondary_background"
+        android:elevation="4dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="16dp"
@@ -101,36 +106,53 @@
         <EditText
             android:id="@+id/ed_message_content"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:minHeight="35dp"
             android:layout_weight="1"
-            android:background="@color/white"
+            android:padding="4dp"
+            android:background="@color/color_secondary_background"
+            android:textColor="@color/color_text"
             android:hint="Type your massage here... "
             android:lineSpacingExtra="6dp"
             android:maxLines="10"
             android:textSize="14sp" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="9dp"
-            android:src="@drawable/ic_react" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/btn_emoji"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            app:tint = "@color/color_text"
+            android:src="@drawable/ic_emoji"
+            app:contentPadding="2dp"
+            android:layout_gravity="top"
+            android:alpha="0.7"
+            android:background="@drawable/profile_section_ripple"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
 
-        <ImageView
-            android:id="@+id/ic_chat_photo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="9dp"
-            android:src="@drawable/ic_attach" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/btn_attach"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            app:tint = "@color/color_text"
+            android:src="@drawable/ic_attach"
+            android:layout_gravity="top"
+            android:scaleType="centerCrop"
+            android:background="@drawable/profile_section_ripple"
+            app:contentPadding="6dp"
+            android:layout_marginHorizontal="4dp"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
 
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/send_message"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
-            android:background="@color/color_accent"
+            android:id="@+id/btn_send_message"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="top"
+            android:background="@drawable/app_button_ripple"
             android:src="@drawable/ic_send"
-            app:contentPadding="16dp"
+            app:contentPadding="10dp"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
 
 

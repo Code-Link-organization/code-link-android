@@ -310,7 +310,7 @@ fun getCurrentUtcDateTime(): String {
 
 fun Boolean.toggle() = !this
 
-fun getImageForGlide(url: String?) = if (url == null) {
+fun getImageForGlide(url: String? = null) = if (url == null) {
     null
 } else {
     BASE_URL_FOR_IMAGE + url

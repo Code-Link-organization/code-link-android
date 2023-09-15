@@ -129,4 +129,6 @@
     <string name="edit">Edit</string>
     <string name="leave">Leave</string>
     <string name="invited">User was invited</string>
+    <string name="reject">Reject</string>
+    <string name="accept">Accept</string>
 </resources>

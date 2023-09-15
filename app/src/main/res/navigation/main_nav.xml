@@ -263,4 +263,9 @@
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.ieee.codelink.ui.notification.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
 </navigation>

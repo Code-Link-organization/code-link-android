@@ -64,11 +64,15 @@ class MainActivity : BaseActivity() {
             R.id.searchFragment
         ),
         CbnMenuItem(
+            R.drawable.ic_notification,
+            R.drawable.avd_notification,
+            R.id.notificationFragment
+        ),
+        CbnMenuItem(
             R.drawable.ic_chat2,
             R.drawable.avd_chat2,
             R.id.chatsFragment
-        )
-        , CbnMenuItem(
+        ), CbnMenuItem(
             R.drawable.ic_profile,
             R.drawable.avd_profile,
             R.id.profileFragment
@@ -81,10 +85,12 @@ class MainActivity : BaseActivity() {
                 R.id.homeFragment,
                 R.id.searchFragment,
                 R.id.profileFragment,
-                R.id.chatsFragment
+                R.id.chatsFragment,
+                R.id.notificationFragment
                 -> {
                     bottomBarNavigationVisibility(true)
                 }
+
                 else -> {
                     bottomBarNavigationVisibility(false)
                 }
