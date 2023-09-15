@@ -1,15 +1,13 @@
-package com.ieee.codelink.ui.adapters.tempAdapters
+package com.ieee.codelink.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.setImageUsingGlide
-import com.ieee.codelink.databinding.CardCourseBinding
+import com.ieee.codelink.common.setImageUsingGlideCenterCrop
 import com.ieee.codelink.databinding.ItemTeamMemberBinding
 import com.ieee.codelink.domain.models.User
-import com.ieee.codelink.domain.tempModels.TempTeam
-import com.ieee.codelink.domain.tempModels.TempUserSearch
 
 
 class TeamMembersAdapter(
@@ -42,7 +40,7 @@ class TeamMembersAdapter(
         }
 
         holder.binding.apply {
-            setImageUsingGlide(
+            setImageUsingGlideCenterCrop(
                 view = ivUserImage,
                 image = getImageForGlide(item.imageUrl)
             )

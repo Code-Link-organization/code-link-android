@@ -7,9 +7,9 @@
     android:background="@color/color_background">
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/iv_team_image"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginTop="60dp"
         android:background="@color/white"
         android:scaleType="centerCrop"
@@ -20,11 +20,11 @@
         app:srcCompat="@drawable/ic_create_team" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/iv_camera"
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_team_image"
+        app:layout_constraintEnd_toEndOf="@+id/iv_team_image"
         app:srcCompat="@drawable/ic_camera" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -38,10 +38,10 @@
         app:hintTextColor="@color/color_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/iv_team_image">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/name_of_team_et"
+            android:id="@+id/et_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
@@ -68,45 +68,17 @@
         app:layout_constraintTop_toBottomOf="@+id/name_of_team_field">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/name_of_project_et"
+            android:id="@+id/et_project"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
             android:backgroundTint="@color/white"
             android:hint="@string/name_of_project"
             android:inputType="text"
-            android:maxLines="1"
             android:textColor="@color/color_text"
             android:textColorHint="#757575"
             android:textCursorDrawable="@drawable/color_cursor" />
     </com.google.android.material.textfield.TextInputLayout>
-
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:id="@+id/description_field"-->
-<!--        style="@style/roundInputTextField"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginHorizontal="20dp"-->
-<!--        android:layout_marginTop="24dp"-->
-<!--        android:textColorHint="@color/color_hint"-->
-<!--        app:hintTextColor="@color/color_hint"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/name_of_project_field">-->
-
-<!--        <com.google.android.material.textfield.TextInputEditText-->
-<!--            android:id="@+id/description_et"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:background="@android:color/transparent"-->
-<!--            android:backgroundTint="@color/white"-->
-<!--            android:hint="@string/description_of_the_project"-->
-<!--            android:inputType="text"-->
-<!--            android:maxLines="1"-->
-<!--            android:textColor="@color/color_text"-->
-<!--            android:textColorHint="#757575"-->
-<!--            android:textCursorDrawable="@drawable/color_cursor" />-->
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
 
 
     <com.kusu.loadingbutton.LoadingButton
@@ -119,7 +91,7 @@
         android:textAllCaps="false"
         android:textColor="@color/color_text"
         android:textSize="@dimen/big_txt"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_of_project_field"

@@ -78,3 +78,11 @@ fun openZoomableImage(imageUrl: String, activity : Activity, imageView: ImageVie
         ), view = imageView
     )
 }
+fun openZoomableImage(image: Int, activity : Activity, imageView: ImageView) {
+    StackImageViewer.openStackViewer(
+        activity = activity,
+        list = listOf(
+            ImageData(ResourceType.AppResource(image)),
+        ), view = imageView
+    )
+}

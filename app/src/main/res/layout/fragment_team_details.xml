@@ -30,7 +30,7 @@ android:background="@color/color_background">
 
         <TextView
             android:id="@+id/tv_team_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/team_name"
             android:textColor="@color/color_text"
@@ -43,7 +43,7 @@ android:background="@color/color_background">
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btn_team_action"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_chat"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.kusu.loadingbutton.LoadingButton
@@ -95,16 +95,20 @@ android:background="@color/color_background">
 
 
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/iv_team_image"
                     android:layout_width="wrap_content"
                     android:layout_height="200dp"
                     android:adjustViewBounds="true"
+                    android:elevation="2dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginTop="8dp"
                     android:scaleType="centerCrop"
+                    app:strokeColor="@color/color_hint"
+                    app:strokeWidth="0.3dp"
+                    app:shapeAppearanceOverlay="@style/rounded5"
                     app:srcCompat="@drawable/img_team_details" />
 
                 <TextView

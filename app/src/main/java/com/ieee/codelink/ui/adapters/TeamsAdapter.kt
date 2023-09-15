@@ -1,16 +1,13 @@
-package com.ieee.codelink.ui.adapters.tempAdapters
+package com.ieee.codelink.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
 import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.databinding.CardTeamBinding
 import com.ieee.codelink.domain.models.Team
-import com.ieee.codelink.domain.tempModels.TempTeam
 
 
 class TeamsAdapter(

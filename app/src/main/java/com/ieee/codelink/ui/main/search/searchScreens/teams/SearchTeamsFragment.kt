@@ -3,7 +3,6 @@ package com.ieee.codelink.ui.main.search.searchScreens.teams
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isGone
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -11,16 +10,13 @@ import androidx.navigation.fragment.navArgs
 import com.ieee.codelink.R
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.ResponseState
-import com.ieee.codelink.data.fakeDataProvider.FakeProvider
 import com.ieee.codelink.databinding.FragmentSearchTeamsBinding
 import com.ieee.codelink.domain.models.Team
 import com.ieee.codelink.domain.models.responses.AllTeamsResponse
-import com.ieee.codelink.domain.tempModels.TempTeam
-import com.ieee.codelink.ui.adapters.tempAdapters.TeamsAdapter
+import com.ieee.codelink.ui.adapters.TeamsAdapter
 import com.ieee.codelink.ui.main.search.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

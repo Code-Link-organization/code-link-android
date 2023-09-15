@@ -3,7 +3,6 @@ package com.ieee.codelink.ui.main.search.searchScreens.individuals
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isGone
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -14,8 +13,7 @@ import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentSeatchUserBinding
 import com.ieee.codelink.domain.models.User
 import com.ieee.codelink.domain.models.responses.AllUsersResponse
-import com.ieee.codelink.domain.tempModels.toTempUserProfile
-import com.ieee.codelink.ui.adapters.tempAdapters.UsersAdapter
+import com.ieee.codelink.ui.adapters.UsersAdapter
 import com.ieee.codelink.ui.main.search.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers

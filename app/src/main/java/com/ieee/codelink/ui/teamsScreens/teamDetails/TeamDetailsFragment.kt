@@ -7,12 +7,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ieee.codelink.R
 import com.ieee.codelink.common.getImageForGlide
+import com.ieee.codelink.common.openZoomableImage
 import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.databinding.FragmentTeamDetailsBinding
 import com.ieee.codelink.domain.models.Team
-import com.ieee.codelink.ui.adapters.tempAdapters.TeamMembersAdapter
+import com.ieee.codelink.ui.adapters.TeamMembersAdapter
 
 class TeamDetailsFragment : BaseFragment<FragmentTeamDetailsBinding>(FragmentTeamDetailsBinding::inflate) {
     override val viewModel : BaseViewModel by viewModels()
@@ -24,15 +25,29 @@ class TeamDetailsFragment : BaseFragment<FragmentTeamDetailsBinding>(FragmentTea
         val team = navArgs.team
         setViews(team)
         setupRv(team)
-        setOnClickListeners()
+        setOnClickListeners(team)
     }
 
-    private fun setOnClickListeners() {
+    private fun setOnClickListeners(team: Team) {
         binding.apply {
             btnChat.setOnClickListener {
                 findNavController().navigateUp()
             }
+
+            ivTeamImage.setOnClickListener {
+                val url = getImageForGlide(team.imageUrl)
+                if (url !=null){
+                    openZoomableImage(url, requireActivity(), binding.ivTeamImage)
+                }else{
+                    openZoomableImage(R.drawable.teamwork,requireActivity(), binding.ivTeamImage)
+                }
+            }
+
+
         }
+
+
+
     }
 
     private fun setupRv(team: Team) {
