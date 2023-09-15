@@ -249,4 +249,11 @@ interface ApiRemoteService {
         token: String,
     ):Response<TeamResponse>
 
+    @POST
+    suspend fun requestToJoinTeam(
+        @Url url: String,
+        @Header("Authorization")
+        token: String,
+    ): Response<BaseResponse>?
+
 }
