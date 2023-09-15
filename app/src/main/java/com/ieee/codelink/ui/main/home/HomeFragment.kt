@@ -8,6 +8,7 @@ import androidx.core.view.isGone
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.facebook.appevents.codeless.internal.ViewHierarchy.setOnClickListener
 import com.ieee.codelink.R
 import com.ieee.codelink.common.extension.onBackPress
 import com.ieee.codelink.common.getImageForGlide
@@ -31,6 +32,7 @@ import com.ieee.codelink.ui.dialogs.CreatePostDialogFragment
 import com.ieee.codelink.ui.dialogs.LikesDialogFragment
 import com.ieee.codelink.ui.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
@@ -75,14 +77,26 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             requireActivity().finish()
         }
 
-        binding.frameAddPost.setOnClickListener {
+        binding.addPostBar.btnCreate.setOnClickListener {
            openCreatePostDialog()
         }
+
+        binding.addPostBar.ivUserImage.setOnClickListener {
+            openUserProfile(viewModel.getUser().id)
+        }
+
     }
 
     private fun callData() {
         lifecycleScope.launch {
             viewModel.getHomePosts()
+        }
+    }
+
+    private fun reCallData() {
+        lifecycleScope.launch {
+            delay(1000)
+            loadData()
         }
     }
 
@@ -288,15 +302,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             is ResponseState.Empty -> {}
             is ResponseState.NotAuthorized,
             is ResponseState.UnKnownError -> {
+                reCallData()
                 viewModel.postsRequestState.value = ResponseState.Empty()
             }
 
             is ResponseState.NetworkError -> {
-                showToast(getString(R.string.network_error),false)
+                //showToast(getString(R.string.network_error),false)
+                reCallData()
                 viewModel.postsRequestState.value = ResponseState.Empty()
             }
 
             is ResponseState.Error -> {
+                reCallData()
                 com.ieee.codelink.common.showToast(state.message.toString(), requireContext())
                 viewModel.postsRequestState.value = ResponseState.Empty()
             }
@@ -438,6 +455,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
 
     private fun startLoadingAnimation() {
+        if (binding.animationView.isAnimating)return
         binding.animationView.apply {
             isGone = false
             playAnimation()

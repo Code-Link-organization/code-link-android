@@ -14,8 +14,8 @@
         android:layout_marginEnd="10dp"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        android:background="@color/color_secondary_background"
-        android:elevation="1dp"
+        android:background="@drawable/background_ripple"
+        android:elevation="0dp"
         android:layout_gravity="center_vertical"
         app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
         app:strokeColor="@color/color_dark_stroke"
@@ -23,6 +23,7 @@
         tools:src="@drawable/ic_onboarding_1" />
 
 <androidx.cardview.widget.CardView
+    android:id="@+id/btn_create"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     app:cardElevation="2dp"

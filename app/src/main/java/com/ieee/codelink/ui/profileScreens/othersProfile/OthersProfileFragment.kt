@@ -70,7 +70,7 @@ class OthersProfileFragment :
             }
 
             is ResponseState.NetworkError -> {
-                showToast(getString(R.string.network_error), false)
+             //   showToast(getString(R.string.network_error), false)
                 reCallData()
             }
 
