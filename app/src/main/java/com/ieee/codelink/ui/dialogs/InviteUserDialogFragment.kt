@@ -8,12 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.ieee.codelink.databinding.DialogInviteUserBinding
+import com.ieee.codelink.domain.models.Team
 import com.ieee.codelink.domain.tempModels.TempTeam
 import com.ieee.codelink.ui.adapters.tempAdapters.InviteUserAdapter
 
 class InviteUserDialogFragment(
-    private val teams: MutableList<TempTeam>,
-    private val inviteUser: (List<TempTeam>) -> Unit,
+    private val teams: List<Team>,
+    private val inviteUser: (List<Team>) -> Unit,
 ) : DialogFragment() {
 
     private lateinit var binding: DialogInviteUserBinding
@@ -37,7 +38,7 @@ class InviteUserDialogFragment(
 
     private fun setUpRv() {
         inviteAdapter = InviteUserAdapter(
-            teams
+            teams as MutableList<Team>
         )
         binding.rvLikes.adapter = inviteAdapter
     }

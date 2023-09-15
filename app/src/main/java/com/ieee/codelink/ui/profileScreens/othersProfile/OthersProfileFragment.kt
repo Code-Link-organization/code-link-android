@@ -18,6 +18,8 @@ import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.data.fakeDataProvider.FakeProvider
 import com.ieee.codelink.databinding.FragmentOthersProfileBinding
 import com.ieee.codelink.domain.models.ProfileUser
+import com.ieee.codelink.domain.models.Team
+import com.ieee.codelink.domain.models.responses.AllTeamsResponse
 import com.ieee.codelink.domain.models.responses.ProfileUserResponse
 import com.ieee.codelink.domain.tempModels.TempUserProfile
 import com.ieee.codelink.domain.tempModels.TempUserSearch
@@ -38,14 +40,17 @@ class OthersProfileFragment :
     private val navArgs by navArgs<OthersProfileFragmentArgs>()
     private lateinit var followersAdapter: FollowersAdapter
     private lateinit var postsAdapter: ProfilePostsAdapter
+    private var userId: Int = -1
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideAll()
-        val userId = navArgs.userId
+        userId = navArgs.userId
         callUser(userId)
         setObservers()
     }
+
+
 
     private fun callUser(userId: Int) {
         lifecycleScope.launch {
@@ -59,6 +64,49 @@ class OthersProfileFragment :
                 profileUserObserver(state)
             }
         }
+
+        viewModel.userTeamsAsLeader.awareCollect { state->
+            state?.let {
+                userTeamsAsLeaderObserver(state)
+            }
+        }
+    }
+
+    private fun userTeamsAsLeaderObserver(state: ResponseState<AllTeamsResponse>) {
+        when (state) {
+            is ResponseState.Empty->{}
+            is ResponseState.NotAuthorized,
+            is ResponseState.UnKnownError -> {
+                viewModel.userTeamsAsLeader.value = ResponseState.Empty()
+            }
+
+            is ResponseState.NetworkError -> {
+                   showToast(getString(R.string.network_error), false)
+                viewModel.userTeamsAsLeader.value = ResponseState.Empty()
+            }
+
+            is ResponseState.Error -> {
+                com.ieee.codelink.common.showToast(state.message.toString(), requireContext())
+                viewModel.userTeamsAsLeader.value = ResponseState.Empty()
+            }
+
+            is ResponseState.Loading -> {
+                startLoadingAnimation()
+            }
+
+            is ResponseState.Success -> {
+                stopLoadingAnimation()
+                state.data?.let { response ->
+                    lifecycleScope.launch {
+                        val teams = response.data.teams
+                        openInviteUserDialog(teams)
+                        viewModel.userTeamsAsLeader.value = ResponseState.Empty()
+                    }
+                }
+            }
+
+        }
+
     }
 
     private fun profileUserObserver(state: ResponseState<ProfileUserResponse>) {
@@ -147,6 +195,10 @@ class OthersProfileFragment :
             tvUserName.text = userData.name
             tvUserEmail.text = userData.track ?: getString(R.string.empty)
 
+            if (viewModel.isCachedUser(userId)){
+                ivInviteUser.isGone = true
+            }
+
             followersCount.text = (Random.nextInt(150) + 30).toString()
             followingCount.text = (Random.nextInt(150) + 30).toString()
             likesCount.text = (Random.nextInt(150) + 30).toString()
@@ -185,7 +237,9 @@ class OthersProfileFragment :
                 userImageClicked(userData)
             }
             ivInviteUser.setOnClickListener {
-                openInviteUserDialog()
+                lifecycleScope.launch {
+                    viewModel.getTeamsWhereUserIsLeader()
+                }
             }
             ivPersonalInfo.setOnClickListener {
                 openInfoScreen(userData.id)
@@ -283,9 +337,9 @@ class OthersProfileFragment :
       )
     }
 
-    private fun openInviteUserDialog() {
+    private fun openInviteUserDialog(teams: List<Team>) {
         val inviteScreen = InviteUserDialogFragment(
-            FakeProvider.fakeDataProvider.getFakeTeams(Random.nextInt(5)+2)
+            teams
         ){
             showToast("invited to ${it.size} teams")
         }

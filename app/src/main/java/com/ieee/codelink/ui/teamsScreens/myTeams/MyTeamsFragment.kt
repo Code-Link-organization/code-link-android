@@ -1,6 +1,7 @@
 package com.ieee.codelink.ui.teamsScreens.myTeams
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
@@ -12,6 +13,7 @@ import com.ieee.codelink.data.fakeDataProvider.FakeProvider
 import com.ieee.codelink.databinding.FragmentMyTeamsBinding
 import com.ieee.codelink.domain.models.Team
 import com.ieee.codelink.domain.models.responses.AllTeamsResponse
+import com.ieee.codelink.domain.models.responses.TeamResponse
 import com.ieee.codelink.domain.tempModels.TempTeam
 import com.ieee.codelink.ui.adapters.tempAdapters.MyTeamsAdapter
 import com.ieee.codelink.ui.teamsScreens.TeamsViewModel
@@ -37,6 +39,46 @@ class MyTeamsFragment :
         viewModel.userTeamsState.awareCollect { state ->
             userTeamsObserver(state)
         }
+
+        viewModel.teamState.awareCollect { state ->
+            userTeamClickedObserver(state)
+        }
+    }
+
+    private fun userTeamClickedObserver(state: ResponseState<TeamResponse>) {
+        when (state) {
+            is ResponseState.Empty->{}
+            is ResponseState.NotAuthorized,
+            is ResponseState.UnKnownError -> {
+                viewModel.teamState.value = ResponseState.Empty()
+            }
+
+            is ResponseState.NetworkError -> {
+                //  showToast(getString(R.string.network_error),false)
+                viewModel.teamState.value = ResponseState.Empty()
+            }
+
+            is ResponseState.Error -> {
+                com.ieee.codelink.common.showToast(state.message.toString(), requireContext())
+                viewModel.teamState.value = ResponseState.Empty()
+            }
+
+            is ResponseState.Loading -> {
+                startLoadingAnimation()
+            }
+
+            is ResponseState.Success -> {
+                stopLoadingAnimation()
+                state.data?.let { response ->
+                    lifecycleScope.launch {
+                        openTeam(response.data.team)
+                        viewModel.teamState.value = ResponseState.Empty()
+                    }
+                }
+            }
+
+        }
+
     }
 
     private fun userTeamsObserver(state: ResponseState<AllTeamsResponse>) {
@@ -75,7 +117,6 @@ class MyTeamsFragment :
             }
 
         }
-
     }
 
 
@@ -96,18 +137,17 @@ class MyTeamsFragment :
             teamsAdapter = MyTeamsAdapter(
                 teams as MutableList<Team>
             ) {
-                openTeam(it)
+                lifecycleScope.launch {
+                    viewModel.getTeamById(it.id)
+                }
             }
             binding.rvTeams.adapter = teamsAdapter
         }
     }
 
     private fun openTeam(team: Team) {
-        findNavController().navigate(
-            MyTeamsFragmentDirections.actionMyTeamsFragmentToTeamDetailsFragment(
-                team
-            )
-        )
+        Log.d("mohamed", team.toString())
+      findNavController().navigate(MyTeamsFragmentDirections.actionMyTeamsFragmentToTeamDetailsFragment(team))
     }
 
     private fun openCreateTeamScreen() {

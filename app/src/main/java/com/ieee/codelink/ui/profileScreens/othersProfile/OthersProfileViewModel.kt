@@ -9,8 +9,10 @@ import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.data.repository.ProfileRepository
+import com.ieee.codelink.data.repository.TeamsRepository
 import com.ieee.codelink.data.repository.UserRepository
 import com.ieee.codelink.domain.models.User
+import com.ieee.codelink.domain.models.responses.AllTeamsResponse
 import com.ieee.codelink.domain.models.responses.AuthResponse
 import com.ieee.codelink.domain.models.responses.ProfileUserResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,6 +23,7 @@ import javax.inject.Inject
 class OthersProfileViewModel @Inject constructor(
     private val profileRepository: ProfileRepository,
     private val userRepository: UserRepository,
+    private val teamsRepository: TeamsRepository,
     private val context: Context
 ) : BaseViewModel() {
 
@@ -34,7 +37,13 @@ class OthersProfileViewModel @Inject constructor(
     val profileUserState: MutableStateFlow<ResponseState<ProfileUserResponse>?> =
         MutableStateFlow(null)
 
+    val userTeamsAsLeader: MutableStateFlow<ResponseState<AllTeamsResponse>?> =
+        MutableStateFlow(null)
+
     fun getCachedUser() = userRepository.getCachedUser()
+
+    fun isCachedUser(userId: Int) = userId == getCachedUser().id
+
     suspend fun editProfile(
         userId: Int,
         name: String?,
@@ -114,5 +123,13 @@ class OthersProfileViewModel @Inject constructor(
       newUser.token = oldUser.token
       userRepository.cacheUser(newUser)
     }
+
+    suspend fun getTeamsWhereUserIsLeader(){
+        userTeamsAsLeader.value = ResponseState.Loading()
+        val response = teamsRepository.getTeamsWhereUserIsLeader()
+        userTeamsAsLeader.value = handleResponse(response)
+    }
+
+
 
 }

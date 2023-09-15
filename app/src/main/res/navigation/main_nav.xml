@@ -226,9 +226,6 @@
         android:id="@+id/teamDetailsFragment"
         android:name="com.ieee.codelink.ui.teamsScreens.teamDetails.TeamDetailsFragment"
         android:label="TeamDetailsFragment" >
-        <argument
-            android:name="team"
-            app:argType="com.ieee.codelink.domain.models.Team" />
         <action
             android:id="@+id/action_teamDetailsFragment_to_othersProfile"
             app:destination="@id/othersProfile"
@@ -238,6 +235,9 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_left"/>
+        <argument
+            android:name="team"
+            app:argType="com.ieee.codelink.domain.models.Team" />
     </fragment>
     <fragment
         android:id="@+id/createTeamFragment"
@@ -257,6 +257,11 @@
             app:popExitAnim="@anim/slide_out_left"/>
         <action
             android:id="@+id/action_myTeamsFragment_to_teamDetailsFragment"
-            app:destination="@id/teamDetailsFragment" />
+            app:destination="@id/teamDetailsFragment"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
 </navigation>
