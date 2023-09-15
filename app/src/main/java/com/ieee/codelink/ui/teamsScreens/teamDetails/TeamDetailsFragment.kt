@@ -42,11 +42,7 @@ class TeamDetailsFragment : BaseFragment<FragmentTeamDetailsBinding>(FragmentTea
                     openZoomableImage(R.drawable.teamwork,requireActivity(), binding.ivTeamImage)
                 }
             }
-
-
         }
-
-
 
     }
 

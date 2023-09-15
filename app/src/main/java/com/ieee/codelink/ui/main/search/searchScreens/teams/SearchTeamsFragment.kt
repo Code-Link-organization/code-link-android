@@ -56,7 +56,7 @@ class SearchTeamsFragment : BaseFragment<FragmentSearchTeamsBinding>(FragmentSea
 
             is ResponseState.NetworkError -> {
                 recallData()
-                showToast(getString(R.string.network_error),false)
+               // showToast(getString(R.string.network_error),false)
                 viewModel.allTeamsState.value = ResponseState.Empty()
             }
 

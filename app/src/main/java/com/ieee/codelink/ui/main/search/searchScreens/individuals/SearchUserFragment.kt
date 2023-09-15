@@ -50,7 +50,7 @@ class SearchUserFragment : BaseFragment<FragmentSeatchUserBinding>(FragmentSeatc
 
             is ResponseState.NetworkError -> {
                 recallData()
-                showToast(getString(R.string.network_error),false)
+              //  showToast(getString(R.string.network_error),false)
                 viewModel.allUsersState.value = ResponseState.Empty()
             }
 
