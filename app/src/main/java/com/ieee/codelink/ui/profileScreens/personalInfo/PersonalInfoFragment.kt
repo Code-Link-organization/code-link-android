@@ -6,7 +6,6 @@ import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.ieee.codelink.R
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.core.ResponseState
@@ -15,7 +14,6 @@ import com.ieee.codelink.domain.models.ProfileUser
 import com.ieee.codelink.domain.models.responses.ProfileUserResponse
 import com.ieee.codelink.ui.profileScreens.othersProfile.OthersProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -53,21 +51,21 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>(FragmentP
                     val behanceUrl = etBehance.text.toString()
                     val linkedinUrl = etLinkedIn.text.toString()
                     viewModel.updateUserInfo(
-                        userId,
-                        governate,
-                        university,
-                        faculty,
-                        birthDate,
-                        emailProfile,
-                        phoneNumber,
-                        projects,
-                        progLanguages,
-                        cvUrl,
-                        facebookUrl,
-                        githubUrl,
-                        twitterUrl,
-                        behanceUrl,
-                        linkedinUrl
+                        userId = userId,
+                        governate = governate,
+                        university = university,
+                        faculty = faculty,
+                        birthDate = birthDate,
+                        emailProfile = emailProfile,
+                        phoneNumber = phoneNumber,
+                        projects = projects,
+                        progLanguages = progLanguages,
+                        cvUrl = cvUrl,
+                        facebookUrl = facebookUrl,
+                        githubUrl = githubUrl,
+                        twitterUrl = twitterUrl,
+                        behanceUrl = behanceUrl,
+                        linkedinUrl = linkedinUrl
                     )
                 }
             }

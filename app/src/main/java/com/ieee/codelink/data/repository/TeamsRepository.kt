@@ -1,16 +1,14 @@
 package com.ieee.codelink.data.repository
 
-import android.util.Log
 import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.data.remote.ApiRemoteService
 import com.ieee.codelink.data.remote.GET_TEAM
 import com.ieee.codelink.data.remote.INVITE_TO_TEAM
 import com.ieee.codelink.data.remote.JOIN_TEAM
-import com.ieee.codelink.data.remote.LEAVE_TEAM_REQUEST
+import com.ieee.codelink.data.remote.LEAVE_TEAM
 import com.ieee.codelink.domain.models.User
 import com.ieee.codelink.domain.models.responses.AllTeamsResponse
-import com.ieee.codelink.domain.models.responses.AllUsersResponse
 import com.ieee.codelink.domain.models.responses.CreateTeamResponse
 import com.ieee.codelink.domain.models.responses.TeamResponse
 import okhttp3.MediaType.Companion.toMediaType
@@ -148,7 +146,7 @@ class TeamsRepository(
     suspend fun leaveTeam(teamId: Int):Response<BaseResponse>?{
         val userToken = sharedPreferenceManger.bearerToken
         val token = "Bearer $userToken"
-        val url = "$LEAVE_TEAM_REQUEST/$teamId"
+        val url = "$LEAVE_TEAM$teamId"
         return try {
             api.leaveTeam(
                 url,
