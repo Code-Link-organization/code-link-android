@@ -11,6 +11,7 @@ import com.ieee.codelink.domain.models.responses.LikesResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
 import com.ieee.codelink.domain.models.responses.ProfileUserResponse
 import com.ieee.codelink.domain.models.responses.ShareResponse
+import com.ieee.codelink.domain.models.responses.TeamResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -234,5 +235,18 @@ interface ApiRemoteService {
         @Header("Authorization")
         token: String,
     ): Response<AllTeamsResponse>?
+
+    @GET(GET_LEADER_TEAMS)
+    suspend fun getTeamsWhereUserIsLeader(
+        @Header("Authorization")
+        token: String,
+    ): Response<AllTeamsResponse>?
+
+    @GET
+    suspend fun getTeamById(
+        @Url url: String,
+        @Header("Authorization")
+        token: String,
+    ):Response<TeamResponse>
 
 }

@@ -2,7 +2,7 @@ package com.ieee.codelink.data.remote
 
 
 //Base Url
-const val BASE_URL_FOR_IMAGE = "https://dd4e-197-43-1-251.ngrok-free.app/"
+const val BASE_URL_FOR_IMAGE = "https://ac77-197-43-1-251.ngrok-free.app/"
 const val BASE_URL = "${BASE_URL_FOR_IMAGE}api/"
 //Auth
 const val USER ="user"
@@ -34,7 +34,7 @@ const val GET_ALL_USERS = "users"
 const val GET_USER = "users/show/"
 //teams
 const val GET_ALL_TEAMS = "teams"
-const val GET_TEAM = "$GET_ALL_TEAMS/show/"
+const val GET_TEAM = "$GET_ALL_TEAMS/show"
 const val GET_USER_TEAMS = "$GET_ALL_TEAMS/user-teams"
 const val GET_LEADER_TEAMS = "$GET_ALL_TEAMS/leader-teams"
 const val CREATE_TEAM = "$GET_ALL_TEAMS/create"

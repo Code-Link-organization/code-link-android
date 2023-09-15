@@ -3,10 +3,12 @@ package com.ieee.codelink.data.repository
 import android.util.Log
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.data.remote.ApiRemoteService
+import com.ieee.codelink.data.remote.GET_TEAM
 import com.ieee.codelink.domain.models.User
 import com.ieee.codelink.domain.models.responses.AllTeamsResponse
 import com.ieee.codelink.domain.models.responses.AllUsersResponse
 import com.ieee.codelink.domain.models.responses.CreateTeamResponse
+import com.ieee.codelink.domain.models.responses.TeamResponse
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -82,6 +84,29 @@ class TeamsRepository(
         val token = "Bearer $userToken"
         return try {
             api.getUserTeams( token)
+        } catch (e: Exception) {
+            null
+        }
+    }
+    suspend fun getTeamsWhereUserIsLeader():Response<AllTeamsResponse>?{
+        val userToken = sharedPreferenceManger.bearerToken
+        val token = "Bearer $userToken"
+        return try {
+            api.getTeamsWhereUserIsLeader(token)
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    suspend fun getTeamById(teamId: Int): Response<TeamResponse>?{
+        val userToken = sharedPreferenceManger.bearerToken
+        val token = "Bearer $userToken"
+        val url = "$GET_TEAM/$teamId"
+        return try {
+            api.getTeamById(
+                url,
+                token
+            )
         } catch (e: Exception) {
             null
         }

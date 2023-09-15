@@ -3,21 +3,14 @@ package com.ieee.codelink.ui.adapters.tempAdapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.ieee.codelink.R
-import com.ieee.codelink.common.setImageUsingGlide
-import com.ieee.codelink.common.showToast
-import com.ieee.codelink.common.toggle
+import com.ieee.codelink.common.getImageForGlide
+import com.ieee.codelink.common.setImageUsingGlideCenterCrop
 import com.ieee.codelink.databinding.CardInviteTeamBinding
-import com.ieee.codelink.databinding.CardMyTeamBinding
-import com.ieee.codelink.databinding.CardTeamBinding
-import com.ieee.codelink.domain.tempModels.TempTeam
-import com.ieee.codelink.domain.tempModels.toggleSelected
+import com.ieee.codelink.domain.models.Team
 
 
 class InviteUserAdapter(
-    var teams: MutableList<TempTeam>,
+    var teams: MutableList<Team>,
 ) : RecyclerView.Adapter<InviteUserAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: CardInviteTeamBinding) :
@@ -42,25 +35,25 @@ class InviteUserAdapter(
         setOnClicks(holder, team)
     }
 
-    private fun setViews(holder: ViewHolder, team: TempTeam) {
+    private fun setViews(holder: ViewHolder, team: Team) {
         holder.binding.apply {
             tvTeamName.text = team.name
-            setImageUsingGlide(
+            setImageUsingGlideCenterCrop(
                 view = holder.binding.ivTeamImage,
-                image = team.image
+                image = getImageForGlide(team.imageUrl)
             )
         }
     }
 
-    private fun setOnClicks(holder: ViewHolder, team: TempTeam) {
+    private fun setOnClicks(holder: ViewHolder, team: Team) {
         holder.binding.apply {
             root.setOnClickListener {
-               checkBox.toggle()
+                checkBox.toggle()
                 team.toggleSelected()
             }
         }
     }
 
-    fun getCheckedTeams(): List<TempTeam> = teams.filter { it.isChecked }
+    fun getCheckedTeams(): List<Team> = teams.filter { it.isSelected }
 
 }

@@ -237,7 +237,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
     private fun postCommentsObserver(state: ResponseState<CommentsResponse>) {
-        stopLoadingAnimation()
         when (state) {
             is ResponseState.Empty -> {}
             is ResponseState.NotAuthorized,
@@ -264,6 +263,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     lifecycleScope.launch {
                         openCommentsScreen(response.data.comments , postId = viewModel.openedPostId)
                         viewModel.postCommentsRequestState.value = ResponseState.Empty()
+                        stopLoadingAnimation()
                     }
                 }
             }

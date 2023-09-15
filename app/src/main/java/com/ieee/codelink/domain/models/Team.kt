@@ -1,6 +1,5 @@
 package com.ieee.codelink.domain.models
 
-import com.ieee.codelink.domain.models.User
 import java.io.Serializable
 
 data class Team(
@@ -13,10 +12,17 @@ data class Team(
     private var is_full: Int?,
     var created_at: String,
     var updated_at: String,
-    var members: List<User>
+    var members: List<User>,
+    var isSelected: Boolean = false
 ):Serializable{
 
     fun isFull(): Boolean = is_full == 1
-
+    fun toggleSelected() {
+        isSelected = !isSelected
+    }
 }
+
+
+
+
 
