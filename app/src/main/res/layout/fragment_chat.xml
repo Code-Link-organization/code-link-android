@@ -8,6 +8,7 @@
     android:focusableInTouchMode="true"
     android:orientation="vertical"
     tools:context=".ui.chat.ChatFragment">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
@@ -35,11 +36,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/mulish_bold"
+            android:layout_marginStart="14dp"
+            android:fontFamily="@font/mulish_regular"
             android:text="David Samuel"
             android:textColor="#FF000000"
             android:textSize="13sp"
-            app:layout_constraintStart_toEndOf="@id/ic_back" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ic_back"
+            app:layout_constraintTop_toTopOf="@+id/ic_back" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="@dimen/_25sdp"
@@ -81,11 +86,54 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topBar" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1.5dp"
-        android:background="#E6EEFAF8" />
 
+    <LinearLayout
+        android:id="@+id/user_typing_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="0.5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="20dp">
+
+        <EditText
+            android:id="@+id/ed_message_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:hint="Type your massage here... "
+            android:lineSpacingExtra="6dp"
+            android:maxLines="10"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="9dp"
+            android:src="@drawable/ic_react" />
+
+        <ImageView
+            android:id="@+id/ic_chat_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="9dp"
+            android:src="@drawable/ic_attach" />
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/send_message"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@color/color_accent"
+            android:src="@drawable/ic_send"
+            app:contentPadding="16dp"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
+
+
+    </LinearLayout>
 
 
 </LinearLayout>
