@@ -15,6 +15,7 @@ import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentCreateTeamBinding
 import com.ieee.codelink.domain.models.responses.CreateTeamResponse
 import com.ieee.codelink.ui.main.search.SearchViewModel
+import com.ieee.codelink.ui.teamsScreens.TeamsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +24,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class CreateTeamFragment :
     BaseFragment<FragmentCreateTeamBinding>(FragmentCreateTeamBinding::inflate) {
-    override val viewModel: SearchViewModel by viewModels()
+    override val viewModel: TeamsViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,7 +38,7 @@ class CreateTeamFragment :
     }
 
     private fun setObserverts() {
-        viewModel.createTeanState.awareCollect { state ->
+        viewModel.createTeamState.awareCollect { state ->
             createTeamObserver(state)
         }
     }
@@ -48,17 +49,17 @@ class CreateTeamFragment :
             is ResponseState.Empty -> {}
             is ResponseState.NotAuthorized,
             is ResponseState.UnKnownError -> {
-                viewModel.createTeanState.value = ResponseState.Empty()
+                viewModel.createTeamState.value = ResponseState.Empty()
             }
 
             is ResponseState.NetworkError -> {
                 showToast(getString(R.string.network_error), false)
-                viewModel.createTeanState.value = ResponseState.Empty()
+                viewModel.createTeamState.value = ResponseState.Empty()
             }
 
             is ResponseState.Error -> {
                 showToast(state.message.toString(), false)
-                viewModel.createTeanState.value = ResponseState.Empty()
+                viewModel.createTeamState.value = ResponseState.Empty()
             }
 
             is ResponseState.Loading -> {
@@ -69,7 +70,7 @@ class CreateTeamFragment :
                 state.data?.let { response ->
                     lifecycleScope.launch {
                         goBack()
-                        viewModel.createTeanState.value = ResponseState.Empty()
+                        viewModel.createTeamState.value = ResponseState.Empty()
                     }
                 }
             }

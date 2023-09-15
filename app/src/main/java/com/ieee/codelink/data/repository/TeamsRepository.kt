@@ -77,4 +77,14 @@ class TeamsRepository(
     }
 
 
+    suspend fun getUserTeams():Response<AllTeamsResponse>?{
+        val userToken = sharedPreferenceManger.bearerToken
+        val token = "Bearer $userToken"
+        return try {
+            api.getUserTeams( token)
+        } catch (e: Exception) {
+            null
+        }
+    }
+
 }

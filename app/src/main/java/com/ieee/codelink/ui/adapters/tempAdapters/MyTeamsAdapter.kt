@@ -6,15 +6,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
+import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.setImageUsingGlide
+import com.ieee.codelink.common.setImageUsingGlideCenterCrop
 import com.ieee.codelink.databinding.CardMyTeamBinding
 import com.ieee.codelink.databinding.CardTeamBinding
+import com.ieee.codelink.domain.models.Team
 import com.ieee.codelink.domain.tempModels.TempTeam
 
 
 class MyTeamsAdapter(
-    var teams: MutableList<TempTeam>,
-    private val openTeam: (TempTeam) -> Unit,
+    var teams: MutableList<Team>,
+    private val openTeam: (Team) -> Unit,
 ) : RecyclerView.Adapter<MyTeamsAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: CardMyTeamBinding) :
@@ -39,17 +42,19 @@ class MyTeamsAdapter(
         setOnClicks(holder, team)
     }
 
-    private fun setViews(holder: ViewHolder, team: TempTeam) {
+    private fun setViews(holder: ViewHolder, team: Team) {
         holder.binding.apply {
             tvTeamName.text = team.name
 
-            setImageUsingGlide(
+            setImageUsingGlideCenterCrop(
                 view = holder.binding.ivTeamImage,
-                image = team.image)
+                image = getImageForGlide(team.imageUrl),
+                errorImage = R.drawable.teamwork
+            )
         }
     }
 
-    private fun setOnClicks(holder: ViewHolder, team: TempTeam) {
+    private fun setOnClicks(holder: ViewHolder, team: Team) {
         holder.binding.root.setOnClickListener {
             openTeam(team)
         }

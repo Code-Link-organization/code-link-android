@@ -25,19 +25,14 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     private val userRepository: UserRepository,
     private val teamsRepository: TeamsRepository,
-    private val context: Context
 ) : BaseViewModel() {
 
-    var createTeamImgUri : Uri? = null
-    var editTeamImgUri : Uri? = null
+
 
     val allUsersState: MutableStateFlow<ResponseState<AllUsersResponse>> =
         MutableStateFlow(ResponseState.Empty())
 
     val allTeamsState: MutableStateFlow<ResponseState<AllTeamsResponse>> =
-        MutableStateFlow(ResponseState.Empty())
-
-    val createTeanState: MutableStateFlow<ResponseState<CreateTeamResponse>> =
         MutableStateFlow(ResponseState.Empty())
 
     var firstOption : String? = null
@@ -53,20 +48,5 @@ class SearchViewModel @Inject constructor(
         val response = teamsRepository.getAllTeams()
         allTeamsState.value = handleResponse(response)
     }
-    suspend fun createTeam(name: String , description: String , uri: Uri?){
-        val imgPart = if (uri !=null){
-            val path = cacheImageToFile( context , uri)
-            val file = getImageFileFromRealPath(path)
-            createMultipartBodyPartFromFile(file , "imageUrl")
-        } else{
-            null
-        }
-        createTeanState.value = ResponseState.Loading()
-        val response = teamsRepository.createTeam(
-            name= name,
-            description= description,
-            imgPart = imgPart
-        )
-        createTeanState.value = handleResponse(response)
-    }
+
 }
