@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.navigateUp
 import com.ieee.codelink.R
 import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.openZoomableImage
@@ -21,7 +22,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class TeamDetailsFragment : BaseFragment<FragmentTeamDetailsBinding>(FragmentTeamDetailsBinding::inflate) {
+class TeamDetailsFragment :
+    BaseFragment<FragmentTeamDetailsBinding>(FragmentTeamDetailsBinding::inflate) {
     override val viewModel: TeamsViewModel by viewModels()
     private val navArgs by navArgs<TeamDetailsFragmentArgs>()
     private lateinit var membersAdapter: TeamMembersAdapter
@@ -65,6 +67,31 @@ class TeamDetailsFragment : BaseFragment<FragmentTeamDetailsBinding>(FragmentTea
             }
         }
 
+        viewModel.leaveTeamState.awareCollect { state ->
+            when (state) {
+                is ResponseState.Empty -> {}
+                is ResponseState.NetworkError,
+                is ResponseState.NotAuthorized,
+                is ResponseState.UnKnownError,
+                is ResponseState.Error -> {
+                    showToast(state.message.toString(), false)
+                    binding.btnTeamAction.hideLoading()
+                    viewModel.leaveTeamState.value = ResponseState.Empty()
+                }
+
+                is ResponseState.Loading -> {
+                    binding.btnTeamAction.showLoading()
+                }
+
+                is ResponseState.Success -> {
+                    showToast(state.message.toString(), false)
+                    binding.btnTeamAction.isGone = true
+                    binding.btnTeamAction.hideLoading()
+                    findNavController().navigateUp()
+                }
+            }
+        }
+
     }
 
     private fun setOnClickListeners(team: Team) {
@@ -100,7 +127,7 @@ class TeamDetailsFragment : BaseFragment<FragmentTeamDetailsBinding>(FragmentTea
     }
 
     private fun leaveTeamClicked(team: Team) {
-        showToast("leaveTeamClick")
+        viewModel.leaveTeam(team)
     }
 
     private fun editTeamClicked(team: Team) {
