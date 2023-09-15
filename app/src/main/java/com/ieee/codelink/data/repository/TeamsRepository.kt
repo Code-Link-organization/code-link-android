@@ -7,6 +7,7 @@ import com.ieee.codelink.data.remote.ApiRemoteService
 import com.ieee.codelink.data.remote.GET_TEAM
 import com.ieee.codelink.data.remote.INVITE_TO_TEAM
 import com.ieee.codelink.data.remote.JOIN_TEAM
+import com.ieee.codelink.data.remote.LEAVE_TEAM_REQUEST
 import com.ieee.codelink.domain.models.User
 import com.ieee.codelink.domain.models.responses.AllTeamsResponse
 import com.ieee.codelink.domain.models.responses.AllUsersResponse
@@ -137,6 +138,21 @@ class TeamsRepository(
                 url,
                 token,
                 userId
+            )
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+
+    suspend fun leaveTeam(teamId: Int):Response<BaseResponse>?{
+        val userToken = sharedPreferenceManger.bearerToken
+        val token = "Bearer $userToken"
+        val url = "$LEAVE_TEAM_REQUEST/$teamId"
+        return try {
+            api.leaveTeam(
+                url,
+                token
             )
         } catch (e: Exception) {
             null

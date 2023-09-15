@@ -21,6 +21,7 @@ import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.Url
 
@@ -282,5 +283,13 @@ interface ApiRemoteService {
         @Header("Authorization")
         token: String,
     ):Response<BaseResponse>
+
+    @POST
+    suspend fun leaveTeam(
+        @Url url: String,
+        @Header("Authorization")
+        token: String,
+    ): Response<BaseResponse>
+
 
 }
