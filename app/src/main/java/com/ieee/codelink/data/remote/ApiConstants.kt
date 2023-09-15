@@ -42,3 +42,8 @@ const val EDIT_TEAM = "$GET_ALL_TEAMS/edit/"
 const val DELETE_TEAM = "$GET_ALL_TEAMS/delete/"
 const val LEAVE_TEAM = "$GET_ALL_TEAMS/leave/"
 const val REMOVE_MEMBER_FROM_TEAM = "$GET_ALL_TEAMS/remove-member/"
+//invite requests
+const val INVITE_REQUESTS = "invite-requests"
+const val INVITE_TO_TEAM = "$INVITE_REQUESTS/invite"
+const val ACCEPT_TEAM_INVITATION = "$INVITE_REQUESTS/accept-invite"
+const val REJECT_TEAM_INVITATION = "$INVITE_REQUESTS/reject-invite"

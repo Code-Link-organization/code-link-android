@@ -21,7 +21,21 @@
         app:lottie_autoPlay="false"
         android:visibility="visible"
         tools:visibility="visible"
-        app:lottie_loop="true"/>
+        app:lottie_loop="true" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_no_connection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="false"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/anim_no_connection"
+        app:tint="@color/color_text"
+        tools:visibility="visible" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"

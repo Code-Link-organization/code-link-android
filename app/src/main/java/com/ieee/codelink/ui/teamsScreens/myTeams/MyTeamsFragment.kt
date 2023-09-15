@@ -9,13 +9,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.ResponseState
-import com.ieee.codelink.data.fakeDataProvider.FakeProvider
 import com.ieee.codelink.databinding.FragmentMyTeamsBinding
 import com.ieee.codelink.domain.models.Team
 import com.ieee.codelink.domain.models.responses.AllTeamsResponse
 import com.ieee.codelink.domain.models.responses.TeamResponse
-import com.ieee.codelink.domain.tempModels.TempTeam
-import com.ieee.codelink.ui.adapters.tempAdapters.MyTeamsAdapter
+import com.ieee.codelink.ui.adapters.MyTeamsAdapter
 import com.ieee.codelink.ui.teamsScreens.TeamsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -76,7 +74,6 @@ class MyTeamsFragment :
                     }
                 }
             }
-
         }
 
     }

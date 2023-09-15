@@ -230,7 +230,6 @@
             android:id="@+id/action_teamDetailsFragment_to_othersProfile"
             app:destination="@id/othersProfile"
 
-
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"

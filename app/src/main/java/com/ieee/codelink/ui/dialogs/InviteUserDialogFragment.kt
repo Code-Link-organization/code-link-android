@@ -9,8 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.ieee.codelink.databinding.DialogInviteUserBinding
 import com.ieee.codelink.domain.models.Team
-import com.ieee.codelink.domain.tempModels.TempTeam
-import com.ieee.codelink.ui.adapters.tempAdapters.InviteUserAdapter
+import com.ieee.codelink.ui.adapters.InviteUserAdapter
 
 class InviteUserDialogFragment(
     private val teams: List<Team>,
