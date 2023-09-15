@@ -40,6 +40,9 @@ class OthersProfileViewModel @Inject constructor(
     val userTeamsAsLeader: MutableStateFlow<ResponseState<AllTeamsResponse>?> =
         MutableStateFlow(null)
 
+    val inviteUserState: MutableStateFlow<ResponseState<BaseResponse>> =
+        MutableStateFlow(ResponseState.Empty())
+
     fun getCachedUser() = userRepository.getCachedUser()
 
     fun isCachedUser(userId: Int) = userId == getCachedUser().id
@@ -130,6 +133,11 @@ class OthersProfileViewModel @Inject constructor(
         userTeamsAsLeader.value = handleResponse(response)
     }
 
+    suspend fun inviteUserToTeam(teamId: Int, userId: Int) {
+        inviteUserState.value = ResponseState.Loading()
+        val response = teamsRepository.inviteToTeam(teamId, userId)
+        inviteUserState.value = handleResponse(response)
+    }
 
 
 }

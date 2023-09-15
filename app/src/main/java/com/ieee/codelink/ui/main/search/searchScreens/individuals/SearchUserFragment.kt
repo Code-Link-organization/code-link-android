@@ -7,7 +7,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.ieee.codelink.R
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentSeatchUserBinding
@@ -68,7 +67,7 @@ class SearchUserFragment : BaseFragment<FragmentSeatchUserBinding>(FragmentSeatc
                 stopLoadingAnimation()
                 state.data?.let { response ->
                     lifecycleScope.launch {
-                        setupRv(response.data.users)
+                        setupRv(response.data.users as MutableList<User>)
                         viewModel.allUsersState.value = ResponseState.Empty()
                     }
                 }
@@ -78,10 +77,11 @@ class SearchUserFragment : BaseFragment<FragmentSeatchUserBinding>(FragmentSeatc
 
     }
 
-    private fun setupRv(users: List<User>) {
+    private fun setupRv(users: MutableList<User>) {
+        users.removeAll{ it.id ==  viewModel.getCachedUserId() }
         lifecycleScope.launch(Dispatchers.Main) {
             usersAdapter = UsersAdapter(
-                users as MutableList<User>,
+                users,
                 openProfile = {
                     openProfile(it.id)
                 },

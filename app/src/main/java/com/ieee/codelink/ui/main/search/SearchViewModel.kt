@@ -37,6 +37,9 @@ class SearchViewModel @Inject constructor(
 
     var firstOption : String? = null
 
+
+    fun getCachedUserId() = userRepository.getCachedUser().id
+
     suspend fun getAllUsers(){
         allUsersState.value = ResponseState.Loading()
         val response = userRepository.getAllUsers()

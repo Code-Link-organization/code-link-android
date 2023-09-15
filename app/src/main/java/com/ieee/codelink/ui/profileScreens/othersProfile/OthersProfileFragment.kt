@@ -14,6 +14,7 @@ import com.ieee.codelink.common.openFacebook
 import com.ieee.codelink.common.openZoomableImage
 import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.core.BaseFragment
+import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.data.fakeDataProvider.FakeProvider
 import com.ieee.codelink.databinding.FragmentOthersProfileBinding
@@ -65,16 +66,38 @@ class OthersProfileFragment :
             }
         }
 
-        viewModel.userTeamsAsLeader.awareCollect { state->
+        viewModel.userTeamsAsLeader.awareCollect { state ->
             state?.let {
                 userTeamsAsLeaderObserver(state)
             }
+        }
+
+        viewModel.inviteUserState.awareCollect { state ->
+            state?.let {
+                inviteUserObserver(state)
+            }
+        }
+    }
+
+    private fun inviteUserObserver(state: ResponseState<BaseResponse>) {
+        when (state) {
+            is ResponseState.Error,
+            is ResponseState.UnKnownError,
+            is ResponseState.NetworkError,
+            is ResponseState.NotAuthorized -> {
+                showToast(state.message.toString(),false)
+            }
+            is ResponseState.Success -> {
+                showToast(getString(R.string.invited),true)
+            }
+            is ResponseState.Empty -> {}
+            is ResponseState.Loading -> {}
         }
     }
 
     private fun userTeamsAsLeaderObserver(state: ResponseState<AllTeamsResponse>) {
         when (state) {
-            is ResponseState.Empty->{}
+            is ResponseState.Empty -> {}
             is ResponseState.NotAuthorized,
             is ResponseState.UnKnownError -> {
                 viewModel.userTeamsAsLeader.value = ResponseState.Empty()
@@ -319,8 +342,8 @@ class OthersProfileFragment :
     private fun setPostsRv(userData: TempUserProfile) {
         postsAdapter = ProfilePostsAdapter(
             userData.posts as MutableList<Int>
-        ) { image ->
-            showToast("open image")
+        ) { image, imageView ->
+            openZoomableImage(image, requireActivity(), imageView)
         }
 
         binding.postsSection.rvPosts.adapter = postsAdapter
@@ -340,13 +363,21 @@ class OthersProfileFragment :
     private fun openInviteUserDialog(teams: List<Team>) {
         val inviteScreen = InviteUserDialogFragment(
             teams
-        ){
-            showToast("invited to ${it.size} teams")
+        ) { teams ->
+            inviteUserToTeams(teams)
         }
-        inviteScreen.show(childFragmentManager , "inviteScreen")
+        inviteScreen.show(childFragmentManager, "inviteScreen")
     }
 
-    fun hideAll(){
+    private fun inviteUserToTeams(teams: List<Team>) {
+        lifecycleScope.launch {
+            for (team in teams) {
+                viewModel.inviteUserToTeam(teamId = team.id, userId)
+            }
+        }
+    }
+
+    fun hideAll() {
         startLoadingAnimation()
         binding.apply {
             llSections.isGone = true

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ieee.codelink.R
@@ -17,6 +18,7 @@ import com.ieee.codelink.domain.models.Team
 import com.ieee.codelink.ui.adapters.TeamMembersAdapter
 import com.ieee.codelink.ui.teamsScreens.TeamsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class TeamDetailsFragment : BaseFragment<FragmentTeamDetailsBinding>(FragmentTeamDetailsBinding::inflate) {
@@ -34,6 +36,10 @@ class TeamDetailsFragment : BaseFragment<FragmentTeamDetailsBinding>(FragmentTea
     }
 
     private fun setObservers() {
+        joinTeamObserver()
+    }
+
+    private fun joinTeamObserver() {
         viewModel.joinTeamState.awareCollect { state ->
             when (state) {
                 is ResponseState.Empty -> {}
@@ -42,19 +48,23 @@ class TeamDetailsFragment : BaseFragment<FragmentTeamDetailsBinding>(FragmentTea
                 is ResponseState.UnKnownError,
                 is ResponseState.Error -> {
                     showToast(state.message.toString(), false)
+                    binding.btnTeamAction.hideLoading()
                     viewModel.joinTeamState.value = ResponseState.Empty()
                 }
 
                 is ResponseState.Loading -> {
+                    binding.btnTeamAction.showLoading()
                 }
 
                 is ResponseState.Success -> {
                     showToast(state.message.toString(), false)
                     binding.btnTeamAction.isGone = true
+                    binding.btnTeamAction.hideLoading()
                     viewModel.joinTeamState.value = ResponseState.Empty()
                 }
             }
         }
+
     }
 
     private fun setOnClickListeners(team: Team) {
@@ -98,7 +108,9 @@ class TeamDetailsFragment : BaseFragment<FragmentTeamDetailsBinding>(FragmentTea
     }
 
     private fun joinTeamClicked(team: Team) {
-        showToast("joinTeamClick")
+        lifecycleScope.launch {
+            viewModel.requestToJoinTeam(team)
+        }
     }
 
     private fun setupRv(team: Team) {
