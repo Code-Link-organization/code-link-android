@@ -229,4 +229,10 @@ interface ApiRemoteService {
         token: String,
     ): Response<BaseResponse>?
 
+    @GET(GET_USER_TEAMS)
+    suspend fun getUserTeams(
+        @Header("Authorization")
+        token: String,
+    ): Response<AllTeamsResponse>?
+
 }
