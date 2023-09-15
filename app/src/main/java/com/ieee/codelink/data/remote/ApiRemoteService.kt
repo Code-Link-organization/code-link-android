@@ -222,4 +222,11 @@ interface ApiRemoteService {
         imageUrl: MultipartBody.Part?,
     ): Response<CreateTeamResponse>
 
+    @POST
+    suspend fun deletePost(
+        @Url url: String,
+        @Header("Authorization")
+        token: String,
+    ): Response<BaseResponse>?
+
 }

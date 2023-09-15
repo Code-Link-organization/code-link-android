@@ -5,6 +5,7 @@ import com.ieee.codelink.R
 import com.ieee.codelink.common.cacheImageToFile
 import com.ieee.codelink.common.createMultipartBodyPartFromFile
 import com.ieee.codelink.common.getImageFileFromRealPath
+import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.core.isSuccess
@@ -51,6 +52,9 @@ class MainViewModel @Inject constructor(
 
     val sharePostRequestState: MutableStateFlow<ResponseState<ShareResponse>> =
         MutableStateFlow(ResponseState.Empty())
+
+    val deletePostState: MutableStateFlow<Pair<ResponseState<BaseResponse> , Int?>> =
+        MutableStateFlow(Pair(ResponseState.Empty() , null))
 
 
     private var postsList: List<Post>? = null
@@ -169,6 +173,12 @@ class MainViewModel @Inject constructor(
         sharePostRequestState.value = ResponseState.Loading()
         val response = postsRepository.sharePost(postId)
         sharePostRequestState.value = handleResponse(response)
+    }
+
+    suspend fun deletePost(postId: Int) {
+        deletePostState.value = Pair(ResponseState.Loading(),postId)
+        val response = postsRepository.deletePost(postId)
+        deletePostState.value = Pair(handleResponse(response),postId)
     }
 
 }
