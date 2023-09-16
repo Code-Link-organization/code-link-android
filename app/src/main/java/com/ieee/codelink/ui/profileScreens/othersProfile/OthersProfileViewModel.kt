@@ -119,7 +119,7 @@ class OthersProfileViewModel @Inject constructor(
     }
 
     fun validateNewData(user: User, name: String, bio: String, track: String): Boolean {
-      return name != user.name || bio != user.track || track != user.track || imageUri != null
+      return name != user.name || bio != user.bio || track != user.track || imageUri != null
     }
 
     fun cacheUser(oldUser: User, newUser: User) {
