@@ -148,7 +148,7 @@ class MyTeamsFragment :
     }
 
     private fun openCreateTeamScreen() {
-        findNavController().navigate(MyTeamsFragmentDirections.actionMyTeamsFragmentToCreateTeamFragment())
+        findNavController().navigate(MyTeamsFragmentDirections.actionMyTeamsFragmentToCreateTeamFragment(null))
 
     }
 

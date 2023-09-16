@@ -113,7 +113,7 @@ class SearchTeamsFragment : BaseFragment<FragmentSearchTeamsBinding>(FragmentSea
     }
 
     private fun openCreateTeamScreen() {
-        findNavController().navigate(SearchTeamsFragmentDirections.actionSearchTeamsFragmentToCreateTeamFragment())
+        findNavController().navigate(SearchTeamsFragmentDirections.actionSearchTeamsFragmentToCreateTeamFragment(null))
 
     }
 

@@ -26,8 +26,8 @@ class TeamsViewModel @Inject constructor(
     private val context: Context
 ) : BaseViewModel() {
 
-    var createTeamImgUri: Uri? = null
-    var editTeamImgUri: Uri? = null
+    var imgUri: Uri? = null
+
 
     val joinTeamState: MutableStateFlow<ResponseState<BaseResponse>> =
         MutableStateFlow(ResponseState.Empty())
@@ -68,6 +68,22 @@ class TeamsViewModel @Inject constructor(
         )
         createTeamState.value = handleResponse(response)
     }
+    suspend fun editTeam(name: String? , description: String? , uri: Uri?){
+        val imgPart = if (uri !=null){
+            val path = cacheImageToFile( context , uri)
+            val file = getImageFileFromRealPath(path)
+            createMultipartBodyPartFromFile(file , "imageUrl")
+        } else{
+            null
+        }
+        createTeamState.value = ResponseState.Loading()
+        val response = teamsRepository.editTeam(
+            name= name,
+            description= description,
+            imgPart = imgPart
+        )
+        createTeamState.value = handleResponse(response)
+    }
 
     suspend fun getTeamById(id: Int) {
         teamState.value = ResponseState.Loading()
@@ -92,5 +108,8 @@ class TeamsViewModel @Inject constructor(
             leaveTeamState.value=it
         })
     }
+
+    fun canUpdateTeam(name: String, description: String, team: Team): Boolean =
+        name != team.name && description != team.description && imgUri != null
 
 }

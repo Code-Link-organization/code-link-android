@@ -245,11 +245,24 @@
         <argument
             android:name="team"
             app:argType="com.ieee.codelink.domain.models.Team" />
+        <action
+            android:id="@+id/action_teamDetailsFragment_to_createTeamFragment"
+            app:destination="@id/createTeamFragment"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/createTeamFragment"
         android:name="com.ieee.codelink.ui.teamsScreens.createTeam.CreateTeamFragment"
-        android:label="CreateTeamFragment" />
+        android:label="CreateTeamFragment" >
+        <argument
+            android:name="teamData"
+            app:argType="com.ieee.codelink.domain.models.Team"
+            app:nullable="true" />
+    </fragment>
     <fragment
         android:id="@+id/myTeamsFragment"
         android:name="com.ieee.codelink.ui.teamsScreens.myTeams.MyTeamsFragment"

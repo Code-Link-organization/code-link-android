@@ -7,14 +7,17 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
+import com.ieee.codelink.common.getImageForGlide
+import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentCreateTeamBinding
+import com.ieee.codelink.domain.models.Team
 import com.ieee.codelink.domain.models.responses.CreateTeamResponse
-import com.ieee.codelink.ui.main.search.SearchViewModel
 import com.ieee.codelink.ui.teamsScreens.TeamsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -24,17 +27,38 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class CreateTeamFragment :
     BaseFragment<FragmentCreateTeamBinding>(FragmentCreateTeamBinding::inflate) {
+
     override val viewModel: TeamsViewModel by viewModels()
+    private val args by navArgs<CreateTeamFragmentArgs>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val team = args.teamData
         initUri()
-        setOnClicks()
+        initData(team)
+        setOnClicks(team)
         setObserverts()
     }
 
+    private fun initData(team: Team?) {
+        team?.let { team ->
+            binding.apply {
+                etName.setText(team.name)
+                etProject.setText(team.description)
+
+                setImageUsingGlide(
+                    view = ivTeamImage,
+                    image = getImageForGlide(team.imageUrl),
+                    errorImage = R.drawable.teamwork
+                )
+
+                btnCreate.buttonText = getString(R.string.save)
+            }
+        }
+    }
+
     private fun initUri() {
-        viewModel.createTeamImgUri = null
+        viewModel.imgUri = null
     }
 
     private fun setObserverts() {
@@ -91,21 +115,45 @@ class CreateTeamFragment :
         binding.btnCreate.showLoading()
     }
 
-    private fun setOnClicks() {
+    private fun setOnClicks(team: Team?) {
         binding.apply {
             ivCamera.setOnClickListener {
                openGallery()
             }
             btnCreate.setOnClickListener {
-                val name = etName.text.toString()
-                val description = etProject.text.toString()
-                if (canCreateTeam(name, description)) {
-                    lifecycleScope.launch {
-                        viewModel.createTeam(name, description, viewModel.createTeamImgUri)
-                    }
-                } else {
-                    showToast(getString(R.string.completeAll), false)
+                if (team == null){
+                 createTeamClicked()
+                }else{
+                 updateTeamClicked(team)
                 }
+
+            }
+        }
+    }
+
+    private fun updateTeamClicked(team: Team) {
+        binding.apply {
+            val name = etName.text.toString()
+            val description = etProject.text.toString()
+            if (viewModel.canUpdateTeam(name, description,team)) {
+                lifecycleScope.launch {
+                    viewModel.editTeam(name, description, viewModel.imgUri)
+                }
+            } else {
+            }
+        }
+    }
+
+    private fun createTeamClicked() {
+        binding.apply {
+            val name = etName.text.toString()
+            val description = etProject.text.toString()
+            if (canCreateTeam(name, description)) {
+                lifecycleScope.launch {
+                    viewModel.createTeam(name, description, viewModel.imgUri)
+                }
+            } else {
+                showToast(getString(R.string.completeAll), false)
             }
         }
     }
@@ -123,14 +171,14 @@ class CreateTeamFragment :
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             if (uri != null) {
                 CoroutineScope(Dispatchers.Main).launch {
-                    viewModel.createTeamImgUri = uri
+                    viewModel.imgUri = uri
 
                     Glide.with(binding.ivTeamImage)
                         .load(uri)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .centerInside()
-                        .placeholder(R.drawable.ic_profile)
-                        .error(R.drawable.ic_profile)
+                        .placeholder(R.drawable.teamwork)
+                        .error(R.drawable.teamwork)
                         .into(binding.ivTeamImage)
                 }
             }
