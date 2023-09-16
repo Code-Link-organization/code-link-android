@@ -305,16 +305,16 @@ class FakeDataProvider(val context: Context = BaseApplication.context) {
 
     private fun initFakeTracks(): MutableList<TempSearchItem> {
         val list = mutableListOf<TempSearchItem>()
-        list.add(TempSearchItem("Android", R.drawable.ic_onboarding_1))
-        list.add(TempSearchItem("IOS", R.drawable.ic_onboarding_2))
-        list.add(TempSearchItem("Front End", R.drawable.ic_onboarding_3))
-        list.add(TempSearchItem("Back End", R.drawable.ic_onboarding_1))
-        list.add(TempSearchItem("UI/UX", R.drawable.ic_onboarding_3))
-        list.add(TempSearchItem("Embedded Systems ", R.drawable.ic_onboarding_2))
-        list.add(TempSearchItem("Cyber Security", R.drawable.ic_onboarding_3))
-        list.add(TempSearchItem("Flutter", R.drawable.ic_onboarding_1))
-        list.add(TempSearchItem("AI", R.drawable.ic_onboarding_2))
-        list.add(TempSearchItem("Data Science", R.drawable.ic_onboarding_1))
+        list.add(TempSearchItem("Android", R.drawable.ic_android))
+        list.add(TempSearchItem("IOS", R.drawable.ic_ios))
+        list.add(TempSearchItem("Front End", R.drawable.ic_front))
+        list.add(TempSearchItem("Back End", R.drawable.ic_back_end))
+        list.add(TempSearchItem("UI/UX", R.drawable.ic_ui_ux))
+        list.add(TempSearchItem("Embedded Systems ", R.drawable.ic_embeded))
+        list.add(TempSearchItem("Cyber Security", R.drawable.ic_cyber))
+        list.add(TempSearchItem("Flutter", R.drawable.ic_flutter))
+        list.add(TempSearchItem("AI", R.drawable.ic_ai))
+        list.add(TempSearchItem("Data Science", R.drawable.ic_data_science))
         return list
     }
 

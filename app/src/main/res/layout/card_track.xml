@@ -14,9 +14,10 @@
         android:layout_height="match_parent"
         android:background="@drawable/track_card_ripple"
         >
+
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/itemImage"
-        android:layout_width="0dp"
+        android:layout_width="90dp"
         android:layout_height="90dp"
         android:adjustViewBounds="true"
         android:layout_marginTop="12dp"
