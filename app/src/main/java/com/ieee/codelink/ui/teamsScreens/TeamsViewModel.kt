@@ -110,6 +110,6 @@ class TeamsViewModel @Inject constructor(
     }
 
     fun canUpdateTeam(name: String, description: String, team: Team): Boolean =
-        name != team.name && description != team.description && imgUri != null
+        name != team.name || description != team.description || imgUri != null
 
 }

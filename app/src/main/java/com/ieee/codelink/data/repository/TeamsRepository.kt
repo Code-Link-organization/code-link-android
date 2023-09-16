@@ -3,6 +3,7 @@ package com.ieee.codelink.data.repository
 import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.data.remote.ApiRemoteService
+import com.ieee.codelink.data.remote.EDIT_TEAM
 import com.ieee.codelink.data.remote.GET_TEAM
 import com.ieee.codelink.data.remote.INVITE_TO_TEAM
 import com.ieee.codelink.data.remote.JOIN_TEAM
@@ -68,8 +69,10 @@ class TeamsRepository(
         val userToken = sharedPreferenceManger.bearerToken
         val token = "Bearer $userToken"
         val mediaType = "multipart/form-data".toMediaType()
+        val url = "$EDIT_TEAM/${getCachedUser().id}"
         return try {
             api.editTeam(
+                url = url,
                 token =token,
                 imageUrl = imgPart,
                 name = name?.toRequestBody(mediaType),

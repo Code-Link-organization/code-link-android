@@ -213,8 +213,9 @@ interface ApiRemoteService {
     ): Response<CreateTeamResponse>
 
     @Multipart
-    @POST(EDIT_TEAM)
+    @POST
     suspend fun editTeam(
+        @Url url: String,
         @Header("Authorization")
         token: String,
         @Part("name")

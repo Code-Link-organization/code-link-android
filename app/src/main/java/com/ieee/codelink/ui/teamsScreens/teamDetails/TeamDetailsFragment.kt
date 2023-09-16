@@ -137,7 +137,7 @@ class TeamDetailsFragment :
     }
 
     private fun editTeamClicked(team: Team) {
-        showToast("editTeamClick")
+        findNavController().navigate(TeamDetailsFragmentDirections.actionTeamDetailsFragmentToCreateTeamFragment(team))
     }
 
     private fun joinTeamClicked(team: Team) {
