@@ -6,8 +6,10 @@ import com.ieee.codelink.data.remote.ApiRemoteService
 import com.ieee.codelink.data.remote.DELETE_ACCOUNT
 import com.ieee.codelink.data.remote.GET_POSTS
 import com.ieee.codelink.data.remote.LIKE_A_POST
+import com.ieee.codelink.data.remote.USER_POSTS
 import com.ieee.codelink.domain.models.User
 import com.ieee.codelink.domain.models.responses.AllUsersResponse
+import com.ieee.codelink.domain.models.responses.PostsResponse
 import retrofit2.Response
 
 class UserRepository(
@@ -33,6 +35,21 @@ class UserRepository(
         val url = "$DELETE_ACCOUNT/${getCachedUser().id}"
         return try {
             api.deleteAccount(
+                url,
+                token
+            )
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+
+    suspend fun getUserPosts(): Response<PostsResponse>? {
+        val userToken = sharedPreferenceManger.bearerToken
+        val token = "Bearer $userToken"
+        val url = "$USER_POSTS/${getCachedUser().id}"
+        return try {
+            api.getUserPosts(
                 url,
                 token
             )

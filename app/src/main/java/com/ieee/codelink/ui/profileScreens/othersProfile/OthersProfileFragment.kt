@@ -21,6 +21,7 @@ import com.ieee.codelink.databinding.FragmentOthersProfileBinding
 import com.ieee.codelink.domain.models.ProfileUser
 import com.ieee.codelink.domain.models.Team
 import com.ieee.codelink.domain.models.responses.AllTeamsResponse
+import com.ieee.codelink.domain.models.responses.PostsResponse
 import com.ieee.codelink.domain.models.responses.ProfileUserResponse
 import com.ieee.codelink.domain.tempModels.TempUserProfile
 import com.ieee.codelink.domain.tempModels.TempUserSearch
@@ -76,6 +77,31 @@ class OthersProfileFragment :
             state?.let {
                 inviteUserObserver(state)
             }
+        }
+
+        viewModel.userPostsState.awareCollect { state ->
+            state?.let {
+                userPostsObserver(state)
+            }
+        }
+    }
+
+    private fun userPostsObserver(state: ResponseState<PostsResponse>) {
+        when (state) {
+            is ResponseState.Error,
+            is ResponseState.UnKnownError,
+            is ResponseState.NetworkError,
+            is ResponseState.NotAuthorized -> {
+                showToast(state.message.toString(),false)
+                viewModel.userPostsState.value = ResponseState.Empty()
+            }
+            is ResponseState.Success -> {
+                val posts = viewModel.getPostsImages(state.data!!.data.postData)
+                setPostsRv(posts)
+                viewModel.userPostsState.value = ResponseState.Empty()
+            }
+            is ResponseState.Empty -> {}
+            is ResponseState.Loading -> {}
         }
     }
 
@@ -160,6 +186,7 @@ class OthersProfileFragment :
                     lifecycleScope.launch {
                         val profileUser = response.data.user
                         showAll()
+                        viewModel.getUserPosts()
                         setScreenLogic(profileUser)
                     }
                 }
@@ -327,7 +354,6 @@ class OthersProfileFragment :
 
     private fun setupRecyclerViews(userData: TempUserProfile) {
         setFollowersRv(userData)
-        setPostsRv(userData)
     }
 
     private fun setFollowersRv(userData: TempUserProfile) {
@@ -341,9 +367,9 @@ class OthersProfileFragment :
         binding.followersSectiom.rvFollowers.adapter = followersAdapter
     }
 
-    private fun setPostsRv(userData: TempUserProfile) {
+    private fun setPostsRv(posts: MutableList<String>) {
         postsAdapter = ProfilePostsAdapter(
-            userData.posts as MutableList<Int>
+            posts
         ) { image, imageView ->
             openZoomableImage(image, requireActivity(), imageView)
         }

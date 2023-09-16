@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
+import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.databinding.CardFollowerBinding
 import com.ieee.codelink.databinding.CardPostProfileBinding
@@ -14,8 +15,8 @@ import com.ieee.codelink.domain.tempModels.TempUserSearch
 
 
 class ProfilePostsAdapter(
-    var posts: MutableList<Int>,
-    private val opemImage: (Int, ImageView) -> Unit
+    var posts: MutableList<String>,
+    private val opemImage: (String, ImageView) -> Unit
 ) : RecyclerView.Adapter<ProfilePostsAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: CardPostProfileBinding) :
@@ -40,17 +41,16 @@ class ProfilePostsAdapter(
         setOnClicks(holder, post)
     }
 
-    private fun setViews(holder: ViewHolder, post: Int) {
+    private fun setViews(holder: ViewHolder, post: String) {
         holder.binding.apply {
-
             setImageUsingGlide(
                 view = holder.binding.imageView,
-                image = post
+                image = getImageForGlide(post)
             )
         }
     }
 
-    private fun setOnClicks(holder: ViewHolder, post: Int) {
+    private fun setOnClicks(holder: ViewHolder, post: String) {
         holder.binding.root.setOnClickListener {
             opemImage(post, holder.binding.imageView)
         }

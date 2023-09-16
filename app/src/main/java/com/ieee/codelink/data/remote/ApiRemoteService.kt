@@ -298,4 +298,10 @@ interface ApiRemoteService {
     ): Response<BaseResponse>
 
 
+    @GET
+    suspend fun getUserPosts(
+        @Url url: String,
+        @Header("Authorization")
+        token: String
+    ):Response<PostsResponse>
 }

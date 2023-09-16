@@ -11,12 +11,15 @@ import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.data.repository.ProfileRepository
 import com.ieee.codelink.data.repository.TeamsRepository
 import com.ieee.codelink.data.repository.UserRepository
+import com.ieee.codelink.domain.models.Post
 import com.ieee.codelink.domain.models.User
 import com.ieee.codelink.domain.models.responses.AllTeamsResponse
 import com.ieee.codelink.domain.models.responses.AuthResponse
+import com.ieee.codelink.domain.models.responses.PostsResponse
 import com.ieee.codelink.domain.models.responses.ProfileUserResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import retrofit2.http.Url
 import javax.inject.Inject
 
 @HiltViewModel
@@ -41,6 +44,9 @@ class OthersProfileViewModel @Inject constructor(
         MutableStateFlow(null)
 
     val inviteUserState: MutableStateFlow<ResponseState<BaseResponse>> =
+        MutableStateFlow(ResponseState.Empty())
+
+    val userPostsState: MutableStateFlow<ResponseState<PostsResponse>> =
         MutableStateFlow(ResponseState.Empty())
 
     fun getCachedUser() = userRepository.getCachedUser()
@@ -139,5 +145,20 @@ class OthersProfileViewModel @Inject constructor(
         inviteUserState.value = handleResponse(response)
     }
 
+    suspend fun getUserPosts(){
+        userPostsState.value = ResponseState.Loading()
+        val response = userRepository.getUserPosts()
+        userPostsState.value = handleResponse(response)
+    }
+
+    fun getPostsImages(posts: List<Post>):MutableList<String> {
+        val list = mutableListOf<String>()
+        for (post in posts) {
+            post.image_path?.let {imgUrl->
+                list.add(imgUrl)
+            }
+        }
+        return list
+    }
 
 }
