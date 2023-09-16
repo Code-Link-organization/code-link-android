@@ -128,18 +128,17 @@ class ForgetPasswordFragment :
 
             is ResponseState.Error -> {
                 state.message?.let {
-                    showToast(state.message.toString())
+                    showToast(state.message.toString(), false)
                 }
             }
 
             is ResponseState.NetworkError -> {
-                showToast(getString(R.string.network_error))
+                showToast(getString(R.string.network_error), false)
             }
 
             else -> {
-                com.ieee.codelink.common.showToast(
-                    getString(R.string.something_went_wrong),
-                    requireContext()
+                showToast(
+                    getString(R.string.something_went_wrong), false
                 )
             }
         }
@@ -149,9 +148,8 @@ class ForgetPasswordFragment :
         binding.btnSend.hideLoading()
         when (state) {
             is ResponseState.Success -> {
-                com.ieee.codelink.common.showToast(
-                    getString(R.string.password_reset_successfully),
-                    requireContext()
+                showToast(
+                    getString(R.string.password_reset_successfully)
                 )
                 navigateToLogin()
             }
@@ -165,18 +163,17 @@ class ForgetPasswordFragment :
 
             is ResponseState.Error -> {
                 state.message?.let {
-                    showToast(state.message.toString())
+                    showToast(state.message.toString(),false)
                 }
             }
 
             is ResponseState.NetworkError -> {
-                showToast(getString(R.string.network_error))
+                showToast(getString(R.string.network_error),false)
             }
 
             else -> {
-                com.ieee.codelink.common.showToast(
-                    getString(R.string.something_went_wrong),
-                    requireContext()
+                showToast(
+                    getString(R.string.something_went_wrong),false
                 )
             }
         }
