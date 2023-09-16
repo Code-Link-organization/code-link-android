@@ -22,7 +22,13 @@ class NotificationsViewModel @Inject constructor(
     val acceptInvitationState: MutableStateFlow<ResponseState<BaseResponse>> =
         MutableStateFlow(ResponseState.Empty())
 
+    val acceptJoinState: MutableStateFlow<ResponseState<BaseResponse>> =
+        MutableStateFlow(ResponseState.Empty())
+
     val rejectInvitationState: MutableStateFlow<ResponseState<BaseResponse>> =
+        MutableStateFlow(ResponseState.Empty())
+
+    val rejectJoinState: MutableStateFlow<ResponseState<BaseResponse>> =
         MutableStateFlow(ResponseState.Empty())
 
     suspend fun getUserNotificationss(){
@@ -37,11 +43,24 @@ class NotificationsViewModel @Inject constructor(
         acceptInvitationState.value = handleResponse(response)
         return acceptInvitationState.value.isSuccess
     }
+    suspend fun acceptJoinRequest(invitationId : Int):Boolean{
+        acceptJoinState.value = ResponseState.Loading()
+        val response = notificationsRepository.acceptJoin(invitationId)
+        acceptJoinState.value = handleResponse(response)
+        return acceptJoinState.value.isSuccess
+    }
     suspend fun rejectInvitation(invitationId : Int):Boolean{
         rejectInvitationState.value = ResponseState.Loading()
         val response = notificationsRepository.rejectInvitation(invitationId)
         rejectInvitationState.value = handleResponse(response)
         return rejectInvitationState.value.isSuccess
+    }
+
+    suspend fun rejectJoinRequest(notificationId: Int): Boolean {
+        rejectJoinState.value = ResponseState.Loading()
+        val response = notificationsRepository.rejectJoin(notificationId)
+        rejectJoinState.value = handleResponse(response)
+        return rejectJoinState.value.isSuccess
     }
 
 }

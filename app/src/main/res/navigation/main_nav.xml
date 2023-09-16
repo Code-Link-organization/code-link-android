@@ -304,7 +304,19 @@
         android:id="@+id/notificationFragment"
         android:name="com.ieee.codelink.ui.notification.NotificationFragment"
         android:label="fragment_notification"
-        tools:layout="@layout/fragment_notification" />
+        tools:layout="@layout/fragment_notification" >
+        <action
+            android:id="@+id/action_notificationFragment_to_teamDetailsFragment"
+            app:destination="@id/teamDetailsFragment"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_notificationFragment_to_othersProfile"
+            app:destination="@id/othersProfile" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentChat"
         android:name="com.ieee.codelink.ui.main.chat.chatScreens.chat.FragmentChat"

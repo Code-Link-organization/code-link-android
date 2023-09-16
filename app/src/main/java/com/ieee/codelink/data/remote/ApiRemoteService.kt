@@ -280,7 +280,20 @@ interface ApiRemoteService {
         token: String,
     ):Response<BaseResponse>
     @POST
+    suspend fun acceptJoin(
+        @Url url : String,
+        @Header("Authorization")
+        token: String,
+    ):Response<BaseResponse>
+    @POST
     suspend fun rejectInvitation(
+        @Url url : String,
+        @Header("Authorization")
+        token: String,
+    ):Response<BaseResponse>
+
+    @POST
+    suspend fun rejectJoin(
         @Url url : String,
         @Header("Authorization")
         token: String,
