@@ -271,11 +271,11 @@ fun createRandomString(size: Int): String {
     return stringBuilder.toString()
 }
 
-fun getTimeDifference(dateStr: String): String {
+fun getTimeDifference(dateStr: String , dateProvider: DateProvider = DateProvider() ): String {
     val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'", Locale.US)
     sdf.timeZone = TimeZone.getTimeZone("UTC")
     val inputDate = sdf.parse(dateStr)
-    val currentDate = Date()
+    val currentDate = dateProvider.getCurrentDate()
 
     val timeDifferenceMillis = currentDate.time - inputDate.time
     val minutesDifference = TimeUnit.MILLISECONDS.toMinutes(timeDifferenceMillis)
@@ -301,18 +301,18 @@ fun getTimeDifference(dateStr: String): String {
     }
 }
 
-fun getCurrentUtcDateTime(): String {
+fun getCurrentUtcDateTime(dateProvider: DateProvider = DateProvider()): String {
     val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
     dateFormat.timeZone = TimeZone.getTimeZone("UTC")
-    val currentDate = Date()
+    val currentDate = dateProvider.getCurrentDate()
     return dateFormat.format(currentDate)
 }
 
 fun Boolean.toggle() = !this
 
-fun getImageForGlide(url: String? = null) = if (url == null) {
+fun getImageForGlide(url: String? = null , baseUrl : String = BASE_URL_FOR_IMAGE) = if (url == null) {
     null
 } else {
-    BASE_URL_FOR_IMAGE + url
+     baseUrl + url
 }
 fun getImageForGlide(image: Int?) = image
