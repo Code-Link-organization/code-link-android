@@ -4,18 +4,22 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentCreateTeamBinding
+import com.ieee.codelink.domain.models.Team
 import com.ieee.codelink.domain.models.responses.CreateTeamResponse
 import com.ieee.codelink.ui.main.search.SearchViewModel
 import com.ieee.codelink.ui.teamsScreens.TeamsViewModel
+import com.ieee.codelink.ui.teamsScreens.teamDetails.TeamDetailsFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -38,6 +42,38 @@ class CreateTeamFragment :
     }
 
     private fun setObserverts() {
+        viewModel.deleteTeamState.awareCollect { state ->
+            when (state) {
+                is ResponseState.Empty -> {}
+                is ResponseState.NotAuthorized,
+                is ResponseState.UnKnownError -> {
+                    viewModel.createTeamState.value = ResponseState.Empty()
+                }
+
+                is ResponseState.NetworkError -> {
+                    showToast(getString(R.string.network_error), false)
+                    viewModel.createTeamState.value = ResponseState.Empty()
+                }
+
+                is ResponseState.Error -> {
+                    showToast(state.message.toString(), false)
+                    viewModel.createTeamState.value = ResponseState.Empty()
+                }
+
+                is ResponseState.Loading -> {
+                    startLoadingAnimation()
+                }
+
+                is ResponseState.Success -> {
+                    state.data?.let { response ->
+                        lifecycleScope.launch {
+                            findNavController().popBackStack(R.id.myTeamsFragment, false)
+                            viewModel.createTeamState.value = ResponseState.Empty()
+                        }
+                    }
+                }
+            }
+        }
         viewModel.createTeamState.awareCollect { state ->
             createTeamObserver(state)
         }
@@ -94,7 +130,7 @@ class CreateTeamFragment :
     private fun setOnClicks() {
         binding.apply {
             ivCamera.setOnClickListener {
-               openGallery()
+                openGallery()
             }
             btnCreate.setOnClickListener {
                 val name = etName.text.toString()
@@ -107,7 +143,17 @@ class CreateTeamFragment :
                     showToast(getString(R.string.completeAll), false)
                 }
             }
+            binding.btnDeleteAction.setOnClickListener {
+           //     if (isTeamLeader) {
+                    deleteTeamClicked(team)
+               // }
+            }
         }
+    }
+
+
+    private fun deleteTeamClicked(team: Team) {
+        viewModel.deleteTeam(team)
     }
 
     private fun canCreateTeam(name: String, description: String): Boolean =

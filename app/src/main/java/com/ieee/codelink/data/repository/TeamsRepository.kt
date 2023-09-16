@@ -4,6 +4,7 @@ import android.util.Log
 import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.data.remote.ApiRemoteService
+import com.ieee.codelink.data.remote.DELETE_TEAM_REQUEST
 import com.ieee.codelink.data.remote.GET_TEAM
 import com.ieee.codelink.data.remote.INVITE_TO_TEAM
 import com.ieee.codelink.data.remote.JOIN_TEAM
@@ -151,6 +152,20 @@ class TeamsRepository(
         val url = "$LEAVE_TEAM_REQUEST/$teamId"
         return try {
             api.leaveTeam(
+                url,
+                token
+            )
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    suspend fun deleteTeam(teamId: Int):Response<BaseResponse>?{
+        val userToken = sharedPreferenceManger.bearerToken
+        val token = "Bearer $userToken"
+        val url = "$DELETE_TEAM_REQUEST/$teamId"
+        return try {
+            api.deleteTeam(
                 url,
                 token
             )

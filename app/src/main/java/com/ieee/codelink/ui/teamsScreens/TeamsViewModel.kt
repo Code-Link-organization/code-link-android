@@ -45,6 +45,9 @@ class TeamsViewModel @Inject constructor(
     val leaveTeamState: MutableStateFlow<ResponseState<BaseResponse>> =
         MutableStateFlow(ResponseState.Empty())
 
+    val deleteTeamState: MutableStateFlow<ResponseState<BaseResponse>> =
+        MutableStateFlow(ResponseState.Empty())
+
 
     suspend fun getUserTeams(){
         userTeamsState.value = ResponseState.Loading()
@@ -88,6 +91,12 @@ class TeamsViewModel @Inject constructor(
     }
 
     fun leaveTeam(team: Team){
+        networkCall({teamsRepository.leaveTeam(team.id)!!},{
+            leaveTeamState.value=it
+        })
+    }
+
+    fun deleteTeam(team: Team){
         networkCall({teamsRepository.leaveTeam(team.id)!!},{
             leaveTeamState.value=it
         })

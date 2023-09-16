@@ -129,4 +129,5 @@
     <string name="edit">Edit</string>
     <string name="leave">Leave</string>
     <string name="invited">User was invited</string>
+    <string name="delete_team">Delete Team</string>
 </resources>

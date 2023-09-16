@@ -1,192 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:background="@color/color_background">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_background">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top_actions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/top_actions"
-        app:layout_constraintTop_toTopOf="parent"
         android:paddingVertical="10dp"
-        >
+        app:layout_constraintTop_toTopOf="parent">
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/btn_chat"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_marginTop="2dp"
             android:layout_marginStart="@dimen/horizontal_padding"
+            android:layout_marginTop="2dp"
             android:adjustViewBounds="true"
             android:background="@drawable/background_ripple"
+            android:src="@drawable/ic_chat3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-            app:tint="@color/color_text"
-            android:src="@drawable/ic_chat3" />
+            app:tint="@color/color_text" />
 
         <TextView
             android:id="@+id/tv_team_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/team_name"
-            android:textColor="@color/color_text"
-            android:maxLines="1"
+            android:layout_marginHorizontal="16dp"
             android:autoSizeMaxTextSize="16sp"
             android:autoSizeMinTextSize="8sp"
             android:autoSizeTextType="uniform"
-            android:layout_marginHorizontal="16dp"
+            android:maxLines="1"
+            android:text="@string/team_name"
+            android:textColor="@color/color_text"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btn_team_action"
             app:layout_constraintStart_toEndOf="@id/btn_chat"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.kusu.loadingbutton.LoadingButton
-            android:id="@+id/btn_team_action"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginEnd="16dp"
-            android:padding="8dp"
-            android:text="@string/join"
-            android:textAllCaps="false"
-            android:textColor="@color/color_text"
-            android:textSize="@dimen/big_txt"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/btn_chat"
-            app:layout_constraintBottom_toBottomOf="@id/btn_chat"
-            app:lb_buttonColor="@color/color_primary"
-            app:lb_cornerRadius="@dimen/app_btn_radius"
-            app:lb_isShadowEnable="false"
-            app:lb_loaderColor="@color/white" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    app:layout_constraintTop_toBottomOf="@id/top_actions"
-    app:layout_constraintBottom_toBottomOf="parent"
-    >
-
-
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/color_background">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_actions">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/toolbar"
+
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbarFadeDuration="500"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:scrimAnimationDuration="500"
-            app:titleCollapseMode="scale">
+            android:background="@color/color_background">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:scrollbarFadeDuration="500"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:scrimAnimationDuration="500"
+                app:titleCollapseMode="scale">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
 
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/iv_team_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="8dp"
+                        android:adjustViewBounds="true"
+                        android:elevation="2dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearanceOverlay="@style/rounded5"
+                        app:srcCompat="@drawable/img_team_details"
+                        app:strokeColor="@color/color_hint"
+                        app:strokeWidth="0.3dp" />
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/iv_team_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="200dp"
-                    android:adjustViewBounds="true"
-                    android:elevation="2dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="8dp"
-                    android:scaleType="centerCrop"
-                    app:strokeColor="@color/color_hint"
-                    app:strokeWidth="0.3dp"
-                    app:shapeAppearanceOverlay="@style/rounded5"
-                    app:srcCompat="@drawable/img_team_details" />
-
-                <TextView
-                    android:id="@+id/tv_team_description"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:textSize="14sp"
-                    android:text="Lorem ipsum is placeholder text commonly
+                    <TextView
+                        android:id="@+id/tv_team_description"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:text="Lorem ipsum is placeholder text commonly
                      used in the graphic, print, and publishing..more Lorem ipsum
                      is placeholder text commonly used in
                     the graphic, print, and publishing..more"
+                        android:textColor="@color/color_text"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_team_image" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_marginTop="16dp"
+                    android:alpha="0.5"
+                    android:background="@color/color_hint" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/team_members_names"
                     android:textColor="@color/color_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_team_members"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="8dp"
+                    android:paddingBottom="20dp"
+
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_team_image" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-    </com.google.android.material.appbar.AppBarLayout>
+                    app:layout_constraintTop_toBottomOf="@+id/textView6"
+                    app:spanCount="2"
+                    tools:itemCount="8"
+                    tools:listitem="@layout/item_team_member" />
 
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                <com.kusu.loadingbutton.LoadingButton
+                    android:id="@+id/btn_team_action"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginHorizontal="16dp"
+                    android:padding="8dp"
+                    android:text="@string/join"
+                    android:textAllCaps="false"
+                    android:textColor="@color/color_text"
+                    android:textSize="@dimen/big_txt"
+                    app:layout_constraintBottom_toBottomOf="@id/btn_chat"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/btn_chat"
+                    app:lb_buttonColor="@color/color_primary"
+                    app:lb_cornerRadius="@dimen/app_btn_radius"
+                    app:lb_isShadowEnable="false"
+                    app:lb_loaderColor="@color/white" />
+            </LinearLayout>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:alpha="0.5"
-                android:layout_marginTop="16dp"
-                android:background="@color/color_hint"
-                />
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/team_members_names"
-                android:textColor="@color/color_text"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_team_members"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:layout_marginTop="4dp"
-                android:paddingHorizontal="8dp"
-                android:paddingBottom="20dp"
-
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView6"
-                tools:listitem="@layout/item_team_member"
-                tools:itemCount="8"
-                app:spanCount="2" />
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -54,3 +54,4 @@ const val ACCEPT_JOIN_REQUEST = "$JOIN_REQUESTS/accept-join"
 const val REJECT_JOIN_REQUEST = "$JOIN_REQUESTS/reject-join"
 
 const val LEAVE_TEAM_REQUEST = "$BASE_URL/teams/leave"
+const val DELETE_TEAM_REQUEST = "$BASE_URL/teams/delete"

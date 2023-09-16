@@ -3,6 +3,7 @@ package com.ieee.codelink.ui.teamsScreens.teamDetails
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -92,6 +93,7 @@ class TeamDetailsFragment :
             }
         }
 
+
     }
 
     private fun setOnClickListeners(team: Team) {
@@ -124,7 +126,9 @@ class TeamDetailsFragment :
                 leaveTeamClicked(team)
             }
         }
+
     }
+
 
     private fun leaveTeamClicked(team: Team) {
         viewModel.leaveTeam(team)
@@ -176,6 +180,8 @@ class TeamDetailsFragment :
         }
 
         binding.btnTeamAction.buttonText = text
+        if (isTeamMember)
+            binding.btnDeleteAction.isVisible = true
     }
 
     private fun openProfileScreen(id: Int) {
