@@ -112,7 +112,7 @@ class TeamsViewModel @Inject constructor(
             leaveTeamState.value=it
         })
     }
-    fun deleteTeam(team: Team){
+    suspend fun deleteTeam(team: Team){
         networkCall({teamsRepository.deleteTeam(team.id)!!},{
             deleteTeamState.value=it
         })

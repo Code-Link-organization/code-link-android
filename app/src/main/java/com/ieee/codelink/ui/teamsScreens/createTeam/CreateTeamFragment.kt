@@ -15,6 +15,7 @@ import com.ieee.codelink.R
 import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.core.BaseFragment
+import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentCreateTeamBinding
 import com.ieee.codelink.domain.models.Team
@@ -42,6 +43,9 @@ class CreateTeamFragment :
     }
 
     private fun initData(team: Team?) {
+
+        binding.btnDeleteAction.isVisible = team != null
+
         team?.let { team ->
             binding.apply {
                 etName.setText(team.name)
@@ -54,7 +58,6 @@ class CreateTeamFragment :
                 )
 
                 btnCreate.buttonText = getString(R.string.save)
-                btnDeleteAction.isVisible = true
             }
         }
     }
@@ -67,7 +70,47 @@ class CreateTeamFragment :
         viewModel.createTeamState.awareCollect { state ->
             createTeamObserver(state)
         }
+
+        viewModel.deleteTeamState.awareCollect { state ->
+            deleteTeamObserver(state)
+        }
     }
+
+    private fun deleteTeamObserver(state: ResponseState<BaseResponse>) {
+        when (state) {
+            is ResponseState.Empty -> {}
+            is ResponseState.NotAuthorized,
+            is ResponseState.UnKnownError -> {
+                viewModel.deleteTeamState.value = ResponseState.Empty()
+            }
+
+            is ResponseState.NetworkError -> {
+                showToast(getString(R.string.network_error), false)
+                viewModel.deleteTeamState.value = ResponseState.Empty()
+            }
+
+            is ResponseState.Error -> {
+                showToast(state.message.toString(), false)
+                viewModel.deleteTeamState.value = ResponseState.Empty()
+            }
+
+            is ResponseState.Loading -> {
+                startLoadingAnimation()
+            }
+
+            is ResponseState.Success -> {
+                state.data?.let { response ->
+                    lifecycleScope.launch {
+                        goBackTwice()
+                        viewModel.deleteTeamState.value = ResponseState.Empty()
+                    }
+                }
+            }
+
+        }
+
+    }
+
 
     private fun createTeamObserver(state: ResponseState<CreateTeamResponse>) {
         stopLoadingAnimation()
@@ -106,7 +149,7 @@ class CreateTeamFragment :
     }
 
     private fun goBack() {
-        findNavController().navigateUp()
+        goBackTwice()
     }
 
     private fun stopLoadingAnimation() {
@@ -138,7 +181,9 @@ class CreateTeamFragment :
 
     private fun deleteItemClicked(team: Team?) {
         if (team != null) {
-            viewModel.deleteTeam(team)
+            lifecycleScope.launch {
+                viewModel.deleteTeam(team)
+            }
         }
     }
 
@@ -194,4 +239,10 @@ class CreateTeamFragment :
                 }
             }
         }
+
+    private fun goBackTwice() {
+        val navController = findNavController()
+        navController.popBackStack(R.id.teamDetailsFragment, true)
+    }
+
 }

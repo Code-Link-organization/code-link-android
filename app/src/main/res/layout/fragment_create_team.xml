@@ -107,6 +107,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="40dp"
         android:padding="8dp"
+        android:visibility="gone"
         android:text="@string/delete"
         android:textAllCaps="false"
         android:textColor="@color/color_text"
