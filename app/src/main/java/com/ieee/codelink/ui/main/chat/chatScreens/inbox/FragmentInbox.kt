@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.ViewCompat.setNestedScrollingEnabled
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.BaseViewModel
 import com.ieee.codelink.data.fakeDataProvider.FakeProvider
@@ -24,12 +25,17 @@ class FragmentInbox : BaseFragment<FragmentInboxBinding>(FragmentInboxBinding::i
         inboxAdapter = InboxAdapter(
             chats
         ) {
-            showToast("Open chat")
+            openChat(it)
         }
 
         binding.rvInboxChats.adapter = inboxAdapter
         binding.rvInboxChats.isNestedScrollingEnabled = false
 
+    }
+
+
+    private fun openChat(user : TempChatUser){
+        findNavController().navigate(FragmentInboxDirections.actionFragmentInboxToFragmentChat(user))
     }
 
 
