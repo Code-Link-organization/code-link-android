@@ -90,19 +90,17 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
             is ResponseState.Error -> {
                 state.message?.let {
-                    showToast(state.message.toString())
+                    showToast(state.message.toString(),false)
                 }
             }
 
             is ResponseState.NetworkError -> {
-                showToast(getString(R.string.network_error))
+                showToast(getString(R.string.network_error),false)
             }
 
             else -> {
-                com.ieee.codelink.common.showToast(
-                    getString(R.string.something_went_wrong),
-                    requireContext()
-                )
+               showToast(
+                    getString(R.string.something_went_wrong),false)
             }
         }
     }
@@ -124,7 +122,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             }
 
             is ResponseState.NetworkError -> {
-                showToast(getString(R.string.network_error))
+                showToast(getString(R.string.network_error),false)
 
             }
 
@@ -135,7 +133,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             }
 
             is ResponseState.Error -> {
-                com.ieee.codelink.common.showToast(state.message.toString(), requireContext())
+                showToast(state.message.toString(),false)
                 viewModel.loginRequestState.value = ResponseState.Empty()
             }
 

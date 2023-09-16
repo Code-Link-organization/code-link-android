@@ -54,16 +54,16 @@ class VerificationFragment :
         viewModel.sendOtpState.awareCollect {state->
             when(state) {
                 is ResponseState.Success -> {
-                    com.ieee.codelink.common.showToast(getString(R.string.resend_code),requireContext())
+                   showToast(getString(R.string.resend_code))
                 }
                 is ResponseState.Loading -> {
                 }
                 is ResponseState.NetworkError -> {
-                    showToast(getString(R.string.network_error))
+                    showToast(getString(R.string.network_error),false)
                 }
                 is ResponseState.Error -> {
                     state.message?.let {
-                        showToast(state.message.toString())
+                        showToast(state.message.toString(),false)
                     }
                 }
                 is ResponseState.Empty -> {}
@@ -91,11 +91,11 @@ class VerificationFragment :
 
                 }
                 is ResponseState.NetworkError -> {
-                    showToast(getString(R.string.network_error))
+                    showToast(getString(R.string.network_error),false)
                 }
                 is ResponseState.Error -> {
                     state.message?.let {
-                        showToast(state.message.toString())
+                        showToast(state.message.toString(),false)
                     }
                 }
 
