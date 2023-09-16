@@ -96,6 +96,7 @@ class SearchTeamsFragment : BaseFragment<FragmentSearchTeamsBinding>(FragmentSea
         lifecycleScope.launch(Dispatchers.Main) {
             teamsAdapter = TeamsAdapter(
                 teams as MutableList<Team> ,
+                viewModel.getCachedUserId(),
                 joinTeam = {
                     showToast("Join Team")
                 },

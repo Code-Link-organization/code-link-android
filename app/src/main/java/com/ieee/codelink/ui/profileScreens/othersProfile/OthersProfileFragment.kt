@@ -176,6 +176,7 @@ class OthersProfileFragment :
     }
 
     private fun setSocialMediaVisibility(profileUser: ProfileUser) {
+
         val hideFacebook = profileUser.facebookUrl.isNullOrEmpty() || profileUser.facebookUrl.toString().toCharArray().size <= 6
         val hideTwitter = profileUser.twitterUrl.isNullOrEmpty()|| profileUser.twitterUrl.toString().toCharArray().size <= 6
         val hideLinkedIn = profileUser.linkedinUrl.isNullOrEmpty()|| profileUser.linkedinUrl.toString().toCharArray().size <= 6
@@ -188,7 +189,8 @@ class OthersProfileFragment :
             binding.socialSection.root.isGone = true
             return
         }
-      binding.socialSection.apply {
+
+        binding.socialSection.apply {
 
        if (hideBehance){
            ivBehance.isGone = true
