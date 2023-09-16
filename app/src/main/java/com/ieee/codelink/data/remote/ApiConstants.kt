@@ -2,7 +2,7 @@ package com.ieee.codelink.data.remote
 
 
 //Base Url
-const val BASE_URL_FOR_IMAGE = "https://f91a-197-43-40-254.ngrok-free.app/"
+const val BASE_URL_FOR_IMAGE = "https://a185-197-43-82-103.ngrok-free.app/"
 const val BASE_URL = "${BASE_URL_FOR_IMAGE}api/"
 //Auth
 const val USER ="user"
@@ -53,4 +53,6 @@ const val JOIN_REQUESTS = "join-requests"
 const val JOIN_TEAM = "$JOIN_REQUESTS/join"
 const val ACCEPT_JOIN_REQUEST = "$JOIN_REQUESTS/accept-join"
 const val REJECT_JOIN_REQUEST = "$JOIN_REQUESTS/reject-join"
+//notifications
+const val GET_ALL_NOTIFICATIONS = "notifications/team-requests"
 

@@ -9,11 +9,11 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_user_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:src="@drawable/place_holder_profile"
@@ -25,7 +25,7 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="5dp"
         android:fontFamily="@font/mulish_regular"
         android:text="Peter Jack liked your post but this"
         android:autoSizeMaxTextSize="14sp"
@@ -38,7 +38,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_reject"
-        android:layout_width="70dp"
+        android:layout_width="60dp"
         android:layout_height="35dp"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginHorizontal="6dp"
@@ -50,7 +50,7 @@
         />
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_accept"
-        android:layout_width="70dp"
+        android:layout_width="60dp"
         android:layout_height="35dp"
         android:layout_marginEnd="12dp"
         android:background="@drawable/accept_button_ripple"

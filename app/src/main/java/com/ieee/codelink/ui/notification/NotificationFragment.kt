@@ -9,6 +9,7 @@ import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentNotificationBinding
 import com.ieee.codelink.domain.models.InviteRequest
+import com.ieee.codelink.domain.models.Notification
 import com.ieee.codelink.ui.adapters.NotificationsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -26,24 +27,27 @@ class NotificationFragment :
     }
 
     private fun setObservers() {
-        invitationsObserver()
+        notificationsObserver()
     }
 
-    private fun invitationsObserver() {
-        viewModel.invitesState.awareCollect { state ->
+    private fun notificationsObserver() {
+        viewModel.notificationsState.awareCollect { state ->
             when (state) {
                 is ResponseState.Empty -> {}
                 is ResponseState.NotAuthorized,
                 is ResponseState.UnKnownError -> {
-                    viewModel.invitesState.value = ResponseState.Empty()
+                    showToast(state.message.toString())
+                    viewModel.notificationsState.value = ResponseState.Empty()
                 }
 
                 is ResponseState.NetworkError -> {
-                    viewModel.invitesState.value = ResponseState.Empty()
+                    showToast(state.message.toString())
+                    viewModel.notificationsState.value = ResponseState.Empty()
                 }
 
                 is ResponseState.Error -> {
-                    viewModel.invitesState.value = ResponseState.Empty()
+                    showToast(state.message.toString())
+                    viewModel.notificationsState.value = ResponseState.Empty()
                 }
 
                 is ResponseState.Loading -> {
@@ -55,14 +59,13 @@ class NotificationFragment :
                         lifecycleScope.launch {
                             stopLoadingAnimation()
                             val invitations =
-                                response.data.invite_requests as MutableList<InviteRequest>
-//                            val notifications = invitationsToNotification(invitations)
-                            if (invitations.isEmpty()) {
+                                response.data.notifications as MutableList<Notification>?
+                            if (invitations.isNullOrEmpty()) {
                                 showNoNotificationsAnimation()
-                            }else {
-                                setupRv(invitations as MutableList<InviteRequest>)
+                            } else {
+                                setupRv(invitations)
                             }
-                            viewModel.invitesState.value = ResponseState.Empty()
+                            viewModel.notificationsState.value = ResponseState.Empty()
                         }
                     }
                 }
@@ -71,17 +74,17 @@ class NotificationFragment :
         }
     }
 
-    private fun setupRv(notifications: MutableList<InviteRequest>) {
+    private fun setupRv(notifications: MutableList<Notification>) {
         notificationsAdapter = NotificationsAdapter(
             notifications,
             openProfile = { userId ->
-                openProfile(userId)
+                //   openProfile(userId)
             },
             acceptAction = { notidicationId ->
-                acceptActionClicked(notidicationId)
+                //  acceptActionClicked(notidicationId)
             },
             rejectAction = { notidicationId ->
-                rejectActionClicked(notidicationId)
+                //   rejectActionClicked(notidicationId)
             }
         )
         binding.rvNotifications.adapter = notificationsAdapter
@@ -146,7 +149,7 @@ class NotificationFragment :
 
     private fun callNotifications() {
         lifecycleScope.launch {
-            viewModel.getUserInvitations()
+            viewModel.getUserNotificationss()
         }
     }
 }

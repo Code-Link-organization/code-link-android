@@ -1,15 +1,13 @@
 package com.ieee.codelink.domain.models
 
-import android.app.Notification
-
-data class Notification (
-    var invites : MutableList<InviteRequest>
-){
-     fun getSize(): Int {
-        return  invites.size
-    }
-
-    //todo : this method should return a mapped class of the 3 notification types (message , invitation ,join request)
-    fun getNotifications(): MutableList<InviteRequest> = invites
-
-}
+data class Notification(
+    var created_at: String,
+    var id: Int,
+    var status: String,
+    var team: Team?,
+    var team_id: Int,
+    var type: String,
+    var updated_at: String,
+    var user: User?,
+    var user_id: Int
+)

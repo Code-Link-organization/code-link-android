@@ -9,6 +9,7 @@ import com.ieee.codelink.domain.models.responses.CreatePostResponse
 import com.ieee.codelink.domain.models.responses.CreateTeamResponse
 import com.ieee.codelink.domain.models.responses.InvitesResponse
 import com.ieee.codelink.domain.models.responses.LikesResponse
+import com.ieee.codelink.domain.models.responses.NotificationsResponse
 import com.ieee.codelink.domain.models.responses.PostsResponse
 import com.ieee.codelink.domain.models.responses.ProfileUserResponse
 import com.ieee.codelink.domain.models.responses.ShareResponse
@@ -305,4 +306,9 @@ interface ApiRemoteService {
         @Header("Authorization")
         token: String
     ):Response<PostsResponse>
+    @GET(GET_ALL_NOTIFICATIONS)
+    suspend fun getAllNotifications(
+        @Header("Authorization")
+        token: String
+    ):Response<NotificationsResponse>
 }

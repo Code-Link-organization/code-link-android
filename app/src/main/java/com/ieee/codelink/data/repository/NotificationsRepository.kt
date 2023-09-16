@@ -15,6 +15,7 @@ import com.ieee.codelink.domain.models.responses.AllTeamsResponse
 import com.ieee.codelink.domain.models.responses.AllUsersResponse
 import com.ieee.codelink.domain.models.responses.CreateTeamResponse
 import com.ieee.codelink.domain.models.responses.InvitesResponse
+import com.ieee.codelink.domain.models.responses.NotificationsResponse
 import com.ieee.codelink.domain.models.responses.TeamResponse
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -39,6 +40,18 @@ class NotificationsRepository(
         val token = "Bearer $userToken"
         return try {
             api.getInvitations(
+                token
+            )
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    suspend fun getAllNotifications():Response<NotificationsResponse>?{
+        val userToken = sharedPreferenceManger.bearerToken
+        val token = "Bearer $userToken"
+        return try {
+            api.getAllNotifications(
                 token
             )
         } catch (e: Exception) {
