@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -53,6 +54,7 @@ class CreateTeamFragment :
                 )
 
                 btnCreate.buttonText = getString(R.string.save)
+                btnDeleteAction.isVisible = true
             }
         }
     }
@@ -118,16 +120,25 @@ class CreateTeamFragment :
     private fun setOnClicks(team: Team?) {
         binding.apply {
             ivCamera.setOnClickListener {
-               openGallery()
+                openGallery()
             }
             btnCreate.setOnClickListener {
-                if (team == null){
-                 createTeamClicked()
-                }else{
-                 updateTeamClicked(team)
+                if (team == null) {
+                    createTeamClicked()
+                } else {
+                    updateTeamClicked(team)
                 }
 
             }
+            btnDeleteAction.setOnClickListener {
+                deleteItemClicked(team)
+            }
+        }
+    }
+
+    private fun deleteItemClicked(team: Team?) {
+        if (team != null) {
+            viewModel.deleteTeam(team)
         }
     }
 
@@ -135,7 +146,7 @@ class CreateTeamFragment :
         binding.apply {
             val name = etName.text.toString()
             val description = etProject.text.toString()
-            if (viewModel.canUpdateTeam(name, description,team)) {
+            if (viewModel.canUpdateTeam(name, description, team)) {
                 lifecycleScope.launch {
                     viewModel.editTeam(name, description, viewModel.imgUri)
                 }

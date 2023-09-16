@@ -291,6 +291,13 @@ interface ApiRemoteService {
         @Header("Authorization")
         token: String,
     ): Response<BaseResponse>
+
+    @POST
+    suspend fun deleteTeam(
+        @Url url: String,
+        @Header("Authorization")
+        token: String,
+    ): Response<BaseResponse>
     @POST
     suspend fun deleteAccount(
         @Url url: String,

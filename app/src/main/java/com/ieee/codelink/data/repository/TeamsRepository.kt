@@ -3,6 +3,7 @@ package com.ieee.codelink.data.repository
 import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.data.local.preference.SharedPreferenceManger
 import com.ieee.codelink.data.remote.ApiRemoteService
+import com.ieee.codelink.data.remote.DELETE_TEAM
 import com.ieee.codelink.data.remote.EDIT_TEAM
 import com.ieee.codelink.data.remote.GET_TEAM
 import com.ieee.codelink.data.remote.INVITE_TO_TEAM
@@ -159,4 +160,18 @@ class TeamsRepository(
             null
         }
     }
+    suspend fun deleteTeam(teamId: Int):Response<BaseResponse>?{
+        val userToken = sharedPreferenceManger.bearerToken
+        val token = "Bearer $userToken"
+        val url = "$DELETE_TEAM$teamId"
+        return try {
+            api.deleteTeam(
+                url,
+                token
+            )
+        } catch (e: Exception) {
+            null
+        }
+    }
+
 }
