@@ -8,6 +8,7 @@ import com.ieee.codelink.R
 import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.getTimeDifference
 import com.ieee.codelink.common.setImageUsingGlide
+import com.ieee.codelink.common.setImageUsingGlideCenterCrop
 import com.ieee.codelink.databinding.ItemNotificationBinding
 import com.ieee.codelink.domain.models.Notification
 
@@ -46,15 +47,18 @@ class NotificationsAdapter(
             val context = root.context
             val img =
                 if (notification.team != null) notification.team!!.imageUrl else notification.user?.imageUrl
+            val errorImage =
+                if (notification.team != null) R.drawable.teamwork else R.drawable.ic_profile
             val msg = if (notification.team != null) getTeamInvitationMessage(
                 notification,
                 context
             ) else getUserInvitationMessage(notification, context)
             tvNotificationMessage.text = msg
             textView2.text = getTimeDifference(notification.created_at)
-            setImageUsingGlide(
+            setImageUsingGlideCenterCrop(
                 view = holder.binding.ivUserImage,
-                image = getImageForGlide(img)
+                image = getImageForGlide(img),
+                errorImage = errorImage
             )
         }
     }
@@ -88,7 +92,7 @@ class NotificationsAdapter(
     private fun getUserInvitationMessage(notification: Notification, context: Context): String? {
         val invitaionString = context.getString(R.string.user_invitaion_message)
         notification.user?.let{
-         return it.name + invitaionString + notification.team?.name
+         return it.name + " $invitaionString "+ (notification.team?.name ?: " ")
         }
         return null
     }
