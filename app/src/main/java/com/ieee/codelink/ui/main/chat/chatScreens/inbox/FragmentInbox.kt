@@ -11,8 +11,9 @@ import com.ieee.codelink.data.fakeDataProvider.FakeProvider
 import com.ieee.codelink.databinding.FragmentInboxBinding
 import com.ieee.codelink.domain.tempModels.TempChatUser
 import com.ieee.codelink.ui.adapters.tempAdapters.InboxAdapter
+import com.ieee.codelink.ui.main.chat.ChatsHolderFragment
 
-class FragmentInbox : BaseFragment<FragmentInboxBinding>(FragmentInboxBinding::inflate) {
+class FragmentInbox() : BaseFragment<FragmentInboxBinding>(FragmentInboxBinding::inflate) {
     override val viewModel : BaseViewModel by viewModels()
     private lateinit var inboxAdapter : InboxAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,13 +31,10 @@ class FragmentInbox : BaseFragment<FragmentInboxBinding>(FragmentInboxBinding::i
 
         binding.rvInboxChats.adapter = inboxAdapter
         binding.rvInboxChats.isNestedScrollingEnabled = false
-
     }
-
 
     private fun openChat(user : TempChatUser){
-        findNavController().navigate(FragmentInboxDirections.actionFragmentInboxToFragmentChat(user))
+        (parentFragment as ChatsHolderFragment).openChat(user)
     }
-
 
 }

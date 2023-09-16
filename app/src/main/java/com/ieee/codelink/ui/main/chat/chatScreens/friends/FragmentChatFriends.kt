@@ -11,9 +11,9 @@ import com.ieee.codelink.databinding.FragmentFriendsBinding
 import com.ieee.codelink.databinding.FragmentInboxBinding
 import com.ieee.codelink.domain.tempModels.TempChatUser
 import com.ieee.codelink.ui.adapters.tempAdapters.InboxAdapter
-import com.ieee.codelink.ui.main.chat.chatScreens.inbox.FragmentInboxDirections
+import com.ieee.codelink.ui.main.chat.ChatsHolderFragment
 
-class FragmentChatFriends : BaseFragment<FragmentFriendsBinding>(FragmentFriendsBinding::inflate) {
+class FragmentChatFriends() : BaseFragment<FragmentFriendsBinding>(FragmentFriendsBinding::inflate) {
     override val viewModel : BaseViewModel by viewModels()
 
     private lateinit var inboxAdapter : InboxAdapter
@@ -34,7 +34,7 @@ class FragmentChatFriends : BaseFragment<FragmentFriendsBinding>(FragmentFriends
     }
 
     private fun openChat(user : TempChatUser){
-        findNavController().navigate(FragmentChatFriendsDirections.actionFragmentChatFriendsToFragmentChat(user))
+        (parentFragment as ChatsHolderFragment).openChat(user)
     }
 
 

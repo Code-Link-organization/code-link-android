@@ -116,6 +116,14 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_chatsFragment_to_fragmentChat"
+            app:destination="@id/fragmentChat"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -296,31 +304,5 @@
         <argument
             android:name="user"
             app:argType="com.ieee.codelink.domain.tempModels.TempChatUser" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentChatFriends"
-        android:name="com.ieee.codelink.ui.main.chat.chatScreens.friends.FragmentChatFriends"
-        android:label="FragmentChatFriends" >
-        <action
-            android:id="@+id/action_fragmentChatFriends_to_fragmentChat"
-            app:destination="@id/fragmentChat"
-
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_left"/>
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentInbox"
-        android:name="com.ieee.codelink.ui.main.chat.chatScreens.inbox.FragmentInbox"
-        android:label="FragmentInbox" >
-        <action
-            android:id="@+id/action_fragmentInbox_to_fragmentChat"
-            app:destination="@id/fragmentChat"
-
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
 </navigation>
