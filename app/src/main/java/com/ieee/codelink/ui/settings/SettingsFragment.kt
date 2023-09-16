@@ -9,8 +9,8 @@ import androidx.lifecycle.lifecycleScope
 import com.ieee.codelink.R
 import com.ieee.codelink.common.extension.onBackPress
 import com.ieee.codelink.common.openBrowser
-import com.ieee.codelink.common.showDialog
 import com.ieee.codelink.core.BaseFragment
+import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentSettingsBinding
 import com.ieee.codelink.ui.main.MainActivity
 import com.zeugmasolutions.localehelper.Locales
@@ -28,6 +28,26 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         setViews()
         setSelectedLanguage()
         setOnClicks()
+        setObservers()
+    }
+
+    private fun setObservers() {
+        viewModel.deleteAccountState.awareCollect { state ->
+            when (state) {
+                is ResponseState.Empty -> {}
+                is ResponseState.Error,
+                is ResponseState.UnKnownError,
+                is ResponseState.NetworkError ,
+                is ResponseState.NotAuthorized -> {
+                    showToast(state.message.toString(),false)
+                }
+                is ResponseState.Success -> {
+                    showToast(state.message.toString())
+                    logOut()
+                }
+                is ResponseState.Loading -> {}
+            }
+        }
     }
 
     private fun setViews() {
@@ -131,7 +151,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         }
 
         binding.btnDeleteAccount.root.setOnClickListener {
-         showToast("delete account",true)
+        deleteAccount()
         }
 
         binding.btnSecurity.root.setOnClickListener {
@@ -149,6 +169,11 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         }
     }
 
+    private fun deleteAccount() {
+        lifecycleScope.launch {
+            viewModel.deleteAccount()
+        }
+    }
 
 
     private fun setSelectedLanguage() {
@@ -197,5 +222,10 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         setViews()
     }
 
+
+    private fun logOut() {
+        viewModel.logout()
+        goToAuthActivity()
+    }
 
 }

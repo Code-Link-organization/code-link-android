@@ -2,7 +2,9 @@ package com.ieee.codelink.ui.settings
 
 import android.content.Context
 import com.ieee.codelink.R
+import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.core.BaseViewModel
+import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.data.repository.SettingsRepository
 import com.ieee.codelink.data.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,6 +24,10 @@ class SettingsViewModel @Inject constructor(
 
     val languageRadioVisible: MutableStateFlow<Boolean> =
         MutableStateFlow(false)
+
+    val deleteAccountState: MutableStateFlow<ResponseState<BaseResponse>> =
+        MutableStateFlow(ResponseState.Empty())
+
 
     fun logout() {
         userRepository.logout()
@@ -59,6 +65,9 @@ class SettingsViewModel @Inject constructor(
 
     fun toggleNotifocationsEnabled() : Boolean = settingsRepository.toggleNotifications()
 
-
-
+    suspend fun deleteAccount(){
+        deleteAccountState.value = ResponseState.Loading()
+        val response = userRepository.deleteAccount()
+        deleteAccountState.value = handleResponse(response)
+    }
 }

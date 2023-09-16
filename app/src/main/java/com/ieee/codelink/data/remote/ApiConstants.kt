@@ -13,6 +13,7 @@ const val SEND_VERIFICATION_CODE = "$USER/send-mail"
 const val CHECK_VERIFICATION_CODE = "$USER/check-code"
 const val CHECK_IF_EMAIL_EXISTS = "$USER/check-email"
 const val RESET_PASSWORD = "$USER/reset-password"
+const val DELETE_ACCOUNT = "profile/delete-account"
 //Posts
 const val GET_POSTS = "posts"
 const val CREATE_POST = "$GET_POSTS/create"

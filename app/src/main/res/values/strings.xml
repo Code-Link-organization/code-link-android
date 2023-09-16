@@ -79,7 +79,7 @@
     <string name="comments">Comments</string>
     <string name="post">Post</string>
     <string name="add_comment">add comment</string>
-    <string name="choose_your_technical_circle">Choose your technical circle!</string>
+    <string name="choose_your_technical_circle">Choose your technical track!</string>
     <string name="find_users">Find Users</string>
     <string name="follow">Follow</string>
     <string name="following">Following</string>
@@ -105,7 +105,7 @@
     <string name="individuals">Individuals</string>
     <string name="mentor">Mentor</string>
     <string name="teams">Teams</string>
-    <string name="courses">Courses</string>
+    <string name="courses">Resources</string>
     <string name="communities">Communities</string>
     <string name="hackathons">Hackathons</string>
     <string name="mentors">Mentors</string>
