@@ -27,7 +27,7 @@ import com.ieee.codelink.domain.tempModels.TempUserProfile
 import com.ieee.codelink.domain.tempModels.TempUserSearch
 import com.ieee.codelink.domain.tempModels.toTempUserProfile
 import com.ieee.codelink.ui.adapters.tempAdapters.FollowersAdapter
-import com.ieee.codelink.ui.adapters.tempAdapters.ProfilePostsAdapter
+import com.ieee.codelink.ui.adapters.ProfilePostsAdapter
 import com.ieee.codelink.ui.dialogs.InviteUserDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -244,11 +244,18 @@ class OthersProfileFragment :
 
     private fun setViews(userData: ProfileUser) {
         binding.upperSection.apply {
+
             tvUserName.text = userData.name
             tvUserEmail.text = userData.track ?: getString(R.string.empty)
 
             if (viewModel.isCachedUser(userId)){
                 ivInviteUser.isGone = true
+                ivChat.isGone = true
+                btnFollow.isGone = true
+            }else{
+                ivInviteUser.isGone = false
+                ivChat.isGone = false
+                btnFollow.isGone = false
             }
 
             followersCount.text = (Random.nextInt(150) + 30).toString()

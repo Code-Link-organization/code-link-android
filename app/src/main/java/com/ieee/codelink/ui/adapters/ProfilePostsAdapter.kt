@@ -1,17 +1,13 @@
-package com.ieee.codelink.ui.adapters.tempAdapters
+package com.ieee.codelink.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.ieee.codelink.R
 import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.setImageUsingGlide
-import com.ieee.codelink.databinding.CardFollowerBinding
+import com.ieee.codelink.common.setImageUsingGlideCenterCrop
 import com.ieee.codelink.databinding.CardPostProfileBinding
-import com.ieee.codelink.domain.tempModels.TempUserSearch
 
 
 class ProfilePostsAdapter(
@@ -43,7 +39,7 @@ class ProfilePostsAdapter(
 
     private fun setViews(holder: ViewHolder, post: String) {
         holder.binding.apply {
-            setImageUsingGlide(
+            setImageUsingGlideCenterCrop(
                 view = holder.binding.imageView,
                 image = getImageForGlide(post)
             )
@@ -52,7 +48,10 @@ class ProfilePostsAdapter(
 
     private fun setOnClicks(holder: ViewHolder, post: String) {
         holder.binding.root.setOnClickListener {
-            opemImage(post, holder.binding.imageView)
+            val img = getImageForGlide(post)
+            img?.let {imgUrl ->
+                opemImage(imgUrl, holder.binding.imageView)
+            }
         }
     }
 

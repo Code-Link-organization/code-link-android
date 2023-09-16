@@ -16,6 +16,7 @@ import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentTeamDetailsBinding
 import com.ieee.codelink.domain.models.Team
+import com.ieee.codelink.domain.tempModels.TempChatUser
 import com.ieee.codelink.ui.adapters.TeamMembersAdapter
 import com.ieee.codelink.ui.teamsScreens.TeamsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -98,7 +99,7 @@ class TeamDetailsFragment :
         setActionButtonClicks(team)
         binding.apply {
             btnChat.setOnClickListener {
-                findNavController().navigateUp()
+                openChat()
             }
             ivTeamImage.setOnClickListener {
                 val url = getImageForGlide(team.imageUrl)
@@ -110,6 +111,11 @@ class TeamDetailsFragment :
             }
         }
 
+    }
+
+    private fun openChat() {
+       val user = TempChatUser("Team Chat",5,"afa","asfasf")
+        findNavController().navigate(TeamDetailsFragmentDirections.actionTeamDetailsFragmentToFragmentChat(user))
     }
 
     private fun setActionButtonClicks(team: Team) {
