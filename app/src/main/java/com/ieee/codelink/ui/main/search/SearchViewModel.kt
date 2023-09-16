@@ -52,4 +52,8 @@ class SearchViewModel @Inject constructor(
         allTeamsState.value = handleResponse(response)
     }
 
+    suspend fun requestToJoin(teamId: Int):Boolean{
+        val response = teamsRepository.requestToJoinTeam(teamId)
+        return response!=null && response.isSuccessful
+    }
 }

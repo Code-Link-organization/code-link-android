@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.ieee.codelink.R
 import com.ieee.codelink.common.extension.onBackPress
 import com.ieee.codelink.common.openBrowser
+import com.ieee.codelink.common.showDialog
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentSettingsBinding
@@ -42,7 +43,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
                     showToast(state.message.toString(),false)
                 }
                 is ResponseState.Success -> {
-                    showToast(state.message.toString())
+                    showToast(getString(R.string.failed_to_delete))
                     logOut()
                 }
                 is ResponseState.Loading -> {}
@@ -151,7 +152,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         }
 
         binding.btnDeleteAccount.root.setOnClickListener {
-        deleteAccount()
+        deleteAccountClicked()
         }
 
         binding.btnSecurity.root.setOnClickListener {
@@ -167,6 +168,16 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
                 "https://gist.github.com/Mohamed02Emad/0e3b816e5f0e5e78dbaad1400c786cf5"
             )
         }
+    }
+
+    private fun deleteAccountClicked() {
+        showDialog(requireContext(),
+            getString(R.string.delete_account),
+            getString(R.string.sure_delete_account),
+            positiveClicked = {
+                deleteAccount()
+            }
+            )
     }
 
     private fun deleteAccount() {

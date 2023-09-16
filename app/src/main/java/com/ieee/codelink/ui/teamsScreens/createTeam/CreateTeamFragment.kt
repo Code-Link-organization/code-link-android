@@ -14,6 +14,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ieee.codelink.R
 import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.setImageUsingGlide
+import com.ieee.codelink.common.showDialog
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.BaseResponse
 import com.ieee.codelink.core.ResponseState
@@ -180,11 +181,20 @@ class CreateTeamFragment :
     }
 
     private fun deleteItemClicked(team: Team?) {
+
         if (team != null) {
-            lifecycleScope.launch {
-                viewModel.deleteTeam(team)
-            }
+            showDialog(requireContext(),
+                getString(R.string.delete_team),
+                getString(R.string.sure_delete_team),
+                positiveClicked = {
+                    lifecycleScope.launch {
+                        viewModel.deleteTeam(team)
+                    }
+
+                }
+            )
         }
+
     }
 
     private fun updateTeamClicked(team: Team) {

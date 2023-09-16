@@ -133,4 +133,8 @@
     <string name="accept">Accept</string>
     <string name="team_invitaion_message">"You were invited to join"</string>
     <string name="user_invitaion_message">has requested to join your team</string>
+    <string name="sure_delete_account">Are you sure you want to delete account ?</string>
+    <string name="failed_to_delete">Failed to delete</string>
+    <string name="delete_team">Delete team</string>
+    <string name="sure_delete_team">Are you sure you want to delete this team ?</string>
 </resources>

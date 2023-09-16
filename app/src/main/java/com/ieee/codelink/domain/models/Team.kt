@@ -13,7 +13,8 @@ data class Team(
     var created_at: String,
     var updated_at: String,
     var members: List<User>,
-    var isSelected: Boolean = false
+    var isSelected: Boolean = false,
+    var joinButton: Boolean = true
 ):Serializable{
 
     fun isFull(): Boolean = is_full == 1

@@ -53,7 +53,7 @@ class TeamsAdapter(
     }
 
     private fun isJoinButtonHidden(team: Team): Boolean {
-      return team.members.any{it.id == cachedUserId}
+      return team.members.any{it.id == cachedUserId} || team.joinButton.not()
     }
 
     private fun setOnClicks(holder: ViewHolder, team: Team) {
@@ -64,6 +64,12 @@ class TeamsAdapter(
             joinTeam(team)
         }
 
+    }
+
+    fun removeJoinButton(id: Int) {
+          val index = teams.indexOfFirst { it.id == id }
+          teams[index].joinButton = false
+          notifyItemChanged(index)
     }
 
 

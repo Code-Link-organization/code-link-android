@@ -98,7 +98,10 @@ class SearchTeamsFragment : BaseFragment<FragmentSearchTeamsBinding>(FragmentSea
                 teams as MutableList<Team> ,
                 viewModel.getCachedUserId(),
                 joinTeam = {
-                    showToast("Join Team")
+                    lifecycleScope.launch {
+                        val isSent =viewModel.requestToJoin(it.id)
+                            teamsAdapter.removeJoinButton(it.id)
+                    }
                 },
                 openTeam = {
                     openTeam(it)
