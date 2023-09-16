@@ -3,16 +3,11 @@ package com.ieee.codelink.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.facebook.appevents.codeless.internal.ViewHierarchy.setOnClickListener
-import com.ieee.codelink.common.getCurrentUtcDateTime
 import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.getTimeDifference
 import com.ieee.codelink.common.setImageUsingGlide
-import com.ieee.codelink.databinding.CardLikePersonBinding
 import com.ieee.codelink.databinding.ItemNotificationBinding
 import com.ieee.codelink.domain.models.InviteRequest
-import com.ieee.codelink.domain.models.Notification
-import com.ieee.codelink.domain.models.responseData.LikeData
 
 
 class NotificationsAdapter(
