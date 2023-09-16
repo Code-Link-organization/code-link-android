@@ -1,20 +1,23 @@
 package com.ieee.codelink.ui.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.ieee.codelink.R
 import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.getTimeDifference
 import com.ieee.codelink.common.setImageUsingGlide
+import com.ieee.codelink.common.setImageUsingGlideCenterCrop
 import com.ieee.codelink.databinding.ItemNotificationBinding
-import com.ieee.codelink.domain.models.InviteRequest
+import com.ieee.codelink.domain.models.Notification
 
 
 class NotificationsAdapter(
-    var notifications: MutableList<InviteRequest>,
-    private val openProfile: (Int) -> Unit,
-    private val acceptAction: (Int) -> Unit,
-    private val rejectAction: (Int) -> Unit
+    var notifications: MutableList<Notification>,
+    private val openProfile: (Notification) -> Unit,
+    private val acceptAction: (Notification) -> Unit,
+    private val rejectAction: (Notification) -> Unit
 ) : RecyclerView.Adapter<NotificationsAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: ItemNotificationBinding) :
@@ -39,26 +42,37 @@ class NotificationsAdapter(
         setOnClicks(holder, notification)
     }
 
-    private fun setViews(holder: NotificationsAdapter.ViewHolder, notification: InviteRequest) {
+    private fun setViews(holder: NotificationsAdapter.ViewHolder, notification: Notification) {
         holder.binding.apply {
-            tvNotificationMessage.text = notification.status
+            val context = root.context
+            val img =
+                if (notification.team != null) notification.team!!.imageUrl else notification.user?.imageUrl
+            val errorImage =
+                if (notification.team != null) R.drawable.teamwork else R.drawable.ic_profile
+            val msg = if (notification.team != null) getTeamInvitationMessage(
+                notification,
+                context
+            ) else getUserInvitationMessage(notification, context)
+            tvNotificationMessage.text = msg
             textView2.text = getTimeDifference(notification.created_at)
-            setImageUsingGlide(
+            setImageUsingGlideCenterCrop(
                 view = holder.binding.ivUserImage,
-                image = getImageForGlide()
+                image = getImageForGlide(img),
+                errorImage = errorImage
             )
         }
     }
 
-    private fun setOnClicks(holder: ViewHolder, notification: InviteRequest) {
+
+    private fun setOnClicks(holder: ViewHolder, notification: Notification) {
         holder.binding.ivUserImage.setOnClickListener {
-            openProfile(notification.user_id)
+            openProfile(notification)
         }
         holder.binding.btnAccept.setOnClickListener {
-            acceptAction(notification.id)
+            acceptAction(notification)
         }
         holder.binding.btnReject.setOnClickListener {
-            rejectAction(notification.id)
+            rejectAction(notification)
         }
     }
 
@@ -69,6 +83,19 @@ class NotificationsAdapter(
     }
 
     fun isEmpty() = notifications.isEmpty()
+
+    private fun getTeamInvitationMessage(notification: Notification, context: Context): String {
+        val invitaionString = context.getString(R.string.team_invitaion_message)
+        return invitaionString +" ${notification.team!!.name}"
+    }
+
+    private fun getUserInvitationMessage(notification: Notification, context: Context): String? {
+        val invitaionString = context.getString(R.string.user_invitaion_message)
+        notification.user?.let{
+         return it.name + " $invitaionString "+ (notification.team?.name ?: " ")
+        }
+        return null
+    }
 
 
 }

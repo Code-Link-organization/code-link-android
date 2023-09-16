@@ -5,10 +5,12 @@ import android.view.View
 import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentNotificationBinding
-import com.ieee.codelink.domain.models.InviteRequest
+import com.ieee.codelink.domain.models.Notification
+import com.ieee.codelink.domain.models.Team
 import com.ieee.codelink.ui.adapters.NotificationsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -26,24 +28,27 @@ class NotificationFragment :
     }
 
     private fun setObservers() {
-        invitationsObserver()
+        notificationsObserver()
     }
 
-    private fun invitationsObserver() {
-        viewModel.invitesState.awareCollect { state ->
+    private fun notificationsObserver() {
+        viewModel.notificationsState.awareCollect { state ->
             when (state) {
                 is ResponseState.Empty -> {}
                 is ResponseState.NotAuthorized,
                 is ResponseState.UnKnownError -> {
-                    viewModel.invitesState.value = ResponseState.Empty()
+                    showToast(state.message.toString())
+                    viewModel.notificationsState.value = ResponseState.Empty()
                 }
 
                 is ResponseState.NetworkError -> {
-                    viewModel.invitesState.value = ResponseState.Empty()
+                    showToast(state.message.toString())
+                    viewModel.notificationsState.value = ResponseState.Empty()
                 }
 
                 is ResponseState.Error -> {
-                    viewModel.invitesState.value = ResponseState.Empty()
+                    showToast(state.message.toString())
+                    viewModel.notificationsState.value = ResponseState.Empty()
                 }
 
                 is ResponseState.Loading -> {
@@ -55,14 +60,13 @@ class NotificationFragment :
                         lifecycleScope.launch {
                             stopLoadingAnimation()
                             val invitations =
-                                response.data.invite_requests as MutableList<InviteRequest>
-//                            val notifications = invitationsToNotification(invitations)
-                            if (invitations.isEmpty()) {
+                                response.data.notifications as MutableList<Notification>?
+                            if (invitations.isNullOrEmpty()) {
                                 showNoNotificationsAnimation()
-                            }else {
-                                setupRv(invitations as MutableList<InviteRequest>)
+                            } else {
+                                setupRv(invitations)
                             }
-                            viewModel.invitesState.value = ResponseState.Empty()
+                            viewModel.notificationsState.value = ResponseState.Empty()
                         }
                     }
                 }
@@ -71,40 +75,82 @@ class NotificationFragment :
         }
     }
 
-    private fun setupRv(notifications: MutableList<InviteRequest>) {
+    private fun setupRv(notifications: MutableList<Notification>) {
         notificationsAdapter = NotificationsAdapter(
             notifications,
-            openProfile = { userId ->
-                openProfile(userId)
+            openProfile = { notification ->
+                if (notification.type == "join") {
+                    openProfile(notification.user!!.id)
+                } else if (notification.team != null) {
+                    openTeam(notification.team!!)
+                }
             },
-            acceptAction = { notidicationId ->
-                acceptActionClicked(notidicationId)
+            acceptAction = { notification ->
+                if (notification.type == "invite") {
+                    acceptInvitationActionClicked(notification.id)
+                } else if (notification.type == "join") {
+                    acceptRequestActionClicked(notification.id)
+                }
             },
-            rejectAction = { notidicationId ->
-                rejectActionClicked(notidicationId)
+            rejectAction = { notification ->
+
+                if (notification.type == "invite") {
+                    rejectInvitationActionClicked(notification.id)
+                } else if (notification.type == "join") {
+                    rejectRequestActionClicked(notification.id)
+                }
             }
         )
         binding.rvNotifications.adapter = notificationsAdapter
     }
 
-    private fun openProfile(userId: Int) {
-
+    private fun openTeam(team: Team) {
+        findNavController().navigate(
+            NotificationFragmentDirections.actionNotificationFragmentToTeamDetailsFragment(
+                team
+            )
+        )
     }
 
-    private fun rejectActionClicked(notificationId: Int) {
+    private fun openProfile(userId: Int) {
+        findNavController().navigate(
+            NotificationFragmentDirections.actionNotificationFragmentToOthersProfile(
+                userId
+            )
+        )
+    }
+
+    private fun rejectInvitationActionClicked(notificationId: Int) {
         lifecycleScope.launch {
             val removeNotification = viewModel.rejectInvitation(notificationId)
-            if (removeNotification){
+            if (removeNotification) {
                 removeNotification(notificationId)
-
             }
         }
     }
 
-    private fun acceptActionClicked(notificationId: Int) {
+    private fun rejectRequestActionClicked(notificationId: Int) {
+        lifecycleScope.launch {
+            val removeNotification = viewModel.rejectJoinRequest(notificationId)
+            if (removeNotification) {
+                removeNotification(notificationId)
+            }
+        }
+    }
+
+    private fun acceptInvitationActionClicked(notificationId: Int) {
         lifecycleScope.launch {
             val removeNotification = viewModel.acceptInvitation(notificationId)
-            if (removeNotification){
+            if (removeNotification) {
+                removeNotification(notificationId)
+            }
+        }
+    }
+
+    private fun acceptRequestActionClicked(notificationId: Int) {
+        lifecycleScope.launch {
+            val removeNotification = viewModel.acceptJoinRequest(notificationId)
+            if (removeNotification) {
                 removeNotification(notificationId)
             }
         }
@@ -112,13 +158,13 @@ class NotificationFragment :
 
     private fun removeNotification(notificationId: Int) {
         notificationsAdapter.removeNotification(notificationId)
-        if (notificationsAdapter.isEmpty()){
+        if (notificationsAdapter.isEmpty()) {
             showNoNotificationsAnimation()
         }
     }
 
     private fun startLoadingAnimation() {
-        if (binding.animationView.isAnimating){
+        if (binding.animationView.isAnimating) {
             return
         }
         binding.animationView.apply {
@@ -146,7 +192,7 @@ class NotificationFragment :
 
     private fun callNotifications() {
         lifecycleScope.launch {
-            viewModel.getUserInvitations()
+            viewModel.getUserNotificationss()
         }
     }
 }
