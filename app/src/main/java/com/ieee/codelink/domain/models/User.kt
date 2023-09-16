@@ -9,5 +9,6 @@ data class User(
     var imageUrl: String?,
     var track: String? = null,
     var pivot: Pivot? = null,
+    var bio: String? = null,
     var token: String? = null
 ) : Serializable

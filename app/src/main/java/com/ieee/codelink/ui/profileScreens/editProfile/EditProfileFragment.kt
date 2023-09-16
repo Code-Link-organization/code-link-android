@@ -90,7 +90,7 @@ class EditProfileFragment :
                 tvUserName.text = user.name
                 tvUserTrack.text = user.track
 
-                etBio.setText(user.track)
+                etBio.setText(user.bio)
                 etTrack.setText(user.track)
                 etName.setText(user.name)
 
