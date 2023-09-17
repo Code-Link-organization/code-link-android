@@ -2,11 +2,13 @@ package com.ieee.codelink.common
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Build
 import android.util.Log
 import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
@@ -316,3 +318,51 @@ fun getImageForGlide(url: String? = null , baseUrl : String = BASE_URL_FOR_IMAGE
      baseUrl + url
 }
 fun getImageForGlide(image: Int?) = image
+
+
+fun openFacebookIntent(fullUrl: String, context: Context) {
+    val username = extractUsernameFromFaceBookUrl(fullUrl)
+    val intent = try {
+        context.getPackageManager().getPackageInfoCompat(context.packageName, 0)
+        val encodedUsername = Uri.encode(username)
+        val fbAppUri = "fb://facewebmodal/f?href=https://www.facebook.com/$encodedUsername"
+        Intent(Intent.ACTION_VIEW, Uri.parse(fbAppUri))
+    } catch (e: Exception) {
+        Intent(Intent.ACTION_VIEW, Uri.parse(fullUrl))
+    }
+    context.startActivity(intent)
+}
+
+fun openGithubIntent(fullUrl: String, context: Context) {
+    val username = extractUsernameFromGitHubUrl(fullUrl)
+    val intent = try {
+        context.getPackageManager().getPackageInfoCompat(context.packageName, 0)
+        val githubAppUri = "https://github.com/$username"
+        Intent(Intent.ACTION_VIEW, Uri.parse(githubAppUri))
+    } catch (e: Exception) {
+        Intent(Intent.ACTION_VIEW, Uri.parse(fullUrl))
+    }
+    context.startActivity(intent)
+}
+
+private fun extractUsernameFromFaceBookUrl(fullUrl: String): String {
+    val pattern = "https://www.facebook.com/(.*)".toRegex()
+    val matchResult = pattern.find(fullUrl)
+    return matchResult?.groupValues?.getOrNull(1) ?: ""
+}
+
+private fun extractUsernameFromGitHubUrl(githubUrl: String): String {
+    val pattern = "https://github.com/(.*)".toRegex()
+    val matchResult = pattern.find(githubUrl)
+    return matchResult?.groupValues?.getOrNull(1) ?: ""
+}
+
+private fun PackageManager.getPackageInfoCompat(
+    packageName: String,
+    flags: Int = 0,
+): PackageInfo =
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(flags.toLong()))
+    } else {
+        @Suppress("DEPRECATION") getPackageInfo(packageName, flags)
+    }
