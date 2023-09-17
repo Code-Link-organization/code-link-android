@@ -3,6 +3,7 @@ package com.ieee.codelink.ui.main.search.searchScreens.teams
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isGone
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -75,6 +76,7 @@ class SearchTeamsFragment : BaseFragment<FragmentSearchTeamsBinding>(FragmentSea
                 state.data?.let { response ->
                     lifecycleScope.launch {
                         setRv(response.data.teams)
+                        setSearchLogic()
                         showAllViews()
                         viewModel.allTeamsState.value = ResponseState.Empty()
                     }
@@ -99,7 +101,7 @@ class SearchTeamsFragment : BaseFragment<FragmentSearchTeamsBinding>(FragmentSea
                 viewModel.getCachedUserId(),
                 joinTeam = {
                     lifecycleScope.launch {
-                        val isSent =viewModel.requestToJoin(it.id)
+                        val isSent = viewModel.requestToJoin(it.id)
                             teamsAdapter.removeJoinButton(it.id)
                     }
                 },
@@ -159,5 +161,15 @@ class SearchTeamsFragment : BaseFragment<FragmentSearchTeamsBinding>(FragmentSea
 //        binding.apply {
 //            searchBar.root.isVisible = false
 //        }
+    }
+
+    private fun setSearchLogic() {
+        binding.apply {
+            searchBar.etSearch.setText("")
+            searchBar.etSearch.doAfterTextChanged {text->
+                val query = if (text.isNullOrEmpty()) "" else text.toString()
+                teamsAdapter.searchFor(query)
+            }
+        }
     }
 }
