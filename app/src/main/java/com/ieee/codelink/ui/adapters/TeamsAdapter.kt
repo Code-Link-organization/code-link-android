@@ -9,6 +9,7 @@ import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.databinding.CardTeamBinding
 import com.ieee.codelink.domain.models.Team
+import com.ieee.codelink.domain.models.User
 
 
 class TeamsAdapter(
@@ -17,6 +18,13 @@ class TeamsAdapter(
     private val joinTeam: (Team) -> Unit,
     private val openTeam: (Team) -> Unit,
 ) : RecyclerView.Adapter<TeamsAdapter.ViewHolder>() {
+
+    private var displayList: MutableList<Team> = mutableListOf<Team>()
+
+    init {
+        displayList.addAll(teams)
+    }
+
 
     inner class ViewHolder(val binding: CardTeamBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -31,11 +39,11 @@ class TeamsAdapter(
         )
     }
 
-    override fun getItemCount(): Int = teams.size
+    override fun getItemCount(): Int = displayList.size
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val team = teams[position]
+        val team = displayList[position]
         setViews(holder, team)
         setOnClicks(holder, team)
     }
@@ -72,5 +80,16 @@ class TeamsAdapter(
           notifyItemChanged(index)
     }
 
+    fun searchFor(query: String = ""){
+        if (query.isNullOrEmpty()){
+            displayList.clear()
+            displayList.addAll(teams)
+        }else {
+            val searchList = teams.filter { it.name.lowercase().contains(query.lowercase()) }
+            displayList.clear()
+            displayList.addAll(searchList)
+        }
+        notifyDataSetChanged()
+    }
 
 }
