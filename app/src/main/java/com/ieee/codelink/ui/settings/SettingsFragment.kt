@@ -40,10 +40,10 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
                 is ResponseState.UnKnownError,
                 is ResponseState.NetworkError ,
                 is ResponseState.NotAuthorized -> {
-                    showToast(state.message.toString(),false)
+                    //showToast(state.message.toString(),false)
                 }
                 is ResponseState.Success -> {
-                    showToast(getString(R.string.failed_to_delete))
+                    showToast(getString(R.string.account_deleted))
                     logOut()
                 }
                 is ResponseState.Loading -> {}

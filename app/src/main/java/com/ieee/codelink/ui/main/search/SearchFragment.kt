@@ -143,7 +143,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
     private fun goToSearch(firstOption: String, it: TempSearchItem) {
         when (firstOption) {
-            "Courses" -> {
+            getString(R.string.courses) -> {
                 openCoursesScrean(it)
             }
             //todo: communities and hackathons

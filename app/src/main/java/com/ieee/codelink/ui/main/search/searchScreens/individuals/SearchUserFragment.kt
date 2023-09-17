@@ -3,6 +3,7 @@ package com.ieee.codelink.ui.main.search.searchScreens.individuals
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isGone
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -68,6 +69,7 @@ class SearchUserFragment : BaseFragment<FragmentSeatchUserBinding>(FragmentSeatc
                 state.data?.let { response ->
                     lifecycleScope.launch {
                         setupRv(response.data.users as MutableList<User>)
+                        setSearchLogic()
                         viewModel.allUsersState.value = ResponseState.Empty()
                     }
                 }
@@ -75,6 +77,16 @@ class SearchUserFragment : BaseFragment<FragmentSeatchUserBinding>(FragmentSeatc
 
         }
 
+    }
+
+    private fun setSearchLogic() {
+        binding.apply {
+            searchBar.etSearch.setText("")
+            searchBar.etSearch.doAfterTextChanged {text->
+                val query = if (text.isNullOrEmpty()) "" else text.toString()
+                usersAdapter.searchFor(query)
+            }
+        }
     }
 
     private fun setupRv(users: MutableList<User>) {

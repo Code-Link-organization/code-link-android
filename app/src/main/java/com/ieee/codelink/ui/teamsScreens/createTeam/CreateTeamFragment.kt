@@ -72,8 +72,47 @@ class CreateTeamFragment :
             createTeamObserver(state)
         }
 
+        viewModel.editTeamState.awareCollect { state ->
+            editTeamObserver(state)
+        }
+
         viewModel.deleteTeamState.awareCollect { state ->
             deleteTeamObserver(state)
+        }
+    }
+
+    private fun editTeamObserver(state: ResponseState<CreateTeamResponse>) {
+        stopLoadingAnimation()
+        when (state) {
+            is ResponseState.Empty -> {}
+            is ResponseState.NotAuthorized,
+            is ResponseState.UnKnownError -> {
+                viewModel.editTeamState.value = ResponseState.Empty()
+            }
+
+            is ResponseState.NetworkError -> {
+                showToast(getString(R.string.network_error), false)
+                viewModel.editTeamState.value = ResponseState.Empty()
+            }
+
+            is ResponseState.Error -> {
+                showToast(state.message.toString(), false)
+                viewModel.editTeamState.value = ResponseState.Empty()
+            }
+
+            is ResponseState.Loading -> {
+                startLoadingAnimation()
+            }
+
+            is ResponseState.Success -> {
+                state.data?.let { response ->
+                    lifecycleScope.launch {
+                        goBackTwice()
+                        viewModel.editTeamState.value = ResponseState.Empty()
+                    }
+                }
+            }
+
         }
     }
 
@@ -150,7 +189,7 @@ class CreateTeamFragment :
     }
 
     private fun goBack() {
-        goBackTwice()
+        findNavController().navigateUp()
     }
 
     private fun stopLoadingAnimation() {
@@ -203,7 +242,7 @@ class CreateTeamFragment :
             val description = etProject.text.toString()
             if (viewModel.canUpdateTeam(name, description, team)) {
                 lifecycleScope.launch {
-                    viewModel.editTeam(name, description, viewModel.imgUri)
+                    viewModel.editTeam(team.id,name, description, viewModel.imgUri)
                 }
             } else {
             }
@@ -242,7 +281,7 @@ class CreateTeamFragment :
                     Glide.with(binding.ivTeamImage)
                         .load(uri)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .centerInside()
+                        .centerCrop()
                         .placeholder(R.drawable.teamwork)
                         .error(R.drawable.teamwork)
                         .into(binding.ivTeamImage)

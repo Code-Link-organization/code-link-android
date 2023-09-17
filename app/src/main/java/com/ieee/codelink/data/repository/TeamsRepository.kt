@@ -63,6 +63,7 @@ class TeamsRepository(
     }
 
     suspend fun editTeam(
+        teamId: Int,
         imgPart: MultipartBody.Part?,
         name: String?,
         description: String?
@@ -70,7 +71,7 @@ class TeamsRepository(
         val userToken = sharedPreferenceManger.bearerToken
         val token = "Bearer $userToken"
         val mediaType = "multipart/form-data".toMediaType()
-        val url = "$EDIT_TEAM/${getCachedUser().id}"
+        val url = "$EDIT_TEAM/$teamId"
         return try {
             api.editTeam(
                 url = url,
