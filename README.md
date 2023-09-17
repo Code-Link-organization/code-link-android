@@ -1,69 +1,86 @@
 # CodeLink
 CodeLink is designed to help those interested in Software find projects that match their interests and connect with experienced professionals to bridge the gap between theory and practice.
 
-## Tech Stack
+## Project Packeges
 
-CodeLink is built using the following cutting-edge technologies:
+| Packege      | Description                                        |
+| -------------- | -------------------------------------------------- |
+| `Retrofit`   | Efficient network requests and retrieval for seamless data integration.                                |
+| `Hilt`    | Dependency injection for clean and modular code.                        |
+| `SharedPreferences`   | Manage user preferences and settings efficiently.                      |
+| `MVVM architecture`   | Well-structured and maintainable codebase.                     |
+| `Glide`  | Effortlessly load and display book cover images with optimized caching and memory management.                |
+| `Lottie` | For animations.                           |
+| `Mockito`   | For testing.             
 
-* Retrofit: Efficient network requests and retrieval for seamless data integration.
-* Hilt: Dependency injection for clean and modular code.
-* SharedPreferences: Manage user preferences and settings efficiently.
-* MVVM architecture: Well-structured and maintainable codebase.
-* Splash Screen: Create an engaging and visually appealing launch experience using the Splash Screen API.
-* Glide: Effortlessly load and display book cover images with optimized caching and memory management.
+
+
 
 ## Design
 Auth : 
 
-<img width="461" alt="Screenshot 2023-09-17 at 12 14 20 AM" src="https://github.com/Code-Link-organization/code-link-android/assets/81470639/558dbffb-fcd4-40e6-ae2a-02de2705cd26">
+<img width="461" alt="Screenshot 2023-09-17 at 12 14 20 AM" src="https://github.com/Code-Link-organization/code-link-android/assets/81470639/accbab7a-0c8b-46b8-a55a-ffba2c0597b3">
 
 
 Home : 
 
-<img width="756" alt="Screenshot 2023-09-17 at 12 17 09 AM" src="https://github.com/Code-Link-organization/code-link-android/assets/81470639/16946ac0-31e3-47f3-af84-55ed7914b78c">
+<img width="756" alt="Screenshot 2023-09-17 at 12 17 09 AM" src="https://github.com/Code-Link-organization/code-link-android/assets/81470639/38d5c09a-da86-4751-b4bb-a8d549c07683">
+
 
 Profile, settings, edit ptofile  and personal details
 
-<img width="631" alt="Screenshot 2023-09-17 at 12 18 04 AM" src="https://github.com/Code-Link-organization/code-link-android/assets/81470639/7f758aa9-1966-414e-bce1-da5a2c35b1e4">
+<img width="631" alt="Screenshot 2023-09-17 at 12 18 04 AM" src="https://github.com/Code-Link-organization/code-link-android/assets/81470639/8f66fe57-1fbb-459f-ad04-e91a85ede20e">
+
 
 Chat Screens :
 
 
-<img width="469" alt="Screenshot 2023-09-17 at 12 20 04 AM" src="https://github.com/Code-Link-organization/code-link-android/assets/81470639/031f4461-8910-4c4a-989f-25809c073a3c">
+<img width="469" alt="Screenshot 2023-09-17 at 12 20 04 AM" src="https://github.com/Code-Link-organization/code-link-android/assets/81470639/406672fc-2ab8-41dc-9eb2-73f8f3af6a6d">
 
 
 Chat : 
 
-<img width="151" alt="Screenshot 2023-09-17 at 12 21 12 AM" src="https://github.com/Code-Link-organization/code-link-android/assets/81470639/17a8b02a-e17f-4741-ab12-e82dc940ffa5">
- 
+
+<img width="151" alt="Screenshot 2023-09-17 at 12 21 12 AM" src="https://github.com/Code-Link-organization/code-link-android/assets/81470639/f0062f10-e8cb-463a-91be-76f7e63c125e">
+
 
 Search and Teams : 
 
-<img width="784" alt="Screenshot 2023-09-17 at 12 22 08 AM" src="https://github.com/Code-Link-organization/code-link-android/assets/81470639/cddad617-1790-4567-ac41-46e106a45c1a">
+
+<img width="784" alt="Screenshot 2023-09-17 at 12 22 08 AM" src="https://github.com/Code-Link-organization/code-link-android/assets/81470639/0509a999-149f-4e30-ba4b-630c7ef1153f">
+
+
 
 My Teams : 
 
-<img width="304" alt="Screenshot 2023-09-17 at 12 23 07 AM" src="https://github.com/Code-Link-organization/code-link-android/assets/81470639/79abd913-6f18-4ef0-9309-2058a7aa7625">
+
+<img width="304" alt="Screenshot 2023-09-17 at 12 23 07 AM" src="https://github.com/Code-Link-organization/code-link-android/assets/81470639/f88aa890-a969-4b1a-8aaa-4e96618a27ae">
+
 
 Notifications : 
 
-<img width="310" alt="Screenshot 2023-09-17 at 12 24 08 AM" src="https://github.com/Code-Link-organization/code-link-android/assets/81470639/4cb22570-91d1-496a-93ce-2a6cb034dd9d">
+
+<img width="310" alt="Screenshot 2023-09-17 at 12 24 08 AM" src="https://github.com/Code-Link-organization/code-link-android/assets/81470639/d6b7d83b-992a-462d-bf61-f241401c6ed4">
+
 
 
 Public profile & users search :
 
-<img width="558" alt="Screenshot 2023-09-17 at 12 25 14 AM" src="https://github.com/Code-Link-organization/code-link-android/assets/81470639/bd9dd37e-76b2-40f9-bb68-ec5d844eadc9">
+
+<img width="558" alt="Screenshot 2023-09-17 at 12 25 14 AM" src="https://github.com/Code-Link-organization/code-link-android/assets/81470639/149fe317-ae99-49c5-ae5b-ea4a19213f74">
+
 
 
 Mentors : 
 
-<img width="269" alt="Screenshot 2023-09-17 at 12 26 10 AM" src="https://github.com/Code-Link-organization/code-link-android/assets/81470639/8dc2abea-152f-422b-97a1-d6a377d18c7c">
+<img width="269" alt="Screenshot 2023-09-17 at 12 26 10 AM" src="https://github.com/Code-Link-organization/code-link-android/assets/81470639/792d2f55-8ffe-41ee-94b7-8751c1d7f2c7">
+
 
 
 Search Screens : 
 
-<img width="195" alt="Screenshot 2023-09-17 at 12 27 45 AM" src="https://github.com/Code-Link-organization/code-link-android/assets/81470639/12e13c0f-6d2e-46c8-ba74-4da5deff4d18">
 
+<img width="195" alt="Screenshot 2023-09-17 at 12 27 45 AM" src="https://github.com/Code-Link-organization/code-link-android/assets/81470639/296bef55-8932-4ebe-80ac-41e74aab1c7e">
 
 
 
