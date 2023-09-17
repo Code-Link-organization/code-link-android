@@ -11,6 +11,8 @@ import com.ieee.codelink.R
 import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.openBrowser
 import com.ieee.codelink.common.openFacebook
+import com.ieee.codelink.common.openFacebookIntent
+import com.ieee.codelink.common.openGithubIntent
 import com.ieee.codelink.common.openZoomableImage
 import com.ieee.codelink.common.setImageUsingGlide
 import com.ieee.codelink.core.BaseFragment
@@ -317,9 +319,9 @@ class OthersProfileFragment :
         binding.socialSection.apply {
             ivFacebook.setOnClickListener {
                 userData.facebookUrl?.let {
-                    openFacebook(
-                        requireContext(),
-                        userData.behanceUrl!!
+                    openFacebookIntent(
+                        userData.facebookUrl!!,
+                        requireContext()
                     )
                 }
             }
@@ -341,9 +343,9 @@ class OthersProfileFragment :
            }
            ivGithub.setOnClickListener {
                userData.githubUrl?.let {
-                   openBrowser(
-                       requireContext(),
-                       userData.githubUrl!!
+                   openGithubIntent(
+                       userData.githubUrl!!,
+                       requireContext()
                    )
                }
            }
