@@ -12,6 +12,7 @@ import com.ieee.codelink.R
 import com.ieee.codelink.common.getImageForGlide
 import com.ieee.codelink.common.openZoomableImage
 import com.ieee.codelink.common.setImageUsingGlide
+import com.ieee.codelink.common.showDialog
 import com.ieee.codelink.core.BaseFragment
 import com.ieee.codelink.core.ResponseState
 import com.ieee.codelink.databinding.FragmentTeamDetailsBinding
@@ -40,6 +41,35 @@ class TeamDetailsFragment :
 
     private fun setObservers() {
         joinTeamObserver()
+        leaveTeamObserver()
+    }
+
+    private fun leaveTeamObserver() {
+        viewModel.leaveTeamState.awareCollect { state ->
+            when (state) {
+                is ResponseState.Empty -> {}
+                is ResponseState.NetworkError,
+                is ResponseState.NotAuthorized,
+                is ResponseState.UnKnownError,
+                is ResponseState.Error -> {
+                    showToast(state.message.toString(), false)
+                    binding.btnTeamAction.hideLoading()
+                    viewModel.leaveTeamState.value = ResponseState.Empty()
+                }
+
+                is ResponseState.Loading -> {
+                    binding.btnTeamAction.showLoading()
+                }
+
+                is ResponseState.Success -> {
+                    showToast(getString(R.string.left), true)
+                    binding.btnTeamAction.hideLoading()
+                    binding.btnTeamAction.isGone = true
+                    findNavController().navigateUp()
+                }
+            }
+        }
+
     }
 
     private fun joinTeamObserver() {
@@ -60,39 +90,13 @@ class TeamDetailsFragment :
                 }
 
                 is ResponseState.Success -> {
-                    showToast(state.message.toString(), false)
-                    binding.btnTeamAction.isGone = true
+                    showToast(getString(R.string.request_sent), true)
                     binding.btnTeamAction.hideLoading()
+                    binding.btnTeamAction.isGone = true
                     viewModel.joinTeamState.value = ResponseState.Empty()
                 }
             }
         }
-
-        viewModel.leaveTeamState.awareCollect { state ->
-            when (state) {
-                is ResponseState.Empty -> {}
-                is ResponseState.NetworkError,
-                is ResponseState.NotAuthorized,
-                is ResponseState.UnKnownError,
-                is ResponseState.Error -> {
-                    showToast(state.message.toString(), false)
-                    binding.btnTeamAction.hideLoading()
-                    viewModel.leaveTeamState.value = ResponseState.Empty()
-                }
-
-                is ResponseState.Loading -> {
-                    binding.btnTeamAction.showLoading()
-                }
-
-                is ResponseState.Success -> {
-                    showToast(state.message.toString(), false)
-                    binding.btnTeamAction.isGone = true
-                    binding.btnTeamAction.hideLoading()
-                    findNavController().navigateUp()
-                }
-            }
-        }
-
     }
 
     private fun setOnClickListeners(team: Team) {
@@ -127,7 +131,13 @@ class TeamDetailsFragment :
             } else if (isTeamLeader) {
                 editTeamClicked(team)
             } else {
-                leaveTeamClicked(team)
+                showDialog(requireContext(),
+                    getString(R.string.leave_team),
+                    getString(R.string.sure_leave_team),
+                    positiveClicked = {
+                        leaveTeamClicked(team)
+                    }
+                    )
             }
         }
     }

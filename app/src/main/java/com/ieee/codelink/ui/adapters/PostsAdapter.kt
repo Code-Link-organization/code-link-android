@@ -186,9 +186,11 @@ class PostsAdapter(
         val inflater: MenuInflater = popupMenu.menuInflater
         inflater.inflate(R.menu.post_options_menu, popupMenu.menu)
 
-        if (post.user_id == post.shareduser_id) {
+        if (post.user_id == cachedUserId || cachedUserId ==  post.shareduser_id) {
             val menuItemIdToHide = R.id.block
+            val menuItemIdToHide2 = R.id.hide
             popupMenu.menu.removeItem(menuItemIdToHide)
+            popupMenu.menu.removeItem(menuItemIdToHide2)
         }
 
         if (post.image_path == null) {

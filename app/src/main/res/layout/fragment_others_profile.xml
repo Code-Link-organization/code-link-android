@@ -43,6 +43,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:elevation="0.001dp"
+                android:visibility="gone"
+                tools:visibility="visible"
                 android:orientation="vertical">
 
                 <FrameLayout

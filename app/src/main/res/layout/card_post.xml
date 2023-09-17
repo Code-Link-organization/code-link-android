@@ -30,10 +30,23 @@
         android:layout_marginStart="8dp"
         android:textColor="@color/color_text"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@id/iv_user_image"
         app:layout_constraintStart_toEndOf="@id/iv_user_image"
         app:layout_constraintTop_toTopOf="@id/iv_user_image"
         tools:text="Mohamed Emad" />
+    <TextView
+        android:id="@+id/tv_user_track"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/color_text"
+        android:alpha="0.7"
+        android:textSize="10sp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_name"
+        app:layout_constraintStart_toEndOf="@id/iv_user_image"
+        tools:text="Android Developer" />
+
 
     <TextView
         android:id="@+id/tv_post_time"

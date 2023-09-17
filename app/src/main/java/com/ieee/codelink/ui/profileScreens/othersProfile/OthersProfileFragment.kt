@@ -97,6 +97,7 @@ class OthersProfileFragment :
             }
             is ResponseState.Success -> {
                 val posts = viewModel.getPostsImages(state.data!!.data.postData)
+              //  showToast(state.data!!.data.postData.size.toString(),false)
                 setPostsRv(posts)
                 viewModel.userPostsState.value = ResponseState.Empty()
             }
@@ -148,7 +149,11 @@ class OthersProfileFragment :
                 state.data?.let { response ->
                     lifecycleScope.launch {
                         val teams = response.data.teams
-                        openInviteUserDialog(teams)
+                        if (teams.isNullOrEmpty()){
+                            showToast("you are not a leader at any teams",false)
+                        }else {
+                            openInviteUserDialog(teams)
+                        }
                         viewModel.userTeamsAsLeader.value = ResponseState.Empty()
                     }
                 }
@@ -185,7 +190,6 @@ class OthersProfileFragment :
                 state.data?.let { response ->
                     lifecycleScope.launch {
                         val profileUser = response.data.user
-                        showAll()
                         viewModel.getUserPosts()
                         setScreenLogic(profileUser)
                     }
@@ -270,6 +274,7 @@ class OthersProfileFragment :
         }
 
         binding.aboutSection.tvAbout.text = userData.bio ?: getString(R.string.empty)
+        showAll()
 
     }
 

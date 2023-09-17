@@ -2,7 +2,7 @@ package com.ieee.codelink.data.remote
 
 
 //Base Url
-const val BASE_URL_FOR_IMAGE = "https://a185-197-43-82-103.ngrok-free.app/"
+const val BASE_URL_FOR_IMAGE = "https://0ed1-197-43-77-188.ngrok-free.app/"
 const val BASE_URL = "${BASE_URL_FOR_IMAGE}api/"
 //Auth
 const val USER ="user"
